@@ -1,0 +1,82 @@
+package testscale;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class Test {
+	
+ public static void main(String[] args) {
+	 
+	 BufferedImage testImage = new BufferedImage(500, 500, BufferedImage.TYPE_INT_BGR);
+	 
+	 File myfile = new File("c:\\testpic.png");
+	 
+	 String pictype = "png";
+	 
+	 Graphics2D drawgraphic = (Graphics2D)testImage.getGraphics();
+	 
+	 drawgraphic.setColor(Color.RED);
+	 
+	 drawgraphic.setFont(new Font("新宋体",Font.BOLD, 200));
+	 
+	 drawgraphic.drawString("我", 100, 200);
+	 
+	 
+	 FontMetrics fontMetrics = drawgraphic.getFontMetrics();
+	 
+	 int[] width = fontMetrics.getWidths();
+	 
+	 int realwidth = width[0];
+	 
+	 int height = fontMetrics.getHeight();
+	 
+	 
+	 drawgraphic.dispose();
+	 
+	 
+	 
+	 BufferedImage finalBufferedImage = new BufferedImage(realwidth, height, BufferedImage.TYPE_INT_BGR);
+	 
+	 Graphics2D drawgraphic2 = (Graphics2D)finalBufferedImage.getGraphics();
+	 
+//	 drawgraphic2.drawImage(testImage, 100, 100, 200,500,null);
+	 
+	 
+	 drawgraphic2.setFont(new Font("新宋体",Font.BOLD, 200));
+	 
+	 drawgraphic2.drawString("我", 0, 150);
+	 
+	 drawgraphic2.dispose();
+	 
+	 
+     boolean val = false;
+     try {
+         val = ImageIO.write(finalBufferedImage, pictype, myfile);
+     } catch (IOException e) {
+         e.printStackTrace();
+     }
+     
+     
+
+//	 
+//     FontMetrics fontMetrics = drawgraphic2.getFontMetrics();
+//     
+//     fontMetrics.getHeight();
+//     fontMetrics.getWidths();
+//	 
+     
+     
+     
+	 System.out.println("画图成功");
+	 
+	
+ }
+
+}

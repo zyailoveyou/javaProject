@@ -1,0 +1,14 @@
+package imageZip;
+
+
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
+
+public class imageZiptest {
+
+ public static void main(String[] args) {
+	
+	
+	
+ }
+}
