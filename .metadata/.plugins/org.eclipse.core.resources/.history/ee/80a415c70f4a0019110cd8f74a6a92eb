@@ -1,0 +1,59 @@
+package graphic_zip;
+
+import java.io.File;
+
+import java.io.IOException;
+
+import net.coobird.thumbnailator.Thumbnails;
+
+
+public class graphic_main {
+	
+	public static void main(String[] args) {
+		
+		filecompress ZipOperation = new filecompress();
+		
+		File directoryZipFile = new File("C:\\zip");
+		
+	    File[] files =  directoryZipFile.listFiles();
+	    
+	    int OutPutNamePostFix = 1;
+	    
+	    String OutputFileName = null;
+	    
+	    for(File f:files) {
+	    	
+	    	if(!f.isDirectory()) {
+	    		
+	    		String InpufileName = f.getName();
+	    		
+	    		String FileType = InpufileName.substring(InpufileName.lastIndexOf("."));
+	    		
+	    		OutputFileName = InpufileName.substring(0, InpufileName.lastIndexOf(".")) + OutPutNamePostFix +FileType;
+	    		
+	    		System.out.println(FileType);
+	    		
+	    		System.out.println(OutputFileName);
+	    		
+	    		ZipOperation.compressPic("C:\\zip\\", "C:\\zip\\", InpufileName, OutputFileName);
+	    		
+	    	}
+	    	
+	    }
+	    
+
+	    
+	    
+	  	
+		
+//		filecompress zip1 = new filecompress();
+//		
+//		
+//	 String jieguo	= filecompress.compressPic("C:\\—πÀı≤‚ ‘\\", "C:\\—πÀı≤‚ ‘\\", "ª„æ∞”™“µ÷¥’’£®∏±±æ£©.jpg", "zip1.jpg");
+		
+		
+//		System.out.println(jieguo);
+		
+	}
+
+}

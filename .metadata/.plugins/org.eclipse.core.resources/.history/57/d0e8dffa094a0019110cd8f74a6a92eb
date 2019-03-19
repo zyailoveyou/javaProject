@@ -1,0 +1,29 @@
+package graphic_zip;
+
+import java.io.File;
+import java.io.IOException;
+
+import net.coobird.thumbnailator.Thumbnails;
+
+public class test1 {
+	
+	
+	public static void main(String[] args) {
+		
+		
+		File ouputFile = new File ("C:\\zip\\孤儿.jpg");
+		
+		
+		try {
+			Thumbnails.of("C:\\zip\\李潇身份证背面.jpg").scale(1f).outputQuality(0.25f).toFile(ouputFile);
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+
+
+}

@@ -1,0 +1,18 @@
+package graphic_zip;
+
+public class graphic_main {
+	
+	public static void main(String[] args) {
+		
+		
+		filecompress zip1 = new filecompress();
+		
+		
+	 String jieguo	= filecompress.compressPic("C:\\—πÀı≤‚ ‘\\", "C:\\—πÀı≤‚ ‘\\", "ª„æ∞”™“µ÷¥’’£®∏±±æ£©.jpg", "zip1");
+		
+		
+		System.out.println(jieguo);
+		
+	}
+
+}

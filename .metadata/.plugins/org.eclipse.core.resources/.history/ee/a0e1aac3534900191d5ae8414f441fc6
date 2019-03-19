@@ -1,0 +1,40 @@
+package graphic_zip;
+
+import java.io.File;
+
+public class graphic_main {
+	
+	public static void main(String[] args) {
+		
+		
+		
+		File directoryZipFile = new File("C:\\zip");
+		
+	    File[] files =  directoryZipFile.listFiles();
+	    
+	    for(File f:files) {
+	    	
+	    	if(!f.isDirectory()) {
+	    		
+	    		String goo1 = f.getName();
+	    		
+	    		System.out.println(goo1);
+	    		
+	    	}
+	    	
+	    }
+	    
+		
+		
+		
+		filecompress zip1 = new filecompress();
+		
+		
+	 String jieguo	= filecompress.compressPic("C:\\—πÀı≤‚ ‘\\", "C:\\—πÀı≤‚ ‘\\", "ª„æ∞”™“µ÷¥’’£®∏±±æ£©.jpg", "zip1.jpg");
+		
+		
+		System.out.println(jieguo);
+		
+	}
+
+}
