@@ -51,7 +51,7 @@ public class graphic_main {
 	    		
 	    		String FileType = InpufileName.substring(InpufileName.lastIndexOf("."));
 	    		
-	    		OutputFileName = InpufileName.substring(0, InpufileName.lastIndexOf(".")) + OutPutNamePostFix +FileType;
+	    		OutputFileName = InpufileName.substring(0, InpufileName.lastIndexOf(".")) + OutPutNamePostFix +".jpg";
 	    			    		
 	    		System.out.println("正在压缩:::->"+InpufileName +"  "+"请不要关闭窗口!");
 	    		

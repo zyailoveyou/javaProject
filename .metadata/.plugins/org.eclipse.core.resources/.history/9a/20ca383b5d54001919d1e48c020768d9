@@ -1,0 +1,227 @@
+package test1;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.WritableWorkbook;
+
+public class Assess {
+	
+	
+	private static String halfdaynoclear_postil ;
+	private static String fulldaynoclear_postil ;
+	private static HashMap<String,Integer> AssessDayInformation = null; 
+	
+	
+	private static ArrayList<String> nameList;
+	private static Workbook DataResouceWorkbook;
+	private static String dataResouceWorkbookSheetName;
+	private static WritableWorkbook DataInputwWritableWorkbookSheetName;
+	
+	
+	
+	
+	
+	
+	
+	public static String getHalfdaynoclear_postil() {
+		return halfdaynoclear_postil;
+	}
+
+
+	public static String getFulldaynoclear_postil() {
+		return fulldaynoclear_postil;
+	}
+
+	public static HashMap<String,Integer> getAssessDayInformation() {
+		return AssessDayInformation;
+	}
+
+
+
+	public static int CaculationAssessDaysByPerson(String Personname,
+			                                       Workbook workbook,
+			                                       String Sheetname) 
+			
+			throws BiffException, IOException {
+		
+	
+		Sheet caculateSheet = workbook.getSheet(Sheetname);
+		
+		int rows = caculateSheet.getRows();
+		int columns   =  caculateSheet.getColumns();
+		
+		int resultcount = 0;
+		for (int i = 0; i < rows; i++) {
+			
+			caculateSheet.getCell(0, i).getContents();
+			
+			if (Personname.equals(caculateSheet.getCell(0, i).getContents())) {
+				resultcount++;
+			}
+			
+		}
+		
+		return resultcount;
+		
+	}
+	
+	
+	
+	
+	public static void CaculationAssessActualDaysBySingleOnePerson(String Personname,
+            Workbook workbook,
+            String Sheetname) 
+
+         throws BiffException, IOException {
+				 
+		  int fulldayclear = Assess.CaculationAssessDaysByPerson(Personname, workbook, Sheetname);
+		  
+		  
+		  
+		  HashMap<String,Integer> result = new HashMap<String, Integer>();
+		  
+		  int actualdayclear = 0;
+		  int morningnoclear = 0;
+		  int afternoonnoclear = 0;
+		  int halfdayclear = 0;
+		  int fulldaynoclear = 0;
+		  
+		  String fulldaynoclear_postilinformation = null;
+		  String halfdaynoclear_postilinformation = null;
+		  	  
+		  result.put("fulldayclear", fulldayclear);
+		  
+
+          Sheet caculateSheet = workbook.getSheet(Sheetname);
+
+          int rows = caculateSheet.getRows();
+          int columns   =  caculateSheet.getColumns();
+
+          for (int i = 0; i < rows; i++) {
+    	   		  
+    		  if (Personname.equals(caculateSheet.getCell(0, i).getContents()))
+    			  
+    		     {
+    			  
+    			  if ((caculateSheet.getCell(6, i).getContents()).equals("") == true) 
+    			  
+    			   {
+     				  if ((caculateSheet.getCell(7, i).getContents()).equals("") == true) 
+    				  {
+     					  
+     					 fulldaynoclear++;
+     					 
+     					 if (fulldaynoclear_postilinformation == null) {
+     						 fulldaynoclear_postilinformation  = 
+     					     caculateSheet.getCell(2, i).getContents() + " 全天未打"+"\n";
+						 }
+     					 
+     					 else {
+     						 
+     						fulldaynoclear_postilinformation 
+        					 += caculateSheet.getCell(2, i).getContents() + " 全天未打"+"\n";
+							
+						 }
+     					 
+    				  }
+     				  
+     				  else {
+						
+     					 morningnoclear++;
+     					 
+     					 if (halfdaynoclear_postilinformation == null) {
+     						 
+     						halfdaynoclear_postilinformation =
+     						caculateSheet.getCell(2, i).getContents() + " 上午未打"+"\n";
+							
+						}
+     					 
+     					 else {
+     						 halfdaynoclear_postilinformation 
+         					 += caculateSheet.getCell(2, i).getContents() + " 上午未打"+"\n";
+						 }
+     					
+					   }
+    				  
+				   }
+    			  
+    			   else {
+    				  
+    				  if ((caculateSheet.getCell(7, i).getContents()).equals("") == true) 
+    				  {
+    					  
+    					  afternoonnoclear++;
+      					 if (halfdaynoclear_postilinformation ==null) {
+     						 
+      						halfdaynoclear_postilinformation =
+      						caculateSheet.getCell(2, i).getContents() + " 下午未打"+"\n";
+ 							
+ 						}
+      					 
+      					 else {
+      						 halfdaynoclear_postilinformation 
+          					 += caculateSheet.getCell(2, i).getContents() + " 下午未打"+"\n";
+ 						 }
+      					
+ 					   }
+    					  
+    					  
+    				  }
+					
+				   }
+    			  
+    		    }
+
+           
+        
+        halfdayclear = morningnoclear + afternoonnoclear;   
+        actualdayclear = fulldayclear - halfdayclear -fulldaynoclear;
+        
+        result.put("actualdayclear", actualdayclear);
+        result.put("halfdayclear", halfdayclear);
+        result.put("morningnoclear", morningnoclear);
+        result.put("afternoonnoclear", afternoonnoclear);
+        result.put("fulldaynoclear", fulldaynoclear);  
+        
+        AssessDayInformation = result;
+        
+        
+        fulldaynoclear_postil = fulldaynoclear_postilinformation;
+        halfdaynoclear_postil = halfdaynoclear_postilinformation;
+        
+
+     }
+	
+	
+	public static void SinglePersonWriteDate(String Personname,
+            WritableWorkbook workbook,
+            String Sheetname){
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+
+}

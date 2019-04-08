@@ -1,0 +1,92 @@
+package test1;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import org.w3c.dom.NameList;
+
+import jxl.Cell;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.Number;
+import jxl.write.WritableCell;
+import jxl.write.WritableCellFeatures;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+public class test1 {
+	
+	
+	public static void main(String[] args) throws BiffException, IOException, WriteException {
+		
+		
+		//创建需要读取基本统计数据的表单
+		Workbook test1work = Workbook.getWorkbook(
+				new File("C:\\Users\\Administrator\\Desktop\\workbooktest\\汇景一般销售.xls"));
+		
+		Workbook writetestworkbook = Workbook.getWorkbook(
+				new File("C:\\Users\\Administrator\\Desktop\\workbooktest\\工作簿.xls"));
+		
+		WritableWorkbook writetestworkbook2= Workbook.createWorkbook(new File("C:\\Users\\Administrator\\Desktop\\workbooktest\\工作簿-写.xls"), writetestworkbook);
+		
+		//创建需要统计的员工集合
+		ArrayList<String> nameList = new ArrayList<String>();
+		Sheet mysheSheet = writetestworkbook.getSheet("1");
+		
+		for (int i = 4; i < 31; i++) {
+			  nameList.add((mysheSheet.getCell(1, i).getContents()));
+			
+		}
+		
+		//开始统计
+		Assess.InitialDataInformation(nameList, test1work, "原始数据表单名称", writetestworkbook2, "1");
+		Assess.CalculateAllPersonDayInformations();
+		
+		
+	    Sheet textSheet = test1work.getSheet("原始数据表单名称");
+	    String times= textSheet.getCell(10,1).getContents();
+	    String times2= textSheet.getCell(10,2).getContents();
+		
+		DateFormat newdaDateFormat = new SimpleDateFormat("HH:mm");
+		
+		java.util.Date myDate = null;
+		java.util.Date myDate2 = null;
+		try {
+		   myDate = newdaDateFormat.parse(times);
+		   myDate2 = newdaDateFormat.parse(times2);
+		   
+		   if (myDate.getTime()>myDate2.getTime()) {
+			    
+			    System.out.println(true);
+		      }
+		   else {
+			   System.out.println(false);
+		     }
+		   
+		   
+		} catch (ParseException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}
+		
+		System.out.println(myDate);
+
+
+	
+    }
+	
+}

@@ -4,32 +4,6 @@
 	<item value="3" key="TypeHierarchyViewPart.orientation"/>
 	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
 	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
-	<section name="org.eclipse.ltk.ui.refactoring.settings">
-		<item value="false" key="renameSubpackages"/>
-		<item value="false" key="updateQualifiedNames"/>
-		<item value="*" key="patterns"/>
-		<item value="false" key="updateSimilarElements"/>
-		<item value="false" key="updateTextualMatches"/>
-		<item value="1" key="updateSimilarElementsMatchStrategy"/>
-	</section>
-	<section name="ProblemSeveritiesConfigurationBlock">
-		<item value="false" key="expanded2"/>
-		<item value="false" key="expanded1"/>
-		<item value="false" key="expanded4"/>
-		<item value="true" key="expanded3"/>
-		<item value="false" key="expanded6"/>
-		<item value="false" key="expanded5"/>
-		<item value="false" key="expanded8"/>
-		<item value="false" key="expanded7"/>
-		<item value="true" key="expanded0"/>
-	</section>
-	<section name="DialogBounds_SuperInterfaceSelectionDialog">
-		<item value="373" key="DIALOG_WIDTH"/>
-		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
-		<item value="596" key="DIALOG_HEIGHT"/>
-		<item value="88" key="DIALOG_X_ORIGIN"/>
-		<item value="0" key="DIALOG_Y_ORIGIN"/>
-	</section>
 	<section name="org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart">
 		<item value="2" key="layout"/>
 		<item value="true" key="group_libraries"/>
@@ -37,33 +11,24 @@
 		<item value="1" key="rootMode"/>
 		<item value="false" key="linkWithEditor"/>
 	</section>
-	<section name="org.eclipse.jdt.internal.ui.dialogs.FilteredTypesSelectionDialog">
-		<item value="true" key="ShowStatusLine"/>
-		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;" key="History"/>
-		<section name="DialogBoundsSettings">
-			<item value="600" key="DIALOG_WIDTH"/>
-			<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
-			<item value="500" key="DIALOG_HEIGHT"/>
-			<item value="-26" key="DIALOG_X_ORIGIN"/>
-			<item value="4" key="DIALOG_Y_ORIGIN"/>
-		</section>
+	<section name="DialogBounds_GenerateConstructorUsingFieldsSelectionDialog">
+		<item value="516" key="DIALOG_WIDTH"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+		<item value="748" key="DIALOG_HEIGHT"/>
+		<item value="470" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
 	</section>
-	<section name="NewClassWizardPage">
-		<item value="false" key="create_constructor"/>
-		<item value="true" key="create_unimplemented"/>
+	<section name="SourceActionDialog.constructors">
+		<item value="false" key="SynchronizedModifier"/>
+		<item value="false" key="Comments"/>
+		<item value="1" key="VisibilityModifier"/>
+		<item value="false" key="FinalModifier"/>
 	</section>
-	<section name="OptionalMessageDialog.hide.">
-		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
-		<item value="false" key="configure_problem_severity_dialog_id"/>
-		<item value="false" key="RunnableJar.export.ipwarning"/>
-	</section>
-	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
-		<item value="true" key="ShowStatusLine"/>
-		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;" key="History"/>
-	</section>
-	<section name="RefactoringWizard.preview">
-		<item value="600" key="width"/>
-		<item value="400" key="height"/>
+	<section name="org.eclipse.jdt.internal.ui.typehierarchy.QuickHierarchy">
+		<item value="true" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_USE_PERSISTED_SIZE"/>
+		<item value="335" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_HEIGHT"/>
+		<item value="350" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_WIDTH"/>
+		<item value="false" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
 	</section>
 	<section name="FatJarPackageWizard">
 		<item value="E:\javaproject" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
@@ -83,11 +48,6 @@
 			<item value=".xml"/>
 		</list>
 	</section>
-	<section name="JavaBuildConfigurationBlock">
-		<item value="false" key="expanded2"/>
-		<item value="false" key="expanded1"/>
-		<item value="true" key="expanded0"/>
-	</section>
 	<section name="org.eclipse.jdt.internal.ui.wizards.buildpaths.NewVariableEntryDialog">
 		<item value="577" key="DIALOG_WIDTH"/>
 		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
@@ -96,17 +56,6 @@
 		<item value="-118" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="BreadcrumbItemDropDown">
-	</section>
-	<section name="ClasspathContainerSelectionPage">
-		<item value="0" key="index"/>
-	</section>
-	<section name="NewPackageWizardPage">
-		<item value="false" key="create_package_info_java"/>
-	</section>
-	<section name="quick_assist_proposal_size">
-	</section>
-	<section name="BuildPathsPropertyPage">
-		<item value="2" key="pageIndex"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>
@@ -134,6 +83,96 @@
 			<item value="C:\Users\Administrator\Desktop\13.jar"/>
 		</list>
 	</section>
+	<section name="AddGetterSetterDialog">
+		<item value="false" key="SortOrdering"/>
+		<item value="false" key="RemoveFinal"/>
+	</section>
 	<section name="JavaElementSearchActions">
+	</section>
+	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="false" key="renameSubpackages"/>
+		<item value="false" key="updateQualifiedNames"/>
+		<item value="*" key="patterns"/>
+		<item value="false" key="updateSimilarElements"/>
+		<item value="false" key="updateTextualMatches"/>
+		<item value="1" key="updateSimilarElementsMatchStrategy"/>
+	</section>
+	<section name="ProblemSeveritiesConfigurationBlock">
+		<item value="false" key="expanded2"/>
+		<item value="false" key="expanded1"/>
+		<item value="false" key="expanded4"/>
+		<item value="true" key="expanded3"/>
+		<item value="false" key="expanded6"/>
+		<item value="false" key="expanded5"/>
+		<item value="false" key="expanded8"/>
+		<item value="false" key="expanded7"/>
+		<item value="true" key="expanded0"/>
+	</section>
+	<section name="DialogBounds_SuperInterfaceSelectionDialog">
+		<item value="373" key="DIALOG_WIDTH"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+		<item value="596" key="DIALOG_HEIGHT"/>
+		<item value="88" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="GenerateConstructorUsingFieldsSelectionDialog">
+		<item value="false" key="OmitCallToSuper"/>
+	</section>
+	<section name="org.eclipse.jdt.internal.ui.dialogs.FilteredTypesSelectionDialog">
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;" key="History"/>
+		<section name="DialogBoundsSettings">
+			<item value="600" key="DIALOG_WIDTH"/>
+			<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="-26" key="DIALOG_X_ORIGIN"/>
+			<item value="4" key="DIALOG_Y_ORIGIN"/>
+		</section>
+	</section>
+	<section name="NewClassWizardPage">
+		<item value="false" key="create_constructor"/>
+		<item value="true" key="create_unimplemented"/>
+	</section>
+	<section name="OptionalMessageDialog.hide.">
+		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
+		<item value="false" key="configure_problem_severity_dialog_id"/>
+		<item value="false" key="RunnableJar.export.ipwarning"/>
+	</section>
+	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;" key="History"/>
+	</section>
+	<section name="DialogBounds_GetterSetterTreeSelectionDialog">
+		<item value="516" key="DIALOG_WIDTH"/>
+		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
+		<item value="766" key="DIALOG_HEIGHT"/>
+		<item value="470" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="RefactoringWizard.preview">
+		<item value="600" key="width"/>
+		<item value="400" key="height"/>
+	</section>
+	<section name="JavaBuildConfigurationBlock">
+		<item value="false" key="expanded2"/>
+		<item value="false" key="expanded1"/>
+		<item value="true" key="expanded0"/>
+	</section>
+	<section name="SourceActionDialog.methods">
+		<item value="false" key="SynchronizedModifier"/>
+		<item value="false" key="Comments"/>
+		<item value="1" key="VisibilityModifier"/>
+		<item value="false" key="FinalModifier"/>
+	</section>
+	<section name="ClasspathContainerSelectionPage">
+		<item value="0" key="index"/>
+	</section>
+	<section name="NewPackageWizardPage">
+		<item value="false" key="create_package_info_java"/>
+	</section>
+	<section name="quick_assist_proposal_size">
+	</section>
+	<section name="BuildPathsPropertyPage">
+		<item value="2" key="pageIndex"/>
 	</section>
 </section>

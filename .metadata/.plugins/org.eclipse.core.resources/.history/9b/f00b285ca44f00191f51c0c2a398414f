@@ -1,0 +1,87 @@
+package test1;
+
+import java.io.File;
+import java.io.IOException;
+
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+
+public class Assess {
+	
+	
+	
+	
+	public static int CaculationAssessDaysByPerson(String Personname,
+			                                       Workbook workbook,
+			                                       String Sheetname) 
+			
+			throws BiffException, IOException {
+		
+	
+		Sheet caculateSheet = workbook.getSheet(Sheetname);
+		
+		int rows = caculateSheet.getRows();
+		int columns   =  caculateSheet.getColumns();
+		
+		int resultcount = 0;
+		for (int i = 0; i < rows; i++) {
+			
+			caculateSheet.getCell(0, i).getContents();
+			
+			if (Personname.equals(caculateSheet.getCell(0, i).getContents())) {
+				resultcount++;
+			}
+			
+		}
+		
+		return resultcount;
+		
+	}
+	
+	
+	
+	
+	public static int CaculationAssessActualDaysByPerson(String Personname,
+            Workbook workbook,
+            String Sheetname) 
+
+         throws BiffException, IOException {
+
+		
+		  int result = Assess.CaculationAssessDaysByPerson("³ÂØ¹ÁÖ", workbook, "3333");
+
+          Sheet caculateSheet = workbook.getSheet(Sheetname);
+
+          int rows = caculateSheet.getRows();
+          int columns   =  caculateSheet.getColumns();
+
+        for (int i = 0; i < rows; i++) {
+    	
+    		  
+    		  if (Personname.equals(caculateSheet.getCell(0, i).getContents()) &&
+    				  
+    		     (caculateSheet.getCell(6, i).getContents()).equals("") == true &&
+    		     
+    		      (caculateSheet.getCell(7, i).getContents()).equals("") == true
+    				  
+    			   ) 
+    			  
+    		    {
+    			  
+    			  result--;
+    			  
+    		   }
+
+           }
+
+
+
+      return result;
+
+   }
+
+	
+	
+
+}

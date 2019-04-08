@@ -6,19 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="CopTitle1" key="selection"/>
+		<item value="AssessDayInformation" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="AssessDayInformation"/>
+			<item value="DataResouceWorkbook"/>
+			<item value="name"/>
+			<item value="getSheet"/>
+			<item value="writetestworkbook"/>
+			<item value="morningnoclear"/>
+			<item value="put"/>
+			<item value="put()"/>
+			<item value="TreeSet"/>
+			<item value="m"/>
+			<item value="add"/>
+			<item value="value[]"/>
+			<item value="compareto"/>
+			<item value="compare"/>
 			<item value="CopTitle1"/>
-			<item value="ZipOperation"/>
-			<item value="write"/>
-			<item value="wrtite"/>
-			<item value="font"/>
-			<item value="advanced"/>
-			<item value="Xarea"/>
 		</list>
 		<list key="replacehistory">
 		</list>
