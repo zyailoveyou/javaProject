@@ -1,0 +1,44 @@
+package windows;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import javax.swing.JCheckBox;
+
+public class chooseWindows {
+
+	private JFrame frame;
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	/**
+	 * Launch the application.
+	 */
+
+	/**
+	 * Create the application.
+	 */
+	public chooseWindows() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 305, 189);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(new GridLayout(1, 3, 0, 0));
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
+		frame.getContentPane().add(chckbxNewCheckBox);
+		
+		JCheckBox checkBox = new JCheckBox("\u4E0A\u5348\u672A\u6253");
+		frame.getContentPane().add(checkBox);
+	}
+
+}

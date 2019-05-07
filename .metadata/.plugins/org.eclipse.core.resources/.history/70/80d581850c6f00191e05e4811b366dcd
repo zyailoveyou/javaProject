@@ -1,0 +1,130 @@
+package windows;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JCheckBox;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Component;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+
+public class chooseWindows {
+
+	private JFrame frame;
+	JCheckBox morningnocheck;
+	private boolean morningnocheckBO = false;
+	private boolean afternoonnocheckBO = false;
+	private boolean wholedaynocheckBO = false;
+	private boolean nondaychoose = false;
+
+	
+	
+	public String getdaycheckstate() {
+		
+		
+		if (morningnocheckBO) {
+			
+			return "上午未打";
+			
+		}
+		
+		else if (afternoonnocheckBO) {
+			
+			return "下午未打";
+		}
+		
+		else if (wholedaynocheckBO) {
+			
+			return "全天未打";
+			
+		}
+		
+		else {
+			
+		     return "未选择";
+		}
+		
+	}
+		
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public chooseWindows() {
+		initialize();
+	}
+	
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 317, 303);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JComboBox reasons = new JComboBox();
+		reasons.setPreferredSize(new Dimension(32, 40));
+		reasons.setFont(new Font("黑体", Font.BOLD, 18));
+		reasons.setModel(new DefaultComboBoxModel(new String[] {"\u6362\u4F11", "\u5E74\u4F11", "\u4E8B\u5047", "\u4E27\u5047", "\u4EA7\u5047", "\u966A\u62A4\u5047", "\u672A\u6253\u5361\u8BF4\u660E"}));
+		frame.getContentPane().add(reasons, BorderLayout.NORTH);
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(new GridLayout(2, 2, 0, 0));
+		
+		JCheckBox morningnocheck_1 = new JCheckBox("上午未打");
+		panel.add(morningnocheck_1);
+		morningnocheck_1.setFont(new Font("黑体", Font.PLAIN, 16));
+		morningnocheck_1.setHorizontalAlignment(SwingConstants.CENTER);
+				
+		JCheckBox afternoonnocheck = new JCheckBox("下午未打");
+		panel.add(afternoonnocheck);
+		afternoonnocheck.setFont(new Font("黑体", Font.PLAIN, 16));
+		afternoonnocheck.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JButton submitnocheck = new JButton("提交");
+		submitnocheck.setPreferredSize(new Dimension(61, 40));
+		frame.getContentPane().add(submitnocheck, BorderLayout.SOUTH);
+		
+		submitnocheck.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if (morningnocheck_1.isSelected()&&!afternoonnocheck.isSelected()) 
+				{					
+					morningnocheckBO = true;					
+				}
+				
+				else if (!morningnocheck_1.isSelected()&&afternoonnocheck.isSelected()) 
+				{					
+					afternoonnocheckBO = true;
+				}
+				
+				else if(morningnocheck_1.isSelected()&&afternoonnocheck.isSelected())
+				{					
+					wholedaynocheckBO =true;
+				}
+				
+				else {
+					
+					nondaychoose = true;
+				}
+				
+				frame.dispose();
+											
+			}
+		});
+			
+	}
+
+}

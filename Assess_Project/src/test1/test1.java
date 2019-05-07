@@ -34,27 +34,14 @@ public class test1 {
 	public static void main(String[] args) throws BiffException, IOException, WriteException, ParseException {
 		
 		
-		//创建需要读取基本统计数据的表单
-		Workbook test1work = Workbook.getWorkbook(
-				new File("C:\\Users\\Administrator\\Desktop\\workbooktest\\汇景一般员工11.xls"));
 		
-		Workbook writetestworkbook = Workbook.getWorkbook(
-				new File("C:\\Users\\Administrator\\Desktop\\workbooktest\\工作簿.xls"));
+		WindowsUI myWindowsUI  = new WindowsUI();		
+		myWindowsUI.ShowWindows();
 		
-		WritableWorkbook writetestworkbook2= Workbook.createWorkbook(new File("C:\\Users\\Administrator\\Desktop\\workbooktest\\工作簿-写.xls"), writetestworkbook);
 		
-		//创建需要统计的员工集合
-		ArrayList<String> nameList = new ArrayList<String>();
-		Sheet mysheSheet = writetestworkbook.getSheet("1");
 		
-		for (int i = 4; i < 31; i++) {
-			  nameList.add((mysheSheet.getCell(1, i).getContents()));
-			
-		}
+
 		
-		//开始统计
-		Assess.InitialDataInformation(nameList, test1work, "原始数据表单名称", writetestworkbook2, "1");
-		Assess.CalculateAllPersonDayInformations();
 		
 	
     }

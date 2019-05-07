@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="将类型“client.testmain”重命名为“ClientTest”&#x0D;&#x0A;－ 原始项目：“ClientProgram”&#x0D;&#x0A;－ 原始元素：“client.testmain”&#x0D;&#x0A;－ 重命名的元素：“client.ClientTest”&#x0D;&#x0A;－ 更新对已重构元素的引用&#x0D;&#x0A;－ 更新注释和字符串中出现的文本" description="重命名类型“testmain”" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;client{testmain.java[testmain" matchStrategy="1" name="ClientTest" qualified="false" references="true" similarDeclarations="false" stamp="1555574078979" textual="false" version="1.0"/>
+</session>

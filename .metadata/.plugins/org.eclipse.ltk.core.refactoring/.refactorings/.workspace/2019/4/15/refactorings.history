@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="将资源“gitext”重命名为“UI_test”" description="重命名资源“gitext”" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/gitext" name="UI_test" stamp="1555040096333" updateReferences="true"/>
+</session>

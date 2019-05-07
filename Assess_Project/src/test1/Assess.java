@@ -37,7 +37,8 @@ public class Assess {
 	private static HashMap<String,Integer> LateDayInformation = null; 
 	
 	
-	private static ArrayList<String> nameList;
+	private static ArrayList<String> WholenameList;
+	private static ArrayList<String> ActualCalculateuWholenameList;
 	private static Workbook DataResouceWorkbook;
 	private static String dataResouceWorkbookSheetName;
 	private static WritableWorkbook DataInputwWritableWorkbook;
@@ -46,21 +47,72 @@ public class Assess {
 	
 	
 	public static void InitialDataInformation
-	       (ArrayList<String> nameList,
+	       (ArrayList<String> WholenameList,
 			Workbook DataResouceWorkbook,
 			String dataResouceWorkbookSheetName,
 			WritableWorkbook DataInputwWritableWorkbook,
 			String dataWriteableWorkbookSheetName
 	    		   )
 	 {
-		Assess.nameList = nameList;
+//		Assess.WholenameList = WholenameList;
+		
+			
 		Assess.DataResouceWorkbook = DataResouceWorkbook;
 		Assess.dataResouceWorkbookSheetName = dataResouceWorkbookSheetName;
 		Assess.DataInputwWritableWorkbook = DataInputwWritableWorkbook;
 		Assess.dataWriteableWorkbookSheetName = dataWriteableWorkbookSheetName;
+		Assess.WholenameList = Assess.getWholenameList();
+		Assess.ActualCalculateuWholenameList = Assess.getaActualCalculateuWholenameList();
+		
+		
 		
 	 }
 		
+
+	private static ArrayList<String> getaActualCalculateuWholenameList() {
+		
+		ArrayList<String> nameList = new ArrayList<String>();
+		Sheet calculatesheetSheet = DataResouceWorkbook.getSheet(0);
+		
+		int rows = calculatesheetSheet.getRows();
+		String nameStringRecive = "";
+		
+		for (int i = 0; i < rows; i++) {
+			
+			String nameString = calculatesheetSheet.getCell(0, i).getContents();
+			  
+			  if (!(nameString.equals(nameStringRecive))) {
+				  
+				  nameList.add((calculatesheetSheet.getCell(0, i).getContents()));
+				  nameStringRecive = nameString;
+				  
+				
+			    }
+			
+			
+		    }
+		
+				
+		return nameList;
+	}
+
+
+	private static ArrayList<String> getWholenameList() {
+		
+		ArrayList<String> nameList = new ArrayList<String>();
+		
+		Sheet calculatesheetSheet = DataInputwWritableWorkbook.getSheet(dataWriteableWorkbookSheetName);
+		
+		int rows = calculatesheetSheet.getRows();
+		
+		for (int i = 4; i < rows-3; i++) {
+		  nameList.add((calculatesheetSheet.getCell(1, i).getContents()));
+		
+	    }
+		
+		return nameList;
+	}
+
 
 	public static String getHalfdaynoclear_postil() {
 		return halfdaynoclear_postil;
@@ -262,7 +314,7 @@ public class Assess {
 	{
 		
 		
-		WritableSheet test2sheet = workbook.getSheet(0);
+		WritableSheet test2sheet = workbook.getSheet(Sheetname);
 		//设置字体居中格式等等
 		
 		//设置字体
@@ -277,8 +329,8 @@ public class Assess {
 		cellFormat.setAlignment(Alignment.CENTRE);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 		
-		
-		for (int i = 4; i < nameList.size()+5; i++) {
+				
+		for (int i = 4; i < WholenameList.size()+5; i++) {
 			
 			if ((test2sheet.getCell(1, i).getContents()).equals(Personname))
 			{
@@ -315,7 +367,7 @@ public class Assess {
     public static void CalculateAllPersonDayInformations() throws BiffException, IOException, RowsExceededException, WriteException, ParseException 
     
     {
-    	for(String name : nameList)
+    	for(String name : ActualCalculateuWholenameList)
     	{
     		
     		SingleOnePersonCaculationAssessActualDays(name, DataResouceWorkbook, dataResouceWorkbookSheetName); 		
@@ -326,6 +378,8 @@ public class Assess {
     	}
     	DataInputwWritableWorkbook.write();
 		DataInputwWritableWorkbook.close();
+		
+		System.out.println("OK");
 		
 	}
 	
@@ -376,7 +430,7 @@ public class Assess {
 		HashMap<String,Integer> result = new HashMap<String, Integer>();
 
 	    
-        for (int i = 0; i < rows; i++) 
+        for (int i = 1; i < rows; i++) 
           {
   	   		  
   		   if (Personname.equals(caculateSheet.getCell(0, i).getContents()))
@@ -501,7 +555,7 @@ public class Assess {
             WritableWorkbook workbook,
             String Sheetname) throws WriteException 
 	{
-		WritableSheet test2sheet = workbook.getSheet(0);
+		WritableSheet test2sheet = workbook.getSheet(Sheetname);
 		//设置字体居中格式等等
 		
 		//设置字体
@@ -517,7 +571,7 @@ public class Assess {
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 		
 		
-		for (int i = 4; i < nameList.size()+5; i++) {
+		for (int i = 4; i < WholenameList.size()+5; i++) {
 			
 			if ((test2sheet.getCell(1, i).getContents()).equals(Personname))
 			{

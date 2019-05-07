@@ -1,0 +1,112 @@
+package windows;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JCheckBox;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+
+public class chooseWindows {
+
+	private JFrame frame;
+	JCheckBox morningnocheck;
+	private boolean morningnocheckBO = false;
+	private boolean afternoonnocheckBO = false;
+	private boolean wholedaynocheckBO = false;
+	private boolean nondaychoose = false;
+
+	
+	
+	public String getdaycheckstate() {
+		
+		
+		if (morningnocheckBO) {
+			
+			return "上午未打";
+			
+		}
+		
+		else if (afternoonnocheckBO) {
+			
+			return "下午未打";
+		}
+		
+		else if (wholedaynocheckBO) {
+			
+			return "全天未打";
+			
+		}
+		
+		else {
+			
+		     return "未选择";
+		}
+		
+	}
+	
+	
+		
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public chooseWindows() {
+		initialize();
+	}
+	
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 206, 190);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JCheckBox morningnocheck = new JCheckBox("上午未打");
+		morningnocheck.setFont(new Font("黑体", Font.PLAIN, 16));
+		morningnocheck.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(morningnocheck);
+				
+		JCheckBox afternoonnocheck = new JCheckBox("下午未打");
+		afternoonnocheck.setFont(new Font("黑体", Font.PLAIN, 16));
+		afternoonnocheck.setHorizontalAlignment(SwingConstants.CENTER);
+		frame.getContentPane().add(afternoonnocheck);
+		
+		JButton submitnocheck = new JButton("提交");
+		frame.getContentPane().add(submitnocheck);
+		
+		submitnocheck.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if (morningnocheck.isSelected()&&!afternoonnocheck.isSelected()) 
+				{					
+					morningnocheckBO = true;					
+				}
+				
+				else if (!morningnocheck.isSelected()&&afternoonnocheck.isSelected()) 
+				{					
+					afternoonnocheckBO = true;
+				}
+				
+				else if(morningnocheck.isSelected()&&afternoonnocheck.isSelected())
+				{					
+					wholedaynocheckBO =true;
+				}
+				
+				else {
+					
+					nondaychoose = true;
+				}
+											
+			}
+		});
+			
+	}
+
+}

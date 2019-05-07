@@ -6,29 +6,31 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="AssessDayInformation" key="selection"/>
+		<item value="vacationorextrawork" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="reasons"/>
+			<item value="InputExcelDirectory"/>
+			<item value="gggg"/>
+			<item value="substring"/>
+			<item value="frame"/>
+			<item value="labelDay"/>
+			<item value="year"/>
+			<item value="day[i]"/>
+			<item value="day"/>
+			<item value="text"/>
+			<item value="name"/>
+			<item value="nameList"/>
+			<item value="getColumn"/>
 			<item value="AssessDayInformation"/>
 			<item value="DataResouceWorkbook"/>
-			<item value="name"/>
-			<item value="getSheet"/>
-			<item value="writetestworkbook"/>
-			<item value="morningnoclear"/>
-			<item value="put"/>
-			<item value="put()"/>
-			<item value="TreeSet"/>
-			<item value="m"/>
-			<item value="add"/>
-			<item value="value[]"/>
-			<item value="compareto"/>
-			<item value="compare"/>
-			<item value="CopTitle1"/>
 		</list>
 		<list key="replacehistory">
+			<item value="vacationorextrawork"/>
+			<item value="WholenameList"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
