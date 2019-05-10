@@ -17,6 +17,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -27,35 +28,17 @@ import javax.swing.border.MatteBorder;
 
 import com.jgoodies.forms.layout.CellConstraints.Alignment;
 
+import data.Dayinformation;
+import data.Persondata;
+import excel.wrtieExcel;
+import jxl.write.WriteException;
+
 import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class CalendarWindows {
 
-	public JComboBox<String> getYear() {
-		return year;
-	}
-
-
-	public void setYear(JComboBox<String> year) {
-		this.year = year;
-	}
-
-
-	public JComboBox<String> getMonth() {
-		return month;
-	}
-
-
-	public JComboBox<String> getNamelist() {
-		return namelist;
-	}
-
-
-	public JComboBox<String> getVacationorextrawork() {
-		return vacationorextrawork;
-	}
 
 
 	private JFrame frame;
@@ -65,12 +48,16 @@ public class CalendarWindows {
 	private String[] vacationorextraworklistdata;
 	private ArrayList<mylabel> daylabeList = new ArrayList<mylabel>();
 	private ArrayList<String> choosedaylist =  new ArrayList<String>();
+	private ArrayList<Persondata> datagroup = new ArrayList<Persondata>();
 	
 	
 	JComboBox<String> year;
 	JComboBox<String> month;
 	JComboBox<String> vacationorextrawork;
 	JComboBox<String> namelist;
+	boolean allistest = false;
+	
+	
 
 
 	/**
@@ -106,6 +93,14 @@ public class CalendarWindows {
 	public JFrame getFrame() {
 		return frame;
 	}
+	
+	public ArrayList<Persondata> getDatagroup() {
+		
+		return datagroup;
+		
+	}
+
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -220,6 +215,9 @@ public class CalendarWindows {
 			dayzoompJPanel.add(i);
 		}
 		
+		Persondata firstPersondata = new Persondata(new ArrayList<Dayinformation>());
+		firstPersondata.setName((String)namelist.getSelectedItem());
+		datagroup.add(firstPersondata);
 		
 		flashdata();
 		
@@ -252,32 +250,74 @@ public class CalendarWindows {
 				
 				choosedaylist.clear();
 				
-				for (mylabel i :daylabeList) {
-										
-					if (i.getIschoose()) {
+				//创建一个EXCEL文件
+				
+			    String year = (String)getYear().getSelectedItem();
+			    String month = (String)getMonth().getSelectedItem();
+			    
+				try {
+					wrtieExcel ttExcel = new wrtieExcel(year+month+"请假加班说明.xls");
+		            ttExcel.writeline(datagroup);
+					ttExcel.writedone();
+				} catch (WriteException e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// DO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+				
+														
+			}
+			
+		});
+		
+		
+		namelist.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					
+					
+					String nameString = (String)namelist.getSelectedItem();
+					
+					if (datagroup.isEmpty()) {
 						
-//						choosedaylist.add(Integer.parseInt(i.getText()));
-						
-						String cachesStringyear = (String)year.getSelectedItem();		
-						String yearsString = cachesStringyear.substring(0,cachesStringyear.lastIndexOf("年"));		
-						int year = Integer.parseInt(yearsString);
-						
-						String cachesStringmonth = (String)month.getSelectedItem();		
-						String monthString = cachesStringmonth.substring(0,cachesStringmonth.lastIndexOf("月"));		
-						int month = Integer.parseInt(monthString);
-						
-						String dayinformationString = year+"-"+month+"-"+i.getText();
-						
-						choosedaylist.add(dayinformationString);
+						Persondata persondata = new Persondata(new ArrayList<Dayinformation>());
+						persondata.setName(nameString);
+						datagroup.add(persondata);
 						
 					}
 					
-				}
-				
-				System.out.println(choosedaylist);
+					else {
+						boolean result =false;
+						for (int i = 0;i<datagroup.size();i++) {
+							
+							if (nameString.equals(datagroup.get(i).getName()))
+							{							
+								result = result||true;							
+							}
+							
+							result =result||false;
+						}
+		
+						if (!result) {
+						
+							Persondata persondata = new Persondata(new ArrayList<Dayinformation>());
+							persondata.setName(nameString);
+							datagroup.add(persondata);
+							allistest = false;
+						}
+						
+					}
+					
+					flashdata();
+					
+				}								
 				
 			}
-			
 		});
 		
 	
@@ -300,6 +340,30 @@ public class CalendarWindows {
 		
 	}
 	
+	public JComboBox<String> getYear() {
+		return year;
+	}
+
+
+	public void setYear(JComboBox<String> year) {
+		this.year = year;
+	}
+
+
+	public JComboBox<String> getMonth() {
+		return month;
+	}
+
+
+	public JComboBox<String> getNamelist() {
+		return namelist;
+	}
+
+
+	public JComboBox<String> getVacationorextrawork() {
+		return vacationorextrawork;
+	}
+	
 	
 	//刷新数据
 	private void flashdata() {
@@ -320,8 +384,49 @@ public class CalendarWindows {
 	    for (int i = 0; i < 42; i++) {
 			
 	    	daylabeList.get(i).setText(daynumbergroup[i]);
-	    	
+	    				
+		}
+	    
+	    for (Persondata data:datagroup) {
+			
+	    	if (data.getName().equals((String)namelist.getSelectedItem())) {
+	    		
+	    		if (data.getDayinformation().isEmpty()) {
+	    			
+	    		    for (int i = 0; i < 42; i++) {
+	    				
+	    		    	daylabeList.get(i).SetNoChooseState();
+	    		    				
+	    			}
+	    								
+				}
+	    		
+	    		else {
+	    			
+	    		    for (int i = 0; i < 42; i++) {
+	    				
+	    		    	daylabeList.get(i).SetNoChooseState();
+	    		    				
+	    			}
+	    		    
+	    			for (Dayinformation in:data.getDayinformation()) {
+						
+		    		    for (int i = 0; i < 42; i++) {
+		    					    		    	
+		    		    	if (in.getLabelday().equals(daylabeList.get(i).getText())) {		    		    		
+		    		    		daylabeList.get(i).SetChooseState();
+								break;
+							}
+		    		    				
+		    			}
+	    				
+						
+					}
+					
+				}
 
+				
+			}
 			
 		}
 	    		

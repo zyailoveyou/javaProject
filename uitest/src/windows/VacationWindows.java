@@ -8,12 +8,14 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import data.persondayinformation;
+import data.Dayinformation;
+import data.Persondata;
 import uitest1.CalendarWindows;
 import uitest1.mylabel;
 
@@ -33,22 +35,29 @@ public class VacationWindows {
 
 	private JFrame frame;
 	JCheckBox morningnocheck;
-	private boolean nondaychoose = false;
+	private boolean noinformationsubmit = false;
 	private JTextField morningreason;
 	private JTextField afternoonreason;
 	private JTextField wholedayreason;
 	private String[] reasonsliStrings = new String[] {"换休","年休","事假","丧假","产假","陪护假","未打卡说明"};
 	private Color activeColor = new Color(255, 255, 255);
 	private Color nagativecColor =  new Color(150,150,150);
-	private persondayinformation information = new persondayinformation();
+
+	private Persondata data = new Persondata(new ArrayList<Dayinformation>());
 	private mylabel label;
 	
 	private JComboBox<String> vacationreasons;
 
 	
-	public boolean getnodaychoose() {
+	
+	public Persondata getPersondata() {
 		
-		return nondaychoose;
+		return data;
+	}
+	
+	public boolean getnoinformationsubmit() {
+		
+		return noinformationsubmit;
 		
 	}
 	
@@ -56,11 +65,7 @@ public class VacationWindows {
 		return label;
 	}
 	
-	public persondayinformation getdaypersoninformation() {
-				
-       return information;
-		
-	}
+
 		
 	public JFrame getFrame() {
 		return frame;
@@ -180,30 +185,25 @@ public class VacationWindows {
 					if (morningnocheck.isSelected()&&!afternoonnocheck.isSelected()) 
 					{					
 					 
-						   setdata();
-						   information.setActualtimenoclear("上午未打");
-						   information.setPostilinformation(morningreason.getText());
-						   
-						 						 
+						   setdata("上午未打",morningreason.getText());
+						 						 						 
 					}
 						
 					else if (!morningnocheck.isSelected()&&afternoonnocheck.isSelected()) 
 					{					
-							setdata();
-							information.setActualtimenoclear("下午未打");
-							information.setPostilinformation(afternoonreason.getText());
+							setdata("下午未打",afternoonreason.getText());
+
 					}
 						
 					else if(wholedaynoclear.isSelected())
 					{					
-						   setdata();
-						   information.setActualtimenoclear("全天未打");
-						   information.setPostilinformation(wholedayreason.getText());
+						   setdata("全天未打",wholedayreason.getText());
+
 					}
 						
 					else 
 					{							
-					     nondaychoose = true;
+					     noinformationsubmit = true;
 					}
 				
 							
@@ -215,10 +215,12 @@ public class VacationWindows {
 	}
 	
 	
-	public void setdata() {
-		
+	public void setdata(String Actualtimenoclear,String Explainreason) {
+				 
 		 String nameString = (String)getlabel().getCal().getNamelist().getSelectedItem();
-		 information.setName(nameString);
+		 data.setName(nameString);
+		 		 
+		 Dayinformation information = new Dayinformation();
 		 String catogoryString = getlabel().getCal().getVacationorExtrawork();
 		 information.setCatogorys(catogoryString);
 		 String vacationreasonString = (String)vacationreasons.getSelectedItem();
@@ -226,7 +228,22 @@ public class VacationWindows {
 		 String timeString = String.valueOf(getlabel().getCal().getyear())+"-"+
 				 String.valueOf(getlabel().getCal().getmonth())+"-"+getlabel().getText();								 
 		 information.setTime(timeString);
+		 information.setLabelday(getlabel().getText());
+		 information.setActualtimenoclear(Actualtimenoclear);
+		 information.setExplainreason(Explainreason);
 		 
+		 
+		 for (int i=0;i<getlabel().getCal().getDatagroup().size();i++) {
+			if (nameString.equals(getlabel().getCal().getDatagroup().get(i).getName())) {				
+				getlabel().getCal().getDatagroup().get(i).getDayinformation().add(information);				
+			}
+		    else {
+				System.out.println("没有初始化数据集，检查哪里出错了");
+			}
+		}
+		 
+		 
+		 System.out.println(12312);
 		
 	}
 
