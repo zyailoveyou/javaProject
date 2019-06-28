@@ -9,18 +9,20 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import data.Dayinformation;
-import data.Persondata;
+import data.OneManData;
 import uitest1.CalendarWindows;
 import uitest1.mylabel;
 
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -30,27 +32,27 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.TextField;
+import javax.swing.JLabel;
 
 public class VacationWindows {
 
 	private JFrame frame;
 	JCheckBox morningnocheck;
 	private boolean noinformationsubmit = false;
-	private JTextField morningreason;
-	private JTextField afternoonreason;
-	private JTextField wholedayreason;
 	private String[] reasonsliStrings = new String[] {"换休","年休","事假","丧假","产假","陪护假","未打卡说明"};
 	private Color activeColor = new Color(255, 255, 255);
 	private Color nagativecColor =  new Color(150,150,150);
 
-	private Persondata data = new Persondata(new ArrayList<Dayinformation>());
+	private OneManData data = new OneManData(new ArrayList<Dayinformation>());
 	private mylabel label;
 	
 	private JComboBox<String> vacationreasons;
+	private TextField reasonsexplanation;
 
 	
 	
-	public Persondata getPersondata() {
+	public OneManData getPersondata() {
 		
 		return data;
 	}
@@ -70,6 +72,8 @@ public class VacationWindows {
 	public JFrame getFrame() {
 		return frame;
 	}
+	
+	
 
 	public VacationWindows(mylabel label) {
 
@@ -78,23 +82,16 @@ public class VacationWindows {
 	}
 	
 	public void activeTextfield() {
-		morningreason.setEnabled(true);
-		afternoonreason.setEnabled(true);
-		wholedayreason.setEnabled(true);
-		morningreason.setBackground(activeColor);
-		afternoonreason.setBackground(activeColor);
-		wholedayreason.setBackground(activeColor);
-		
+
+		reasonsexplanation.setEnabled(true);
+		reasonsexplanation.setBackground(activeColor);
+
 	}
 	
 	public void nagativeTextfield() {
 		
-		morningreason.setEnabled(false);
-		afternoonreason.setEnabled(false);
-		wholedayreason.setEnabled(false);		
-		morningreason.setBackground(nagativecColor);
-		afternoonreason.setBackground(nagativecColor);
-		wholedayreason.setBackground(nagativecColor);
+		reasonsexplanation.setEnabled(false);
+		reasonsexplanation.setBackground(nagativecColor);
 		
 	}
 	
@@ -112,17 +109,13 @@ public class VacationWindows {
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(3, 2, 0, 10));
+		panel.setLayout(new GridLayout(4, 1, 0, 0));
 		
 		JCheckBox morningnocheck = new JCheckBox("上午未打");
 		morningnocheck.setBackground(new Color(245, 245, 245));
 		panel.add(morningnocheck);
 		morningnocheck.setFont(new Font("黑体", Font.PLAIN, 16));
 		morningnocheck.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		morningreason = new JTextField();
-		panel.add(morningreason);
-		morningreason.setColumns(10);
 				
 		JCheckBox afternoonnocheck = new JCheckBox("下午未打");
 		afternoonnocheck.setBackground(new Color(245, 245, 245));
@@ -130,24 +123,26 @@ public class VacationWindows {
 		afternoonnocheck.setFont(new Font("黑体", Font.PLAIN, 16));
 		afternoonnocheck.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		afternoonreason = new JTextField();
-		afternoonreason.setColumns(10);
-		panel.add(afternoonreason);
-		
 		JCheckBox wholedaynoclear = new JCheckBox("全天未打");
 		wholedaynoclear.setHorizontalAlignment(SwingConstants.CENTER);
 		wholedaynoclear.setFont(new Font("黑体", Font.PLAIN, 16));
 		wholedaynoclear.setBackground(new Color(245, 245, 245));
 		panel.add(wholedaynoclear);
 		
-		wholedayreason = new JTextField();
-		wholedayreason.setColumns(10);
-		panel.add(wholedayreason);
+		reasonsexplanation = new TextField();
+		reasonsexplanation.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		reasonsexplanation.setText("\u8BF7\u8F93\u5165\u672A\u6253\u5361\u7684\u539F\u56E0");
+		panel.add(reasonsexplanation);
+		
+		ButtonGroup mygourpButtonGroup = new ButtonGroup();
+		mygourpButtonGroup.add(morningnocheck);
+		mygourpButtonGroup.add(afternoonnocheck);
+		mygourpButtonGroup.add(wholedaynoclear);
 		
 		JButton submitvacation = new JButton("提交");
 		submitvacation.setPreferredSize(new Dimension(61, 40));
 		frame.getContentPane().add(submitvacation, BorderLayout.SOUTH);
-		
+				
 		nagativeTextfield();
 				
 		vacationreasons.addItemListener(new ItemListener() {
@@ -185,19 +180,19 @@ public class VacationWindows {
 					if (morningnocheck.isSelected()&&!afternoonnocheck.isSelected()) 
 					{					
 					 
-						   setdata("上午未打",morningreason.getText());
+						   setdata("上午未打",reasonsexplanation.getText());
 						 						 						 
 					}
 						
 					else if (!morningnocheck.isSelected()&&afternoonnocheck.isSelected()) 
 					{					
-							setdata("下午未打",afternoonreason.getText());
+							setdata("下午未打",reasonsexplanation.getText());
 
 					}
 						
 					else if(wholedaynoclear.isSelected())
 					{					
-						   setdata("全天未打",wholedayreason.getText());
+						    setdata("全天未打",reasonsexplanation.getText());
 
 					}
 						
@@ -218,32 +213,30 @@ public class VacationWindows {
 	public void setdata(String Actualtimenoclear,String Explainreason) {
 				 
 		 String nameString = (String)getlabel().getCal().getNamelist().getSelectedItem();
-		 data.setName(nameString);
-		 		 
+		 
 		 Dayinformation information = new Dayinformation();
 		 String catogoryString = getlabel().getCal().getVacationorExtrawork();
-		 information.setCatogorys(catogoryString);
+		 information.setreasons(catogoryString);
 		 String vacationreasonString = (String)vacationreasons.getSelectedItem();
-		 information.setSubcatogory(vacationreasonString);
+		 information.setreasons_details(vacationreasonString);
 		 String timeString = String.valueOf(getlabel().getCal().getyear())+"-"+
 				 String.valueOf(getlabel().getCal().getmonth())+"-"+getlabel().getText();								 
 		 information.setTime(timeString);
-		 information.setLabelday(getlabel().getText());
+		 information.setLabelday(getlabel().getText());		 
 		 information.setActualtimenoclear(Actualtimenoclear);
-		 information.setExplainreason(Explainreason);
+		 information.setreasons_explanation(Explainreason);
+		 information.sethandleovertimework(null);
 		 
 		 
 		 for (int i=0;i<getlabel().getCal().getDatagroup().size();i++) {
 			if (nameString.equals(getlabel().getCal().getDatagroup().get(i).getName())) {				
 				getlabel().getCal().getDatagroup().get(i).getDayinformation().add(information);				
 			}
-		    else {
-				System.out.println("没有初始化数据集，检查哪里出错了");
-			}
+
 		}
 		 
 		 
-		 System.out.println(12312);
+		 System.out.println(nameString+"写入假期信息完成");
 		
 	}
 

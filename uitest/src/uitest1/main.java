@@ -1,24 +1,18 @@
 package uitest1;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import data.Dayinformation;
 
    public class main {
 	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CalendarWindows window = new CalendarWindows();
-					window.getFrame().setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	
-	
-	
-	
-}
+		
+				
+			CalendarWindows window = new CalendarWindows();
+			window.getFrame().setVisible(true);
+				
+      }
+ }

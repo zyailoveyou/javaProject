@@ -1,0 +1,330 @@
+六月 03, 2019 4:08:26 下午 org.eclipse.birt.chart.device.swt.SwtDisplayServer <init>
+信息: SWT Display Server: win32 v4,880
+六月 03, 2019 4:13:34 下午 org.eclipse.birt.chart.device.swt.R31Enhance <clinit>
+信息: 启用高级 SWT 图形功能。
+六月 03, 2019 4:13:34 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {1107368179}
+六月 03, 2019 4:13:34 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:13:34 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:13:34 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:13:34 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:16:11 下午 org.eclipse.birt.chart.device.swt.SwtDisplayServer <init>
+信息: SWT Display Server: win32 v4,880
+六月 03, 2019 4:16:19 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:16:19 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:16:19 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:16:19 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:16:19 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:16:19 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:16:19 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:16:20 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:19:02 下午 org.eclipse.birt.chart.device.swt.SwtDisplayServer <init>
+信息: SWT Display Server: win32 v4,880
+六月 03, 2019 4:19:02 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-1627317219}
+六月 03, 2019 4:19:02 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:19:02 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:19:02 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:19:02 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:19:24 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-1493097747}
+六月 03, 2019 4:19:24 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:19:24 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:19:24 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:19:24 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:02 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {1006706219}
+六月 03, 2019 4:21:02 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:02 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:21:02 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:02 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:28 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-788456039}
+六月 03, 2019 4:21:28 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:28 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:21:28 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:28 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:43 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-721346218}
+六月 03, 2019 4:21:43 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:43 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:21:43 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:43 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-1526654317}
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:51 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:21:52 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:21:52 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:21:52 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:21:52 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:21:52 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:21:52 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:21:52 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-1778313475}
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:22:33 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:26:39 下午 org.eclipse.birt.chart.device.swt.SwtDisplayServer <init>
+信息: SWT Display Server: win32 v4,880
+六月 03, 2019 4:26:39 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-1811864201}
+六月 03, 2019 4:26:39 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:26:39 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:26:39 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:26:39 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:26:52 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {1258363510}
+六月 03, 2019 4:26:52 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:26:52 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:26:52 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:26:52 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:28:10 下午 org.eclipse.birt.chart.device.swt.SwtRendererImpl setProperty
+信息: 使用图形上下文 org.eclipse.swt.graphics.GC@GC {-1811866690}
+六月 03, 2019 4:28:10 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:28:10 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.StorageUnitRenderScript]。
+六月 03, 2019 4:28:10 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:28:10 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.swing.SwingDisplayServer <init>
+信息: SWING 显示服务器: Oracle Corporation v1.8.0_201
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 正在尝试加载图表 Java 事件处理程序类...
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.script.AbstractScriptHandler register
+信息: 已成功加载图表 Java 事件处理程序类 [class org.eclipse.mat.impl.chart.LabelRenderScript]。
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.swing.SwingRendererImpl prepareGraphicsContext
+信息: 使用图形上下文 sun.java2d.SunGraphics2D[font=java.awt.Font[family=Dialog,name=Dialog,style=plain,size=12],color=java.awt.Color[r=255,g=255,b=255]]
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.render.EmptyWithoutAxes renderSeries
+信息: org.eclipse.birt.chart.render.EmptyWithoutAxes: renderSeries() [1/2]
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.extension.render.Pie renderSeries
+信息: {0}: renderSeries() [{1}/{2}]org.eclipse.birt.chart.extension.render.Pie22
+六月 03, 2019 4:31:41 下午 org.eclipse.birt.chart.device.image.JavaxImageIOWriter after
+信息: 使用 {0} 图像编写器 {1}pngcom.sun.imageio.plugins.png.PNGImageWriter

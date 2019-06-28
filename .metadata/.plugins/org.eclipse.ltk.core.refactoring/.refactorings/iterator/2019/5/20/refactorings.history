@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="将包“data”复制到“test1/src”&#x0D;&#x0A;－ 原始项目：“iterator”&#x0D;&#x0A;－ 目标元素：“test1/src”&#x0D;&#x0A;－ 原始元素：“iterator/src/data”" description="复制包" destination="=test1/src" element1="/src&lt;data" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1557737381687" version="1.0"/>
+</session>

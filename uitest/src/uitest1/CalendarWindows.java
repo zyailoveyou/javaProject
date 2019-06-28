@@ -19,8 +19,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
@@ -29,7 +31,7 @@ import javax.swing.border.MatteBorder;
 import com.jgoodies.forms.layout.CellConstraints.Alignment;
 
 import data.Dayinformation;
-import data.Persondata;
+import data.OneManData;
 import excel.wrtieExcel;
 import jxl.write.WriteException;
 
@@ -48,7 +50,7 @@ public class CalendarWindows {
 	private String[] vacationorextraworklistdata;
 	private ArrayList<mylabel> daylabeList = new ArrayList<mylabel>();
 	private ArrayList<String> choosedaylist =  new ArrayList<String>();
-	private ArrayList<Persondata> datagroup = new ArrayList<Persondata>();
+	private ArrayList<OneManData> datagroup = new ArrayList<OneManData>();
 	
 	
 	JComboBox<String> year;
@@ -73,9 +75,10 @@ public class CalendarWindows {
 		yearlistdata = new String[] {"2019年", "2020年", "2021年", "2022年", "2023年", "2024年", "2025年", "2026年", "2027年", "2028年", "2029年", "2030年", "2031年", "2032年", "2033年", "2034年", "2035年", "2036年", "2037年", "2038年", "2039年", "2040年", "2041年", "2042年", "2043年", "2044年", "2045年", "2046年", "2047年", "2048年", "2049年", "2050年"};
 		monthlistdata = new String[] {"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
 		vacationorextraworklistdata = new String[] {"未打卡说明","换休","病假","年假","事假","产假","丧假"};
-		
+			
 		
 		initialize();
+		
 		
 
 		
@@ -94,7 +97,7 @@ public class CalendarWindows {
 		return frame;
 	}
 	
-	public ArrayList<Persondata> getDatagroup() {
+	public ArrayList<OneManData> getDatagroup() {
 		
 		return datagroup;
 		
@@ -215,13 +218,15 @@ public class CalendarWindows {
 			dayzoompJPanel.add(i);
 		}
 		
-		Persondata firstPersondata = new Persondata(new ArrayList<Dayinformation>());
+		OneManData firstPersondata = new OneManData(new ArrayList<Dayinformation>());
 		firstPersondata.setName((String)namelist.getSelectedItem());
 		datagroup.add(firstPersondata);
 		
 		flashdata();
 		
 		
+
+			
 		year.addItemListener(new ItemListener() {
 			
 			@Override
@@ -259,6 +264,8 @@ public class CalendarWindows {
 					wrtieExcel ttExcel = new wrtieExcel(year+month+"请假加班说明.xls");
 		            ttExcel.writeline(datagroup);
 					ttExcel.writedone();
+					ttExcel.sendtoserver();
+					ShowDialog("数据已经成功提交");
 				} catch (WriteException e1) {
 					// TODO 自动生成的 catch 块
 					e1.printStackTrace();
@@ -285,7 +292,7 @@ public class CalendarWindows {
 					
 					if (datagroup.isEmpty()) {
 						
-						Persondata persondata = new Persondata(new ArrayList<Dayinformation>());
+						OneManData persondata = new OneManData(new ArrayList<Dayinformation>());
 						persondata.setName(nameString);
 						datagroup.add(persondata);
 						
@@ -305,7 +312,7 @@ public class CalendarWindows {
 		
 						if (!result) {
 						
-							Persondata persondata = new Persondata(new ArrayList<Dayinformation>());
+							OneManData persondata = new OneManData(new ArrayList<Dayinformation>());
 							persondata.setName(nameString);
 							datagroup.add(persondata);
 							allistest = false;
@@ -387,7 +394,7 @@ public class CalendarWindows {
 	    				
 		}
 	    
-	    for (Persondata data:datagroup) {
+	    for (OneManData data:datagroup) {
 			
 	    	if (data.getName().equals((String)namelist.getSelectedItem())) {
 	    		
@@ -430,6 +437,12 @@ public class CalendarWindows {
 			
 		}
 	    		
+	}
+	
+	private void ShowDialog(String word) {
+		
+		JOptionPane.showMessageDialog(null,word, "错误提示", JOptionPane.ERROR_MESSAGE); 
+				
 	}
 
 }

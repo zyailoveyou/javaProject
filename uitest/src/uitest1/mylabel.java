@@ -7,12 +7,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 import javax.swing.JLabel;
 
 import data.Dayinformation;
-import data.Persondata;
+import data.OneManData;
 import windows.ExtraWorkWindows;
 import windows.VacationWindows;
 
@@ -35,30 +37,38 @@ public class mylabel extends JLabel implements MouseListener {
 		ischoose = false;	
 	}
 	
-	public void Removedata(String number) {
+	public void Removedata(String name) {
+			
+		ArrayList<OneManData> data= getCal().getDatagroup();
 		
-
+		Iterator<OneManData> l = data.iterator();
 		
-		Iterator<Persondata> l = getCal().getDatagroup().iterator();
-		while(l.hasNext()) {		
-			Persondata data = l.next();			
-			Iterator<Dayinformation> l2 = data.getDayinformation().iterator();
-			while(l2.hasNext()) {
+		while(l.hasNext()) {
+			
+			OneManData oneManData = (OneManData)l.next();
+			
+			if (oneManData.getName().equals(name)) {
 				
-				Dayinformation data2 = (Dayinformation)l2.next();
-				
-				if (data2.getLabelday().equals(number)) {
+				ArrayList<Dayinformation> dayinformations = oneManData.getDayinformation();			
+				Iterator<Dayinformation> l2 = dayinformations.iterator();				
+				while (l2.hasNext()) {
 					
-					l2.remove();
+					Dayinformation dayinformation = (Dayinformation)l2.next();
+					if (dayinformation.getLabelday().equals(getText())) {
+						
+						l2.remove();
+					}
+					
 					
 				}
-								
+				
 			}
 			
 			
-		}
 
-		
+			
+		}
+				
 	}
 		
 	public Dayinformation getinformation() {
@@ -99,6 +109,9 @@ public class mylabel extends JLabel implements MouseListener {
 		this.cal = cal;
 								
 	}
+	
+	
+	
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -110,7 +123,7 @@ public class mylabel extends JLabel implements MouseListener {
 			String optionchoose = getCal().getVacationorExtrawork();
 			
 			if (optionchoose.equals("Çë¼Ù")) {
-			
+							
 				VacationWindows Vwindow = new VacationWindows(this);
 				Vwindow.getFrame().setVisible(true);
 				Vwindow.getFrame().addWindowListener(new WindowAdapter() {					
@@ -145,14 +158,26 @@ public class mylabel extends JLabel implements MouseListener {
 			
 			else if (optionchoose.equals("¼Ó°à")) {
 				
-			    ExtraWorkWindows ewindoWindow = new ExtraWorkWindows();
+			    ExtraWorkWindows ewindoWindow = new ExtraWorkWindows(this);
 			    ewindoWindow.getFrame().setVisible(true);
 			    ewindoWindow.getFrame().addWindowListener(new WindowAdapter() {
 			    	
 			    	@Override
 			    	public void windowClosed(WindowEvent e) {
-			    		
-			    		
+			    				
+						if (ewindoWindow.getnoinformationsubmit()) {
+							
+							SetNoChooseState();
+							return;
+							
+						}
+						
+						else {
+							
+							System.out.println("OK");
+							
+						}
+			    		    		
 
 			    	}
 			    	
@@ -173,7 +198,7 @@ public class mylabel extends JLabel implements MouseListener {
 			
 		else {
 			
-			Removedata((String)getCal().getNamelist().getSelectedItem());
+			Removedata((String)getCal().getNamelist().getSelectedItem());		
 			SetNoChooseState();
 			
 		}

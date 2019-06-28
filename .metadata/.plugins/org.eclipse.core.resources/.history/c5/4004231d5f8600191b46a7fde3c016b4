@@ -1,0 +1,25 @@
+package heapOutMemory;
+
+import java.util.ArrayList;
+
+public class myclass {
+	
+	 class heapblock {
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		heapblock heap = new heapblock();
+		
+		ArrayList<heapblock> list=new ArrayList<main.heapblock>();
+		
+		while (true) {
+			list.add(new heapblock());			
+		}
+		
+	}
+
+
+}

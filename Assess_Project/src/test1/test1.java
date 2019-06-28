@@ -33,15 +33,9 @@ public class test1 {
 	
 	public static void main(String[] args) throws BiffException, IOException, WriteException, ParseException {
 		
-		
-		
+				
 		WindowsUI myWindowsUI  = new WindowsUI();		
 		myWindowsUI.ShowWindows();
-		
-		
-		
-
-		
 		
 	
     }
