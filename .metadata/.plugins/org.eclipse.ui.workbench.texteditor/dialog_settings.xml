@@ -6,29 +6,32 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="noinformationsubmit" key="selection"/>
+		<item value="ShowDialog" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="noinformationsubmit"/>
-			<item value="afternoonnocheck"/>
-			<item value="morningnocheck"/>
-			<item value="frame"/>
-			<item value="morningreason"/>
-			<item value="Explainreason"/>
-			<item value="data"/>
-			<item value="数据"/>
-			<item value="titles"/>
-			<item value="in"/>
-			<item value="daylabeList"/>
-			<item value="getlabel()"/>
-			<item value="getLabel()"/>
-			<item value="label"/>
-			<item value="datagroup"/>
+			<item value="ShowDialog"/>
+			<item value="iterator"/>
+			<item value="grouplayout"/>
+			<item value="setlocation"/>
+			<item value="regis"/>
+			<item value="register"/>
+			<item value="tDefaultCloseOperation"/>
+			<item value="setda"/>
+			<item value="show"/>
+			<item value="submit"/>
+			<item value="group"/>
+			<item value="getframe"/>
+			<item value="download"/>
+			<item value="nowline"/>
+			<item value="异常出勤原因"/>
 		</list>
 		<list key="replacehistory">
+			<item value="getsubmitdatagroup"/>
+			<item value="s"/>
+			<item value="submitdatagroup"/>
 			<item value="afternoonextrawork"/>
 			<item value="morningextrawork"/>
 			<item value="getlabel()"/>
@@ -44,7 +47,7 @@
 		<item value="278" key="DIALOG_WIDTH"/>
 		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
 		<item value="327" key="DIALOG_HEIGHT"/>
-		<item value="1032" key="DIALOG_X_ORIGIN"/>
-		<item value="374" key="DIALOG_Y_ORIGIN"/>
+		<item value="1030" key="DIALOG_X_ORIGIN"/>
+		<item value="424" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -1,0 +1,121 @@
+package user;
+
+import java.sql.SQLException;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.JOptionPane;
+
+import ojdbc.DataBaseOperation;
+
+public class user {
+	
+	
+	String checkname;
+	String usernameString;
+	String passwordString;
+	String departmentString;
+	
+	
+	private user(String checkname,String usernameString,String passwordString,String departmentString)
+	{		
+		this.checkname = checkname;
+		this.usernameString = usernameString;
+		this.passwordString = passwordString;
+		this.departmentString = departmentString;		
+	}
+	
+	public static user GetUserData(String usernameString,String passwordString)	
+	{
+			return null;
+	
+	}
+	
+	
+
+	
+	public static boolean RegisterUser(String checkname,String usernameString,String passwordString,String departmentString) throws ClassNotFoundException, SQLException
+	{
+		
+		DataBaseOperation testBaseOperation = new DataBaseOperation();
+		
+		int usernamelength = usernameString.length();
+		int passwordlength = passwordString.length();
+		
+		if (checkname.equals("")) {
+			ShowDialog("员工姓名不能为空");
+			return false;
+		}
+		
+		if (usernamelength<6) {
+			
+			ShowDialog("用户名长度小于6位");
+			return false;
+		}
+		
+		if (passwordlength<6) {
+			ShowDialog("密码长度小于6位");
+			return false;
+			
+		}
+		
+		int id = testBaseOperation.GetID_from_Nanme(checkname);
+		
+		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname, id);
+				
+	}
+	
+	
+	
+	public static Map<Boolean, String> LoginInUser (String usernameString,String passwordString) throws ClassNotFoundException, SQLException 	
+	{
+		
+		
+		
+		DataBaseOperation testBaseOperation = new DataBaseOperation();
+		
+		String resultString = testBaseOperation.SelectOneLine_DATA_ACCOUNT(usernameString, passwordString);
+		
+		if (resultString.equals("成功登录")) {
+			
+			Map<Boolean, String> resultmap = new HashMap<Boolean, String>();		
+			resultmap.put(true, "成功登录");
+			return resultmap;
+		}
+		
+		else if (resultString.equals("数据库中没有读取到任何帐号数据，请联系管理员")) {
+			
+			Map<Boolean, String> resultmap = new HashMap<Boolean, String>();		
+			resultmap.put(false, "数据库中没有读取到任何帐号数据，请联系管理员");			
+			return resultmap;
+		}
+		
+		else if (resultString.equals("帐号或者密码错误")) {
+			
+			Map<Boolean, String> resultmap = new HashMap<Boolean, String>();		
+			resultmap.put(false, "帐号或者密码错误");			
+			return resultmap;
+		}
+		
+		else if (resultString.equals("数据库连接错误")) {
+			
+			Map<Boolean, String> resultmap = new HashMap<Boolean, String>();		
+			resultmap.put(false, "数据库连接错误");			
+			return resultmap;
+		}
+		
+		return null;
+								
+	}
+	
+	
+	private static void ShowDialog(String word) {
+		
+		JOptionPane.showMessageDialog(null,word, "错误提示", JOptionPane.ERROR_MESSAGE); 
+				
+	}
+	
+
+}

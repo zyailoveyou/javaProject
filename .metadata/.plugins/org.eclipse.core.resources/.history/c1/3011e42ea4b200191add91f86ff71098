@@ -1,0 +1,90 @@
+package user;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JTextPane;
+import java.awt.GridBagConstraints;
+import java.awt.TextField;
+import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JLabel;
+
+public class LoginInWindows {
+
+	private JFrame frame;
+	private JTextField usenametextfiled;
+	private JTextField passwordtextfiled;
+
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	public LoginInWindows() {
+		initialize();
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JPanel northfillin = new JPanel();
+		FlowLayout fl_northfillin = (FlowLayout) northfillin.getLayout();
+		fl_northfillin.setVgap(30);
+		fl_northfillin.setHgap(10);
+		frame.getContentPane().add(northfillin, BorderLayout.NORTH);
+		
+		JPanel centerfillin = new JPanel();
+		frame.getContentPane().add(centerfillin, BorderLayout.CENTER);
+		centerfillin.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		Box AccounthorizontalBox = Box.createHorizontalBox();
+		centerfillin.add(AccounthorizontalBox);
+		
+		JLabel usernamelabel = new JLabel("\u5E10\u53F7\uFF1A");
+		usernamelabel.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		AccounthorizontalBox.add(usernamelabel);
+		
+		usenametextfiled = new JTextField();
+		AccounthorizontalBox.add(usenametextfiled);
+		usenametextfiled.setColumns(10);
+		
+		Box PasswordhorizontalBox = Box.createHorizontalBox();
+		centerfillin.add(PasswordhorizontalBox);
+		
+		JLabel passwordlable = new JLabel("\u5BC6\u7801\uFF1A");
+		passwordlable.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		PasswordhorizontalBox.add(passwordlable);
+		
+		passwordtextfiled = new JTextField();
+		passwordtextfiled.setColumns(10);
+		PasswordhorizontalBox.add(passwordtextfiled);
+		
+		JPanel southfillin = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) southfillin.getLayout();
+		flowLayout.setHgap(10);
+		flowLayout.setVgap(60);
+		frame.getContentPane().add(southfillin, BorderLayout.SOUTH);
+		
+		JPanel westfillin = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) westfillin.getLayout();
+		flowLayout_1.setHgap(10);
+		frame.getContentPane().add(westfillin, BorderLayout.WEST);
+		
+		JPanel eastfillin = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) eastfillin.getLayout();
+		flowLayout_2.setHgap(10);
+		frame.getContentPane().add(eastfillin, BorderLayout.EAST);
+	}
+
+}

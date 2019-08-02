@@ -1,0 +1,66 @@
+package user;
+
+import java.sql.SQLException;
+
+import ojdbc.DataBaseOperation;
+
+public class user {
+	
+	
+	String checkname;
+	String usernameString;
+	String passwordString;
+	String departmentString;
+	
+	
+	public user(String checkname,String usernameString,String passwordString,String departmentString)
+	{		
+		this.checkname = checkname;
+		this.usernameString = usernameString;
+		this.passwordString = passwordString;
+		this.departmentString = departmentString;		
+	}
+	
+	public static user CreateUserData(String checkname,String usernameString,String passwordString,String departmentString)	
+	{
+		user returnUser = new user(checkname, usernameString, passwordString, departmentString);		
+		return returnUser;		
+	}
+	
+	public boolean RegisterUser() throws ClassNotFoundException, SQLException
+	{
+		
+		DataBaseOperation testBaseOperation = new DataBaseOperation();
+		
+		int usernamelength = usernameString.length();
+		int passwordlength = passwordString.length();
+		
+		if (usernamelength<6) {
+			
+			System.out.println("账号长度小于6位");
+			
+		}
+		
+		if (passwordlength<6) {
+			System.out.println("密码长度小于6位");
+		}
+		
+		int id = testBaseOperation.GetID_from_Nanme(checkname);
+		
+		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname, id);
+				
+	}
+	
+	public Boolean LoginInUser (String usernameString,String passwordString) 	
+	{
+		
+		DataBaseOperation testBaseOperation = new DataBaseOperation();
+		
+		
+		
+		
+	}
+	
+	
+
+}

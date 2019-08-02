@@ -1,5 +1,6 @@
 package excel;
 
+import java.awt.Label;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -11,8 +12,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import data.Dayinformation;
-import data.OneManData;
 import jxl.Workbook;
 import jxl.common.LengthConverter;
 import jxl.format.Alignment;
@@ -24,6 +23,8 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import vacation_extrawork.Dayinformation;
+import vacation_extrawork.OneManData;
 
 public class wrtieExcel {
 	
@@ -47,14 +48,16 @@ public class wrtieExcel {
 		currentFile.createNewFile();
 		
 		workbook = Workbook.createWorkbook(currentFile);
-		sheet = workbook.createSheet("1111", 0);
+		sheet = workbook.createSheet("异常出勤导出", 0);
 		
 		titles.add("姓名");
-		titles.add("日期");
-		titles.add("类别");
-		titles.add("假种");
-		titles.add("打卡情况");
-		titles.add("未打卡说明");
+		titles.add("编号ID");
+		titles.add("时间");
+		titles.add("实际异常出勤时间");
+		titles.add("异常出勤原因");
+		titles.add("异常出勤原因细分");
+		titles.add("异常出勤说明");
+		titles.add("异常出勤处理方式");
 		
 		//设置字体格式
 		WritableFont font = new WritableFont(
@@ -81,7 +84,7 @@ public class wrtieExcel {
 		
 	}
 	
-	public void writeline(ArrayList<OneManData> data) throws WriteException 
+	public void writeline(ArrayList<String> datagroup) throws WriteException 
 	{
 				
 		//设置字体格式
@@ -96,41 +99,22 @@ public class wrtieExcel {
 		cellFormat.setAlignment(Alignment.CENTRE);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 		
-		for (OneManData in:data) {
-			
-			for (Dayinformation information2 : in.getDayinformation()) {
-				
-				
-				jxl.write.Label nameLabel = new jxl.write.Label(0, nowline,in.getName(), cellFormat);
-				jxl.write.Label timeLabel = new jxl.write.Label(1, nowline,information2.getTime(), cellFormat);
-				jxl.write.Label catagoryLabel = new jxl.write.Label(2, nowline,information2.getreasons(), cellFormat);
-				jxl.write.Label subcatagorylabel = new jxl.write.Label(3, nowline,information2.getreasons_details(), cellFormat);
-				jxl.write.Label actualtimenoclearlabel = new jxl.write.Label(4, nowline,information2.getActualtimenoclear(), cellFormat);
-				jxl.write.Label explainlabel = new jxl.write.Label(5, nowline,information2.getreasons_explanation(), cellFormat);
-				
-				sheet.addCell(nameLabel);
-				sheet.addCell(timeLabel);
-				sheet.addCell(catagoryLabel);
-				sheet.addCell(subcatagorylabel);
-				sheet.addCell(actualtimenoclearlabel);
-				sheet.addCell(explainlabel);
-				
-				nowline++;
-				
-			}
-
-			
+		for (int i= 0;i<8;i++) {
+											
+				jxl.write.Label nameLabel = new jxl.write.Label(i, nowline,datagroup.get(i), cellFormat);								
+				sheet.addCell(nameLabel);			
+												
 		}
-		
-
-		
-						
+		nowline++;	
+								
 	}
 	
 	public void writedone() throws IOException, WriteException {
 		
+		nowline =1;
 		workbook.write();
 		workbook.close();
+		
 		
 	}
 	

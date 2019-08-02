@@ -1,0 +1,23 @@
+package user;
+
+public class userdatatype {
+	
+	
+	String checkname;
+	String usernameString;
+	String passwordString;
+	String departmentString;
+	
+	
+	public userdatatype() {
+		
+		
+		
+	}
+	
+	public static CreateUserData
+	
+	
+	
+
+}

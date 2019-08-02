@@ -1,0 +1,163 @@
+package user;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JTextPane;
+import java.awt.GridBagConstraints;
+import java.awt.TextField;
+import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import ojdbc.DataBaseOperation;
+
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import java.awt.Insets;
+
+public class RegisterWindows {
+
+	private JFrame frame;
+	private JTextField usenametextfiled;
+	private JTextField passwordtextfiled;
+	private JTextField textField;
+	private JTextField textField_1;
+
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	public RegisterWindows() {
+		initialize();
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setTitle("\u6CE8\u518C\u7A97\u53E3");
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JPanel northfillin = new JPanel();
+		FlowLayout fl_northfillin = (FlowLayout) northfillin.getLayout();
+		fl_northfillin.setVgap(30);
+		fl_northfillin.setHgap(10);
+		frame.getContentPane().add(northfillin, BorderLayout.NORTH);
+		
+		JPanel centerfillin = new JPanel();
+		frame.getContentPane().add(centerfillin, BorderLayout.CENTER);
+		centerfillin.setLayout(new GridLayout(4, 1, 0, 0));
+		
+		Box ChecknameBox = Box.createHorizontalBox();
+		centerfillin.add(ChecknameBox);
+		
+		JLabel label_1 = new JLabel("\u59D3\u540D\uFF1A");
+		label_1.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		ChecknameBox.add(label_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		ChecknameBox.add(textField_1);
+		
+		Box UsenameBox = Box.createHorizontalBox();
+		centerfillin.add(UsenameBox);
+		
+		JLabel usernamelabel = new JLabel("\u5E10\u53F7\uFF1A");
+		usernamelabel.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		UsenameBox.add(usernamelabel);
+		
+		usenametextfiled = new JTextField();
+		UsenameBox.add(usenametextfiled);
+		usenametextfiled.setColumns(10);
+		
+		Box PasswordBox = Box.createHorizontalBox();
+		centerfillin.add(PasswordBox);
+		
+		JLabel passwordlable = new JLabel("\u5BC6\u7801\uFF1A");
+		passwordlable.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		PasswordBox.add(passwordlable);
+		
+		passwordtextfiled = new JTextField();
+		passwordtextfiled.setColumns(10);
+		PasswordBox.add(passwordtextfiled);
+		
+		Box DepartmentBox = Box.createHorizontalBox();
+		centerfillin.add(DepartmentBox);
+		
+		JLabel label = new JLabel("\u90E8\u95E8\uFF1A");
+		label.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		DepartmentBox.add(label);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		DepartmentBox.add(textField);
+		
+		JPanel southfillin = new JPanel();
+		frame.getContentPane().add(southfillin, BorderLayout.SOUTH);
+		
+		JButton register = new JButton("\u6CE8\u518C");
+		register.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		GroupLayout gl_southfillin = new GroupLayout(southfillin);
+		gl_southfillin.setHorizontalGroup(
+			gl_southfillin.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_southfillin.createSequentialGroup()
+					.addGap(182)
+					.addComponent(register)
+					.addContainerGap(187, Short.MAX_VALUE))
+		);
+		gl_southfillin.setVerticalGroup(
+			gl_southfillin.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_southfillin.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(register)
+					.addContainerGap(28, Short.MAX_VALUE))
+		);
+		southfillin.setLayout(gl_southfillin);
+		
+		register.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+				
+			}
+		});
+		
+		JPanel westfillin = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) westfillin.getLayout();
+		flowLayout_1.setHgap(30);
+		frame.getContentPane().add(westfillin, BorderLayout.WEST);
+		
+		JPanel eastfillin = new JPanel();
+		FlowLayout flowLayout_2 = (FlowLayout) eastfillin.getLayout();
+		flowLayout_2.setHgap(30);
+		frame.getContentPane().add(eastfillin, BorderLayout.EAST);
+	}
+	
+	
+    private void ShowDialog(String word) {
+
+         JOptionPane.showMessageDialog(null,word, "´íÎóÌáÊ¾", JOptionPane.ERROR_MESSAGE); 
+		
+    }
+	
+	
+
+}

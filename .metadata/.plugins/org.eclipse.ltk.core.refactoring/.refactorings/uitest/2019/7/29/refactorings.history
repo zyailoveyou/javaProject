@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="将“uitest1.CalendarWindows.initialize()”中的局部变量“uitest1.CalendarWindows.initialize().downloadchoose”转换为字段&#x0D;&#x0A;－ 原始项目：“uitest”&#x0D;&#x0A;－ 原始元素：“uitest1.CalendarWindows.initialize().downloadchoose”&#x0D;&#x0A;－ 字段名称：“downloadchoose”&#x0D;&#x0A;－ 初始化方法中的字段&#x0D;&#x0A;－ 已声明可视性：“private”" description="将局部变量“downloadchoose”转换为字段" final="false" flags="2" id="org.eclipse.jdt.ui.promote.temp" initialize="1" input="/src&lt;uitest1{CalendarWindows.java" name="downloadchoose" selection="4298 32" stamp="1563266544318" static="false" version="1.0" visibility="2"/>
+</session>
