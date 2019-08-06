@@ -23,6 +23,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Calendar.CalendarWindows;
+import Calendar.MainWindows;
+import Calendar.BackupSubmitWindows;
+import MyThread.MyThread;
 import ojdbc.DataBaseOperation;
 
 import java.awt.event.ActionListener;
@@ -178,7 +181,8 @@ public class LoginInWindows {
 					Set<Map.Entry<user, String>> set = resultmap.entrySet();
 					Iterator<Map.Entry<user, String>> iterator;
 								    
-				    iterator = set.iterator();				    	
+				    iterator = set.iterator();	
+				    
 					user loginuser = null;
 					String  resultstring = null;
 						
@@ -192,10 +196,10 @@ public class LoginInWindows {
 					if (resultstring.equals("成功登录")) {
 							
 						getFrame().dispose();
-						ShowDialog(resultstring);
-						CalendarWindows window = new CalendarWindows(loginuser);
-						window.getFrame().setVisible(true);
-													
+						ShowDialog(resultstring);						
+						MainWindows windows  = new MainWindows(loginuser);
+						windows.getFrame().setVisible(true);
+														
 					}
 						
 					else {
@@ -203,8 +207,7 @@ public class LoginInWindows {
 						ShowDialog(resultstring);
 							
 					}
-						
-										
+																
 				} catch (ClassNotFoundException e1) {
 					// TODO 自动生成的 catch 块
 					e1.printStackTrace();

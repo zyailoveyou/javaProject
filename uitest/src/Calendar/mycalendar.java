@@ -2,7 +2,7 @@ package Calendar;
 
 import java.util.Calendar;
 
-public class mycalendar  {
+public class Mycalendar  {
 	
 	  //出事年份和月份 月份少1,calendar类的特点
 	  int year=2005;

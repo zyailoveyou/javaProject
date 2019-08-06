@@ -1,0 +1,173 @@
+package Calendar;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
+
+import user.user;
+import vacation_extrawork.OneManData;
+import javax.swing.GroupLayout.Alignment;
+
+public class NewSubimitWindows extends Windows {
+	
+	private String[] yearlistdata;
+	private String[] monthlistdata;
+	private String[] vacationorextraworklistdata;
+	private ArrayList<mylabel> daylabeList = new ArrayList<mylabel>();
+	private ArrayList<OneManData> submitdatagroup = new ArrayList<OneManData>();
+	private JComboBox<String> year;
+	private JComboBox<String> month;
+	private JComboBox<String> vacationorextrawork;
+	private JLabel worknameinformation;
+
+
+
+	public NewSubimitWindows() {
+		
+//		setUser(user);
+		yearlistdata = new String[] {"2019年", "2020年", "2021年", "2022年", "2023年", "2024年", "2025年", "2026年", "2027年", "2028年", "2029年", "2030年", "2031年", "2032年", "2033年", "2034年", "2035年", "2036年", "2037年", "2038年", "2039年", "2040年", "2041年", "2042年", "2043年", "2044年", "2045年", "2046年", "2047年", "2048年", "2049年", "2050年"};
+		monthlistdata = new String[] {"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
+		vacationorextraworklistdata = new String[] {"未打卡说明","换休","病假","年假","事假","产假","丧假"};					
+		initialize();
+	}
+
+
+	private void initialize() {
+
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.setTitle("\u8BF7\u5047\u63D0\u4EA4");
+		frame.setBounds(100, 100, 441, 384);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.setLocationRelativeTo(null);
+		JPanel top = new JPanel();
+		frame.getContentPane().add(top, BorderLayout.NORTH);
+		
+				
+		year = new JComboBox<String>();
+		year.setToolTipText("\u9009\u62E9\u5E74\u4EFD");
+		year.setModel(new DefaultComboBoxModel<String>(yearlistdata));
+		year.setFont(new Font("Adobe 黑体 Std R", Font.PLAIN, 16));
+		
+		month = new JComboBox<String>();
+		month.setToolTipText("\u9009\u62E9\u6708\u4EFD");
+		month.setModel(new DefaultComboBoxModel<String>(monthlistdata));
+		month.setFont(new Font("Adobe 黑体 Std R", Font.PLAIN, 16));
+		
+		vacationorextrawork = new JComboBox<String>();
+		vacationorextrawork.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
+		vacationorextrawork.setModel(new DefaultComboBoxModel(vacationorextraworklistdata));
+		vacationorextrawork.setFont(new Font("Adobe 黑体 Std R", Font.PLAIN, 16));
+		
+		worknameinformation = new JLabel("New label");
+		worknameinformation.setFont(new Font("宋体", Font.PLAIN, 14));		
+		worknameinformation.setText("欢迎登录，"+"123"+"!");
+		
+		GroupLayout gl_top = new GroupLayout(top);
+		gl_top.setHorizontalGroup(
+			gl_top.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(gl_top.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(worknameinformation)
+					.addGap(40)
+					.addComponent(year, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(15)
+					.addComponent(month, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(15)
+					.addComponent(vacationorextrawork, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		gl_top.setVerticalGroup(
+			gl_top.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(gl_top.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_top.createParallelGroup(GroupLayout.Alignment.BASELINE)
+						.addComponent(vacationorextrawork, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(month, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(year, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(worknameinformation))
+					.addGap(9))
+		);
+		
+		top.setLayout(gl_top);
+		
+		JPanel middle = new JPanel();
+		middle.setBorder(new MatteBorder(1, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		frame.getContentPane().add(middle, BorderLayout.CENTER);
+		middle.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new MatteBorder(1, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		middle.add(panel, BorderLayout.NORTH);
+		panel.setLayout(new GridLayout(1, 7, 4, 2));
+		
+		JLabel label = new JLabel("\u661F\u671F\u4E00");
+		label.setForeground(Color.BLACK);
+		label.setBackground(Color.BLUE);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("宋体", Font.PLAIN, 16));
+		panel.add(label);
+		
+		JLabel label_2 = new JLabel("\u661F\u671F\u4E8C");
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setFont(new Font("宋体", Font.PLAIN, 16));
+		panel.add(label_2);
+		
+		JLabel label_1 = new JLabel("\u661F\u671F\u4E09");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setFont(new Font("宋体", Font.PLAIN, 16));
+		panel.add(label_1);
+		
+		JLabel label_3 = new JLabel("\u661F\u671F\u56DB");
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
+		label_3.setFont(new Font("宋体", Font.PLAIN, 16));
+		panel.add(label_3);
+		
+		JLabel label_4 = new JLabel("\u661F\u671F\u4E94");
+		label_4.setHorizontalAlignment(SwingConstants.CENTER);
+		label_4.setFont(new Font("宋体", Font.PLAIN, 16));
+		panel.add(label_4);
+		
+		JLabel label_5 = new JLabel("\u661F\u671F\u516D");
+		label_5.setHorizontalAlignment(SwingConstants.CENTER);
+		label_5.setFont(new Font("宋体", Font.PLAIN, 16));
+		panel.add(label_5);
+		
+		JLabel label_6 = new JLabel("\u661F\u671F\u65E5");
+		label_6.setHorizontalAlignment(SwingConstants.CENTER);
+		label_6.setFont(new Font("宋体", Font.PLAIN, 16));
+		panel.add(label_6);
+		
+		JPanel dayzoompJPanel = new JPanel();
+		middle.add(dayzoompJPanel, BorderLayout.CENTER);
+		dayzoompJPanel.setLayout(new GridLayout(6, 7, 4, 4));
+		
+		JPanel list = new JPanel();
+		middle.add(list, BorderLayout.SOUTH);
+		list.setLayout(new BorderLayout(0, 0));
+		
+		JButton submit = new JButton("\u63D0\u4EA4");
+		submit.setFont(new Font("宋体", Font.PLAIN, 16));
+		list.add(submit);
+
+
+	
+	}
+
+}

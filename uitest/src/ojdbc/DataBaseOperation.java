@@ -430,6 +430,8 @@ public class DataBaseOperation {
 				String passwordString= myresultSet.getString("password");
 				String wokernameString= myresultSet.getString("WOKERNAME");
 				String idString= myresultSet.getString("id");
+				String departmentString= myresultSet.getString("DEPARTMENT");
+
 												
 				if (usenameString.equals(username)) {
 					
@@ -441,6 +443,7 @@ public class DataBaseOperation {
 						userinformationArrayList.add(usenameString);
 						userinformationArrayList.add(passwordString);
 						userinformationArrayList.add(idString);
+						userinformationArrayList.add(departmentString);
 						resutMap.put(userinformationArrayList, "³É¹¦µÇÂ¼");						
 						DisposeDataBaseLink();
 						return resutMap;

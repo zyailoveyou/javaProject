@@ -10,6 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.GridLayout;
+import java.awt.MenuBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -53,6 +54,7 @@ import java.awt.CardLayout;
 import javax.swing.GroupLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class CalendarWindows {
 
@@ -61,7 +63,7 @@ public class CalendarWindows {
 	private String[] yearlistdata;
 	private String[] monthlistdata;
 	private String[] vacationorextraworklistdata;
-	private ArrayList<mylabel> daylabeList = new ArrayList<mylabel>();
+	private ArrayList<Mylabel> daylabeList = new ArrayList<Mylabel>();
 	private ArrayList<OneManData> submitdatagroup = new ArrayList<OneManData>();
 	private Date[] period = new Date[2];
 		
@@ -89,7 +91,7 @@ public class CalendarWindows {
 	
 	
 	
-	public ArrayList<mylabel> getDaylabeList() {
+	public ArrayList<Mylabel> getDaylabeList() {
 		return daylabeList;
 	}
 
@@ -137,13 +139,13 @@ public class CalendarWindows {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("\u8BF7\u5047\u8BBE\u7F6E");
-		frame.setBounds(100, 100, 498, 367);
+		frame.setBounds(100, 100, 520, 384);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
 		JPanel top = new JPanel();
 		frame.getContentPane().add(top, BorderLayout.NORTH);
-		frame.getContentPane().setVisible(false);
+		
 		
 		top.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
 		
@@ -257,10 +259,23 @@ public class CalendarWindows {
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("New menu");
-		menuBar.add(mnNewMenu);
+		JMenu modegroup = new JMenu("\u6A21\u5F0F\u9009\u62E9");
+		modegroup.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 14));
+		menuBar.add(modegroup);
 		
+		JMenuItem sumbitmode = new JMenuItem("\u63D0\u4EA4\u6A21\u5F0F");
+		modegroup.add(sumbitmode);
 		
+		JMenuItem downloadmode = new JMenuItem("\u4E0B\u8F7D\u6A21\u5F0F");
+		modegroup.add(downloadmode);
+		
+		JMenuItem approvalmode = new JMenuItem("\u5BA1\u6279\u6A21\u5F0F");
+		modegroup.add(approvalmode);
+		
+		JMenu aboutinformation = new JMenu("\u5173\u4E8E");
+		aboutinformation.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 14));
+		menuBar.add(aboutinformation);
+				
 		submit.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -320,21 +335,21 @@ public class CalendarWindows {
 		
 		
 		
-		for (int i = 0; i < 42; i++) {
-			
-			mylabel mylabel = new mylabel(this);
-			mylabel.setText("");
-			mylabel.setOpaque(true);
-			mylabel.setFont(new Font("ËÎÌå", Font.BOLD, 20));
-			mylabel.setHorizontalAlignment(SwingConstants.CENTER);
-			mylabel.setVerticalAlignment(SwingConstants.CENTER);
-			mylabel.addMouseListener(mylabel);
-			daylabeList.add(mylabel);
-			
-		}
+//		for (int i = 0; i < 42; i++) {
+//			
+//			mylabel mylabel = new mylabel(this);
+//			mylabel.setText("");
+//			mylabel.setOpaque(true);
+//			mylabel.setFont(new Font("ËÎÌå", Font.BOLD, 20));
+//			mylabel.setHorizontalAlignment(SwingConstants.CENTER);
+//			mylabel.setVerticalAlignment(SwingConstants.CENTER);
+//			mylabel.addMouseListener(mylabel);
+//			daylabeList.add(mylabel);
+//			
+//		}
 		
 		
-		for (mylabel i : daylabeList) {
+		for (Mylabel i : daylabeList) {
 			
 			dayzoompJPanel.add(i);
 		}
@@ -439,7 +454,7 @@ public class CalendarWindows {
 		int year = getyear();			
 		int month = getmonth();
 				
-		mycalendar myMycalendar = new mycalendar();		
+		Mycalendar myMycalendar = new Mycalendar();		
 	    myMycalendar.setYear(year);
 	    myMycalendar.setMonth(month);
 	    
@@ -493,7 +508,7 @@ public class CalendarWindows {
 		int year = getyear();			
 		int month = getmonth();
 				
-		mycalendar myMycalendar = new mycalendar();		
+		Mycalendar myMycalendar = new Mycalendar();		
 	    myMycalendar.setYear(year);
 	    myMycalendar.setMonth(month);
 	    
@@ -641,7 +656,6 @@ public class CalendarWindows {
 		}
 		
 		Date error = Date.valueOf("9999-12-12");
-        return error;
-		
+        return error;		
 	}
 }

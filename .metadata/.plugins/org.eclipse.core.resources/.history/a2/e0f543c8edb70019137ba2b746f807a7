@@ -1,0 +1,40 @@
+package Calendar;
+
+import java.awt.EventQueue;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+
+import user.user;
+import vacation_extrawork.OneManData;
+
+public class Windows {
+
+	protected JFrame frame;
+//	protected ArrayList<OneManData> submitdatagroup = new ArrayList<OneManData>();
+	protected String WindowsMode;
+	protected user user;
+		
+	protected JFrame getFrame() {
+		return frame;
+	}
+	protected String getWindowsMode() {
+		return WindowsMode;
+	}
+	protected user getUser() {
+		return user;
+	}
+	protected void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+	protected void setWindowsMode(String windowsMode) {
+		WindowsMode = windowsMode;
+	}
+	protected void setUser(user user) {
+		this.user = user;
+	}
+	
+	
+	
+	
+}

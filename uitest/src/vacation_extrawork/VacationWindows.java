@@ -18,7 +18,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
 import Calendar.CalendarWindows;
-import Calendar.mylabel;
+import Calendar.Mylabel;
 import ojdbc.DataBaseOperation;
 
 import java.awt.Font;
@@ -46,7 +46,7 @@ public class VacationWindows {
 	private Color nagativecColor =  new Color(150,150,150);
 
 	private OneManData data = new OneManData(new ArrayList<Dayinformation>());
-	private mylabel label;
+	private Mylabel label;
 	
 	private JComboBox<String> vacationreasons;
 	private TextField reasonsexplanation;
@@ -64,7 +64,7 @@ public class VacationWindows {
 		
 	}
 	
-	public mylabel getlabel() {
+	public Mylabel getlabel() {
 		return label;
 	}
 	
@@ -76,7 +76,7 @@ public class VacationWindows {
 	
 	
 
-	public VacationWindows(mylabel label) {
+	public VacationWindows(Mylabel label) {
 
 		this.label = label;
 		initialize();
@@ -98,7 +98,7 @@ public class VacationWindows {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 317, 303);
+		frame.setBounds(100, 100, 181, 336);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
@@ -216,14 +216,14 @@ public class VacationWindows {
 	
 	public void setdata(String Actualtimenoclear,String Explainreason) {
 				 
-		 String nameString = (String)getlabel().getCal().getNamelist().getSelectedItem();	 
+		 String nameString = getlabel().getNewSubimitWindows().getUser().getCheckname();	 
 		 Dayinformation information = new Dayinformation();
-		 String catogoryString = getlabel().getCal().getVacationorExtrawork();
+		 String catogoryString = getlabel().getNewSubimitWindows().getVacationorExtrawork();
 		 information.setreasons(catogoryString);
 		 String vacationreasonString = (String)vacationreasons.getSelectedItem();
 		 information.setreasons_details(vacationreasonString);
-		 String timeString = String.valueOf(getlabel().getCal().getyear())+"-"+
-				 String.valueOf(getlabel().getCal().getmonth())+"-"+getlabel().getText();
+		 String timeString = String.valueOf(getlabel().getNewSubimitWindows().getyear())+"-"+
+				 String.valueOf(getlabel().getNewSubimitWindows().getmonth())+"-"+getlabel().getText();
 		 Date datetime = Date.valueOf(timeString);
 		 information.setTime(datetime);
 		 information.setLabelday(getlabel().getText());		 
@@ -234,9 +234,9 @@ public class VacationWindows {
 		 
 		 CheckTheManExist(nameString);
 		 
-		 for (int i=0;i<getlabel().getCal().getsubmitdatagroup().size();i++) {
-			if (nameString.equals(getlabel().getCal().getsubmitdatagroup().get(i).getName())) {				
-				getlabel().getCal().getsubmitdatagroup().get(i).getDayinformation().add(information);				
+		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
+			if (nameString.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
+				getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getDayinformation().add(information);				
 			}
 
 		}
@@ -250,8 +250,8 @@ public class VacationWindows {
 	private void CheckTheManExist(String name) {
 		
 		 boolean exist = false;
-		 for (int i=0;i<getlabel().getCal().getsubmitdatagroup().size();i++) {
-			if (name.equals(getlabel().getCal().getsubmitdatagroup().get(i).getName())) {				
+		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
+			if (name.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
 				exist = true;		
 			}
 		 }
@@ -271,22 +271,13 @@ public class VacationWindows {
 		
 		OneManData OnePersondata = new OneManData(new ArrayList<Dayinformation>());
 		OnePersondata.setName(name);
-		DataBaseOperation getidBaseOperation = new DataBaseOperation();
-		int id = -1;
-		try {
-			id = getidBaseOperation.GetID_from_Nanme(name);
-		} catch (ClassNotFoundException e1) {
-			// TODO 自动生成的 catch 块
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO 自动生成的 catch 块
-			e1.printStackTrace();
-		}
-		
+		int id = -1;	
+		id = Integer.valueOf(getlabel().getNewSubimitWindows().getUser().getId());
+			
 		if (id != -1) {
 			
 			OnePersondata.setId(id);
-			getlabel().getCal().getsubmitdatagroup().add(OnePersondata);
+			getlabel().getNewSubimitWindows().getSubmitdatagroup().add(OnePersondata);
 			
 		}
 		else {

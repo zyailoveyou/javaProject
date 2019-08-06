@@ -1,18 +1,14 @@
 package Calendar;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,14 +19,14 @@ import vacation_extrawork.ExtraWorkWindows;
 import vacation_extrawork.OneManData;
 import vacation_extrawork.VacationWindows;
 
-public class mylabel extends JLabel implements MouseListener {
+public class Mylabel extends JLabel implements MouseListener {
 	
 	private Color choosecolor;
 	private Color choosecolorfornormalrestdayColor;
 	private Color nochoosecolor;
 	private boolean ischoose = false;
 	private String dayclearinformationString;
-	private CalendarWindows cal;
+	private Windows cal;
 	private Dayinformation information = new Dayinformation();
 	
 	public void SetChooseState() {
@@ -52,7 +48,7 @@ public class mylabel extends JLabel implements MouseListener {
 	
 	public void Removedata(String name) {
 			
-		ArrayList<OneManData> data= getCal().getsubmitdatagroup();		
+		ArrayList<OneManData> data= (getNewSubimitWindows().getSubmitdatagroup());		
 		Iterator<OneManData> l = data.iterator();
 		
 		while(l.hasNext()) {
@@ -107,11 +103,18 @@ public class mylabel extends JLabel implements MouseListener {
 	}
 
 	
-	public CalendarWindows getCal() {
-		return cal;
+	public Windows getCal() {
+		
+		return cal;		
+		
+	}
+	
+	public SubimitWindows getNewSubimitWindows() {
+		return (SubimitWindows)cal;	
 	}
 
-	public mylabel(CalendarWindows cal) {
+
+	public Mylabel(Windows cal) {
 		
 		super();
 		choosecolor = new Color(255,206, 82);
@@ -124,15 +127,16 @@ public class mylabel extends JLabel implements MouseListener {
 	
 	
 	
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		//提交模式执行代码
-		if (((String)getCal().getmode().getSelectedItem()).equals("提交模式")) {
+		if ((getCal().getWindowsMode()).equals("提交模式")) {
 			
 		  if (!ischoose) {
 						
 			ischoose = true;						
-			String optionchoose = getCal().getVacationorExtrawork();
+			String optionchoose = (getNewSubimitWindows().getVacationorExtrawork());
 			
 			if (optionchoose.equals("请假")) {
 				
@@ -219,7 +223,7 @@ public class mylabel extends JLabel implements MouseListener {
 												
 		   else {
 			
-			Removedata((String)getCal().getNamelist().getSelectedItem());		
+			Removedata(getCal().getUser().getCheckname());		
 			SetNoChooseState();
 			
 		   }
@@ -228,86 +232,71 @@ public class mylabel extends JLabel implements MouseListener {
 		//提交模式执行代码完毕
 		
 		//下载模式执行代码
-		else if (((String)getCal().getmode().getSelectedItem()).equals("下载模式")) {
-			
-			
-			if (!ischoose) {
-										
-			String nowchoosedateString = String.valueOf(getCal().getyear())+"-"+String.valueOf(getCal().getmonth())+"-"+getText();			
-			Date nowDate = Date.valueOf(nowchoosedateString);
-			
-			  if ((getCal().getPeriod())[0] == null ) {
-				
-				(getCal().getPeriod())[0] = nowDate;
-				SetChooseStatefornormalrestdayColor();
-
-				
-			  }
-			
-			  else {
-				
-				if ((getCal().getPeriod())[1] == null) {
-										
-					(getCal().getPeriod())[1] = nowDate;
-					SetChooseStatefornormalrestdayColor();
-					
-				}
-				
-				else {
-					
-					ShowDialog("日期设置满了必须先删除一个，再次点击设置好的日期可以删除");
-					
-					
-				 }
-											
-			   }
-						   			
-			 }
-			
-			
-			else {
-				
-				String nowchoosedateString = String.valueOf(getCal().getyear())+"-"+String.valueOf(getCal().getmonth())+"-"+getText();			
-				Date nowDate = Date.valueOf(nowchoosedateString);
-				for (int i = 0; i < 2;i++) {					
-										
-					if ((getCal().getPeriod())[i] != null) {
-												
-						if ((getCal().getPeriod())[i].equals(nowDate)) {
-							(getCal().getPeriod())[i] = null;
-							SetNoChooseState();
-							break;													
-						}
-												
-					}
-					
-					
-				}
-				
-			}
-			
-			
-//		    FillDateBetweenTheSetTime();
-			
-		}
+//		else if ((getCal().getWindowsMode()).equals("下载模式")) {
+//			
+//			
+//			if (!ischoose) {
+//										
+//			String nowchoosedateString = String.valueOf(getCal().getyear())+"-"+String.valueOf(getCal().getmonth())+"-"+getText();			
+//			Date nowDate = Date.valueOf(nowchoosedateString);
+//			
+//			  if ((getCal().getPeriod())[0] == null ) {
+//				
+//				(getCal().getPeriod())[0] = nowDate;
+//				SetChooseStatefornormalrestdayColor();
+//
+//				
+//			  }
+//			
+//			  else {
+//				
+//				if ((getCal().getPeriod())[1] == null) {
+//										
+//					(getCal().getPeriod())[1] = nowDate;
+//					SetChooseStatefornormalrestdayColor();
+//					
+//				}
+//				
+//				else {
+//					
+//					ShowDialog("日期设置满了必须先删除一个，再次点击设置好的日期可以删除");
+//					
+//					
+//				 }
+//											
+//			   }
+//						   			
+//			 }
+//			
+//			
+//			else {
+//				
+//				String nowchoosedateString = String.valueOf(getCal().getyear())+"-"+String.valueOf(getCal().getmonth())+"-"+getText();			
+//				Date nowDate = Date.valueOf(nowchoosedateString);
+//				for (int i = 0; i < 2;i++) {					
+//										
+//					if ((getCal().getPeriod())[i] != null) {
+//												
+//						if ((getCal().getPeriod())[i].equals(nowDate)) {
+//							(getCal().getPeriod())[i] = null;
+//							SetNoChooseState();
+//							break;													
+//						}
+//												
+//					}
+//					
+//					
+//				}
+//				
+//			}
+//			
+//		
+//			
+//		}
 		
 	}
 	
 	
-//	private void FillDateBetweenTheSetTime() {
-//		
-//		
-//		if ((getCal().getPeriod())[0]!=null&& (getCal().getPeriod())[1]!=null) {
-//			
-//			
-//			
-//			
-//			
-//		}
-//		
-//		
-//		
-//	}
 
 	private void ShowDialog(String word) {
 		
@@ -315,6 +304,82 @@ public class mylabel extends JLabel implements MouseListener {
 				
 	}
 
+	
+	
+	public void setdata(String Actualtimenoclear,String Explainreason) {
+		 
+		 String nameString = getCal().getUser().getCheckname();	 
+		 Dayinformation information = new Dayinformation();
+		 String catogoryString = (getNewSubimitWindows().getVacationorExtrawork());
+
+
+		 String timeString = String.valueOf(getNewSubimitWindows().getyear())+"-"+
+				 String.valueOf(getNewSubimitWindows().getmonth())+"-"+getText();
+		 Date datetime = Date.valueOf(timeString);
+		 
+
+		 information.setreasons(catogoryString);
+		 information.setreasons_details("正常休假");
+		 information.setTime(datetime);
+		 information.setLabelday(getText());		 
+		 information.setActualtimenoclear(Actualtimenoclear);
+		 information.setreasons_explanation(Explainreason);
+		 information.sethandleovertimework(null);
+		 
+		 
+		 CheckTheManExist(nameString);
+		 
+		 for (int i=0;i<(getNewSubimitWindows().getSubmitdatagroup().size());i++) {
+			if (nameString.equals(getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
+				(getNewSubimitWindows().getSubmitdatagroup().get(i).getDayinformation()).add(information);				
+			}
+
+		}
+		 
+		 
+		 System.out.println(nameString+"写入假期信息完成");
+		
+	}
+	
+	
+	private void CheckTheManExist(String name) {
+		
+		 boolean exist = false;
+		 for (int i=0;i<(getNewSubimitWindows().getSubmitdatagroup()).size();i++) {
+			if (name.equals((getNewSubimitWindows().getSubmitdatagroup()).get(i).getName())) {				
+				exist = true;		
+			}
+		 }
+		 
+		 if (!exist) {
+			
+			 CreateOneManData(name);
+			 
+		 }		
+	}
+	
+	
+	
+	private void CreateOneManData(String name) {
+		
+		OneManData OnePersondata = new OneManData(new ArrayList<Dayinformation>());
+		OnePersondata.setName(name);
+
+		int id = -1;	
+		id = Integer.valueOf(getNewSubimitWindows().getUser().getId());
+		
+		if (id != -1) {
+			
+			OnePersondata.setId(id);
+			(getNewSubimitWindows().getSubmitdatagroup()).add(OnePersondata);
+			
+		}
+		else {
+			System.out.println("id查询错误，放弃添加人员信息");
+		}
+		
+		
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -337,97 +402,6 @@ public class mylabel extends JLabel implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO 自动生成的方法存根
-		
-	}
-	
-	
-	private void ChecingToCreateTheManInfo(String name) {
-		
-		
-		
-	}
-	
-	
-	public void setdata(String Actualtimenoclear,String Explainreason) {
-		 
-		 String nameString = (String)getCal().getNamelist().getSelectedItem();	 
-		 Dayinformation information = new Dayinformation();
-		 String catogoryString = getCal().getVacationorExtrawork();
-
-
-		 String timeString = String.valueOf(getCal().getyear())+"-"+
-				 String.valueOf(getCal().getmonth())+"-"+getText();
-		 Date datetime = Date.valueOf(timeString);
-		 
-
-		 information.setreasons(catogoryString);
-		 information.setreasons_details("正常休假");
-		 information.setTime(datetime);
-		 information.setLabelday(getText());		 
-		 information.setActualtimenoclear(Actualtimenoclear);
-		 information.setreasons_explanation(Explainreason);
-		 information.sethandleovertimework(null);
-		 
-		 
-		 CheckTheManExist(nameString);
-		 
-		 for (int i=0;i<getCal().getsubmitdatagroup().size();i++) {
-			if (nameString.equals(getCal().getsubmitdatagroup().get(i).getName())) {				
-				getCal().getsubmitdatagroup().get(i).getDayinformation().add(information);				
-			}
-
-		}
-		 
-		 
-		 System.out.println(nameString+"写入假期信息完成");
-		
-	}
-	
-	
-	private void CheckTheManExist(String name) {
-		
-		 boolean exist = false;
-		 for (int i=0;i<getCal().getsubmitdatagroup().size();i++) {
-			if (name.equals(getCal().getsubmitdatagroup().get(i).getName())) {				
-				exist = true;		
-			}
-		 }
-		 
-		 if (!exist) {
-			
-			 CreateOneManData(name);
-			 
-		 }		
-	}
-	
-	
-	
-	private void CreateOneManData(String name) {
-		
-		OneManData OnePersondata = new OneManData(new ArrayList<Dayinformation>());
-		OnePersondata.setName(name);
-		DataBaseOperation getidBaseOperation = new DataBaseOperation();
-		int id = -1;
-		try {
-			id = getidBaseOperation.GetID_from_Nanme(name);
-		} catch (ClassNotFoundException e1) {
-			// TODO 自动生成的 catch 块
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO 自动生成的 catch 块
-			e1.printStackTrace();
-		}
-		
-		if (id != -1) {
-			
-			OnePersondata.setId(id);
-			getCal().getsubmitdatagroup().add(OnePersondata);
-			
-		}
-		else {
-			System.out.println("id查询错误，放弃添加人员信息");
-		}
-		
 		
 	}
 		

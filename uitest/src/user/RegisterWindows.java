@@ -201,8 +201,37 @@ public class RegisterWindows {
 				
 				String usernameString = usenametextfiled.getText();
 				String checknameString = checknamefield.getText();
-				String passwordString = passwordtextfiled.getPassword().toString();			
+				String passwordString = passwordtextfiled.getPassword().toString();
+				String cetificationString = CetificatePasswordField.getPassword().toString();
+
 				String departmentString = (String)departmentfield.getSelectedItem();
+				
+				int usernamelength = usernameString.length();
+				int passwordlength = passwordString.length();
+				
+				if (checknameString.equals("")) {
+					ShowDialog("员工姓名不能为空");
+					return;
+				}
+				
+				if (usernamelength<6) {
+					
+					ShowDialog("用户名长度小于6位");
+					return;
+				}
+				
+				if (passwordlength<6) {
+					ShowDialog("密码长度小于6位");
+					return;
+					
+				}
+				
+				if (!passwordString.equals(cetificationString)) {
+					ShowDialog("两次输入的密码不一致");
+					return;
+					
+				}
+				
 				
 				try {
 					boolean result = user.RegisterUser(checknameString, usernameString, passwordString, departmentString);

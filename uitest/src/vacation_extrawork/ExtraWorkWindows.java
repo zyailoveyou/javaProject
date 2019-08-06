@@ -24,7 +24,7 @@ import javax.swing.JCheckBox;
 import java.awt.Component;
 import javax.swing.SwingConstants;
 
-import Calendar.mylabel;
+import Calendar.Mylabel;
 import ojdbc.DataBaseOperation;
 
 import javax.swing.JList;
@@ -34,7 +34,7 @@ public class ExtraWorkWindows {
 	
 	private boolean noinformationsubmit = true;
 	private JFrame frame;
-	private mylabel label;
+	private Mylabel label;
 	private JComboBox extraworktype;
 	private JCheckBox morningextrawork;
 	private JCheckBox afternoonextrawork;
@@ -45,7 +45,7 @@ public class ExtraWorkWindows {
 		return noinformationsubmit;
 	}
 
-	public mylabel getlabel() {
+	public Mylabel getlabel() {
 		return label;
 	}
 
@@ -57,7 +57,7 @@ public class ExtraWorkWindows {
 		return frame;
 	}
 
-	public ExtraWorkWindows(mylabel label) {
+	public ExtraWorkWindows(Mylabel label) {
 		this.label = label;
 		initialize();
 	}
@@ -168,13 +168,12 @@ public class ExtraWorkWindows {
 	
 	public void setdata(String Actualtimenoclear,String Explainreason) {
 		 
-		 String nameString = (String)getlabel().getCal().getNamelist().getSelectedItem();
-		 		 		 
+		 String nameString = getlabel().getCal().getUser().getCheckname();	 		 		 
 		 Dayinformation information = new Dayinformation();
-		 String catogoryString = getlabel().getCal().getVacationorExtrawork();
+		 String catogoryString = getlabel().getNewSubimitWindows().getVacationorExtrawork();
 		 String vacationreasonString = (String)extraworktype.getSelectedItem();
-		 String timeString = String.valueOf(getlabel().getCal().getyear())+"-"+
-				 String.valueOf(getlabel().getCal().getmonth())+"-"+getlabel().getText();
+		 String timeString = String.valueOf(getlabel().getNewSubimitWindows().getyear())+"-"+
+				 String.valueOf(getlabel().getNewSubimitWindows().getmonth())+"-"+getlabel().getText();
 		 Date datetime = Date.valueOf(timeString);
 		 String howtodealwithovertimework  = (String)howtodealwithoverwork.getSelectedItem();
 		 
@@ -188,9 +187,9 @@ public class ExtraWorkWindows {
 		 
 		 CheckTheManExist(nameString);
 		 
-		 for (int i=0;i<getlabel().getCal().getsubmitdatagroup().size();i++) {
-			if (nameString.equals(getlabel().getCal().getsubmitdatagroup().get(i).getName())) {				
-				getlabel().getCal().getsubmitdatagroup().get(i).getDayinformation().add(information);				
+		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
+			if (nameString.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
+				getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getDayinformation().add(information);				
 			}
 
 		}
@@ -204,8 +203,8 @@ public class ExtraWorkWindows {
 	private void CheckTheManExist(String name) {
 		
 		 boolean exist = false;
-		 for (int i=0;i<getlabel().getCal().getsubmitdatagroup().size();i++) {
-			if (name.equals(getlabel().getCal().getsubmitdatagroup().get(i).getName())) {				
+		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
+			if (name.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
 				exist = true;		
 			}
 		 }
@@ -240,7 +239,7 @@ public class ExtraWorkWindows {
 		if (id != -1) {
 			
 			OnePersondata.setId(id);
-			getlabel().getCal().getsubmitdatagroup().add(OnePersondata);
+			getlabel().getNewSubimitWindows().getSubmitdatagroup().add(OnePersondata);
 			
 		}
 		else {

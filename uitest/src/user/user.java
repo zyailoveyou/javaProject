@@ -48,12 +48,13 @@ public class user {
 	}
 
 
-	private user(String checkname,String usernameString,String passwordString,String departmentString)
+	private user(String checkname,String usernameString,String passwordString,String id,String departmentString)
 	{		
 		this.checkname = checkname;
 		this.usernameString = usernameString;
 		this.passwordString = passwordString;
-		this.departmentString = departmentString;		
+		this.departmentString = departmentString;
+		this.id = id;
 	}
 	
 	
@@ -68,29 +69,8 @@ public class user {
 	{
 		
 		DataBaseOperation testBaseOperation = new DataBaseOperation();
-		
-		int usernamelength = usernameString.length();
-		int passwordlength = passwordString.length();
-		
-		if (checkname.equals("")) {
-			ShowDialog("员工姓名不能为空");
-			return false;
-		}
-		
-		if (usernamelength<6) {
 			
-			ShowDialog("用户名长度小于6位");
-			return false;
-		}
-		
-		if (passwordlength<6) {
-			ShowDialog("密码长度小于6位");
-			return false;
-			
-		}
-		
-		int id = testBaseOperation.GetID_from_Nanme(checkname);
-		
+		int id = testBaseOperation.GetID_from_Nanme(checkname);		
 		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname, id);
 				
 	}
@@ -102,7 +82,7 @@ public class user {
 		
 		
 		if (usernameString.equals("")||passwordString.equals("")) {
-			user returnUser = new user("-1", "-1", "-1", "-1");
+			user returnUser = new user("-1", "-1", "-1", "-1","-1");
 			Map<user, String> resultmap = new HashMap<user, String>();		
 			resultmap.put(returnUser, "帐号或者密码不能为空");
 			return resultmap;
@@ -127,7 +107,7 @@ public class user {
 						
 		if (logininreturnString.equals("成功登录")) {
 			
-			user returnUser = new user(resultArrayList.get(0), resultArrayList.get(1), resultArrayList.get(2), resultArrayList.get(3));
+			user returnUser = new user(resultArrayList.get(0), resultArrayList.get(1), resultArrayList.get(2), resultArrayList.get(3),resultArrayList.get(4));
 			Map<user, String> resultmap = new HashMap<user, String>();			
 			resultmap.put(returnUser, "成功登录");
 			return resultmap;
@@ -135,7 +115,7 @@ public class user {
 		
 		else if (logininreturnString.equals("数据库中没有读取到任何帐号数据，请联系管理员")) {
 			
-			user returnUser = new user("-1", "-1", "-1", "-1");
+			user returnUser = new user("-1", "-1", "-1", "-1","-1");
 			Map<user, String> resultmap = new HashMap<user, String>();			
 			resultmap.put(returnUser, "数据库中没有读取到任何帐号数据，请联系管理员");			
 			return resultmap;
@@ -143,7 +123,7 @@ public class user {
 		
 		else if (logininreturnString.equals("帐号或者密码错误")) {
 			
-			user returnUser = new user("-1", "-1", "-1", "-1");
+			user returnUser = new user("-1", "-1", "-1", "-1","-1");
 			Map<user, String> resultmap = new HashMap<user, String>();			
 			resultmap.put(returnUser, "帐号或者密码错误");			
 			return resultmap;
@@ -151,7 +131,7 @@ public class user {
 		
 		else if (logininreturnString.equals("数据库连接错误")) {
 			
-			user returnUser = new user("-1", "-1", "-1", "-1");
+			user returnUser = new user("-1", "-1", "-1", "-1","-1");
 			Map<user, String> resultmap = new HashMap<user, String>();		
 			resultmap.put(returnUser, "数据库连接错误");			
 			return resultmap;

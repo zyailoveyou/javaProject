@@ -1,0 +1,22 @@
+package MyThread;
+
+import Calendar.SubmitWindows;
+
+public class MyThread implements Runnable {
+
+	private SubmitWindows windows;
+	
+	public MyThread(SubmitWindows windows) {
+		
+		this.windows = windows;
+		
+	}
+	
+	@Override
+	public void run() {
+		
+		windows.getFrame().setVisible(true);
+		
+	}
+
+}
