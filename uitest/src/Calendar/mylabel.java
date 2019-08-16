@@ -24,6 +24,7 @@ public class Mylabel extends JLabel implements MouseListener {
 	private Color choosecolor;
 	private Color choosecolorfornormalrestdayColor;
 	private Color nochoosecolor;
+	private Color betweenColor;
 	private boolean ischoose = false;
 	private String dayclearinformationString;
 	private Windows cal;
@@ -103,14 +104,18 @@ public class Mylabel extends JLabel implements MouseListener {
 	}
 
 	
-	public Windows getCal() {
-		
+	public Windows getCal() {		
 		return cal;		
 		
 	}
 	
 	public SubimitWindows getNewSubimitWindows() {
 		return (SubimitWindows)cal;	
+	}
+	
+	public DownloadWindows getDownloadWindows() {
+		
+		return (DownloadWindows)cal;	
 	}
 
 
@@ -120,6 +125,7 @@ public class Mylabel extends JLabel implements MouseListener {
 		choosecolor = new Color(255,206, 82);
 		nochoosecolor = new Color(255,255,255);
 		choosecolorfornormalrestdayColor = new Color(0,204,255);
+		betweenColor = new Color(255,192,0);
 		this.setBackground(nochoosecolor);
 		this.cal = cal;
 								
@@ -130,169 +136,16 @@ public class Mylabel extends JLabel implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		//Ã·Ωªƒ£ Ω÷¥––¥˙¬Î
-		if ((getCal().getWindowsMode()).equals("Ã·Ωªƒ£ Ω")) {
-			
-		  if (!ischoose) {
-						
-			ischoose = true;						
-			String optionchoose = (getNewSubimitWindows().getVacationorExtrawork());
-			
-			if (optionchoose.equals("«ÎºŸ")) {
-				
-				setBackground(choosecolor);
-							
-				VacationWindows Vwindow = new VacationWindows(this);
-				Vwindow.getFrame().setVisible(true);		
-				Vwindow.getFrame().addWindowListener(new WindowAdapter() {					
-					@Override
-					public void windowClosed(WindowEvent e) {
-						
-						if (Vwindow.getnoinformationsubmit()) {
-							
-							SetNoChooseState();
-							ShowDialog("√ª”–Ã·ΩªªÚ’ﬂ…Ë÷√»Œ∫Œ–≈œ¢");
-							return;
-							
-						}
-						
-						else {
-							
-							System.out.println("≥…π¶Ã·Ωª–≈œ¢");
-							
-						}
-						
-					}
-					
-					@Override
-					public void windowClosing(WindowEvent e) {
-						
-						SetNoChooseState();
-						return;
-					}
-					
-				});
-			
-		      }
-			
-			else if (optionchoose.equals("º”∞‡")) {
-				
-				setBackground(choosecolor);				
-			    ExtraWorkWindows ewindoWindow = new ExtraWorkWindows(this);
-			    ewindoWindow.getFrame().setVisible(true);
-			    ewindoWindow.getFrame().addWindowListener(new WindowAdapter() {
-			    	
-			    	@Override
-			    	public void windowClosed(WindowEvent e) {
-			    				
-						if (ewindoWindow.getnoinformationsubmit()) {
-							
-							SetNoChooseState();
-							ShowDialog("√ª”–Ã·ΩªªÚ’ﬂ…Ë÷√»Œ∫Œ–≈œ¢");
-							return;
-							
-						}
-						
-						else {
-							
-							System.out.println("≥…π¶Ã·Ωª–≈œ¢");
-							
-						}
-			    		    		
 
-			    	}
-			    	
-				});
-						
-		      }
+		if ((getCal().getWindowsMode()).equals("Êèê‰∫§Ê®°Âºè")) {
 			
-			else if (optionchoose.equals("’˝≥£–›ºŸ")) {
-				
-				SetChooseStatefornormalrestdayColor();							
-				setdata("»´ÃÏŒ¥¥Ú", "’˝≥£–›ºŸ");
-												
-			}
-			
-					
-		    else {
-			
-			     ShowDialog("Ã·Ωª–≈œ¢¥ÌŒÛ£¨¡™œµπ‹¿Ì‘±");
-		    }
-			
-		  }
-												
-		   else {
-			
-			Removedata(getCal().getUser().getCheckname());		
-			SetNoChooseState();
-			
-		   }
-		  
+		    ExecuteSubmitMode();
 		}
-		//Ã·Ωªƒ£ Ω÷¥––¥˙¬ÎÕÍ±œ
-		
-		//œ¬‘ÿƒ£ Ω÷¥––¥˙¬Î
-//		else if ((getCal().getWindowsMode()).equals("œ¬‘ÿƒ£ Ω")) {
-//			
-//			
-//			if (!ischoose) {
-//										
-//			String nowchoosedateString = String.valueOf(getCal().getyear())+"-"+String.valueOf(getCal().getmonth())+"-"+getText();			
-//			Date nowDate = Date.valueOf(nowchoosedateString);
-//			
-//			  if ((getCal().getPeriod())[0] == null ) {
-//				
-//				(getCal().getPeriod())[0] = nowDate;
-//				SetChooseStatefornormalrestdayColor();
-//
-//				
-//			  }
-//			
-//			  else {
-//				
-//				if ((getCal().getPeriod())[1] == null) {
-//										
-//					(getCal().getPeriod())[1] = nowDate;
-//					SetChooseStatefornormalrestdayColor();
-//					
-//				}
-//				
-//				else {
-//					
-//					ShowDialog("»’∆⁄…Ë÷√¬˙¡À±ÿ–Îœ»…æ≥˝“ª∏ˆ£¨‘Ÿ¥Œµ„ª˜…Ë÷√∫√µƒ»’∆⁄ø…“‘…æ≥˝");
-//					
-//					
-//				 }
-//											
-//			   }
-//						   			
-//			 }
-//			
-//			
-//			else {
-//				
-//				String nowchoosedateString = String.valueOf(getCal().getyear())+"-"+String.valueOf(getCal().getmonth())+"-"+getText();			
-//				Date nowDate = Date.valueOf(nowchoosedateString);
-//				for (int i = 0; i < 2;i++) {					
-//										
-//					if ((getCal().getPeriod())[i] != null) {
-//												
-//						if ((getCal().getPeriod())[i].equals(nowDate)) {
-//							(getCal().getPeriod())[i] = null;
-//							SetNoChooseState();
-//							break;													
-//						}
-//												
-//					}
-//					
-//					
-//				}
-//				
-//			}
-//			
-//		
-//			
-//		}
+
+		else if ((getCal().getWindowsMode()).equals("‰∏ãËΩΩÊ®°Âºè")) {
+								
+			ExecuteDownloadMode();
+		}
 		
 	}
 	
@@ -300,7 +153,7 @@ public class Mylabel extends JLabel implements MouseListener {
 
 	private void ShowDialog(String word) {
 		
-		JOptionPane.showMessageDialog(null,word, "¥ÌŒÛÃ· æ", JOptionPane.ERROR_MESSAGE); 
+		JOptionPane.showMessageDialog(null,word, "ÊèêÁ§∫ æ", JOptionPane.ERROR_MESSAGE); 
 				
 	}
 
@@ -311,15 +164,13 @@ public class Mylabel extends JLabel implements MouseListener {
 		 String nameString = getCal().getUser().getCheckname();	 
 		 Dayinformation information = new Dayinformation();
 		 String catogoryString = (getNewSubimitWindows().getVacationorExtrawork());
-
-
+		 
 		 String timeString = String.valueOf(getNewSubimitWindows().getyear())+"-"+
 				 String.valueOf(getNewSubimitWindows().getmonth())+"-"+getText();
 		 Date datetime = Date.valueOf(timeString);
 		 
-
 		 information.setreasons(catogoryString);
-		 information.setreasons_details("’˝≥£–›ºŸ");
+		 information.setreasons_details("Ê≠£Â∏∏‰ºëÂÅá");
 		 information.setTime(datetime);
 		 information.setLabelday(getText());		 
 		 information.setActualtimenoclear(Actualtimenoclear);
@@ -337,7 +188,7 @@ public class Mylabel extends JLabel implements MouseListener {
 		}
 		 
 		 
-		 System.out.println(nameString+"–¥»ÎºŸ∆⁄–≈œ¢ÕÍ≥…");
+		 System.out.println(nameString+"ÂÜôÂÖ•ÂÅáÊúü‰ø°ÊÅØÂÆåÊàê");
 		
 	}
 	
@@ -375,7 +226,7 @@ public class Mylabel extends JLabel implements MouseListener {
 			
 		}
 		else {
-			System.out.println("id≤È—Ø¥ÌŒÛ£¨∑≈∆˙ÃÌº”»À‘±–≈œ¢");
+			System.out.println("idÊü•ËØ¢ÈîôËØØÔºåÊîæÂºÉÊ∑ªÂä†‰∫∫Âëò‰ø°ÊÅØ");
 		}
 		
 		
@@ -383,26 +234,184 @@ public class Mylabel extends JLabel implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO ◊‘∂Ø…˙≥…µƒ∑Ω∑®¥Ê∏˘
+	
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO ◊‘∂Ø…˙≥…µƒ∑Ω∑®¥Ê∏˘
+	
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO ◊‘∂Ø…˙≥…µƒ∑Ω∑®¥Ê∏˘
+
 		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO ◊‘∂Ø…˙≥…µƒ∑Ω∑®¥Ê∏˘
+
 		
+	}
+	
+	public void ExecuteSubmitMode() {
+		
+		  if (!ischoose) {
+				
+				ischoose = true;						
+				String optionchoose = (getNewSubimitWindows().getVacationorExtrawork());
+				
+				if (optionchoose.equals("ËØ∑ÂÅá")) {
+					
+					setBackground(choosecolor);
+								
+					VacationWindows Vwindow = new VacationWindows(this);
+					Vwindow.getFrame().setVisible(true);		
+					Vwindow.getFrame().addWindowListener(new WindowAdapter() {					
+						@Override
+						public void windowClosed(WindowEvent e) {
+							
+							if (Vwindow.getnoinformationsubmit()) {
+								
+								SetNoChooseState();
+								ShowDialog("Ê≤°ÊúâÊèê‰∫§ÊàñËÄÖËÆæÁΩÆ‰ªª‰Ωï‰ø°ÊÅØ");
+								return;
+								
+							}
+							
+							else {
+								
+								System.out.println("ÊàêÂäüÊèê‰∫§‰ø°ÊÅØ");
+								
+							}
+							
+						}
+						
+						@Override
+						public void windowClosing(WindowEvent e) {
+							
+							SetNoChooseState();
+							return;
+						}
+						
+					});
+				
+			      }
+				
+				else if (optionchoose.equals("Âä†Áè≠")) {
+					
+					setBackground(choosecolor);				
+				    ExtraWorkWindows ewindoWindow = new ExtraWorkWindows(this);
+				    ewindoWindow.getFrame().setVisible(true);
+				    ewindoWindow.getFrame().addWindowListener(new WindowAdapter() {
+				    	
+				    	@Override
+				    	public void windowClosed(WindowEvent e) {
+				    				
+							if (ewindoWindow.getnoinformationsubmit()) {
+								
+								SetNoChooseState();
+								ShowDialog("Ê≤°ÊúâÊèê‰∫§ÊàñËÄÖËÆæÁΩÆ‰ªª‰Ωï‰ø°ÊÅØ");
+								return;
+								
+							}
+							
+							else {
+								
+								System.out.println("ÊàêÂäüÊèê‰∫§‰ø°ÊÅØ");
+								
+							}
+				    		    		
+
+				    	}
+				    	
+					});
+							
+			      }
+				
+				else if (optionchoose.equals("Ê≠£Â∏∏‰ºëÂÅá")) {
+					
+					SetChooseStatefornormalrestdayColor();							
+					setdata("ÂÖ®Â§©Êú™Êâì", "Ê≠£Â∏∏‰ºëÂÅá");
+													
+				}
+				
+						
+			    else {
+				
+				     ShowDialog("Êèê‰∫§‰ø°ÊÅØÈîôËØØÔºåËÅîÁ≥ªÁÆ°ÁêÜÂëò");
+			    }
+				
+			  }
+													
+			   else {
+				
+				Removedata(getCal().getUser().getCheckname());		
+				SetNoChooseState();
+				
+			   }
+		
+	}
+	
+	public void ExecuteDownloadMode() {
+		
+		
+		if (!ischoose) {
+			
+			String nowchoosedateString = String.valueOf(getDownloadWindows().getyear())+"-"+String.valueOf(getDownloadWindows().getmonth())+"-"+getText();			
+			Date nowDate = Date.valueOf(nowchoosedateString);
+			
+			  if ((getDownloadWindows().getPeriod())[0] == null ) {
+				
+				(getDownloadWindows().getPeriod())[0] = nowDate;
+				SetChooseStatefornormalrestdayColor();
+
+				
+			  }
+			
+			  else {
+				
+				if ((getDownloadWindows().getPeriod())[1] == null) {
+										
+					(getDownloadWindows().getPeriod())[1] = nowDate;
+					SetChooseStatefornormalrestdayColor();
+					
+				}
+				
+				else {
+					
+					ShowDialog("Êó•ÊúüËÆæÁΩÆÊª°‰∫ÜÂøÖÈ°ªÂÖàÂà†Èô§‰∏Ä‰∏™ÔºåÂÜçÊ¨°ÁÇπÂáªËÆæÁΩÆÂ•ΩÁöÑÊó•ÊúüÂèØ‰ª•Âà†Èô§");
+										
+				 }
+											
+			   }
+						   			
+			 }
+			
+			
+			else {
+				
+				String nowchoosedateString = String.valueOf(getDownloadWindows().getyear())+"-"+String.valueOf(getDownloadWindows().getmonth())+"-"+getText();			
+				Date nowDate = Date.valueOf(nowchoosedateString);
+				for (int i = 0; i < 2;i++) {					
+										
+					if ((getDownloadWindows().getPeriod())[i] != null) {
+												
+						if ((getDownloadWindows().getPeriod())[i].equals(nowDate)) {
+							(getDownloadWindows().getPeriod())[i] = null;
+							SetNoChooseState();
+							break;													
+						}
+												
+					}
+					
+					
+				}
+				
+			}
+	
 	}
 		
 

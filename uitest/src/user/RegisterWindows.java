@@ -71,39 +71,43 @@ public class RegisterWindows {
 		Box ChecknameBox = Box.createHorizontalBox();
 		
 		JLabel label_1 = new JLabel("\u5458\u5DE5\u59D3\u540D\uFF1A");
-		label_1.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		label_1.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		ChecknameBox.add(label_1);
 		
 		checknamefield = new JTextField();
+		checknamefield.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		checknamefield.setColumns(10);
 		ChecknameBox.add(checknamefield);
 		
 		Box UsenameBox = Box.createHorizontalBox();
 		
 		JLabel usernamelabel = new JLabel("\u6CE8\u518C\u5E10\u53F7\uFF1A");
-		usernamelabel.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		usernamelabel.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		UsenameBox.add(usernamelabel);
 		
 		usenametextfiled = new JTextField();
+		usenametextfiled.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		UsenameBox.add(usenametextfiled);
 		usenametextfiled.setColumns(10);
 		
 		Box PasswordBox = Box.createHorizontalBox();
 		
 		JLabel passwordlable = new JLabel("\u6CE8\u518C\u5BC6\u7801\uFF1A");
-		passwordlable.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		passwordlable.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		PasswordBox.add(passwordlable);
 		
 		passwordtextfiled = new JPasswordField();
+		passwordtextfiled.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		PasswordBox.add(passwordtextfiled);
 		
 		Box CetificatePasswordBox = Box.createHorizontalBox();
 		
 		JLabel CetificatePasswordlable = new JLabel("\u786E\u8BA4\u5BC6\u7801\uFF1A");
-		CetificatePasswordlable.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		CetificatePasswordlable.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		CetificatePasswordBox.add(CetificatePasswordlable);
 		
 		CetificatePasswordField = new JPasswordField();
+		CetificatePasswordField.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		CetificatePasswordBox.add(CetificatePasswordField);
 		
 		GroupLayout gl_centerfillin = new GroupLayout(centerfillin);
@@ -138,11 +142,11 @@ public class RegisterWindows {
 		
 		JLabel label = new JLabel("\u6240\u5C5E\u90E8\u95E8\uFF1A");
 		ChecknameBox.add(label);
-		label.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		label.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		
 		JComboBox departmentfield = new JComboBox();
 		departmentfield.setModel(new DefaultComboBoxModel(new String[] {"\u5DE5\u7A0B\u90E8", "\u529E\u516C\u5BA4", "\u8D22\u52A1\u90E8", "\u9500\u552E\u90E8"}));
-		departmentfield.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		departmentfield.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		ChecknameBox.add(departmentfield);
 		
 		JPanel panel_1 = new JPanel();
@@ -155,7 +159,7 @@ public class RegisterWindows {
 		frame.getContentPane().add(southfillin, BorderLayout.SOUTH);
 		
 		JButton register = new JButton("\u6CE8\u518C");
-		register.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		register.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 16));
 		GroupLayout gl_southfillin = new GroupLayout(southfillin);
 		gl_southfillin.setHorizontalGroup(
 			gl_southfillin.createParallelGroup(Alignment.LEADING)
@@ -176,7 +180,7 @@ public class RegisterWindows {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+
 				
 			}
 		});
@@ -201,8 +205,8 @@ public class RegisterWindows {
 				
 				String usernameString = usenametextfiled.getText();
 				String checknameString = checknamefield.getText();
-				String passwordString = passwordtextfiled.getPassword().toString();
-				String cetificationString = CetificatePasswordField.getPassword().toString();
+				String passwordString = passwordtextfiled.getText();
+				String cetificationString = CetificatePasswordField.getText();
 
 				String departmentString = (String)departmentfield.getSelectedItem();
 				
@@ -210,40 +214,41 @@ public class RegisterWindows {
 				int passwordlength = passwordString.length();
 				
 				if (checknameString.equals("")) {
-					ShowDialog("Ô±¹¤ĞÕÃû²»ÄÜÎª¿Õ");
+					ShowDialog("å‘˜å·¥å§“åä¸èƒ½ä¸ºç©º");
 					return;
 				}
 				
 				if (usernamelength<6) {
 					
-					ShowDialog("ÓÃ»§Ãû³¤¶ÈĞ¡ÓÚ6Î»");
+					ShowDialog("å¸å·é•¿åº¦ä¸èƒ½å°äº6ä½");
 					return;
 				}
 				
 				if (passwordlength<6) {
-					ShowDialog("ÃÜÂë³¤¶ÈĞ¡ÓÚ6Î»");
+					ShowDialog("å¯†ç é•¿åº¦ä¸èƒ½å°äº6ä½");
 					return;
 					
 				}
 				
 				if (!passwordString.equals(cetificationString)) {
-					ShowDialog("Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ");
+					ShowDialog("ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´");
 					return;
 					
 				}
 				
 				
 				try {
-					boolean result = user.RegisterUser(checknameString, usernameString, passwordString, departmentString);
+					boolean result = User.RegisterUser(checknameString, usernameString, passwordString, departmentString);
 					if (result == true) {
-						ShowDialog("×¢²á³É¹¦");
+						ShowDialog("æ³¨å†ŒæˆåŠŸ");
+						getFrame().dispose();
 					}
 				} catch (ClassNotFoundException e1) {
-					ShowDialog("Êı¾İ¿âÁ¬½Ó´íÎó");
+					ShowDialog("æ•°æ®åº“è¿æ¥é”™è¯¯");
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
-					ShowDialog("×¢²áÊ§°Ü,¸ÃÔ±¹¤ÒÑ¾­×¢²áÕÊºÅ£¬»òÕß×¢²áÈËÔ±ĞÕÃû²»ÊÇÔ±¹¤ĞÕÃû");
+					// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Éµï¿½ catch ï¿½ï¿½
+					ShowDialog("æŸ¥è¯¢åˆ°ä½ ä¸æ˜¯æœ¬å…¬å¸çš„å‘˜å·¥ï¼Œæˆ–è€…ä½ å·²ç»æ³¨å†Œè¿‡äº†å¸å·ï¼Œè¯·è”ç³»ç®¡ç†å‘˜");
 					e1.printStackTrace();
 				}
 				
@@ -259,7 +264,7 @@ public class RegisterWindows {
 	
     private void ShowDialog(String word) {
 
-         JOptionPane.showMessageDialog(null,word, "´íÎóÌáÊ¾", JOptionPane.ERROR_MESSAGE); 
+         JOptionPane.showMessageDialog(null,word, "æç¤ºÊ¾", JOptionPane.ERROR_MESSAGE); 
 		
     }
 	

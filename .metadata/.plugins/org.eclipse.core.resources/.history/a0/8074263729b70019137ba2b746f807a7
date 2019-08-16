@@ -1,5 +1,0 @@
-package MyThread;
-
-public class MyThread {
-
-}

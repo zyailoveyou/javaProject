@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import user.user;
+import user.User;
 import vacation_extrawork.OneManData;
 
 public class Windows {
@@ -13,7 +13,7 @@ public class Windows {
 	protected JFrame frame;
 //	protected ArrayList<OneManData> submitdatagroup = new ArrayList<OneManData>();
 	protected String WindowsMode;
-	protected user user;
+	protected User user;
 	 	
 	public JFrame getFrame() {
 		return frame;
@@ -21,7 +21,7 @@ public class Windows {
 	public String getWindowsMode() {
 		return WindowsMode;
 	}
-	public user getUser() {
+	public User getUser() {
 		return user;
 	}
 	public void setFrame(JFrame frame) {
@@ -30,7 +30,7 @@ public class Windows {
 	public void setWindowsMode(String windowsMode) {
 		WindowsMode = windowsMode;
 	}
-	public void setUser(user user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

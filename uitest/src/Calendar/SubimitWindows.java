@@ -27,16 +27,16 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import ojdbc.DataBaseOperation;
-import user.user;
+import user.User;
 import vacation_extrawork.Dayinformation;
 import vacation_extrawork.OneManData;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.FlowLayout;
 
 public class SubimitWindows extends Windows {
 	
 	private String[] yearlistdata;
 	private String[] monthlistdata;
-	private String[] vacationorextraworklistdata;
 	private ArrayList<Mylabel> daylabeList = new ArrayList<Mylabel>();
 	private ArrayList<OneManData> submitdatagroup = new ArrayList<OneManData>();
 	private JComboBox<String> year;
@@ -51,13 +51,13 @@ public class SubimitWindows extends Windows {
 	
 	
 
-	public SubimitWindows(user user) {
+	public SubimitWindows(User user) {
 		
 		setUser(user);
-		setWindowsMode("Ìá½»Ä£Ê½");
-		yearlistdata = new String[] {"2019Äê", "2020Äê", "2021Äê", "2022Äê", "2023Äê", "2024Äê", "2025Äê", "2026Äê", "2027Äê", "2028Äê", "2029Äê", "2030Äê", "2031Äê", "2032Äê", "2033Äê", "2034Äê", "2035Äê", "2036Äê", "2037Äê", "2038Äê", "2039Äê", "2040Äê", "2041Äê", "2042Äê", "2043Äê", "2044Äê", "2045Äê", "2046Äê", "2047Äê", "2048Äê", "2049Äê", "2050Äê"};
-		monthlistdata = new String[] {"1ÔÂ","2ÔÂ","3ÔÂ","4ÔÂ","5ÔÂ","6ÔÂ","7ÔÂ","8ÔÂ","9ÔÂ","10ÔÂ","11ÔÂ","12ÔÂ"};
-		vacationorextraworklistdata = new String[] {"Î´´ò¿¨ËµÃ÷","»»Ğİ","²¡¼Ù","Äê¼Ù","ÊÂ¼Ù","²ú¼Ù","É¥¼Ù"};					
+		setWindowsMode("æäº¤æ¨¡å¼");
+		yearlistdata = new String[] {"2019å¹´", "2020å¹´", "2021å¹´", "2022å¹´", "2023å¹´", "2024å¹´", "2025å¹´", "2026å¹´", "2027å¹´", "2028å¹´", "2029å¹´", "2030å¹´", "2031å¹´", "2032å¹´", "2033å¹´", "2034å¹´", "2035å¹´", "2036å¹´", "2037å¹´", "2038å¹´", "2039å¹´", "2040å¹´", "2041å¹´", "2042å¹´", "2043å¹´", "2044å¹´", "2045å¹´", "2046å¹´", "2047å¹´", "2048å¹´", "2049å¹´", "2050å¹´"};
+		monthlistdata = new String[] {"1æœˆ","2æœˆ","3æœˆ","4æœˆ","5æœˆ","6æœˆ","7æœˆ","8æœˆ","9æœˆ","10æœˆ","11æœˆ","12æœˆ"};
+						
 		initialize();
 	}
 
@@ -67,7 +67,7 @@ public class SubimitWindows extends Windows {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setTitle("\u8BF7\u5047\u63D0\u4EA4");
-		frame.setBounds(100, 100, 441, 384);
+		frame.setBounds(100, 100, 460, 384);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
@@ -78,21 +78,21 @@ public class SubimitWindows extends Windows {
 		year = new JComboBox<String>();
 		year.setToolTipText("\u9009\u62E9\u5E74\u4EFD");
 		year.setModel(new DefaultComboBoxModel<String>(yearlistdata));
-		year.setFont(new Font("Adobe ºÚÌå Std R", Font.PLAIN, 16));
+		year.setFont(new Font("é»‘ä½“", Font.BOLD, 16));
 		
 		month = new JComboBox<String>();
 		month.setToolTipText("\u9009\u62E9\u6708\u4EFD");
 		month.setModel(new DefaultComboBoxModel<String>(monthlistdata));
-		month.setFont(new Font("Adobe ºÚÌå Std R", Font.PLAIN, 16));
+		month.setFont(new Font("é»‘ä½“", Font.BOLD, 16));
 		
 		vacationorextrawork = new JComboBox<String>();
 		vacationorextrawork.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
 		vacationorextrawork.setModel(new DefaultComboBoxModel(new String[] {"\u8BF7\u5047", "\u52A0\u73ED", "\u6B63\u5E38\u4F11\u5047"}));
-		vacationorextrawork.setFont(new Font("Adobe ºÚÌå Std R", Font.PLAIN, 16));
+		vacationorextrawork.setFont(new Font("é»‘ä½“", Font.BOLD, 16));
 		
 		worknameinformation = new JLabel("New label");
-		worknameinformation.setFont(new Font("ËÎÌå", Font.PLAIN, 14));		
-		worknameinformation.setText("»¶Ó­µÇÂ¼£¬"+user.getCheckname()+"!");
+		worknameinformation.setFont(new Font("é»‘ä½“", Font.BOLD, 14));		
+		worknameinformation.setText("æ¬¢è¿ä½ ç™»å½•ï¼Œ"+user.getCheckname()+"!");
 		
 		GroupLayout gl_top = new GroupLayout(top);
 		gl_top.setHorizontalGroup(
@@ -111,7 +111,7 @@ public class SubimitWindows extends Windows {
 		gl_top.setVerticalGroup(
 			gl_top.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(gl_top.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(9)
 					.addGroup(gl_top.createParallelGroup(GroupLayout.Alignment.BASELINE)
 						.addComponent(vacationorextrawork, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(month, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -136,37 +136,37 @@ public class SubimitWindows extends Windows {
 		label.setForeground(Color.BLACK);
 		label.setBackground(Color.BLUE);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label);
 		
 		JLabel label_2 = new JLabel("\u661F\u671F\u4E8C");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_2.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_2);
 		
 		JLabel label_1 = new JLabel("\u661F\u671F\u4E09");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_1.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_1);
 		
 		JLabel label_3 = new JLabel("\u661F\u671F\u56DB");
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_3.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("\u661F\u671F\u4E94");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_4.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_4);
 		
 		JLabel label_5 = new JLabel("\u661F\u671F\u516D");
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_5.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_5);
 		
 		JLabel label_6 = new JLabel("\u661F\u671F\u65E5");
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_6.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_6);
 		
 		JPanel dayzoompJPanel = new JPanel();
@@ -175,16 +175,16 @@ public class SubimitWindows extends Windows {
 		
 		JPanel list = new JPanel();
 		middle.add(list, BorderLayout.SOUTH);
-		list.setLayout(new BorderLayout(0, 0));
+		list.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton submit = new JButton("\u63D0\u4EA4");
-		submit.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		JButton submit = new JButton("\u63D0\u4EA4\u4FE1\u606F");
+		submit.setFont(new Font("é»‘ä½“", Font.BOLD, 16));
 		list.add(submit);
 		
 		
 		
 		
-		//´´½¨ÊÂ¼ş
+
         submit.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -192,20 +192,20 @@ public class SubimitWindows extends Windows {
 							
 				DataBaseOperation test = new DataBaseOperation();
 				if (submitdatagroup.isEmpty()) {
-					ShowDialog("Ã»ÓĞÈÎºÎÊı¾İ£¬ÇëÖØĞÂÉèÖÃÊı¾İ");
+					ShowDialog("æ²¡æœ‰è®¾ç½®ä»»ä½•æ•°æ®");
 					return;
 				}
 				try {
 					test.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
 				} catch (ClassNotFoundException e1) {
-					// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
+
 					e1.printStackTrace();
 				}
 				
-					ShowDialog("Êı¾İ·¢ËÍ³É¹¦");
+					ShowDialog("æäº¤æˆåŠŸ");
 					submitdatagroup.clear();
 					flashdata();
 																					
@@ -219,7 +219,7 @@ public class SubimitWindows extends Windows {
 			Mylabel mylabel = new Mylabel(this);
 			mylabel.setText("");
 			mylabel.setOpaque(true);
-			mylabel.setFont(new Font("ËÎÌå", Font.BOLD, 20));
+			mylabel.setFont(new Font("é»‘ä½“", Font.PLAIN, 20));
 			mylabel.setHorizontalAlignment(SwingConstants.CENTER);
 			mylabel.setVerticalAlignment(SwingConstants.CENTER);
 			mylabel.addMouseListener(mylabel);
@@ -234,7 +234,7 @@ public class SubimitWindows extends Windows {
 			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+
 				
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					flashdata();
@@ -248,7 +248,7 @@ public class SubimitWindows extends Windows {
 			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					flashdata();
 				}
@@ -259,12 +259,11 @@ public class SubimitWindows extends Windows {
         
 	
 	}
-	//ÊÂ¼ş½áÊø
 
-	//¸¨Öúº¯Êı
+
 	private void ShowDialog(String word) {
 		
-		JOptionPane.showMessageDialog(null,word, "´íÎóÌáÊ¾", JOptionPane.ERROR_MESSAGE); 
+		JOptionPane.showMessageDialog(null,word, "æç¤ºÊ¾", JOptionPane.ERROR_MESSAGE); 
 				
 	}
 	
@@ -272,14 +271,14 @@ public class SubimitWindows extends Windows {
 	public int getyear() {
 		
 		String cachesStringyear = (String)year.getSelectedItem();		
-		String yearsString = cachesStringyear.substring(0,cachesStringyear.lastIndexOf("Äê"));		
+		String yearsString = cachesStringyear.substring(0,cachesStringyear.lastIndexOf("å¹´"));		
 		int year = Integer.parseInt(yearsString);
 		return year;
 	}
 	
 	public int getmonth() {
 		String cachesStringmonth = (String)month.getSelectedItem();		
-		String monthString = cachesStringmonth.substring(0,cachesStringmonth.lastIndexOf("ÔÂ"));		
+		String monthString = cachesStringmonth.substring(0,cachesStringmonth.lastIndexOf("æœˆ"));		
 		int month = Integer.parseInt(monthString);
 		return month;
 		
@@ -292,7 +291,7 @@ public class SubimitWindows extends Windows {
 		
 	}
 	
-	//Ë¢ĞÂº¯Êı
+
 	private void flashdata() {
 		
 		int year = getyear();			
@@ -304,7 +303,7 @@ public class SubimitWindows extends Windows {
 	    
 	    String[] daynumbergroup = myMycalendar.getCalendar();
 	    
-	    //ÖØĞÂË¢ĞÂÈÕÀú±í¸ñ
+
 	    for (int i = 0; i < 42; i++) {
 			
 	    	daylabeList.get(i).setText(daynumbergroup[i]);
@@ -312,7 +311,7 @@ public class SubimitWindows extends Windows {
 	    				
 		}
 	    
-	    //¿ªÊ¼Ë¢ĞÂ¼ì²é
+
 	    if (submitdatagroup.isEmpty()) {
 			
 		    for (int i = 0; i < 42; i++) {
@@ -343,7 +342,7 @@ public class SubimitWindows extends Windows {
 			    		    	if (in.getLabelday().equals(daylabeList.get(i).getText())) {
 			    		    				    
 			    		    		
-			    		    		if (in.getreasons_details().equals("Õı³£Ğİ¼Ù")) {
+			    		    		if (in.getreasons_details().equals("æ­£å¸¸ä¼‘å‡")) {
 			    		    			
 			    		    			daylabeList.get(i).SetChooseStatefornormalrestdayColor();
 									}
@@ -375,8 +374,5 @@ public class SubimitWindows extends Windows {
 	    	}
 	    }
 	}
-	
-	
-	
-	
+		
 }

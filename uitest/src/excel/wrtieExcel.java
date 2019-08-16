@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -34,39 +35,39 @@ public class wrtieExcel {
 	private WritableSheet sheet;
 	private String dictionaryString;
 	
-	public wrtieExcel(String name) throws WriteException, IOException {
+	public wrtieExcel(File file) throws WriteException, IOException {
 		
-		createxcel(name);
+		createxcel(file);
 		
 	}
 	
-	public void createxcel(String name) throws IOException, WriteException{
+	private void createxcel(File file) throws IOException, WriteException{
 		
-		File currentFile = new File(System.getProperty("user.dir")+"\\"+name);
-		dictionaryString = System.getProperty("user.dir")+"\\"+name;
 		
-		currentFile.createNewFile();
+		dictionaryString = file.getPath();
 		
-		workbook = Workbook.createWorkbook(currentFile);
-		sheet = workbook.createSheet("Òì³£³öÇÚµ¼³ö", 0);
+		file.createNewFile();
 		
-		titles.add("ĞÕÃû");
-		titles.add("±àºÅID");
-		titles.add("Ê±¼ä");
-		titles.add("Êµ¼ÊÒì³£³öÇÚÊ±¼ä");
-		titles.add("Òì³£³öÇÚÔ­Òò");
-		titles.add("Òì³£³öÇÚÔ­ÒòÏ¸·Ö");
-		titles.add("Òì³£³öÇÚËµÃ÷");
-		titles.add("Òì³£³öÇÚ´¦Àí·½Ê½");
+		workbook = Workbook.createWorkbook(file);
+		sheet = workbook.createSheet("å¼‚å¸¸è€ƒå‹¤æ•°æ®", 0);
 		
-		//ÉèÖÃ×ÖÌå¸ñÊ½
+		titles.add("å§“å");
+		titles.add("å‘˜å·¥ID");
+		titles.add("æ—¥æœŸ");
+		titles.add("æ—¶é—´");
+		titles.add("ç±»å‹");
+		titles.add("ç±»å‹ç»†åˆ†");
+		titles.add("æœªæ‰“å¡è¯´æ˜");
+		titles.add("å¤„ç†æ–¹å¼Ê½");
+		
+	
 		WritableFont font = new WritableFont(
-				WritableFont.createFont("ËÎÌå"), 
+				WritableFont.createFont("å®‹ä½“"), 
 				12, WritableFont.BOLD, 
 				false, 
 				UnderlineStyle.NO_UNDERLINE);
 		
-		//ÉèÖÃµ¥Ôª¸ñ¸ñÊ½
+
 		WritableCellFormat cellFormat = new WritableCellFormat(font);
 		cellFormat.setAlignment(Alignment.CENTRE);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
@@ -87,14 +88,13 @@ public class wrtieExcel {
 	public void writeline(ArrayList<String> datagroup) throws WriteException 
 	{
 				
-		//ÉèÖÃ×ÖÌå¸ñÊ½
+
 		WritableFont font = new WritableFont(
-				WritableFont.createFont("ËÎÌå"), 
+				WritableFont.createFont("å®‹ä½“"), 
 				12, WritableFont.NO_BOLD, 
 				false, 
 				UnderlineStyle.NO_UNDERLINE);
 		
-		//ÉèÖÃµ¥Ôª¸ñ¸ñÊ½
 		WritableCellFormat cellFormat = new WritableCellFormat(font);
 		cellFormat.setAlignment(Alignment.CENTRE);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);

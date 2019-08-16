@@ -22,13 +22,16 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import Calendar.CalendarWindows;
 import Calendar.MainWindows;
-import Calendar.BackupSubmitWindows;
 import MyThread.MyThread;
+import backup.BackupSubmitWindows;
+import backup.CalendarWindows;
 import ojdbc.DataBaseOperation;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -73,24 +76,26 @@ public class LoginInWindows {
 		Box AccounthorizontalBox = Box.createHorizontalBox();
 		
 		JLabel usernamelabel = new JLabel("\u5E10\u53F7\uFF1A");
-		usernamelabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		usernamelabel.setFont(new Font("榛戜綋", Font.BOLD, 16));
 		AccounthorizontalBox.add(usernamelabel);
 		
 		usenametextfiled = new JTextField();
+		usenametextfiled.setFont(new Font("寰蒋闆呴粦", Font.BOLD, 16));
 		AccounthorizontalBox.add(usenametextfiled);
 		usenametextfiled.setColumns(10);
 		
 		Box PasswordhorizontalBox = Box.createHorizontalBox();
 		
 		JLabel passwordlable = new JLabel("\u5BC6\u7801\uFF1A");
-		passwordlable.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		passwordlable.setFont(new Font("榛戜綋", Font.BOLD, 16));
 		PasswordhorizontalBox.add(passwordlable);
 		
 		passwordtextfiled = new JPasswordField();
+		passwordtextfiled.setFont(new Font("寰蒋闆呴粦", Font.BOLD, 16));
 		PasswordhorizontalBox.add(passwordtextfiled);
 		
 		JLabel notification = new JLabel("\u63D0\u793A\u4FE1\u606F");
-		notification.setFont(new Font("宋体", Font.PLAIN, 13));
+		notification.setFont(new Font("瀹嬩綋", Font.PLAIN, 14));
 		GroupLayout gl_centerfillin = new GroupLayout(centerfillin);
 		gl_centerfillin.setHorizontalGroup(
 			gl_centerfillin.createParallelGroup(Alignment.LEADING)
@@ -125,7 +130,7 @@ public class LoginInWindows {
 		AccounthorizontalBox.add(panel);
 		centerfillin.setLayout(gl_centerfillin);
 		
-		JPanel southfillin = new JPanel();
+		JPanel southfillin = new JPanel();	
 		frame.getContentPane().add(southfillin, BorderLayout.SOUTH);
 		
 		JButton login = new JButton("\u767B\u5F55");
@@ -133,10 +138,10 @@ public class LoginInWindows {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		login.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		login.setFont(new Font("榛戜綋", Font.BOLD, 16));
 		
 		JButton register = new JButton("\u6CE8\u518C");
-		register.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		register.setFont(new Font("榛戜綋", Font.BOLD, 16));
 		GroupLayout gl_southfillin = new GroupLayout(southfillin);
 		gl_southfillin.setHorizontalGroup(
 			gl_southfillin.createParallelGroup(Alignment.LEADING)
@@ -171,32 +176,32 @@ public class LoginInWindows {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO 自动生成的方法存根
-				
+		
 				String username = usenametextfiled.getText();
 				String password = passwordtextfiled.getText();
 				
 				try {
-					Map<user,String> resultmap = user.LoginInUser(username, password);					
-					Set<Map.Entry<user, String>> set = resultmap.entrySet();
-					Iterator<Map.Entry<user, String>> iterator;
+					Map<User,String> resultmap = User.LoginInUser(username, password);					
+					Set<Map.Entry<User, String>> set = resultmap.entrySet();
+					Iterator<Map.Entry<User, String>> iterator;
 								    
 				    iterator = set.iterator();	
 				    
-					user loginuser = null;
+					User loginuser = null;
 					String  resultstring = null;
 						
 					while (iterator.hasNext()) {
-						Map.Entry<user, String> loginresult= (Map.Entry<user, String>) iterator.next();
+						Map.Entry<User, String> loginresult= (Map.Entry<User, String>) iterator.next();
 						loginuser = loginresult.getKey();
 						resultstring = loginresult.getValue();						
 					}
 						
 											
-					if (resultstring.equals("成功登录")) {
+					if (resultstring.equals("鎴愬姛鐧诲綍")) {
 							
+						
+						ShowDialog(resultstring);
 						getFrame().dispose();
-						ShowDialog(resultstring);						
 						MainWindows windows  = new MainWindows(loginuser);
 						windows.getFrame().setVisible(true);
 														
@@ -209,10 +214,10 @@ public class LoginInWindows {
 					}
 																
 				} catch (ClassNotFoundException e1) {
-					// TODO 自动生成的 catch 块
+
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO 自动生成的 catch 块
+
 					e1.printStackTrace();
 				}
 				
@@ -221,6 +226,68 @@ public class LoginInWindows {
 			}
 			
 		});
+		
+		
+		login.addKeyListener(new KeyAdapter() {
+			
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == 13 || e.getKeyCode() == 16777296) {
+										
+					String username = usenametextfiled.getText();
+					String password = passwordtextfiled.getText();
+					
+					try {
+						Map<User,String> resultmap = User.LoginInUser(username, password);					
+						Set<Map.Entry<User, String>> set = resultmap.entrySet();
+						Iterator<Map.Entry<User, String>> iterator;
+									    
+					    iterator = set.iterator();	
+					    
+						User loginuser = null;
+						String  resultstring = null;
+							
+						while (iterator.hasNext()) {
+							Map.Entry<User, String> loginresult= (Map.Entry<User, String>) iterator.next();
+							loginuser = loginresult.getKey();
+							resultstring = loginresult.getValue();						
+						}
+							
+												
+						if (resultstring.equals("鎴愬姛鐧诲綍")) {
+								
+							
+							ShowDialog(resultstring);
+							getFrame().dispose();
+							MainWindows windows  = new MainWindows(loginuser);
+							windows.getFrame().setVisible(true);
+															
+						}
+							
+						else {
+								
+							ShowDialog(resultstring);
+								
+						}
+																	
+					} catch (ClassNotFoundException e1) {
+
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+
+						e1.printStackTrace();
+					}
+					
+					
+					
+				}
+
+				
+			}
+		});
+
 		
 		register.addMouseListener(new MouseAdapter() {
 			
@@ -237,7 +304,7 @@ public class LoginInWindows {
 	
     private void ShowDialog(String word) {
 
-         JOptionPane.showMessageDialog(null,word, "错误提示", JOptionPane.ERROR_MESSAGE); 
+         JOptionPane.showMessageDialog(null,word, "鎻愮ず示", JOptionPane.INFORMATION_MESSAGE); 
 		
     }
 	

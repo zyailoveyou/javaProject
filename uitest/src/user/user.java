@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 import ojdbc.DataBaseOperation;
 
-public class user {
+public class User {
 	
 	
 	String checkname;
@@ -21,6 +21,14 @@ public class user {
 	String passwordString;
 	String departmentString;
 	String id;
+	String duty;
+	String power_level;
+	String whether_manager;
+	String level_shape;
+	String VACATION_APPROVAL_NORMAL;
+	String VACATION_APPROVAL_HIGHER;
+	String ASSESS_APPROVAL_NORMAL;
+	String ASSESS_APPROVAL_HIGHER;
 	
 		
 	public String getCheckname() {
@@ -46,19 +54,68 @@ public class user {
 	public String getId() {
 		return id;
 	}
+	
+	
 
 
-	private user(String checkname,String usernameString,String passwordString,String id,String departmentString)
+	public String getPower_level() {
+		return power_level;
+	}
+
+
+	public String getWhether_manager() {
+		return whether_manager;
+	}
+
+
+	public String getLevel_shape() {
+		return level_shape;
+	}
+
+
+	public String getVACATION_APPROVAL_NORMAL() {
+		return VACATION_APPROVAL_NORMAL;
+	}
+
+
+	public String getVACATION_APPROVAL_HIGHER() {
+		return VACATION_APPROVAL_HIGHER;
+	}
+
+
+	public String getASSESS_APPROVAL_NORMAL() {
+		return ASSESS_APPROVAL_NORMAL;
+	}
+
+
+	public String getASSESS_APPROVAL_HIGHER() {
+		return ASSESS_APPROVAL_HIGHER;
+	}
+
+
+	private User(String checkname,String usernameString,String passwordString,String id,String departmentString
+                 ,String duty,String power_level,String whether_manager,String level_shape,
+                 String VACATION_APPROVAL_NORMAL,String VACATION_APPROVAL_HIGHER,
+                 String ASSESS_APPROVAL_NORMAL,String ASSESS_APPROVAL_HIGHER)
 	{		
 		this.checkname = checkname;
 		this.usernameString = usernameString;
 		this.passwordString = passwordString;
 		this.departmentString = departmentString;
 		this.id = id;
+		this.duty = duty;
+		this.power_level = power_level;
+		this.whether_manager = whether_manager;
+		this.level_shape = level_shape;
+		this.VACATION_APPROVAL_NORMAL = VACATION_APPROVAL_NORMAL;
+		this.VACATION_APPROVAL_HIGHER = VACATION_APPROVAL_HIGHER;
+		this.ASSESS_APPROVAL_NORMAL = ASSESS_APPROVAL_NORMAL;
+		this.ASSESS_APPROVAL_HIGHER = ASSESS_APPROVAL_HIGHER;
+		
 	}
 	
 	
-	public static user GetUserData(String usernameString,String passwordString)	
+	public static User GetUserData(String usernameString,String passwordString)	
 	{
 			return null;
 	
@@ -68,23 +125,22 @@ public class user {
 	public static boolean RegisterUser(String checkname,String usernameString,String passwordString,String departmentString) throws ClassNotFoundException, SQLException
 	{
 		
-		DataBaseOperation testBaseOperation = new DataBaseOperation();
-			
+		DataBaseOperation testBaseOperation = new DataBaseOperation();		
 		int id = testBaseOperation.GetID_from_Nanme(checkname);		
-		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname, id);
+		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname, id,departmentString);
 				
 	}
 	
 	
 	
-	public static Map<user, String> LoginInUser (String usernameString,String passwordString) throws ClassNotFoundException, SQLException 	
+	public static Map<User, String> LoginInUser (String usernameString,String passwordString) throws ClassNotFoundException, SQLException 	
 	{
 		
 		
 		if (usernameString.equals("")||passwordString.equals("")) {
-			user returnUser = new user("-1", "-1", "-1", "-1","-1");
-			Map<user, String> resultmap = new HashMap<user, String>();		
-			resultmap.put(returnUser, "ÕÊºÅ»òÕßÃÜÂë²»ÄÜÎª¿Õ");
+			User returnUser = new User("-1", "-1", "-1", "-1","-1","-1", "-1", "-1", "-1","-1","-1","-1","-1");
+			Map<User, String> resultmap = new HashMap<User, String>();		
+			resultmap.put(returnUser, "å¸å·å¯†ç ä¸ºç©º");
 			return resultmap;
 		}
 		
@@ -105,35 +161,35 @@ public class user {
 					
 		}
 						
-		if (logininreturnString.equals("³É¹¦µÇÂ¼")) {
+		if (logininreturnString.equals("æˆåŠŸç™»å½•")) {
 			
-			user returnUser = new user(resultArrayList.get(0), resultArrayList.get(1), resultArrayList.get(2), resultArrayList.get(3),resultArrayList.get(4));
-			Map<user, String> resultmap = new HashMap<user, String>();			
-			resultmap.put(returnUser, "³É¹¦µÇÂ¼");
+			User returnUser = new User(resultArrayList.get(0), resultArrayList.get(1), resultArrayList.get(2), resultArrayList.get(3),resultArrayList.get(4),resultArrayList.get(5),resultArrayList.get(6),resultArrayList.get(7),resultArrayList.get(8),resultArrayList.get(9),resultArrayList.get(10),resultArrayList.get(11),resultArrayList.get(12));
+			Map<User, String> resultmap = new HashMap<User, String>();			
+			resultmap.put(returnUser, "æˆåŠŸç™»å½•");
 			return resultmap;
 		}
 		
-		else if (logininreturnString.equals("Êı¾İ¿âÖĞÃ»ÓĞ¶ÁÈ¡µ½ÈÎºÎÕÊºÅÊı¾İ£¬ÇëÁªÏµ¹ÜÀíÔ±")) {
+		else if (logininreturnString.equals("å¸å·æˆ–è€…å¯†ç é”™è¯¯")) {
 			
-			user returnUser = new user("-1", "-1", "-1", "-1","-1");
-			Map<user, String> resultmap = new HashMap<user, String>();			
-			resultmap.put(returnUser, "Êı¾İ¿âÖĞÃ»ÓĞ¶ÁÈ¡µ½ÈÎºÎÕÊºÅÊı¾İ£¬ÇëÁªÏµ¹ÜÀíÔ±");			
+			User returnUser = new  User("-1", "-1", "-1", "-1","-1","-1", "-1", "-1", "-1","-1","-1","-1","-1");
+			Map<User, String> resultmap = new HashMap<User, String>();			
+			resultmap.put(returnUser, "å¸å·æˆ–è€…å¯†ç é”™è¯¯");			
 			return resultmap;
 		}
 		
-		else if (logininreturnString.equals("ÕÊºÅ»òÕßÃÜÂë´íÎó")) {
+		else if (logininreturnString.equals("æ•°æ®åº“ä¸­æ²¡æœ‰è¯»å–åˆ°ä»»ä½•å¸å·æ•°æ®ï¼Œè¯·è”ç³»ç®¡ç†å‘˜")) {
 			
-			user returnUser = new user("-1", "-1", "-1", "-1","-1");
-			Map<user, String> resultmap = new HashMap<user, String>();			
-			resultmap.put(returnUser, "ÕÊºÅ»òÕßÃÜÂë´íÎó");			
+			User returnUser = new  User("-1", "-1", "-1", "-1","-1","-1", "-1", "-1", "-1","-1","-1","-1","-1");
+			Map<User, String> resultmap = new HashMap<User, String>();			
+			resultmap.put(returnUser, "æ•°æ®åº“ä¸­æ²¡æœ‰è¯»å–åˆ°ä»»ä½•å¸å·æ•°æ®ï¼Œè¯·è”ç³»ç®¡ç†å‘˜");			
 			return resultmap;
 		}
 		
-		else if (logininreturnString.equals("Êı¾İ¿âÁ¬½Ó´íÎó")) {
+		else if (logininreturnString.equals("æ•°æ®åº“è¿æ¥é”™è¯¯")) {
 			
-			user returnUser = new user("-1", "-1", "-1", "-1","-1");
-			Map<user, String> resultmap = new HashMap<user, String>();		
-			resultmap.put(returnUser, "Êı¾İ¿âÁ¬½Ó´íÎó");			
+			User returnUser = new  User("-1", "-1", "-1", "-1","-1","-1", "-1", "-1", "-1","-1","-1","-1","-1");
+			Map<User, String> resultmap = new HashMap<User, String>();		
+			resultmap.put(returnUser, "æ•°æ®åº“è¿æ¥é”™è¯¯");			
 			return resultmap;
 		}
 		
@@ -144,7 +200,7 @@ public class user {
 	
 	private static void ShowDialog(String word) {
 		
-		JOptionPane.showMessageDialog(null,word, "´íÎóÌáÊ¾", JOptionPane.ERROR_MESSAGE); 
+		JOptionPane.showMessageDialog(null,word, "é”™è¯¯Ê¾", JOptionPane.ERROR_MESSAGE); 
 				
 	}
 	

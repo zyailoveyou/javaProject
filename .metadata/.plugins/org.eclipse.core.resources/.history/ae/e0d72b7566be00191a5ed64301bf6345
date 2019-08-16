@@ -1,0 +1,90 @@
+package approvel;
+
+
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import Calendar.Windows;
+import mylayout.MyVFlowLayout;
+import ojdbc.DataBaseOperation;
+import tcp.ListInformation;
+import user.User;
+public class ApprovalWindows extends Windows {
+
+
+
+	public ApprovalWindows(User user) throws ClassNotFoundException, SQLException {
+		initialize();
+		this.setUser(user);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 */
+	private void initialize() throws ClassNotFoundException, SQLException {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 500, 527);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setResizable(false);
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+		
+		DataBaseOperation dataBaseOperation = new DataBaseOperation();
+		ListInformation informationgroup = dataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
+		
+
+		
+
+		
+		JPanel panelcontainer = new JPanel();
+		scrollPane.setViewportView(panelcontainer);
+		MyVFlowLayout mvfl_panelcontainer = new MyVFlowLayout(MyVFlowLayout.TOP,20,20,false,false);
+		panelcontainer.setLayout(mvfl_panelcontainer);
+		
+		if (informationgroup!= null) {
+			
+			for (ArrayList<String> list : informationgroup.getLineinformationgroup()) {
+				VacationPanel vacationPanel = new VacationPanel(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4));
+				panelcontainer.add(vacationPanel);
+			}
+			
+		}
+		
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		
+		JButton quicklyapproval = new JButton("\u4E00\u952E\u540C\u610F");
+		quicklyapproval.setFont(new Font("ËÎÌו", Font.PLAIN, 16));
+		panel.add(quicklyapproval);
+		
+		JButton submitapproval = new JButton("\u63D0\u4EA4\u5BA1\u6279");
+		submitapproval.setFont(new Font("ËÎÌו", Font.PLAIN, 16));
+		panel.add(submitapproval);
+		
+		
+		if (user!=null) {
+			
+			String userlevel_shape = user.getLevel_shape();
+			
+			
+		}
+		
+		
+		
+		
+	}
+
+}

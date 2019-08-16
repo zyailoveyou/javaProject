@@ -1,0 +1,312 @@
+package vacation_extrawork;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Date;
+import java.util.ArrayList;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+
+import Calendar.Mylabel;
+
+public class VacationWindows {
+
+	private JFrame frame;
+	JCheckBox morningnocheck;
+	private boolean noinformationsubmit = true;
+	private String[] reasonsliStrings = new String[] {"换休","年休","事假","丧假","产假","陪护假","未打卡说明"};
+	private Color activeColor = new Color(255, 255, 255);
+	private Color nagativecColor =  new Color(150,150,150);
+
+	private OneManData data = new OneManData(new ArrayList<Dayinformation>());
+	private Mylabel label;
+	
+	private JComboBox<String> vacationreasons;
+	private JTextField reasonsexplanation;
+
+	
+	
+	public OneManData getPersondata() {
+		
+		return data;
+	}
+	
+	public boolean getnoinformationsubmit() {
+		
+		return noinformationsubmit;
+		
+	}
+	
+	public Mylabel getlabel() {
+		return label;
+	}
+	
+
+		
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	
+
+	public VacationWindows(Mylabel label) {
+
+		this.label = label;
+		initialize();
+	}
+	
+	public void activeTextfield() {
+
+		reasonsexplanation.setEnabled(true);
+		reasonsexplanation.setBackground(activeColor);
+
+	}
+	
+	public void nagativeTextfield() {
+		
+	}
+	
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 216, 360);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		vacationreasons = new JComboBox<String>();
+		vacationreasons.setPreferredSize(new Dimension(32, 40));
+		vacationreasons.setFont(new Font("黑体", Font.BOLD, 18));
+		vacationreasons.setModel(new DefaultComboBoxModel<String>(reasonsliStrings));
+		
+		
+
+		ButtonGroup mygourpButtonGroup = new ButtonGroup();
+		
+		JButton submitvacation = new JButton("提交");
+		submitvacation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		submitvacation.setPreferredSize(new Dimension(61, 40));
+		
+		JCheckBox morningnocheck_1 = new JCheckBox("上午未打");
+		morningnocheck_1.setBackground(new Color(245, 245, 245));
+		morningnocheck_1.setFont(new Font("黑体", Font.PLAIN, 16));
+		morningnocheck_1.setHorizontalAlignment(SwingConstants.CENTER);
+		mygourpButtonGroup.add(morningnocheck_1);
+		
+		JCheckBox afternoonnocheck = new JCheckBox("下午未打");
+		afternoonnocheck.setBackground(new Color(245, 245, 245));
+		afternoonnocheck.setFont(new Font("黑体", Font.PLAIN, 16));
+		afternoonnocheck.setHorizontalAlignment(SwingConstants.CENTER);
+		mygourpButtonGroup.add(afternoonnocheck);
+		
+		JCheckBox wholedaynoclear = new JCheckBox("全天未打");
+		wholedaynoclear.setHorizontalAlignment(SwingConstants.CENTER);
+		wholedaynoclear.setFont(new Font("黑体", Font.PLAIN, 16));
+		wholedaynoclear.setBackground(new Color(245, 245, 245));
+		mygourpButtonGroup.add(wholedaynoclear);
+		
+		reasonsexplanation = new JTextField();
+		reasonsexplanation.setEnabled(false);
+		reasonsexplanation.setColumns(10);
+
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addComponent(submitvacation, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addComponent(vacationreasons, 0, 180, Short.MAX_VALUE)
+								.addContainerGap())
+							.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addComponent(wholedaynoclear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+									.addComponent(afternoonnocheck, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+									.addComponent(morningnocheck_1, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+									.addComponent(reasonsexplanation, GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+								.addContainerGap()))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(8)
+					.addComponent(vacationreasons, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(10)
+					.addComponent(morningnocheck_1, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(afternoonnocheck, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(wholedaynoclear, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(reasonsexplanation, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(submitvacation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(16, Short.MAX_VALUE))
+		);
+		frame.getContentPane().setLayout(groupLayout);
+				
+		nagativeTextfield();
+				
+		vacationreasons.addItemListener(new ItemListener() {
+			
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				
+				String reasonsString = (String)vacationreasons.getSelectedItem();
+				
+				if (reasonsString.equals("未打卡说明")) {
+					
+                    activeTextfield();
+					
+					
+				}
+				else {
+					
+					nagativeTextfield();
+
+					
+				}				
+			}
+		});
+			
+		
+		
+		
+		
+		
+		submitvacation.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+													
+					if (morningnocheck_1.isSelected()&&!afternoonnocheck.isSelected()) 
+					{					
+					 
+						   setdata("上午未打",reasonsexplanation.getText());
+						   noinformationsubmit = false;
+						 						 						 
+					}
+						
+					else if (!morningnocheck_1.isSelected()&&afternoonnocheck.isSelected()) 
+					{					
+							setdata("下午未打",reasonsexplanation.getText());
+							noinformationsubmit = false;
+
+					}
+						
+					else if(wholedaynoclear.isSelected())
+					{					
+						    setdata("全天未打",reasonsexplanation.getText());
+						    noinformationsubmit = false;
+
+					}
+						
+					else 
+					{							
+					     noinformationsubmit = true;
+					}
+				
+							
+				frame.dispose();
+											
+			}
+		});
+			
+	}
+	
+	
+	public void setdata(String Actualtimenoclear,String Explainreason) {
+				 
+		 String nameString = getlabel().getNewSubimitWindows().getUser().getCheckname();	 
+		 Dayinformation information = new Dayinformation();
+		 String catogoryString = getlabel().getNewSubimitWindows().getVacationorExtrawork();
+		 information.setreasons(catogoryString);
+		 String vacationreasonString = (String)vacationreasons.getSelectedItem();
+		 information.setreasons_details(vacationreasonString);
+		 String timeString = String.valueOf(getlabel().getNewSubimitWindows().getyear())+"-"+
+				 String.valueOf(getlabel().getNewSubimitWindows().getmonth())+"-"+getlabel().getText();
+		 Date datetime = Date.valueOf(timeString);
+		 information.setTime(datetime);
+		 information.setLabelday(getlabel().getText());		 
+		 information.setActualtimenoclear(Actualtimenoclear);
+		 information.setreasons_explanation(Explainreason);
+		 information.sethandleovertimework(null);
+		 
+		 
+		 CheckTheManExist(nameString);
+		 
+		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
+			if (nameString.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
+				getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getDayinformation().add(information);				
+			}
+
+		}
+		 
+		 
+		 System.out.println(nameString+"写入假期信息完成");
+		
+	}
+	
+	
+	private void CheckTheManExist(String name) {
+		
+		 boolean exist = false;
+		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
+			if (name.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
+				exist = true;		
+			}
+		 }
+		 
+		 if (!exist) {
+			
+			 CreateOneManData(name);
+			 
+		 }
+		 
+		
+		
+	}
+	
+	
+	private void CreateOneManData(String name) {
+		
+		OneManData OnePersondata = new OneManData(new ArrayList<Dayinformation>());
+		OnePersondata.setName(name);
+		int id = -1;	
+		id = Integer.valueOf(getlabel().getNewSubimitWindows().getUser().getId());
+			
+		if (id != -1) {
+			
+			OnePersondata.setId(id);
+			getlabel().getNewSubimitWindows().getSubmitdatagroup().add(OnePersondata);
+			
+		}
+		else {
+			System.out.println("id查询错误，放弃添加人员信息");
+		}
+		
+		
+	}
+}

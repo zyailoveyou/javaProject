@@ -1,47 +1,43 @@
 package vacation_extrawork;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-
-import Calendar.CalendarWindows;
-import Calendar.Mylabel;
-import ojdbc.DataBaseOperation;
-
-import java.awt.Font;
-import javax.swing.JComboBox;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.Component;
-import javax.swing.JPanel;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JTextField;
-import java.awt.Color;
-import java.awt.SystemColor;
-import java.awt.TextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+
+import Calendar.Mylabel;
+import implement.JTextFieldHintListener;
+import java.awt.Label;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+import java.awt.Component;
 
 public class VacationWindows {
 
 	private JFrame frame;
 	JCheckBox morningnocheck;
 	private boolean noinformationsubmit = true;
-	private String[] reasonsliStrings = new String[] {"ªª–›","ƒÍ–›"," ¬ºŸ","…•ºŸ","≤˙ºŸ","≈„ª§ºŸ","Œ¥¥Úø®Àµ√˜"};
+	private String[] reasonsliStrings = new String[]  {"Êç¢‰ºë","Âπ¥‰ºë","‰∫ãÂÅá","‰∏ßÂÅá","‰∫ßÂÅá","Èô™Êä§ÂÅá","Êú™ÊâìÂç°ËØ¥Êòé"};
 	private Color activeColor = new Color(255, 255, 255);
 	private Color nagativecColor =  new Color(150,150,150);
 
@@ -49,7 +45,7 @@ public class VacationWindows {
 	private Mylabel label;
 	
 	private JComboBox<String> vacationreasons;
-	private TextField reasonsexplanation;
+	private JTextField reasonsexplanation;
 
 	
 	
@@ -90,83 +86,193 @@ public class VacationWindows {
 	}
 	
 	public void nagativeTextfield() {
-		
 		reasonsexplanation.setEnabled(false);
-		reasonsexplanation.setBackground(nagativecColor);
-		
+//		reasonsexplanation.setBackground(nagativecColor);
 	}
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 181, 336);
+		frame.setResizable(false);
+		frame.setTitle("\u8BF7\u5047\u8BBE\u7F6E");
+		frame.setBounds(100, 100, 207, 457);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
+				
+		ButtonGroup mygourpButtonGroup = new ButtonGroup();		
+		JButton submitvacation = new JButton("\u8BBE\u7F6E\u4FE1\u606F");
+		submitvacation.setFont(new Font("Èªë‰Ωì", Font.BOLD, 16));
+		submitvacation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		submitvacation.setPreferredSize(new Dimension(61, 40));
+		
+		JPanel panelreason = new JPanel();
+		panelreason.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		
+		JPanel paneltime = new JPanel();
+		paneltime.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		
+		JLabel notificationtime = new JLabel("\u65F6\u95F4\u9009\u62E9\uFF1A");
+		
+		JCheckBox morningnocheck_1 = new JCheckBox("‰∏äÂçàÊú™Êâì");
+		
+		morningnocheck_1.setFont(new Font("Èªë‰Ωì", Font.PLAIN, 16));
+		morningnocheck_1.setHorizontalAlignment(SwingConstants.CENTER);
+		mygourpButtonGroup.add(morningnocheck_1);
+		
+		JCheckBox afternoonnocheck = new JCheckBox("‰∏ãÂçàÊú™Êâì");
+		
+		afternoonnocheck.setFont(new Font("Èªë‰Ωì", Font.PLAIN, 16));
+		afternoonnocheck.setHorizontalAlignment(SwingConstants.CENTER);
+		mygourpButtonGroup.add(afternoonnocheck);
+		
+		JCheckBox wholedaynoclear = new JCheckBox("ÂÖ®Â§©Êú™Êâì");
+		wholedaynoclear.setHorizontalAlignment(SwingConstants.CENTER);
+		wholedaynoclear.setFont(new Font("Èªë‰Ωì", Font.PLAIN, 16));
+		
+		mygourpButtonGroup.add(wholedaynoclear);
+		GroupLayout gl_paneltime = new GroupLayout(paneltime);
+		gl_paneltime.setHorizontalGroup(
+			gl_paneltime.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_paneltime.createSequentialGroup()
+					.addGroup(gl_paneltime.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_paneltime.createSequentialGroup()
+							.addGap(5)
+							.addComponent(wholedaynoclear))
+						.addGroup(gl_paneltime.createSequentialGroup()
+							.addGap(5)
+							.addComponent(notificationtime, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_paneltime.createSequentialGroup()
+							.addGap(5)
+							.addComponent(afternoonnocheck))
+						.addGroup(gl_paneltime.createSequentialGroup()
+							.addGap(5)
+							.addComponent(morningnocheck_1)))
+					)
+		);
+		gl_paneltime.setVerticalGroup(
+			gl_paneltime.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_paneltime.createSequentialGroup()
+					.addGap(5)
+					.addComponent(notificationtime)					
+					.addComponent(morningnocheck_1, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)					
+					.addComponent(afternoonnocheck, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addComponent(wholedaynoclear, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addGap(5))
+		);
+		paneltime.setLayout(gl_paneltime);
+		
+		JPanel panelweidaka = new JPanel();
+		panelweidaka.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		
+		JLabel notificationweidaka = new JLabel("\u672A\u6253\u5361\u8BF4\u660E\uFF1A");
+		
+		reasonsexplanation = new JTextField();
+		reasonsexplanation.setText("\u8BF7\u8F93\u5165\u672A\u6253\u5361\u8BF4\u660E");
+		reasonsexplanation.setEnabled(false);
+		reasonsexplanation.setColumns(10);
+		reasonsexplanation.addFocusListener(new JTextFieldHintListener("ËØ∑ËæìÂÖ•Êú™ÊâìÂç°ËØ¥Êòé", reasonsexplanation));
+		GroupLayout gl_panelweidaka = new GroupLayout(panelweidaka);
+		gl_panelweidaka.setHorizontalGroup(
+			gl_panelweidaka.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelweidaka.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panelweidaka.createParallelGroup(Alignment.LEADING)
+						.addComponent(reasonsexplanation, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+						.addComponent(notificationweidaka))
+					.addGap(5))
+		);
+		gl_panelweidaka.setVerticalGroup(
+			gl_panelweidaka.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panelweidaka.createSequentialGroup()
+					.addGap(5)
+					.addComponent(notificationweidaka)
+					.addGap(5)
+					.addComponent(reasonsexplanation, GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+					.addGap(5))
+		);
+		panelweidaka.setLayout(gl_panelweidaka);
+
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panelweidaka, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addComponent(submitvacation, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addComponent(panelreason, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
+					.addGap(10))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(paneltime, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(15)
+					.addComponent(panelreason, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(15)
+					.addComponent(paneltime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(15)
+					.addComponent(panelweidaka, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+					.addGap(15)
+					.addComponent(submitvacation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(15))
+		);
 		vacationreasons = new JComboBox<String>();
 		vacationreasons.setPreferredSize(new Dimension(32, 40));
-		vacationreasons.setFont(new Font("∫⁄ÃÂ", Font.BOLD, 18));
-		vacationreasons.setModel(new DefaultComboBoxModel<String>(reasonsliStrings));
-		frame.getContentPane().add(vacationreasons, BorderLayout.NORTH);
+		vacationreasons.setFont(new Font("Èªë‰Ωì", Font.BOLD, 18));
+		vacationreasons.setModel(new DefaultComboBoxModel(new String[] {"\u6362\u4F11", "\u5E74\u4F11", "\u4E8B\u5047", "\u4E27\u5047", "\u4EA7\u5047", "\u966A\u62A4\u5047", "\u672A\u6253\u5361"}));
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new GridLayout(4, 1, 0, 0));
+		JLabel notificationreason = new JLabel("\u539F\u56E0\u9009\u62E9\uFF1A");
+		GroupLayout gl_panelreason = new GroupLayout(panelreason);
+		gl_panelreason.setHorizontalGroup(
+			gl_panelreason.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelreason.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panelreason.createParallelGroup(Alignment.LEADING)
+						.addComponent(vacationreasons, 0, 157, Short.MAX_VALUE)
+						.addComponent(notificationreason))
+					.addGap(5))
+		);
+		gl_panelreason.setVerticalGroup(
+			gl_panelreason.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panelreason.createSequentialGroup()
+					.addGap(5)
+					.addComponent(notificationreason)
+					.addGap(5)
+					.addComponent(vacationreasons, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addGap(5))
+		);
+		panelreason.setLayout(gl_panelreason);
 		
-		JCheckBox morningnocheck = new JCheckBox("…œŒÁŒ¥¥Ú");
-		morningnocheck.setBackground(new Color(245, 245, 245));
-		panel.add(morningnocheck);
-		morningnocheck.setFont(new Font("∫⁄ÃÂ", Font.PLAIN, 16));
-		morningnocheck.setHorizontalAlignment(SwingConstants.CENTER);
-				
-		JCheckBox afternoonnocheck = new JCheckBox("œ¬ŒÁŒ¥¥Ú");
-		afternoonnocheck.setBackground(new Color(245, 245, 245));
-		panel.add(afternoonnocheck);
-		afternoonnocheck.setFont(new Font("∫⁄ÃÂ", Font.PLAIN, 16));
-		afternoonnocheck.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		JCheckBox wholedaynoclear = new JCheckBox("»´ÃÏŒ¥¥Ú");
-		wholedaynoclear.setHorizontalAlignment(SwingConstants.CENTER);
-		wholedaynoclear.setFont(new Font("∫⁄ÃÂ", Font.PLAIN, 16));
-		wholedaynoclear.setBackground(new Color(245, 245, 245));
-		panel.add(wholedaynoclear);
-		
-		reasonsexplanation = new TextField();
-		reasonsexplanation.setText("\u8BF7\u8F93\u5165\u672A\u6253\u5361\u539F\u56E0");
-		reasonsexplanation.setFont(new Font("Œ¢»Ì—≈∫⁄", Font.BOLD, 16));
-		panel.add(reasonsexplanation);
-		
-		ButtonGroup mygourpButtonGroup = new ButtonGroup();
-		mygourpButtonGroup.add(morningnocheck);
-		mygourpButtonGroup.add(afternoonnocheck);
-		mygourpButtonGroup.add(wholedaynoclear);
-		
-		JButton submitvacation = new JButton("Ã·Ωª");
-		submitvacation.setPreferredSize(new Dimension(61, 40));
-		frame.getContentPane().add(submitvacation, BorderLayout.SOUTH);
-				
-		nagativeTextfield();
-				
 		vacationreasons.addItemListener(new ItemListener() {
 			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				
-				String reasonsString = (String)vacationreasons.getSelectedItem();
-				
-				if (reasonsString.equals("Œ¥¥Úø®Àµ√˜")) {
-					
+		
+		String reasonsString = (String)vacationreasons.getSelectedItem();
+		
+		if (reasonsString.equals("Êú™ÊâìÂç°ËØ¥Êòé")) {
+			
                     activeTextfield();
-					
-					
-				}
-				else {
-					
-					nagativeTextfield();
+			
+			
+		}
+		else {
+			
+			nagativeTextfield();
 
-					
-				}				
+			
+		}				
 			}
 		});
+		frame.getContentPane().setLayout(groupLayout);
+				
+		nagativeTextfield();
 			
 		
 		
@@ -178,24 +284,24 @@ public class VacationWindows {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 													
-					if (morningnocheck.isSelected()&&!afternoonnocheck.isSelected()) 
+					if (morningnocheck_1.isSelected()&&!afternoonnocheck.isSelected()) 
 					{					
 					 
-						   setdata("…œŒÁŒ¥¥Ú",reasonsexplanation.getText());
+						   setdata("‰∏äÂçàÊú™Êâì",reasonsexplanation.getText());
 						   noinformationsubmit = false;
 						 						 						 
 					}
 						
-					else if (!morningnocheck.isSelected()&&afternoonnocheck.isSelected()) 
+					else if (!morningnocheck_1.isSelected()&&afternoonnocheck.isSelected()) 
 					{					
-							setdata("œ¬ŒÁŒ¥¥Ú",reasonsexplanation.getText());
+							setdata("‰∏ãÂçàÊú™Êâì",reasonsexplanation.getText());
 							noinformationsubmit = false;
 
 					}
 						
 					else if(wholedaynoclear.isSelected())
 					{					
-						    setdata("»´ÃÏŒ¥¥Ú",reasonsexplanation.getText());
+						    setdata("ÂÖ®Â§©Êú™Êâì",reasonsexplanation.getText());
 						    noinformationsubmit = false;
 
 					}
@@ -242,7 +348,7 @@ public class VacationWindows {
 		}
 		 
 		 
-		 System.out.println(nameString+"–¥»ÎºŸ∆⁄–≈œ¢ÕÍ≥…");
+		 System.out.println(nameString+"ÂÜôÂÖ•ÂÅáÊúü‰ø°ÊÅØÂÆåÊàê");
 		
 	}
 	
@@ -281,11 +387,9 @@ public class VacationWindows {
 			
 		}
 		else {
-			System.out.println("id≤È—Ø¥ÌŒÛ£¨∑≈∆˙ÃÌº”»À‘±–≈œ¢");
+			System.out.println("idÊü•ËØ¢ÈîôËØØÔºåÊîæÂºÉÊ∑ªÂä†‰∫∫Âëò‰ø°ÊÅØ");
 		}
 		
 		
 	}
-	
-	
 }

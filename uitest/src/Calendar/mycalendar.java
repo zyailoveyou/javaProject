@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class Mycalendar  {
 	
-	  //³öÊÂÄê·İºÍÔÂ·İ ÔÂ·İÉÙ1,calendarÀàµÄÌØµã
+
 	  int year=2005;
 	  int month=1;
 	  
@@ -44,20 +44,20 @@ public class Mycalendar  {
 		   }
           week =week-1;               
           int day=0;              
-          //ÅĞ¶Ï´óÔÂ·İ  
+    
           if(month==1||month==3||month==5||month==7 
             ||month==8||month==10||month==12)   
           {   
               day=31;   
           }   
             
-          //ÅĞ¶ÏĞ¡ÔÂ  
+
           if(month==4||month==6||month==9||month==11)   
           {   
               day=30;   
           }   
             
-          //ÅĞ¶ÏÆ½ÄêÓëÈòÄê  
+
           if(month==2)   
           {   
               if(((year%4==0)&&(year%100!=0))||(year%400==0))   
@@ -77,7 +77,7 @@ public class Mycalendar  {
                   n++;   
           } 
                     
-          System.out.println("³É¹¦´´½¨ÁËÒ»¸ö×Ô¶¨ÒåÈÕÀú");
+          System.out.println("åˆ›å»ºäº†ä¸€ä¸ªæ—¥å†");
           
           return a;   
        }  

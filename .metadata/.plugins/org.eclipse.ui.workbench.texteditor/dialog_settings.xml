@@ -6,29 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="ShowDialog" key="selection"/>
+		<item value="Icon" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="ShowDialog"/>
-			<item value="iterator"/>
-			<item value="grouplayout"/>
-			<item value="setlocation"/>
-			<item value="regis"/>
-			<item value="register"/>
-			<item value="tDefaultCloseOperation"/>
-			<item value="setda"/>
+			<item value="icon"/>
+			<item value="�"/>
 			<item value="show"/>
+			<item value="informationgroup"/>
+			<item value="PLAIN"/>
+			<item value="dialog"/>
+			<item value="mylabe"/>
+			<item value="detailstype"/>
+			<item value="mylabel"/>
+			<item value="new String[]"/>
+			<item value="vacationorextrawork"/>
+			<item value="��"/>
+			<item value="黑体"/>
 			<item value="submit"/>
-			<item value="group"/>
-			<item value="getframe"/>
-			<item value="download"/>
-			<item value="nowline"/>
-			<item value="异常出勤原因"/>
+			<item value="submitmode"/>
 		</list>
 		<list key="replacehistory">
+			<item value="download"/>
 			<item value="getsubmitdatagroup"/>
 			<item value="s"/>
 			<item value="submitdatagroup"/>
@@ -47,7 +48,7 @@
 		<item value="278" key="DIALOG_WIDTH"/>
 		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
 		<item value="327" key="DIALOG_HEIGHT"/>
-		<item value="1030" key="DIALOG_X_ORIGIN"/>
-		<item value="424" key="DIALOG_Y_ORIGIN"/>
+		<item value="1144" key="DIALOG_X_ORIGIN"/>
+		<item value="350" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

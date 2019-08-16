@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.ParameterMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,8 @@ import javax.swing.JOptionPane;
 
 import excel.wrtieExcel;
 import jxl.write.WriteException;
+import tcp.ListInformation;
+import user.User;
 import vacation_extrawork.Dayinformation;
 import vacation_extrawork.OneManData;
 
@@ -70,7 +73,7 @@ public class DataBaseOperation {
 						
 		}
 		else {
-			System.out.println("¡¥Ω”√ª”–Ω®¡¢≥…π¶");
+			System.out.println("ÈìæÊé•Ê≤°ÊúâÂª∫Á´ãÊàêÂäü");
 			DisposeDataBaseLink();
 			return false;
 		}
@@ -125,7 +128,7 @@ public class DataBaseOperation {
 									
 		}
 		else {
-			System.out.println("¡¥Ω”√ª”–Ω®¡¢≥…π¶");
+			System.out.println("ÈìæÊé•Ê≤°ÊúâÂª∫Á´ãÊàêÂäü");
 			DisposeDataBaseLink();	
 			return false;
 		}
@@ -199,191 +202,189 @@ public class DataBaseOperation {
 	}
 	
 	
-	public void selectfrom_DATA_VACATIONANDOVERWORK_downloadchoose(String Rangename,String rangetype,Date[] period) throws ClassNotFoundException, SQLException, WriteException, IOException {
+	public ListInformation Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName(String name,String reason,String reasondetail,Date[] period) throws ClassNotFoundException, SQLException {
 		
         LinkToDataBase();
         
 		if (connect!=null) {
 			
-			String alltypesqlString ="select * from DATA_VACATIONANDOVERWORK where Time>= ? and Time<= ?and name = ? and reasons = ?";
-			String allmansqlString ="select * from DATA_VACATIONANDOVERWORK where Time>= ? and Time<= ? and reasons = ?";	
-			String allreasonsqlString ="select * from DATA_VACATIONANDOVERWORK where Time>= ? and Time<= ? and name = ?";	
-			String all ="select * from DATA_VACATIONANDOVERWORK where Time>= ? and Time<= ? ";	
-					
-			if (Rangename.equals("À˘”–»À")&&rangetype.equals("»´≤ø«¯º‰")) {
+			String sqlString ="select * from DATA_VACATIONANDOVERWORK where Time>= ? and Time<= ?and name = ?";
+			
+			if (!reason.equals("ÂÖ®ÈÉ®")) {
 				
-				PreparedStatement pre = connect.prepareStatement(all);
-				pre.setDate(1, GetTheSmallerTimeInperiod(period));
-				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				ResultSet myresultSet = pre.executeQuery();
-				if (!myresultSet.isBeforeFirst()) {
-					
-					ShowDialog("—°∂®µƒ∑∂Œßƒ⁄√ª”– ˝æ›");
-					return;
-				}
-				wrtieExcel wrtieExcel = new wrtieExcel("“Ï≥£øº«⁄µΩ¥¶ ˝æ›.xls");
-				while (myresultSet.next()) {
-					String NAME = myresultSet.getString("NAME");
-					int IDint = myresultSet.getInt("ID");
-					String ID= String.valueOf(IDint);
-					Date TIMEdate = myresultSet.getDate("TIME");
-					String Time = String.valueOf(TIMEdate);
-					String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
-					String REASONS = myresultSet.getString("REASONS");
-					String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
-					String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
-					String HANDLEOVERTIMEWORK = myresultSet.getString("HANDLEOVERTIMEWORK");					
-					ArrayList<String> datagroup = new ArrayList<String>();
-					datagroup.add(NAME);
-					datagroup.add(ID);
-					datagroup.add(Time);
-					datagroup.add(ACTUALTIMENOCLEAR);
-					datagroup.add(REASONS);
-					datagroup.add(REASONS_DETAILS);
-					datagroup.add(REASONS_EXPLANATION);
-					datagroup.add(HANDLEOVERTIMEWORK);
-					
-					wrtieExcel.writeline(datagroup);															
-				}
-				wrtieExcel.writedone();
+				sqlString += "and reasons = ?";
+			}
+			
+			if (!reasondetail.equals("ÂÖ®ÈÉ®")) {
+				
+				sqlString += "and REASONS_DETAILS = ?";
 			}
 			
 			
-            else if (!Rangename.equals("À˘”–»À")&&rangetype.equals("»´≤ø«¯º‰")) {
+			PreparedStatement pre = connect.prepareStatement(sqlString);
+			ParameterMetaData parameterMetaData = null;
+			parameterMetaData = pre.getParameterMetaData();
+			int count = parameterMetaData.getParameterCount();
+			System.out.println(count);
+			
+			if (count == 3) {
 				
-				PreparedStatement pre = connect.prepareStatement(allreasonsqlString);
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, Rangename);
+				pre.setString(3, name);
+				
 				ResultSet myresultSet = pre.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
 					
-					ShowDialog("—°∂®µƒ∑∂Œßƒ⁄√ª”– ˝æ›");
-					return;
+					ShowDialog("ÈÄâÂÆöÁöÑËåÉÂõ¥ÂÜÖÊ≤°ÊúâÊï∞ÊçÆ");
+					return null;
 				}
-				wrtieExcel wrtieExcel = new wrtieExcel("“Ï≥£øº«⁄µΩ¥¶ ˝æ›.xls");
+				
+				ListInformation informationgroup = new ListInformation();
 				while (myresultSet.next()) {
-					String NAME = myresultSet.getString("NAME");
-					int IDint = myresultSet.getInt("ID");
-					String ID= String.valueOf(IDint);
-					Date TIMEdate = myresultSet.getDate("TIME");
-					String Time = String.valueOf(TIMEdate);
-					String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
-					String REASONS = myresultSet.getString("REASONS");
-					String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
-					String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
-					String HANDLEOVERTIMEWORK = myresultSet.getString("HANDLEOVERTIMEWORK");					
-					ArrayList<String> datagroup = new ArrayList<String>();
-					datagroup.add(NAME);
-					datagroup.add(ID);
-					datagroup.add(Time);
-					datagroup.add(ACTUALTIMENOCLEAR);
-					datagroup.add(REASONS);
-					datagroup.add(REASONS_DETAILS);
-					datagroup.add(REASONS_EXPLANATION);
-					datagroup.add(HANDLEOVERTIMEWORK);
 					
-					wrtieExcel.writeline(datagroup);															
+				String NAME = myresultSet.getString("NAME");
+				int IDint = myresultSet.getInt("ID");
+				String ID= String.valueOf(IDint);
+				Date TIMEdate = myresultSet.getDate("TIME");
+				String Time = String.valueOf(TIMEdate);
+				String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
+				String REASONS = myresultSet.getString("REASONS");
+				String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
+				String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
+				String HANDLEOVERTIMEWORK = myresultSet.getString("HANDLEOVERTIMEWORK");
+				
+				ArrayList<String> datagroup = new ArrayList<String>();
+				datagroup.add(NAME);
+				datagroup.add(ID);
+				datagroup.add(Time);
+				datagroup.add(ACTUALTIMENOCLEAR);
+				datagroup.add(REASONS);
+				datagroup.add(REASONS_DETAILS);
+				datagroup.add(REASONS_EXPLANATION);
+				datagroup.add(HANDLEOVERTIMEWORK);
+								
+				informationgroup.getLineinformationgroup().add(datagroup);
+				
 				}
-				wrtieExcel.writedone();
+				DisposeDataBaseLink();
+				return informationgroup;
 			}
 			
-			
-           else if (Rangename.equals("À˘”–»À")&&!rangetype.equals("»´≤ø«¯º‰")) {
+			if (count == 4) {
 				
-				PreparedStatement pre = connect.prepareStatement(allmansqlString);
+				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, rangetype);
+				pre.setString(3, name);
+				pre.setString(4, reason);
+				
 				ResultSet myresultSet = pre.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
 					
-					ShowDialog("—°∂®µƒ∑∂Œßƒ⁄√ª”– ˝æ›");
-					return;
+					ShowDialog("ÈÄâÂÆöÁöÑËåÉÂõ¥ÂÜÖÊ≤°ÊúâÊï∞ÊçÆ");
+					return null;
 				}
-				wrtieExcel wrtieExcel = new wrtieExcel("“Ï≥£øº«⁄µΩ¥¶ ˝æ›.xls");
+				
+				ListInformation informationgroup = new ListInformation();
 				while (myresultSet.next()) {
-					String NAME = myresultSet.getString("NAME");
-					int IDint = myresultSet.getInt("ID");
-					String ID= String.valueOf(IDint);
-					Date TIMEdate = myresultSet.getDate("TIME");
-					String Time = String.valueOf(TIMEdate);
-					String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
-					String REASONS = myresultSet.getString("REASONS");
-					String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
-					String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
-					String HANDLEOVERTIMEWORK = myresultSet.getString("HANDLEOVERTIMEWORK");					
-					ArrayList<String> datagroup = new ArrayList<String>();
-					datagroup.add(NAME);
-					datagroup.add(ID);
-					datagroup.add(Time);
-					datagroup.add(ACTUALTIMENOCLEAR);
-					datagroup.add(REASONS);
-					datagroup.add(REASONS_DETAILS);
-					datagroup.add(REASONS_EXPLANATION);
-					datagroup.add(HANDLEOVERTIMEWORK);					
-					wrtieExcel.writeline(datagroup);															
+				String NAME = myresultSet.getString("NAME");
+				int IDint = myresultSet.getInt("ID");
+				String ID= String.valueOf(IDint);
+				Date TIMEdate = myresultSet.getDate("TIME");
+				String Time = String.valueOf(TIMEdate);
+				String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
+				String REASONS = myresultSet.getString("REASONS");
+				String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
+				String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
+				String HANDLEOVERTIMEWORK = myresultSet.getString("HANDLEOVERTIMEWORK");
+				
+				ArrayList<String> datagroup = new ArrayList<String>();
+				datagroup.add(NAME);
+				datagroup.add(ID);
+				datagroup.add(Time);
+				datagroup.add(ACTUALTIMENOCLEAR);
+				datagroup.add(REASONS);
+				datagroup.add(REASONS_DETAILS);
+				datagroup.add(REASONS_EXPLANATION);
+				datagroup.add(HANDLEOVERTIMEWORK);
+								
+				informationgroup.getLineinformationgroup().add(datagroup);
+				
 				}
-				wrtieExcel.writedone();
+				DisposeDataBaseLink();
+				return informationgroup;
+				
 			}
-						
-			else {
+			
+	        if (count == 5) {
 				
-				PreparedStatement pre = connect.prepareStatement(alltypesqlString);
+				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, Rangename);
-				pre.setString(4, rangetype);
-				ResultSet myresultSet = pre.executeQuery();
+				pre.setString(3, name);
+				pre.setString(4, reason);
+				pre.setString(5, reasondetail);
 				
+				ResultSet myresultSet = pre.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
 					
-					ShowDialog("—°∂®µƒ∑∂Œßƒ⁄√ª”– ˝æ›");
-					return;
+					ShowDialog("ÈÄâÂÆöÁöÑËåÉÂõ¥ÂÜÖÊ≤°ÊúâÊï∞ÊçÆ");
+					return null;
 				}
-				wrtieExcel wrtieExcel = new wrtieExcel("“Ï≥£øº«⁄µΩ¥¶ ˝æ›.xls");
+				
+				ListInformation informationgroup = new ListInformation();
 				while (myresultSet.next()) {
-					String NAME = myresultSet.getString("NAME");
-					int IDint = myresultSet.getInt("ID");
-					String ID= String.valueOf(IDint);
-					Date TIMEdate = myresultSet.getDate("TIME");
-					String Time = String.valueOf(TIMEdate);
-					String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
-					String REASONS = myresultSet.getString("REASONS");
-					String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
-					String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
-					String HANDLEOVERTIMEWORK = myresultSet.getString("HANDLEOVERTIMEWORK");					
-					ArrayList<String> datagroup = new ArrayList<String>();
-					datagroup.add(NAME);
-					datagroup.add(ID);
-					datagroup.add(Time);
-					datagroup.add(ACTUALTIMENOCLEAR);
-					datagroup.add(REASONS);
-					datagroup.add(REASONS_DETAILS);
-					datagroup.add(REASONS_EXPLANATION);
-					datagroup.add(HANDLEOVERTIMEWORK);					
-					wrtieExcel.writeline(datagroup);															
+				String NAME = myresultSet.getString("NAME");
+				int IDint = myresultSet.getInt("ID");
+				String ID= String.valueOf(IDint);
+				Date TIMEdate = myresultSet.getDate("TIME");
+				String Time = String.valueOf(TIMEdate);
+				String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
+				String REASONS = myresultSet.getString("REASONS");
+				String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
+				String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
+				String HANDLEOVERTIMEWORK = myresultSet.getString("HANDLEOVERTIMEWORK");
+				
+				ArrayList<String> datagroup = new ArrayList<String>();
+				datagroup.add(NAME);
+				datagroup.add(ID);
+				datagroup.add(Time);
+				datagroup.add(ACTUALTIMENOCLEAR);
+				datagroup.add(REASONS);
+				datagroup.add(REASONS_DETAILS);
+				datagroup.add(REASONS_EXPLANATION);
+				datagroup.add(HANDLEOVERTIMEWORK);
+								
+				informationgroup.getLineinformationgroup().add(datagroup);
+				
 				}
-				wrtieExcel.writedone();								
-			}														
+				DisposeDataBaseLink();
+				return informationgroup;
+				
+			}
+			ShowDialog("Á®ãÂ∫èÂá∫ÈîôËÅîÁ≥ªÁÆ°ÁêÜÂëò");
+			return null;
 		}
 		DisposeDataBaseLink();
+		return null;
 				
 	}
 	
-	public boolean InsertIntoOneLine_DATA_ACCOUNT(String username,String password,String workname,int id) throws ClassNotFoundException, SQLException {
+	public boolean InsertIntoOneLine_DATA_ACCOUNT(String username,String password,String workname,int id,String department) throws ClassNotFoundException, SQLException {
 		
 	       LinkToDataBase();
 	        
 			if (connect!=null) {
 				
-				String onelineSQL = "INSERT INTO ACCOUNT (username,password,workername,id) VALUES (?,?,?,?)";
+				String onelineSQL = "INSERT INTO ACCOUNT (username,password,WOKERNAME,id,DEPARTMENT) VALUES (?,?,?,?,?)";
 				PreparedStatement pre = connect.prepareStatement(onelineSQL);
 				
 				pre.setString(1, username);
 				pre.setString(2, password);
 				pre.setString(3, workname);
-				pre.setInt(4, id);				
+				pre.setInt(4, id);
+				pre.setString(5, department);
 				int result = pre.executeUpdate();
 				
 				
@@ -418,7 +419,7 @@ public class DataBaseOperation {
 			if (!myresultSet.isBeforeFirst()) {
 				
 				Map<ArrayList<String>, String> resutMap = new HashMap<ArrayList<String>, String>();
-				resutMap.put(new ArrayList<String>(), " ˝æ›ø‚÷–√ª”–∂¡»°µΩ»Œ∫Œ’ ∫≈ ˝æ›£¨«Î¡™œµπ‹¿Ì‘±");	
+				resutMap.put(new ArrayList<String>(), "Êï∞ÊçÆÂ∫ì‰∏≠Ê≤°ÊúâËØªÂèñÂà∞‰ªª‰ΩïÂ∏êÂè∑Êï∞ÊçÆÔºåËØ∑ËÅîÁ≥ªÁÆ°ÁêÜÂëò");	
 				DisposeDataBaseLink();
 				return resutMap;
 				
@@ -431,7 +432,14 @@ public class DataBaseOperation {
 				String wokernameString= myresultSet.getString("WOKERNAME");
 				String idString= myresultSet.getString("id");
 				String departmentString= myresultSet.getString("DEPARTMENT");
-
+				String duty = myresultSet.getString("DUTY");
+				String power_level = myresultSet.getString("POWER_LEVEL");
+				String whether_manager = myresultSet.getString("WHETHERMANAGER");
+				String level_shape = myresultSet.getString("LEVEL_SHAPE");
+				String VACATION_APPROVAL_NORMAL = myresultSet.getString("VACATION_APPROVAL_NORMAL");
+				String VACATION_APPROVAL_HIGHER = myresultSet.getString("VACATION_APPROVAL_HIGHER");
+				String ASSESS_APPROVAL_NORMAL = myresultSet.getString("ASSESS_APPROVAL_NORMAL");
+				String ASSESS_APPROVAL_HIGHER = myresultSet.getString("ASSESS_APPROVAL_HIGHER");
 												
 				if (usenameString.equals(username)) {
 					
@@ -444,7 +452,15 @@ public class DataBaseOperation {
 						userinformationArrayList.add(passwordString);
 						userinformationArrayList.add(idString);
 						userinformationArrayList.add(departmentString);
-						resutMap.put(userinformationArrayList, "≥…π¶µ«¬º");						
+						userinformationArrayList.add(duty);
+						userinformationArrayList.add(power_level);
+						userinformationArrayList.add(whether_manager);
+						userinformationArrayList.add(level_shape);
+						userinformationArrayList.add(VACATION_APPROVAL_NORMAL);
+						userinformationArrayList.add(VACATION_APPROVAL_HIGHER);
+						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL);
+						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER);
+						resutMap.put(userinformationArrayList, "ÊàêÂäüÁôªÂΩï");						
 						DisposeDataBaseLink();
 						return resutMap;
 					}
@@ -453,18 +469,127 @@ public class DataBaseOperation {
 			}
 			
 			Map<ArrayList<String>, String> resutMap = new HashMap<ArrayList<String>, String>();
-			resutMap.put(new ArrayList<String>(), "’ ∫≈ªÚ’ﬂ√‹¬Î¥ÌŒÛ");
+			resutMap.put(new ArrayList<String>(), "Â∏êÂè∑ÊàñËÄÖÂØÜÁ†ÅÈîôËØØ");
 			DisposeDataBaseLink();
 			return resutMap;
 									
 		}
 		
 		Map<ArrayList<String>, String> resutMap = new HashMap<ArrayList<String>, String>();
-		resutMap.put(new ArrayList<String>(), " ˝æ›ø‚¡¨Ω”¥ÌŒÛ");		
+		resutMap.put(new ArrayList<String>(), "Êï∞ÊçÆÂ∫ìËøûÊé•ÈîôËØØ");		
 		DisposeDataBaseLink();
 		return resutMap;
 		
 	}
+	
+	public ListInformation Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(User user) throws ClassNotFoundException, SQLException {
+		
+       LinkToDataBase();
+		
+		if (connect!=null) {
+						
+			int VACATION_APPROVAL_NORMAL = Integer.valueOf(user.getVACATION_APPROVAL_NORMAL());
+			int VACATION_APPROVAL_HIGHER = Integer.valueOf(user.getVACATION_APPROVAL_HIGHER());
+			String level_shape = user.getLevel_shape();
+						
+			if (VACATION_APPROVAL_NORMAL ==1) {
+				
+				String SelectSQL = "SELECT * FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED = 0 and level_shape LIKE";
+				SelectSQL += "'"+user.getLevel_shape()+"."+"%"+"'";			
+				PreparedStatement pre = connect.prepareStatement(SelectSQL);
+				System.out.println(SelectSQL);
+				ResultSet myresultSet = pre.executeQuery();
+				
+                if (!myresultSet.isBeforeFirst()) {
+                	
+    				ShowDialog("ÊöÇÊó∂Ê≤°ÊúâËØªÂèñÂà∞ÈúÄË¶ÅÂÆ°ÊâπÁöÑÊï∞ÊçÆ"); 
+					return null;
+				}
+                
+                ListInformation informationgroup = new ListInformation();
+                while (myresultSet.next()) {
+					
+                	String NAME = myresultSet.getString("NAME");
+                	Date time = myresultSet.getDate("time");
+                	String timeString = time.toString();
+                	String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
+                	String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
+                	String DEPARTMENT= myresultSet.getString("DEPARTMENT");
+                	
+                	ArrayList<String> arrayList = new ArrayList<String>();
+                	arrayList.add(NAME);
+                	arrayList.add(timeString);
+                	arrayList.add(ACTUALTIMENOCLEAR);
+                	arrayList.add(REASONS_DETAILS);
+                	arrayList.add(DEPARTMENT);
+                	           	
+                	informationgroup.getLineinformationgroup().add(arrayList);
+                						
+				}
+				DisposeDataBaseLink();
+				return informationgroup;
+				
+			}
+			
+			
+					
+			
+		}
+		
+		DisposeDataBaseLink();
+		return null;
+		
+	}
+	
+	
+	public void Update_VACATION_WORK_NORMOL_APPROVAL_state(ListInformation datagroup) throws SQLException, ClassNotFoundException {
+		
+		  LinkToDataBase();
+			
+		  
+			if (connect!=null) {
+				
+				//Êõ¥Êñ∞Ë°®ÂçïËØ∑ÂÅáÁä∂ÊÄÅËÆ∞Âè∑
+				String SQL1 = "UPDATE VACATION_NAPPROVAL SET VACATION_NORMAL_PASSED = 1 WHERE name = ? and ACTUALTIMENOCLEAR = ? and to_char(time,'yyyy-mm-dd')=? ";		
+				PreparedStatement pre = connect.prepareStatement(SQL1);
+				
+				
+				for (ArrayList<String> data : datagroup.getLineinformationgroup()) {
+					
+					pre.setString(1, data.get(0));
+					pre.setString(2, data.get(1));
+					pre.setString(3, data.get(2));					
+					pre.addBatch();
+					
+				}
+				
+				int[] myresultSet = pre.executeBatch();
+				
+				//ËΩ¨ÁßªÊï∞ÊçÆ
+				
+				String SQL2 = "insert into DATA_VACATIONANDOVERWORK(name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK) select name, id ,time ,ACTUALTIMENOCLEAR, REASONS, REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK from VACATION_NAPPROVAL where VACATION_NORMAL_PASSED = 1";	
+				PreparedStatement pre2 = connect.prepareStatement(SQL2);
+				pre2.executeUpdate();
+				
+				//
+				
+				//Âà†Èô§ÂéüÊï∞ÊçÆ
+				String SQL3 = "DELETE FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED  = 1";	
+				PreparedStatement pre3 = connect.prepareStatement(SQL3);
+				pre3.executeUpdate();
+				
+				ShowDialog("ÂÆ°ÊâπÊèê‰∫§ÊàêÂäü");
+			}
+		
+		DisposeDataBaseLink();
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 		
@@ -532,7 +657,7 @@ public class DataBaseOperation {
 	
 	private void ShowDialog(String word) {
 		
-		JOptionPane.showMessageDialog(null,word, "¥ÌŒÛÃ· æ", JOptionPane.ERROR_MESSAGE); 
+		JOptionPane.showMessageDialog(null,word, "ÊèêÁ§∫", JOptionPane.INFORMATION_MESSAGE); 
 				
 	}
 

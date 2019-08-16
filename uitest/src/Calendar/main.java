@@ -1,21 +1,28 @@
 package Calendar;
 
-import java.awt.EventQueue;
-import java.util.ArrayList;
-import java.util.Iterator;
+import javax.swing.ImageIcon;
 
+import approvel.ApprovalWindows;
+import approvel.BackupApprovelWindows;
+import approvel.testwindows;
+import backup.BackupDownWindows;
 import user.LoginInWindows;
-import vacation_extrawork.Dayinformation;
 
    public class main {
 	
 	public static void main(String[] args) {
 			
+		ImageIcon icon = new ImageIcon("uitest/image/upload.png");
 			LoginInWindows window = new LoginInWindows();
 			window.getFrame().setVisible(true);
+			window.getFrame().requestFocus();
 		
-//		NewSubimitWindows newSubimitWindows = new NewSubimitWindows();
-//		newSubimitWindows.getFrame().setVisible(true);
-								
+//		ApprovalWindows testwindows = new ApprovalWindows();
+//		testwindows.getFrame().setVisible(true);
+//		
+//		BackupApprovelWindows tesBackupDownWindows = new BackupApprovelWindows();
+//		tesBackupDownWindows.getFrame().setVisible(true);
+
+										
       }
  }
