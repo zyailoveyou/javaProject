@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -41,7 +42,7 @@ public class VacationWindows {
 	private Color activeColor = new Color(255, 255, 255);
 	private Color nagativecColor =  new Color(150,150,150);
 
-	private OneManData data = new OneManData(new ArrayList<Dayinformation>());
+	private OneManData data = new OneManData(new ArrayList<Approvel_N_Dayinformation>());
 	private Mylabel label;
 	
 	private JComboBox<String> vacationreasons;
@@ -97,6 +98,8 @@ public class VacationWindows {
 		frame.setBounds(100, 100, 207, 457);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
+		ImageIcon icon55 = new ImageIcon("src/image/汇景图标.png");		
+		frame.setIconImage(icon55.getImage());
 				
 		ButtonGroup mygourpButtonGroup = new ButtonGroup();		
 		JButton submitvacation = new JButton("\u8BBE\u7F6E\u4FE1\u606F");
@@ -196,15 +199,17 @@ public class VacationWindows {
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(10)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panelweidaka, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-						.addComponent(submitvacation, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-						.addComponent(panelreason, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(panelweidaka, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addComponent(panelreason, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(33)
+							.addComponent(submitvacation, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)))
 					.addGap(10))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(paneltime, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
 					.addContainerGap())
@@ -217,7 +222,7 @@ public class VacationWindows {
 					.addGap(15)
 					.addComponent(paneltime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(15)
-					.addComponent(panelweidaka, GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+					.addComponent(panelweidaka, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
 					.addGap(15)
 					.addComponent(submitvacation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(15))
@@ -225,7 +230,7 @@ public class VacationWindows {
 		vacationreasons = new JComboBox<String>();
 		vacationreasons.setPreferredSize(new Dimension(32, 40));
 		vacationreasons.setFont(new Font("黑体", Font.BOLD, 18));
-		vacationreasons.setModel(new DefaultComboBoxModel(new String[] {"\u6362\u4F11", "\u5E74\u4F11", "\u4E8B\u5047", "\u4E27\u5047", "\u4EA7\u5047", "\u966A\u62A4\u5047", "\u672A\u6253\u5361"}));
+		vacationreasons.setModel(new DefaultComboBoxModel(new String[] {"换休", "年休", "事假", "丧假", "产假", "病假", "陪护假", "未打卡"}));
 		
 		JLabel notificationreason = new JLabel("\u539F\u56E0\u9009\u62E9\uFF1A");
 		GroupLayout gl_panelreason = new GroupLayout(panelreason);
@@ -256,7 +261,7 @@ public class VacationWindows {
 		
 		String reasonsString = (String)vacationreasons.getSelectedItem();
 		
-		if (reasonsString.equals("未打卡说明")) {
+		if (reasonsString.equals("未打卡")) {
 			
                     activeTextfield();
 			
@@ -323,7 +328,7 @@ public class VacationWindows {
 	public void setdata(String Actualtimenoclear,String Explainreason) {
 				 
 		 String nameString = getlabel().getNewSubimitWindows().getUser().getCheckname();	 
-		 Dayinformation information = new Dayinformation();
+		 Approvel_N_Dayinformation information = new Approvel_N_Dayinformation();
 		 String catogoryString = getlabel().getNewSubimitWindows().getVacationorExtrawork();
 		 information.setreasons(catogoryString);
 		 String vacationreasonString = (String)vacationreasons.getSelectedItem();
@@ -338,11 +343,18 @@ public class VacationWindows {
 		 information.sethandleovertimework(null);
 		 
 		 
+		 int vnpassed = 0;
+		 information.setVACATION_NORMAL_PASSED(vnpassed);
+		 String level_shape = getlabel().getCal().getUser().getLevel_shape();
+		 information.setLEVEL_SHAPE(level_shape);
+		 information.setDEPARTMENT(getlabel().getCal().getUser().getDepartmentString());
+
+		 
 		 CheckTheManExist(nameString);
 		 
 		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
 			if (nameString.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
-				getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getDayinformation().add(information);				
+				getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getN_dayinformation().add(information);				
 			}
 
 		}
@@ -375,7 +387,7 @@ public class VacationWindows {
 	
 	private void CreateOneManData(String name) {
 		
-		OneManData OnePersondata = new OneManData(new ArrayList<Dayinformation>());
+		OneManData OnePersondata = new OneManData(new ArrayList<Approvel_N_Dayinformation>());
 		OnePersondata.setName(name);
 		int id = -1;	
 		id = Integer.valueOf(getlabel().getNewSubimitWindows().getUser().getId());

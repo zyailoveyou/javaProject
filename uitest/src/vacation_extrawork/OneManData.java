@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public  class OneManData {
 	
 
-	private ArrayList<Dayinformation> dayinformation = new ArrayList<Dayinformation>();
+	private ArrayList<Approvel_N_Dayinformation> N_dayinformation = new ArrayList<Approvel_N_Dayinformation>();
 	private String name = null;
 	private int id;
 	
@@ -18,16 +18,16 @@ public  class OneManData {
 		this.id = id;
 	}
 
-	public OneManData(ArrayList<Dayinformation> info) {		
-		this.dayinformation = info;				
+	public OneManData(ArrayList<Approvel_N_Dayinformation> info) {		
+		this.N_dayinformation = info;				
 	}
 		
-	public ArrayList<Dayinformation> getDayinformation() {
-		return dayinformation;
+	public ArrayList<Approvel_N_Dayinformation> getN_dayinformation() {
+		return N_dayinformation;
 	}
 
-	public void setDayinformation(ArrayList<Dayinformation> dayinformation) {
-		this.dayinformation = dayinformation;
+	public void setN_dayinformation(ArrayList<Approvel_N_Dayinformation> dayinformation) {
+		this.N_dayinformation = dayinformation;
 	}
 
 	public String getName() {
@@ -38,7 +38,5 @@ public  class OneManData {
 		this.name = name;
 	}
 	
-
-
 
 }

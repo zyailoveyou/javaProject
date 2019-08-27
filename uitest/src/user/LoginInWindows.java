@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.GridBagLayout;
 import javax.swing.JTextPane;
 import java.awt.GridBagConstraints;
@@ -19,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -26,6 +28,7 @@ import Calendar.MainWindows;
 import MyThread.MyThread;
 import backup.BackupSubmitWindows;
 import backup.CalendarWindows;
+import implement.RoundBorder;
 import ojdbc.DataBaseOperation;
 
 import java.awt.event.ActionListener;
@@ -40,16 +43,19 @@ import java.util.Map;
 import java.util.Set;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
+
+import java.awt.Color;
 
 public class LoginInWindows {
 
-	private JFrame frame;
+	private JFrame frmHjassesssystemAlpha;
 	private JTextField usenametextfiled;
 	private JPasswordField passwordtextfiled;
 
 	
 	public JFrame getFrame() {
-		return frame;
+		return frmHjassesssystemAlpha;
 	}
 	
 	public LoginInWindows() {
@@ -57,119 +63,126 @@ public class LoginInWindows {
 	}
 
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setTitle("\u767B\u5F55\u7A97\u53E3");
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		frame.setLocationRelativeTo(null);
-		JPanel northfillin = new JPanel();
-		FlowLayout fl_northfillin = (FlowLayout) northfillin.getLayout();
-		fl_northfillin.setVgap(30);
-		fl_northfillin.setHgap(10);
-		frame.getContentPane().add(northfillin, BorderLayout.NORTH);
+		frmHjassesssystemAlpha = new JFrame();
+		frmHjassesssystemAlpha.setFont(new Font("Dialog", Font.PLAIN, 12));
+		frmHjassesssystemAlpha.setResizable(false);
+		frmHjassesssystemAlpha.setTitle("HJ_Assess_System alpha1.0");
+		frmHjassesssystemAlpha.setBounds(100, 100, 417, 300);
+		frmHjassesssystemAlpha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmHjassesssystemAlpha.setLocationRelativeTo(null);		
+		ImageIcon icon = new ImageIcon("src/image/汇景图标.png");		
+		frmHjassesssystemAlpha.setIconImage(icon.getImage());
 		
-		JPanel centerfillin = new JPanel();
-		frame.getContentPane().add(centerfillin, BorderLayout.CENTER);
-		
-		Box AccounthorizontalBox = Box.createHorizontalBox();
-		
-		JLabel usernamelabel = new JLabel("\u5E10\u53F7\uFF1A");
-		usernamelabel.setFont(new Font("黑体", Font.BOLD, 16));
-		AccounthorizontalBox.add(usernamelabel);
+		Box AccounthorizontalBox = Box.createHorizontalBox();		
+		Box PasswordhorizontalBox = Box.createHorizontalBox();		
+		JLabel usernamelabel = new JLabel("帐号");
+		usernamelabel.setForeground(Color.DARK_GRAY);
+		usernamelabel.setFont(new Font("幼圆", Font.BOLD, 16));
 		
 		usenametextfiled = new JTextField();
+		usenametextfiled.setForeground(Color.DARK_GRAY);
 		usenametextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		AccounthorizontalBox.add(usenametextfiled);
 		usenametextfiled.setColumns(10);
-		
-		Box PasswordhorizontalBox = Box.createHorizontalBox();
-		
-		JLabel passwordlable = new JLabel("\u5BC6\u7801\uFF1A");
-		passwordlable.setFont(new Font("黑体", Font.BOLD, 16));
-		PasswordhorizontalBox.add(passwordlable);
-		
-		passwordtextfiled = new JPasswordField();
-		passwordtextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		PasswordhorizontalBox.add(passwordtextfiled);
-		
-		JLabel notification = new JLabel("\u63D0\u793A\u4FE1\u606F");
-		notification.setFont(new Font("宋体", Font.PLAIN, 14));
-		GroupLayout gl_centerfillin = new GroupLayout(centerfillin);
-		gl_centerfillin.setHorizontalGroup(
-			gl_centerfillin.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_centerfillin.createSequentialGroup()
-					.addContainerGap(74, Short.MAX_VALUE)
-					.addGroup(gl_centerfillin.createParallelGroup(Alignment.LEADING)
-						.addComponent(notification)
-						.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)
-						.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE))
-					.addGap(26))
-		);
-		gl_centerfillin.setVerticalGroup(
-			gl_centerfillin.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_centerfillin.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(notification)
-					.addContainerGap(39, Short.MAX_VALUE))
-		);
-		
-		JPanel panel_1 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_1.getLayout();
-		flowLayout_3.setHgap(30);
-		PasswordhorizontalBox.add(panel_1);
-		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setHgap(30);
-		AccounthorizontalBox.add(panel);
-		centerfillin.setLayout(gl_centerfillin);
-		
-		JPanel southfillin = new JPanel();	
-		frame.getContentPane().add(southfillin, BorderLayout.SOUTH);
+		usenametextfiled.setBorder(new RoundBorder());
 		
 		JButton login = new JButton("\u767B\u5F55");
+		login.setForeground(Color.DARK_GRAY);
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		login.setFont(new Font("黑体", Font.BOLD, 16));
+		login.setFont(new Font("幼圆", Font.BOLD, 16));
 		
-		JButton register = new JButton("\u6CE8\u518C");
-		register.setFont(new Font("黑体", Font.BOLD, 16));
-		GroupLayout gl_southfillin = new GroupLayout(southfillin);
-		gl_southfillin.setHorizontalGroup(
-			gl_southfillin.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_southfillin.createSequentialGroup()
-					.addContainerGap(160, Short.MAX_VALUE)
-					.addComponent(login)
+		JButton register_1 = new JButton("\u6CE8\u518C");
+		register_1.setForeground(Color.DARK_GRAY);
+		register_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		register_1.setFont(new Font("幼圆", Font.BOLD, 16));
+		
+		JLabel passwordlable = new JLabel("密码");
+		passwordlable.setForeground(Color.DARK_GRAY);
+		passwordlable.setFont(new Font("幼圆", Font.BOLD, 16));
+		
+		passwordtextfiled = new JPasswordField();
+		passwordtextfiled.setForeground(Color.DARK_GRAY);
+		passwordtextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		passwordtextfiled.setBorder(new RoundBorder());
+		
+		JLabel imagetitle = new JLabel("");
+		
+		GroupLayout groupLayout = new GroupLayout(frmHjassesssystemAlpha.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(145)
+							.addComponent(login)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(register_1))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(82)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(usernamelabel)
+								.addComponent(passwordlable))
+							.addGap(3)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(passwordtextfiled)
+								.addComponent(usenametextfiled, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(19)
+							.addComponent(imagetitle, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
+							.addGap(25)
+							.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(5)
+							.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(86))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(1)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(imagetitle, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(register)
-					.addGap(148))
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(usernamelabel))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(passwordlable))
+					.addGap(10)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(login, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(register_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
 		);
-		gl_southfillin.setVerticalGroup(
-			gl_southfillin.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_southfillin.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_southfillin.createParallelGroup(Alignment.BASELINE)
-						.addComponent(login)
-						.addComponent(register))
-					.addGap(42))
-		);
-		southfillin.setLayout(gl_southfillin);
+		frmHjassesssystemAlpha.getContentPane().setLayout(groupLayout);
 		
-		JPanel westfillin = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) westfillin.getLayout();
-		frame.getContentPane().add(westfillin, BorderLayout.WEST);
+				
 		
-		JPanel eastfillin = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) eastfillin.getLayout();
-		frame.getContentPane().add(eastfillin, BorderLayout.EAST);
+		ImageIcon icon2 = new ImageIcon("src/image/汇景logo.jpg");
+		icon2.setImage(
+				icon2.getImage().
+      		  getScaledInstance(377,95, Image.SCALE_DEFAULT)); 
+		imagetitle.setIcon(icon2);
+		
+				register_1.addMouseListener(new MouseAdapter() {
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						
+						RegisterWindows register = new RegisterWindows();
+						register.getFrame().setVisible(true);
+						
+					}
+				});
 		
 		
 		login.addMouseListener(new MouseAdapter() {
@@ -287,18 +300,6 @@ public class LoginInWindows {
 				
 			}
 		});
-
-		
-		register.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				RegisterWindows register = new RegisterWindows();
-				register.getFrame().setVisible(true);
-				
-			}
-		});
 	}
 	
 	
@@ -307,7 +308,4 @@ public class LoginInWindows {
          JOptionPane.showMessageDialog(null,word, "提示ʾ", JOptionPane.INFORMATION_MESSAGE); 
 		
     }
-	
-	
-
 }

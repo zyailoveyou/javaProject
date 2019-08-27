@@ -224,13 +224,13 @@ public class Assess {
      					 
      					 if (fulldaynoclear_postilinformation == null) {
      						 fulldaynoclear_postilinformation  = 
-     					     caculateSheet.getCell(2, i).getContents() + " 全天未打"+"\n";
+     					     caculateSheet.getCell(2, i).getContents() + " 鍏ㄥぉ鏈墦"+"\n";
 						 }
      					 
      					 else {
      						 
      						fulldaynoclear_postilinformation 
-        					 += caculateSheet.getCell(2, i).getContents() + " 全天未打"+"\n";
+        					 += caculateSheet.getCell(2, i).getContents() + " 鍏ㄥぉ鏈墦"+"\n";
 							
 						 }
      					 
@@ -243,13 +243,13 @@ public class Assess {
      					 if (halfdaynoclear_postilinformation == null) {
      						 
      						halfdaynoclear_postilinformation =
-     						caculateSheet.getCell(2, i).getContents() + " 上午未打"+"\n";
+     						caculateSheet.getCell(2, i).getContents() + " 涓婂崍鏈墦"+"\n";
 							
 						}
      					 
      					 else {
      						 halfdaynoclear_postilinformation 
-         					 += caculateSheet.getCell(2, i).getContents() + " 上午未打"+"\n";
+         					 += caculateSheet.getCell(2, i).getContents() + " 涓婂崍鏈墦"+"\n";
 						 }
      					
 					   }
@@ -265,13 +265,13 @@ public class Assess {
       					 if (halfdaynoclear_postilinformation ==null) {
      						 
       						halfdaynoclear_postilinformation =
-      						caculateSheet.getCell(2, i).getContents() + " 下午未打"+"\n";
+      						caculateSheet.getCell(2, i).getContents() + " 涓嬪崍鏈墦"+"\n";
  							
  						}
       					 
       					 else {
       						 halfdaynoclear_postilinformation 
-          					 += caculateSheet.getCell(2, i).getContents() + " 下午未打"+"\n";
+          					 += caculateSheet.getCell(2, i).getContents() + " 涓嬪崍鏈墦"+"\n";
  						 }
       					
  					   }
@@ -315,16 +315,14 @@ public class Assess {
 		
 		
 		WritableSheet test2sheet = workbook.getSheet(Sheetname);
-		//设置字体居中格式等等
-		
-		//设置字体
+
 		WritableFont font = new WritableFont(
-				WritableFont.createFont("宋体"), 
+				WritableFont.createFont("瀹嬩綋"), 
 				12, WritableFont.BOLD, 
 				false, 
 				UnderlineStyle.NO_UNDERLINE);
 		
-		//设置单元格格式
+
 		WritableCellFormat cellFormat = new WritableCellFormat(font);
 		cellFormat.setAlignment(Alignment.CENTRE);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
@@ -556,16 +554,14 @@ public class Assess {
             String Sheetname) throws WriteException 
 	{
 		WritableSheet test2sheet = workbook.getSheet(Sheetname);
-		//设置字体居中格式等等
-		
-		//设置字体
+
 		WritableFont font = new WritableFont(
-				WritableFont.createFont("宋体"), 
+				WritableFont.createFont("瀹嬩綋"), 
 				12, WritableFont.BOLD, 
 				false, 
 				UnderlineStyle.NO_UNDERLINE);
 		
-		//设置单元格格式
+
 		WritableCellFormat cellFormat = new WritableCellFormat(font);
 		cellFormat.setAlignment(Alignment.CENTRE);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);

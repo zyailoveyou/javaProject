@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.event.ItemEvent"/>
-<fullyQualifiedTypeName name="zzzz.excel"/>
-<fullyQualifiedTypeName name="oracle.net.aso.f"/>
-<fullyQualifiedTypeName name="java.lang.Float"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="data.OneManData"/>
-<fullyQualifiedTypeName name="data.Dayinformation"/>
-<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
-<fullyQualifiedTypeName name="java.util.Calendar"/>
-<fullyQualifiedTypeName name="java.time.Period"/>
-<fullyQualifiedTypeName name="java.awt.Label"/>
-<fullyQualifiedTypeName name="jxl.write.Label"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 <fullyQualifiedTypeName name="user.RegisterWindows"/>
 <fullyQualifiedTypeName name="java.util.AbstractMap"/>
@@ -26,7 +13,6 @@
 <fullyQualifiedTypeName name="user.user"/>
 <fullyQualifiedTypeName name="oracle.jdbc.AdditionalDatabaseMetaData"/>
 <fullyQualifiedTypeName name="Calendar.DownloadWindows"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
 <fullyQualifiedTypeName name="java.awt.event.ItemListener"/>
 <fullyQualifiedTypeName name="vacation_extrawork.OneManData"/>
@@ -44,20 +30,34 @@
 <fullyQualifiedTypeName name="mylayout.MyVFlowLayout"/>
 <fullyQualifiedTypeName name="Calendar.Windows"/>
 <fullyQualifiedTypeName name="approvel.ApprovalWindows"/>
-<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="backup.BackupDownWindows"/>
 <fullyQualifiedTypeName name="approvel.BackupApprovelWindows"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="user.User"/>
 <fullyQualifiedTypeName name="approvel.VacationPanel"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="ojdbc.DataBaseOperation"/>
 <fullyQualifiedTypeName name="tcp.ListInformation"/>
 <fullyQualifiedTypeName name="javax.swing.Icon"/>
 <fullyQualifiedTypeName name="java.io.File"/>
-<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 <fullyQualifiedTypeName name="java.awt.Image"/>
+<fullyQualifiedTypeName name="javax.swing.JRootPane"/>
+<fullyQualifiedTypeName name="javax.swing.UIManager"/>
+<fullyQualifiedTypeName name="javax.swing.UIDefaults"/>
+<fullyQualifiedTypeName name="javax.swing.JSeparator"/>
+<fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="vacation_extrawork.Dayinformation"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="vacation_extrawork.Approvel_N_Dayinformation"/>
+<fullyQualifiedTypeName name="implement.RoundBorder"/>
+<fullyQualifiedTypeName name="implement.BackgroundPanel"/>
+<fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="javax.swing.event.MenuListener"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="version_information.VersionWindows"/>
 </qualifiedTypeNameHistroy>

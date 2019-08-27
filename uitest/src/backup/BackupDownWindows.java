@@ -2,31 +2,41 @@ package backup;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Calendar.Mycalendar;
 import Calendar.Mylabel;
+import excel.wrtieExcel;
+import jxl.write.WriteException;
 import ojdbc.DataBaseOperation;
+import tcp.ListInformation;
 import user.User;
 import vacation_extrawork.Dayinformation;
 import vacation_extrawork.OneManData;
@@ -37,32 +47,25 @@ public class BackupDownWindows {
 
 	private JFrame frame;
 	private String[] yearlistdata;
-	private String[] monthlistdata;
-	private String[] vacationorextraworklistdata;
+	private String[] monthlistdata;    
 	private ArrayList<Mylabel> daylabeList = new ArrayList<Mylabel>();
 	private ArrayList<OneManData> submitdatagroup = new ArrayList<OneManData>();
-	private Date[] period = new Date[2];
-	
+	private Date[] period = new Date[2];	
 	private String workername;
-
 	private JComboBox<String> year;
 	private JComboBox<String> month;
 	private JComboBox<String> vacationorextrawork;
-	private JLabel worknameinformation;
 	private JComboBox<String> detailstype;
+	
 	
 	public String getWorkername() {
 		return workername;
 	}
 		
-	public BackupDownWindows(User user) {
+	public BackupDownWindows() {
 		
-
-//		workername = user.getCheckname();
-
-		yearlistdata = new String[] {"2019Äê", "2020Äê", "2021Äê", "2022Äê", "2023Äê", "2024Äê", "2025Äê", "2026Äê", "2027Äê", "2028Äê", "2029Äê", "2030Äê", "2031Äê", "2032Äê", "2033Äê", "2034Äê", "2035Äê", "2036Äê", "2037Äê", "2038Äê", "2039Äê", "2040Äê", "2041Äê", "2042Äê", "2043Äê", "2044Äê", "2045Äê", "2046Äê", "2047Äê", "2048Äê", "2049Äê", "2050Äê"};
-		monthlistdata = new String[] {"1ÔÂ","2ÔÂ","3ÔÂ","4ÔÂ","5ÔÂ","6ÔÂ","7ÔÂ","8ÔÂ","9ÔÂ","10ÔÂ","11ÔÂ","12ÔÂ"};
-		vacationorextraworklistdata = new String[] {"Î´´ò¿¨","»»Ğİ","²¡¼Ù","Äê¼Ù","ÊÂ¼Ù","²ú¼Ù","É¥¼Ù"};				
+		yearlistdata = new String[] {"2019å¹´", "2020å¹´", "2021å¹´", "2022å¹´", "2023å¹´", "2024å¹´", "2025å¹´", "2026å¹´", "2027å¹´", "2028å¹´", "2029å¹´", "2030å¹´", "2031å¹´", "2032å¹´", "2033å¹´", "2034å¹´", "2035å¹´", "2036å¹´", "2037å¹´", "2038å¹´", "2039å¹´", "2040å¹´", "2041å¹´", "2042å¹´", "2043å¹´", "2044å¹´", "2045å¹´", "2046å¹´", "2047å¹´", "2048å¹´", "2049å¹´", "2050å¹´"};
+		monthlistdata = new String[] {"1æœˆ","2æœˆ","3æœˆ","4æœˆ","5æœˆ","6æœˆ","7æœˆ","8æœˆ","9æœˆ","10æœˆ","11æœˆ","12æœˆ"};	
 		initialize();
 								
 	}
@@ -76,9 +79,7 @@ public class BackupDownWindows {
 
 
 
-	public Date[] getPeriod() {
-		return period;
-	}
+
 
 
 	public ArrayList<OneManData> getSubmitdatagroup() {
@@ -91,12 +92,7 @@ public class BackupDownWindows {
 	}
 
 
-	public String getVacationorExtrawork() {
-				
-		String indexinformation = (String)vacationorextrawork.getSelectedItem();		
-		return indexinformation;
-		
-	}
+
 
 	public JFrame getFrame() {
 		return frame;
@@ -114,66 +110,73 @@ public class BackupDownWindows {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setTitle("\u8BF7\u5047\u63D0\u4EA4");
-		frame.setBounds(100, 100, 539, 384);
+		frame.setTitle("ä¸‹è½½çª—å£");
+		frame.setBounds(100, 100, 600, 480);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
+		ImageIcon icon55 = new ImageIcon("src/image/æ±‡æ™¯å›¾æ ‡.png");		
+		frame.setIconImage(icon55.getImage());
 		JPanel top = new JPanel();
 		frame.getContentPane().add(top, BorderLayout.NORTH);
 						
 		year = new JComboBox<String>();
 		year.setToolTipText("\u9009\u62E9\u5E74\u4EFD");
 		year.setModel(new DefaultComboBoxModel<String>(yearlistdata));
-		year.setFont(new Font("Adobe ºÚÌå Std R", Font.PLAIN, 16));
-		
+		year.setFont(new Font("å¹¼åœ†", Font.BOLD, 16));
+		year.setForeground(Color.DARK_GRAY);
 		month = new JComboBox<String>();
 		month.setToolTipText("\u9009\u62E9\u6708\u4EFD");
 		month.setModel(new DefaultComboBoxModel<String>(monthlistdata));
-		month.setFont(new Font("Adobe ºÚÌå Std R", Font.PLAIN, 16));
-		
+		month.setFont(new Font("å¹¼åœ†", Font.BOLD, 16));
+		month.setForeground(Color.DARK_GRAY);
 		vacationorextrawork = new JComboBox<String>();
 		vacationorextrawork.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
-		vacationorextrawork.setModel(new DefaultComboBoxModel(new String[] {"\u8BF7\u5047", "\u52A0\u73ED", "\u6B63\u5E38\u4F11\u5047"}));
-		vacationorextrawork.setFont(new Font("Adobe ºÚÌå Std R", Font.PLAIN, 16));
-		
-		worknameinformation = new JLabel("New label");
-		worknameinformation.setFont(new Font("ËÎÌå", Font.PLAIN, 14));		
-		worknameinformation.setText("\u6B22\u8FCE\u767B\u5F55\uFF0C\u5F20\u5343\u5531!");
+		vacationorextrawork.setModel(new DefaultComboBoxModel(new String[] {"å…¨éƒ¨","\u8BF7\u5047", "\u52A0\u73ED", "\u6B63\u5E38\u4F11\u5047"}));
+		vacationorextrawork.setFont(new Font("å¹¼åœ†", Font.BOLD, 16));
+		vacationorextrawork.setForeground(Color.DARK_GRAY);
 		
 		detailstype = new JComboBox<String>();
+		detailstype.setModel(new DefaultComboBoxModel(new String[] {"å…¨éƒ¨", "æ¢ä¼‘", "å¹´ä¼‘", "äº‹å‡", "ä¸§å‡", "äº§å‡", "é™ªæŠ¤å‡", "æœªæ‰“å¡è¯´æ˜"}));
 		detailstype.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
-		detailstype.setModel(new DefaultComboBoxModel(new String[] {"È«²¿", "»»Ğİ", "ÄêĞİ", "ÊÂ¼Ù","É¥¼Ù", "²ú¼Ù", "Åã»¤¼Ù", "Î´´ò¿¨"}));
-		detailstype.setFont(new Font("Adobe ºÚÌå Std R", Font.PLAIN, 16));
+		detailstype.setFont(new Font("å¹¼åœ†", Font.BOLD, 16));
+		detailstype.setForeground(Color.DARK_GRAY);
+		
+		JComboBox<String> namelist = new JComboBox<String>();
+		namelist.setModel(new DefaultComboBoxModel(new String[] {"å…¨éƒ¨", "ä¿çº", "é™ˆæ¯“æ—", "æå»ºå¹³", "æ½˜ä¿Šä¼¦", "åˆ˜æ™ºé¢–", "ä½•å¸Œå½ª", "è’²è²", "éƒ‘ä¹¾å²—", "éŸ©æ–‡é›¯", "æ²ˆå¹³", "æ¨ç‘", "å¼ åƒå”±", "æ±ªå†›", "é™ˆè¯š", "å¼ é›ª", "é’Ÿé™é¸¿", "æ±ªæ€¡é›¯", "å´å‹å…°", "ç‹ä¸¹", "å½­å°æ³¢", "è°¢é‡‘è±†", "æ¨æ˜“", "å»–é¾™", "æ¨é“ç´", "é™ˆé“é¢–", "å¢ç‡•", "åˆ˜è", "æ®µä»å‹‡", "è‘£æˆç«¹", "é‚“è½²", "ç‹ç‚œ", "ä»£ä½³", "å¤æ›¦", "ä½•å®¶é”‹", "ç‹é•", "æå‹æ–‡", "å­™çº¢ä¸½"}));
+		namelist.setToolTipText("é€‰æ‹©å¹´ä»½");
+		namelist.setForeground(Color.DARK_GRAY);
+		namelist.setFont(new Font("å¹¼åœ†", Font.BOLD, 16));
 		
 		GroupLayout gl_top = new GroupLayout(top);
 		gl_top.setHorizontalGroup(
 			gl_top.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_top.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(worknameinformation)
-					.addGap(30)
-					.addComponent(year, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+					.addGap(13)
+					.addComponent(namelist, GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(year, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(month, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
+					.addComponent(month, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(vacationorextrawork, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(detailstype, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
-					.addGap(5))
+					.addComponent(detailstype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(19, Short.MAX_VALUE))
 		);
 		gl_top.setVerticalGroup(
-			gl_top.createParallelGroup(Alignment.LEADING)
+			gl_top.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_top.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(10)
 					.addGroup(gl_top.createParallelGroup(Alignment.BASELINE)
 						.addComponent(year, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(worknameinformation)
 						.addComponent(month, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(vacationorextrawork, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(detailstype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(detailstype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(namelist, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(9))
 		);
 		
@@ -190,40 +193,45 @@ public class BackupDownWindows {
 		panel.setLayout(new GridLayout(1, 7, 4, 2));
 		
 		JLabel label = new JLabel("\u661F\u671F\u4E00");
-		label.setForeground(Color.BLACK);
-		label.setBackground(Color.BLUE);
+		label.setForeground(Color.DARK_GRAY);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label);
 		
 		JLabel label_2 = new JLabel("\u661F\u671F\u4E8C");
+		label_2.setForeground(Color.DARK_GRAY);
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_2.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_2);
 		
 		JLabel label_1 = new JLabel("\u661F\u671F\u4E09");
+		label_1.setForeground(Color.DARK_GRAY);
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_1.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_1);
 		
 		JLabel label_3 = new JLabel("\u661F\u671F\u56DB");
+		label_3.setForeground(Color.DARK_GRAY);
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_3.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("\u661F\u671F\u4E94");
+		label_4.setForeground(Color.DARK_GRAY);
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_4.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_4);
 		
 		JLabel label_5 = new JLabel("\u661F\u671F\u516D");
+		label_5.setForeground(Color.DARK_GRAY);
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		label_5.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_5.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_5);
 		
 		JLabel label_6 = new JLabel("\u661F\u671F\u65E5");
+		label_6.setForeground(Color.DARK_GRAY);
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		label_6.setFont(new Font("å®‹ä½“", Font.PLAIN, 16));
 		panel.add(label_6);
 		
 		JPanel dayzoompJPanel = new JPanel();
@@ -232,187 +240,212 @@ public class BackupDownWindows {
 		
 		JPanel list = new JPanel();
 		middle.add(list, BorderLayout.SOUTH);
-		list.setLayout(new BorderLayout(0, 0));
+		list.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton download = new JButton("\u4E0B\u8F7D");
-		download.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		JButton download = new JButton("\u4E0B\u8F7D\u4FE1\u606F");
+		download.setForeground(Color.DARK_GRAY);
+		download.setFont(new Font("å¹¼åœ†", Font.BOLD, 16));
 		list.add(download);
-				
-		download.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		
+		
+//		  for (int i = 0; i < 42; i++) {
+//				
+//				Mylabel mylabel = new Mylabel(this);
+//				mylabel.setText("");
+//				mylabel.setOpaque(true);
+//				mylabel.setFont(new Font("é»‘ä½“", Font.BOLD, 20));
+//				mylabel.setHorizontalAlignment(SwingConstants.CENTER);
+//				mylabel.setVerticalAlignment(SwingConstants.CENTER);
+//				mylabel.addMouseListener(mylabel);
+//				mylabel.setBorder(BorderFactory.createLineBorder(Color.gray));
+//				daylabeList.add(mylabel);
+//				dayzoompJPanel.add(mylabel);
+//			}
+												
+//	 		flashdata();
 							
-				DataBaseOperation test = new DataBaseOperation();
-				if (submitdatagroup.isEmpty()) {
-					ShowDialog("Ã»ÓĞÈÎºÎÊı¾İ£¬ÇëÖØĞÂÉèÖÃÊı¾İ");
-					return;
-				}
-				try {
-					test.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
-				} catch (ClassNotFoundException e1) {
-					// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO ×Ô¶¯Éú³ÉµÄ catch ¿é
-					e1.printStackTrace();
-				}
+			year.addItemListener(new ItemListener() {
 				
-					ShowDialog("Êı¾İ·¢ËÍ³É¹¦");
-					submitdatagroup.clear();
-					flashdata();
-																					
-			}
-			
-		});
-		
-		
-		year.addItemListener(new ItemListener() {
-			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-				
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					flashdata();
-				}
+				@Override
+				public void itemStateChanged(ItemEvent e) {
 
-			}
-		});
-		
-		
-		month.addItemListener(new ItemListener() {
-			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					flashdata();
+					
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+						flashdata();
+					}
+
 				}
-				
-			}
-		});
-		
-		
-		vacationorextrawork.addItemListener(new ItemListener() {
+			});
 			
-			@Override
-			public void itemStateChanged(ItemEvent e) {
+			
+			month.addItemListener(new ItemListener() {
 				
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					
-					
-					if (((String)vacationorextrawork.getSelectedItem()).equals("Çë¼Ù")) {
-						
-						detailstype.setModel(new DefaultComboBoxModel(new String[] {"È«²¿", "»»Ğİ", "ÄêĞİ", "ÊÂ¼Ù","É¥¼Ù", "²ú¼Ù", "Åã»¤¼Ù", "Î´´ò¿¨"}));
-						
-					}
-					
-					if (((String)vacationorextrawork.getSelectedItem()).equals("¼Ó°à")) {
-						
-						detailstype.setModel(new DefaultComboBoxModel(new String[] {"È«²¿","³¬Ê±", "ĞİÏ¢ÈÕ", "¹«Ë¾Í³Ò»","·¨¶¨½Ú¼ÙÈÕ"}));
-						
-					}
-					
-					
-					if (((String)vacationorextrawork.getSelectedItem()).equals("Õı³£Ğİ¼Ù")) {
-						
-						detailstype.setModel(new DefaultComboBoxModel(new String[] {"È«²¿"}));
-						
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+						flashdata();
 					}
 					
 				}
-				
-			}
-		});
-		
-		
-		
-//		for (int i = 0; i < 42; i++) {
-//			
-//			mylabel mylabel = new mylabel(this);
-//			mylabel.setText("");
-//			mylabel.setOpaque(true);
-//			mylabel.setFont(new Font("ËÎÌå", Font.BOLD, 20));
-//			mylabel.setHorizontalAlignment(SwingConstants.CENTER);
-//			mylabel.setVerticalAlignment(SwingConstants.CENTER);
-//			mylabel.addMouseListener(mylabel);
-//			daylabeList.add(mylabel);
-//			
-//		}
-		
-		
-		for (Mylabel i : daylabeList) {
+			});
 			
-			dayzoompJPanel.add(i);
-		}
+			vacationorextrawork.addItemListener(new ItemListener() {
+				
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+					
+					if (e.getStateChange() == ItemEvent.SELECTED) {
+						
+						
+						if (((String)vacationorextrawork.getSelectedItem()).equals("è¯·å‡")) {
+							
+							detailstype.setModel(new DefaultComboBoxModel(new String[] {"å…¨éƒ¨", "æ¢ä¼‘", "å¹´ä¼‘", "äº‹å‡","ä¸§å‡", "äº§å‡", "é™ªæŠ¤å‡", "æœªæ‰“å¡è¯´æ˜"}));
+							
+						}
+						
+						if (((String)vacationorextrawork.getSelectedItem()).equals("åŠ ç­")) {
+							
+							detailstype.setModel(new DefaultComboBoxModel(new String[] {"å…¨éƒ¨","ä¼‘æ¯æ—¥åŠ ç­", "ç»Ÿä¸€åŠ ç­", "è¶…æ—¶åŠ ç­","æ³•å®šèŠ‚å‡æ—¥åŠ ç­"}));
+							
+						}
+						
+						
+						if (((String)vacationorextrawork.getSelectedItem()).equals("æ­£å¸¸ä¼‘å‡")) {
+							
+							detailstype.setModel(new DefaultComboBoxModel(new String[] {"å…¨éƒ¨"}));
+							
+						}
+						
+						
+						if (((String)vacationorextrawork.getSelectedItem()).equals("å…¨éƒ¨")) {
+							
+							detailstype.setModel(new DefaultComboBoxModel(new String[] {"å…¨éƒ¨"}));
+							
+						}
+						
+						
+					}
+					
+				}
+			});
+			
+			
+		   download.addMouseListener(new MouseAdapter() {
+						
+
+			public void mouseClicked(MouseEvent e) {
+				ListInformation listInformation= null;
+//				DataBaseOperation dataBaseOperation = new DataBaseOperation();
+//				try {
+////				  listInformation = dataBaseOperation.Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName(user.getCheckname(), getVacationorExtrawork(), getdetailstype(), period);
+//				} catch (ClassNotFoundException e1) {
+//
+//					e1.printStackTrace();
+//				}  catch (SQLException e1) {
+//
+//					e1.printStackTrace();
+//				} 
+//				
+				if (listInformation !=null) {
+					
+					JFileChooser fileChooser=new JFileChooser();
+					FileNameExtensionFilter filter=new FileNameExtensionFilter("*.xls","xls");
+					fileChooser.setFileFilter(filter);
+					fileChooser.setMultiSelectionEnabled(false);
+					fileChooser.setCurrentDirectory(new File("c:/"));
+					fileChooser.setSelectedFile(new File("å¼‚å¸¸è€ƒå‹¤æ•°æ®.xls"));
+					int result = fileChooser.showSaveDialog(null);
+					
+					if (result == JFileChooser.APPROVE_OPTION) {
+						
+						File file=fileChooser.getSelectedFile();
+						String path = file.getPath();
+						System.out.println(path);
+						try {
+							wrtieExcel write  = new wrtieExcel(file);
+							
+							for (ArrayList<String> data:listInformation.getLineinformationgroup()) {
 								
- 		flashdata();
+								write.writeline(data);
+							}
+							write.writedone();
+												
+						} catch (WriteException e1) {
+							
+							e1.printStackTrace();
+						} catch (IOException e1) {
+				
+							e1.printStackTrace();
+						}
 						
-
-		
+						ShowDialog("æˆåŠŸå¯¼å‡º");
+						getFrame().dispose();
+						
+					}
+					
+					if(result == JFileChooser.CANCEL_OPTION) {
+						
+						
+					}
+					
+					
+				}
 	
+				
+
+			}
+		});
+		
+		
 	}
+	
+	
+	
 
-
+	private void ShowDialog(String word) {
+		
+		JOptionPane.showMessageDialog(null,word, "æç¤º", JOptionPane.INFORMATION_MESSAGE); 
+				
+	}
+	
+	public Date[] getPeriod() {
+		return period;
+	}
+	
+	
 	public int getyear() {
 		
 		String cachesStringyear = (String)year.getSelectedItem();		
-		String yearsString = cachesStringyear.substring(0,cachesStringyear.lastIndexOf("Äê"));		
+		String yearsString = cachesStringyear.substring(0,cachesStringyear.lastIndexOf("å¹´"));		
 		int year = Integer.parseInt(yearsString);
 		return year;
 	}
 	
 	public int getmonth() {
 		String cachesStringmonth = (String)month.getSelectedItem();		
-		String monthString = cachesStringmonth.substring(0,cachesStringmonth.lastIndexOf("ÔÂ"));		
+		String monthString = cachesStringmonth.substring(0,cachesStringmonth.lastIndexOf("æœˆ"));		
 		int month = Integer.parseInt(monthString);
 		return month;
 		
 	}
 	
-	public JComboBox<String> getYear() {
-		return year;
-	}
-
-
-	public void setYear(JComboBox<String> year) {
-		this.year = year;
+	public String getVacationorExtrawork() {
+		
+		String indexinformation = (String)vacationorextrawork.getSelectedItem();		
+		return indexinformation;
+		
 	}
 	
-
-	public JComboBox<String> getMonth() {
-		return month;
-	}
-
-
-
-
-	public JComboBox<String> getVacationorextrawork() {
-		return vacationorextrawork;
+	public String getdetailstype() {
+		
+		String indexinformation = (String)detailstype.getSelectedItem();		
+		return indexinformation;
+		
 	}
 	
 	
-	//Ë¢ĞÂÊı¾İ
 	private void flashdata() {
-			
-//		if (((String)downloadchoose.getSelectedItem()).equals("Ìá½»Ä£Ê½")) {
-			
-//			ModeSubmitFlash();
-			
-//		}
-		
-//		if (((String)downloadchoose.getSelectedItem()).equals("ÏÂÔØÄ£Ê½")) {
-			
-//			ModeDownloadFlash();
-			
-//		}
-			    		
-	}
-	
-	private void ModeDownloadFlash() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
-		
 		int year = getyear();			
 		int month = getmonth();
 				
@@ -422,7 +455,7 @@ public class BackupDownWindows {
 	    
 	    String[] daynumbergroup = myMycalendar.getCalendar();
 	    
-	    //ÖØĞÂË¢ĞÂÈÕÀú±í¸ñ
+
 	    for (int i = 0; i < 42; i++) {
 			
 	    	daylabeList.get(i).setText(daynumbergroup[i]);
@@ -433,7 +466,7 @@ public class BackupDownWindows {
 		for (int i = 0; i <2; i++) {
 			
 			Calendar myCalendar = Calendar.getInstance();		
-			if (period[i] !=null) {							
+			if (period[i]!=null) {							
 			 myCalendar.setTime(period[i]);
 			
 			 if (getyear() == myCalendar.get(Calendar.YEAR) && getmonth() == myCalendar.get(Calendar.MONTH)+1) {
@@ -459,165 +492,5 @@ public class BackupDownWindows {
 		  }
 						
 		}
-		
-	}
-
-
-
-
-	private void ModeSubmitFlash() {
-		
-		int year = getyear();			
-		int month = getmonth();
-				
-		Mycalendar myMycalendar = new Mycalendar();		
-	    myMycalendar.setYear(year);
-	    myMycalendar.setMonth(month);
-	    
-	    String[] daynumbergroup = myMycalendar.getCalendar();
-	    
-	    //ÖØĞÂË¢ĞÂÈÕÀú±í¸ñ
-	    for (int i = 0; i < 42; i++) {
-			
-	    	daylabeList.get(i).setText(daynumbergroup[i]);
-	    	daylabeList.get(i).SetNoChooseState();
-	    				
-		}
-	    
-	    //¿ªÊ¼Ë¢ĞÂ¼ì²é
-	    if (submitdatagroup.isEmpty()) {
-			
-		    for (int i = 0; i < 42; i++) {
-				
-		    	daylabeList.get(i).SetNoChooseState();
-		    				
-			}
-		}
-	    
-	    else {
-	    		    	
-	    	for (OneManData data:submitdatagroup) {
-				
-		    	if (data.getName().equals(getWorkername()))     	
-		    	{
-		    		
-	    			for (Dayinformation in:data.getDayinformation()) {
-	    				
-	    				Calendar calendar = Calendar.getInstance();
-	    				calendar.setTime(in.getTime());
-	    				int restore_year = calendar.get(Calendar.YEAR);
-	    				int restore_month= calendar.get(Calendar.MONTH)+1;
-	    										    				    		        		    	
-	    				if (getyear() == restore_year && getmonth() == restore_month) {
-							
-	    	    		    for (int i = 0; i < 42; i++) {
-					    		    	
-			    		    	if (in.getLabelday().equals(daylabeList.get(i).getText())) {
-			    		    				    
-			    		    		
-			    		    		if (in.getreasons_details().equals("Õı³£Ğİ¼Ù")) {
-			    		    			
-			    		    			daylabeList.get(i).SetChooseStatefornormalrestdayColor();
-									}
-			    		    		else {
-			    		    			daylabeList.get(i).SetChooseState();
-									}
-			    
-									break;
-								 }	    		    	
-					         }
-	    					
-						}
-	    						    		   
-	    			 }
-	    			 break;
-	    			 
-		    	 }
-		    	
-		    	else {
-		    		
-				    for (int i = 0; i < 42; i++) {
-						
-				    	daylabeList.get(i).SetNoChooseState();
-				    				
-					}
-				    
-				}
-		    	
-	    	}
-	    }
-		
-		
-	}
-	
-
-			
-	private void ShowDialog(String word) {
-		
-		JOptionPane.showMessageDialog(null,word, "´íÎóÌáÊ¾", JOptionPane.ERROR_MESSAGE); 
-				
-	}
-	
-
-	
-	public Date GetTheBiggerTimeInperiod() {
-		
-		if (period[0] !=null &&period[1] !=null ) {
-			
-			int result = period[0].compareTo(period[1]);
-			
-			if (result<0) {
-				
-				return period[1];
-				
-			}
-			
-			else if (result>0) {
-				
-				return period[0];
-			}
-			else {
-
-                 Date error = Date.valueOf("9999-12-12");
-                 return error;
-			}
-			
-			
-		}
-		
-		Date error = Date.valueOf("9999-12-12");
-        return error;
-		
-	}
-
-    
-	public Date GetTheSmallerTimeInperiod() {
-		
-		
-          if (period[0] !=null &&period[1] !=null ) {
-			
-			int result = period[0].compareTo(period[1]);
-			
-			if (result<0) {
-				
-				return period[0];
-				
-			}
-			
-			else if (result>0) {
-				
-				return period[1];
-			}
-			else {
-
-                 Date error = Date.valueOf("9999-12-12");
-                 return error;
-			}
-			
-			
-		}
-		
-		Date error = Date.valueOf("9999-12-12");
-        return error;		
 	}
 }

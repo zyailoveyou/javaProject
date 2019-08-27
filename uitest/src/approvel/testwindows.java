@@ -38,8 +38,8 @@ public class testwindows {
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		
-		VacationPanel vacationPanel = new VacationPanel("123", "123", "123", "123","123");
-		VacationPanel vacationPanel2 = new VacationPanel("123", "123", "123", "123","123");
+		VacationPanel vacationPanel = new VacationPanel("123", "123", "123", "123","123","123");
+		VacationPanel vacationPanel2 = new VacationPanel("123", "123", "123", "123","123","123");
 		
 		JPanel panelcontainer = new JPanel();
 		scrollPane.setViewportView(panelcontainer);
@@ -52,11 +52,11 @@ public class testwindows {
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 		
 		JButton quicklyapproval = new JButton("\u4E00\u952E\u540C\u610F");
-		quicklyapproval.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		quicklyapproval.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 16));
 		panel.add(quicklyapproval);
 		
 		JButton submitapproval = new JButton("\u63D0\u4EA4\u5BA1\u6279");
-		submitapproval.setFont(new Font("ËÎÌå", Font.PLAIN, 16));
+		submitapproval.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 16));
 		panel.add(submitapproval);
 	}
 

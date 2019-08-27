@@ -16,8 +16,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -68,38 +70,42 @@ public class DownloadWindows extends Windows {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setTitle("下载窗口");
-		frame.setBounds(100, 100, 580, 400);
+		frame.setBounds(100, 100, 635, 480);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
+		ImageIcon icon55 = new ImageIcon("src/image/汇景图标.png");		
+		frame.setIconImage(icon55.getImage());
 		JPanel top = new JPanel();
 		frame.getContentPane().add(top, BorderLayout.NORTH);
 						
 		year = new JComboBox<String>();
 		year.setToolTipText("\u9009\u62E9\u5E74\u4EFD");
 		year.setModel(new DefaultComboBoxModel<String>(yearlistdata));
-		year.setFont(new Font("黑体", Font.BOLD, 16));
-		
+		year.setFont(new Font("幼圆", Font.BOLD, 16));
+		year.setForeground(Color.DARK_GRAY);
 		month = new JComboBox<String>();
 		month.setToolTipText("\u9009\u62E9\u6708\u4EFD");
 		month.setModel(new DefaultComboBoxModel<String>(monthlistdata));
-		month.setFont(new Font("黑体", Font.BOLD, 16));
-		
+		month.setFont(new Font("幼圆", Font.BOLD, 16));
+		month.setForeground(Color.DARK_GRAY);
 		vacationorextrawork = new JComboBox<String>();
 		vacationorextrawork.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
 		vacationorextrawork.setModel(new DefaultComboBoxModel(new String[] {"全部","\u8BF7\u5047", "\u52A0\u73ED", "\u6B63\u5E38\u4F11\u5047"}));
-		vacationorextrawork.setFont(new Font("黑体", Font.BOLD, 16));
-		
+		vacationorextrawork.setFont(new Font("幼圆", Font.BOLD, 16));
+		vacationorextrawork.setForeground(Color.DARK_GRAY);
 		worknameinformation = new JLabel("New label");
-		worknameinformation.setFont(new Font("黑体", Font.BOLD,16));		
-		worknameinformation.setText("欢迎登录"+"，"+user.getCheckname()+"!");
+		worknameinformation.setFont(new Font("幼圆", Font.BOLD, 16));
+		worknameinformation.setForeground(Color.DARK_GRAY);
+		worknameinformation.setText("欢迎你登录，"+user.getCheckname()+"!");
 		
 		detailstype = new JComboBox<String>();
 		detailstype.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
 		
 
 		detailstype.setModel(new DefaultComboBoxModel(new String[] {"全部", "换休", "年休", "事假","丧假", "产假", "陪护假", "未打卡说明"}));
-		detailstype.setFont(new Font("黑体", Font.BOLD, 16));
+		detailstype.setFont(new Font("幼圆", Font.BOLD, 16));
+		detailstype.setForeground(Color.DARK_GRAY);
 		
 		GroupLayout gl_top = new GroupLayout(top);
 		gl_top.setHorizontalGroup(
@@ -108,13 +114,13 @@ public class DownloadWindows extends Windows {
 					.addContainerGap()
 					.addComponent(worknameinformation)
 					.addGap(30)
-					.addComponent(year, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+					.addComponent(year, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(month, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+					.addComponent(month, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
 					.addComponent(vacationorextrawork, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(10)
-					.addComponent(detailstype, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+					.addComponent(detailstype, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(5))
 		);
 		gl_top.setVerticalGroup(
@@ -143,38 +149,43 @@ public class DownloadWindows extends Windows {
 		panel.setLayout(new GridLayout(1, 7, 4, 2));
 		
 		JLabel label = new JLabel("\u661F\u671F\u4E00");
-		label.setForeground(Color.BLACK);
-		label.setBackground(Color.BLUE);
+		label.setForeground(Color.DARK_GRAY);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("宋体", Font.PLAIN, 16));
 		panel.add(label);
 		
 		JLabel label_2 = new JLabel("\u661F\u671F\u4E8C");
+		label_2.setForeground(Color.DARK_GRAY);
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
 		label_2.setFont(new Font("宋体", Font.PLAIN, 16));
 		panel.add(label_2);
 		
 		JLabel label_1 = new JLabel("\u661F\u671F\u4E09");
+		label_1.setForeground(Color.DARK_GRAY);
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(new Font("宋体", Font.PLAIN, 16));
 		panel.add(label_1);
 		
 		JLabel label_3 = new JLabel("\u661F\u671F\u56DB");
+		label_3.setForeground(Color.DARK_GRAY);
 		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("宋体", Font.PLAIN, 16));
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("\u661F\u671F\u4E94");
+		label_4.setForeground(Color.DARK_GRAY);
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
 		label_4.setFont(new Font("宋体", Font.PLAIN, 16));
 		panel.add(label_4);
 		
 		JLabel label_5 = new JLabel("\u661F\u671F\u516D");
+		label_5.setForeground(Color.DARK_GRAY);
 		label_5.setHorizontalAlignment(SwingConstants.CENTER);
 		label_5.setFont(new Font("宋体", Font.PLAIN, 16));
 		panel.add(label_5);
 		
 		JLabel label_6 = new JLabel("\u661F\u671F\u65E5");
+		label_6.setForeground(Color.DARK_GRAY);
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("宋体", Font.PLAIN, 16));
 		panel.add(label_6);
@@ -188,7 +199,8 @@ public class DownloadWindows extends Windows {
 		list.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton download = new JButton("\u4E0B\u8F7D\u4FE1\u606F");
-		download.setFont(new Font("黑体", Font.BOLD, 16));
+		download.setForeground(Color.DARK_GRAY);
+		download.setFont(new Font("幼圆", Font.BOLD, 16));
 		list.add(download);
 		
 		
@@ -197,10 +209,11 @@ public class DownloadWindows extends Windows {
 				Mylabel mylabel = new Mylabel(this);
 				mylabel.setText("");
 				mylabel.setOpaque(true);
-				mylabel.setFont(new Font("黑体", Font.PLAIN, 20));
+				mylabel.setFont(new Font("黑体", Font.BOLD, 20));
 				mylabel.setHorizontalAlignment(SwingConstants.CENTER);
 				mylabel.setVerticalAlignment(SwingConstants.CENTER);
 				mylabel.addMouseListener(mylabel);
+				mylabel.setBorder(BorderFactory.createLineBorder(Color.gray));
 				daylabeList.add(mylabel);
 				dayzoompJPanel.add(mylabel);
 			}
@@ -323,6 +336,7 @@ public class DownloadWindows extends Windows {
 						}
 						
 						ShowDialog("成功导出");
+						getFrame().dispose();
 						
 					}
 					

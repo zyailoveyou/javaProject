@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Icon" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="icon"/>
-			<item value="�"/>
-			<item value="show"/>
-			<item value="informationgroup"/>
-			<item value="PLAIN"/>
-			<item value="dialog"/>
-			<item value="mylabe"/>
-			<item value="detailstype"/>
-			<item value="mylabel"/>
-			<item value="new String[]"/>
-			<item value="vacationorextrawork"/>
-			<item value="��"/>
-			<item value="黑体"/>
+			<item value="正常休假"/>
 			<item value="submit"/>
-			<item value="submitmode"/>
+			<item value="vacationapproval"/>
+			<item value="activeTextfield"/>
+			<item value="reasonsexplanation"/>
+			<item value="imagetitle"/>
+			<item value="scrollPane"/>
+			<item value="panelcontainer"/>
+			<item value="gl_p1"/>
+			<item value="panelscroll"/>
+			<item value="p1"/>
+			<item value="mvfl_panelcontainer"/>
+			<item value="vacationPanels"/>
+			<item value="assessapproval"/>
+			<item value="mylabel"/>
 		</list>
 		<list key="replacehistory">
 			<item value="download"/>

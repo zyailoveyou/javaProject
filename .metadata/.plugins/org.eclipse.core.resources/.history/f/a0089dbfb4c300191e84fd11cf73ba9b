@@ -1,0 +1,298 @@
+package user;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.GridBagLayout;
+import javax.swing.JTextPane;
+import java.awt.GridBagConstraints;
+import java.awt.TextField;
+import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import Calendar.MainWindows;
+import MyThread.MyThread;
+import backup.BackupSubmitWindows;
+import backup.CalendarWindows;
+import implement.RoundBorder;
+import ojdbc.DataBaseOperation;
+
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
+
+import java.awt.Color;
+
+public class LoginInWindows {
+
+	private JFrame frmHjassesssystemAlpha;
+	private JTextField usenametextfiled;
+	private JPasswordField passwordtextfiled;
+
+	
+	public JFrame getFrame() {
+		return frmHjassesssystemAlpha;
+	}
+	
+	public LoginInWindows() {
+		initialize();
+	}
+
+	private void initialize() {
+		frmHjassesssystemAlpha = new JFrame();
+		frmHjassesssystemAlpha.setResizable(false);
+		frmHjassesssystemAlpha.setTitle("HJ_Assess_System alpha1.0");
+		frmHjassesssystemAlpha.setBounds(100, 100, 450, 300);
+		frmHjassesssystemAlpha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmHjassesssystemAlpha.setLocationRelativeTo(null);		
+		ImageIcon icon = new ImageIcon("src/image/汇景图标.png");		
+		frmHjassesssystemAlpha.setIconImage(icon.getImage());
+		
+		Box AccounthorizontalBox = Box.createHorizontalBox();
+		
+		Box PasswordhorizontalBox = Box.createHorizontalBox();
+		
+		JLabel usernamelabel = new JLabel("帐号");
+		usernamelabel.setFont(new Font("黑体", Font.BOLD, 16));
+		
+		usenametextfiled = new JTextField();
+		usenametextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		usenametextfiled.setColumns(10);
+		usenametextfiled.setBorder(new RoundBorder());
+		
+		JButton login = new JButton("\u767B\u5F55");
+		login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		login.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		JButton register_1 = new JButton("\u6CE8\u518C");
+		register_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		register_1.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		JLabel passwordlable = new JLabel("密码");
+		passwordlable.setFont(new Font("黑体", Font.BOLD, 16));
+		
+		passwordtextfiled = new JPasswordField();
+		passwordtextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		passwordtextfiled.setBorder(new RoundBorder());
+		GroupLayout groupLayout = new GroupLayout(frmHjassesssystemAlpha.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(130)
+							.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(5)
+							.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(156)
+							.addComponent(login)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(register_1))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(100)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(usernamelabel)
+									.addGap(2))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(passwordlable)
+									.addGap(2)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(passwordtextfiled, Alignment.LEADING)
+								.addComponent(usenametextfiled, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(101, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(19)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(usernamelabel)
+						.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(passwordlable))
+					.addGap(41)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(login, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(register_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
+					.addGap(28))
+		);
+		frmHjassesssystemAlpha.getContentPane().setLayout(groupLayout);
+		
+				
+				register_1.addMouseListener(new MouseAdapter() {
+					
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						
+						RegisterWindows register = new RegisterWindows();
+						register.getFrame().setVisible(true);
+						
+					}
+				});
+		
+		
+		login.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+		
+				String username = usenametextfiled.getText();
+				String password = passwordtextfiled.getText();
+				
+				try {
+					Map<User,String> resultmap = User.LoginInUser(username, password);					
+					Set<Map.Entry<User, String>> set = resultmap.entrySet();
+					Iterator<Map.Entry<User, String>> iterator;
+								    
+				    iterator = set.iterator();	
+				    
+					User loginuser = null;
+					String  resultstring = null;
+						
+					while (iterator.hasNext()) {
+						Map.Entry<User, String> loginresult= (Map.Entry<User, String>) iterator.next();
+						loginuser = loginresult.getKey();
+						resultstring = loginresult.getValue();						
+					}
+						
+											
+					if (resultstring.equals("成功登录")) {
+							
+						
+						ShowDialog(resultstring);
+						getFrame().dispose();
+						MainWindows windows  = new MainWindows(loginuser);
+						windows.getFrame().setVisible(true);
+														
+					}
+						
+					else {
+							
+						ShowDialog(resultstring);
+							
+					}
+																
+				} catch (ClassNotFoundException e1) {
+
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+
+					e1.printStackTrace();
+				}
+				
+				
+				
+			}
+			
+		});
+		
+		
+		login.addKeyListener(new KeyAdapter() {
+			
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+				if (e.getKeyCode() == 13 || e.getKeyCode() == 16777296) {
+										
+					String username = usenametextfiled.getText();
+					String password = passwordtextfiled.getText();
+					
+					try {
+						Map<User,String> resultmap = User.LoginInUser(username, password);					
+						Set<Map.Entry<User, String>> set = resultmap.entrySet();
+						Iterator<Map.Entry<User, String>> iterator;
+									    
+					    iterator = set.iterator();	
+					    
+						User loginuser = null;
+						String  resultstring = null;
+							
+						while (iterator.hasNext()) {
+							Map.Entry<User, String> loginresult= (Map.Entry<User, String>) iterator.next();
+							loginuser = loginresult.getKey();
+							resultstring = loginresult.getValue();						
+						}
+							
+												
+						if (resultstring.equals("成功登录")) {
+								
+							
+							ShowDialog(resultstring);
+							getFrame().dispose();
+							MainWindows windows  = new MainWindows(loginuser);
+							windows.getFrame().setVisible(true);
+															
+						}
+							
+						else {
+								
+							ShowDialog(resultstring);
+								
+						}
+																	
+					} catch (ClassNotFoundException e1) {
+
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+
+						e1.printStackTrace();
+					}
+					
+					
+					
+				}
+
+				
+			}
+		});
+	}
+	
+	
+    private void ShowDialog(String word) {
+
+         JOptionPane.showMessageDialog(null,word, "提示ʾ", JOptionPane.INFORMATION_MESSAGE); 
+		
+    }
+	
+	
+
+}

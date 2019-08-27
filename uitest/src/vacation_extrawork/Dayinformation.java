@@ -5,13 +5,13 @@ import java.sql.Date;
 public class Dayinformation{
 	
 
-	private String actualtimenoclear;
-	private String reasons;
-	private String reasons_details;
-	private String reasons_explanation;
-	private Date time;
-	private String labelday;
-	private String handleovertimework;
+	protected String actualtimenoclear;
+	protected String reasons;
+	protected String reasons_details;
+	protected String reasons_explanation;
+	protected Date time;
+	protected String labelday;
+	protected String handleovertimework;
 	
 	
 

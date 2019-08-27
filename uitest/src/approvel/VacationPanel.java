@@ -5,17 +5,20 @@ import java.awt.Font;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class VacationPanel extends JPanel {
-		
+import implement.BackgroundPanel;
+import implement.RoundBorder;
+
+public class VacationPanel extends BackgroundPanel {
+	
+
 	JLabel titlelabel = new JLabel("\u5F02\u5E38\u51FA\u52E4\u8BF4\u660E");	
 	JLabel name = new JLabel("\u59D3\u540D\uFF1A\u5F20\u5343\u5531");		
 	JLabel vacationtype = new JLabel("\u5047\u522B\uFF1A\u6362\u4F11");		
@@ -30,6 +33,7 @@ public class VacationPanel extends JPanel {
 	String wokervacationdate = null;
 	String wokervacationtime = null;
 	String wokerdepartment = null;
+	String reasonsString = null;
 	
 	
 	                                         
@@ -53,22 +57,29 @@ public class VacationPanel extends JPanel {
 		return wokerdepartment;
 	}
 
-	public VacationPanel(String nameforwoker,String vacationdateforwoker,String vacationtimeforwoker,String vacationtypeforwoker,String departmentforwoker) {
+	public VacationPanel(String nameforwoker,String vacationdateforwoker,String vacationtimeforwoker,String vacationtypeforwoker,String departmentforwoker,String reasonsString) {
 		
-		titlelabel.setFont(new Font("黑体", Font.BOLD, 20));
+			
+		titlelabel.setFont(new Font("幼圆", Font.BOLD, 20));
 		titlelabel.setHorizontalAlignment(SwingConstants.CENTER);
-		name.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-		vacationtype.setFont(new Font("微软雅黑", Font.PLAIN, 14));
-		vacationtime.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		name.setForeground(Color.DARK_GRAY);
+		name.setFont(new Font("幼圆", Font.PLAIN, 14));
+		vacationtype.setForeground(Color.DARK_GRAY);
+		vacationtype.setFont(new Font("幼圆", Font.PLAIN, 14));
+		vacationtime.setForeground(Color.DARK_GRAY);
+		vacationtime.setFont(new Font("幼圆", Font.BOLD, 16));
+		approval.setForeground(Color.DARK_GRAY);
 		approval.setFont(new Font("黑体", Font.BOLD, 16));
 		approval.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		deny.setForeground(Color.DARK_GRAY);
 		deny.setFont(new Font("黑体", Font.BOLD, 16));
 		deny.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		mygourpButtonGroup.add(approval);
 		mygourpButtonGroup.add(deny);
-		department.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+		department.setForeground(Color.DARK_GRAY);
+		department.setFont(new Font("幼圆", Font.PLAIN, 14));
 		
-		this.setBorder(new LineBorder(new Color(0, 0, 0), 1,true));
+		this.setBorder(new RoundBorder());
 		this.setBackground(Color.WHITE);
 		
 		wokername = nameforwoker;
@@ -82,30 +93,39 @@ public class VacationPanel extends JPanel {
 		department.setText("部门："+wokerdepartment);
 		vacationtime.setText("时间："+vacationdateforwoker+" "+vacationtimeforwoker);
 		
+		JLabel reasons = new JLabel("未打卡原因："+reasonsString);
+		reasons.setForeground(Color.DARK_GRAY);
+		reasons.setFont(new Font("幼圆", Font.BOLD, 16));
+		
 		GroupLayout gl_p1 = new GroupLayout(this);
 		gl_p1.setHorizontalGroup(
 			gl_p1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_p1.createSequentialGroup()
-					.addGap(40)
-					.addGroup(gl_p1.createParallelGroup(Alignment.LEADING, false)
+					.addGroup(gl_p1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_p1.createSequentialGroup()
-							.addComponent(name, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addGap(20)
-							.addComponent(vacationtype, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(70)
-							.addComponent(department, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+							.addGap(40)
+							.addGroup(gl_p1.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_p1.createSequentialGroup()
+									.addComponent(name, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+									.addGap(20)
+									.addComponent(vacationtype, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(50)
+									.addComponent(department, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_p1.createSequentialGroup()
+									.addGap(230)
+									.addComponent(approval)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(deny, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(17))
+								.addComponent(vacationtime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 						.addGroup(gl_p1.createSequentialGroup()
-							.addGap(230)
-							.addComponent(approval)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(deny, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(17))
-						.addComponent(vacationtime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(23))
-				.addGroup(gl_p1.createSequentialGroup()
-					.addGap(142)
-					.addComponent(titlelabel)
-					.addContainerGap(137, Short.MAX_VALUE))
+							.addGap(142)
+							.addComponent(titlelabel)))
+					.addContainerGap(17, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_p1.createSequentialGroup()
+					.addContainerGap(40, Short.MAX_VALUE)
+					.addComponent(reasons, GroupLayout.PREFERRED_SIZE, 382, GroupLayout.PREFERRED_SIZE)
+					.addGap(17))
 		);
 		gl_p1.setVerticalGroup(
 			gl_p1.createParallelGroup(Alignment.LEADING)
@@ -119,13 +139,16 @@ public class VacationPanel extends JPanel {
 						.addComponent(name, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(vacationtime, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+					.addGap(9)
+					.addComponent(reasons, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
 					.addGroup(gl_p1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(approval)
 						.addComponent(deny))
 					.addGap(24))
 		);
 		this.setLayout(gl_p1);
+		
 	}
 	
 	public boolean getApprovalState() {
@@ -151,6 +174,4 @@ public class VacationPanel extends JPanel {
 		
 		approval.setSelected(true);
 	}
-	
-	
 }

@@ -29,6 +29,7 @@ import ojdbc.DataBaseOperation;
 
 import javax.swing.JList;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.FlowLayout;
 import javax.swing.border.LineBorder;
@@ -93,6 +94,8 @@ public class ExtraWorkWindows {
 		frame.setBounds(100, 100, 207, 435);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
+		ImageIcon icon55 = new ImageIcon("src/image/汇景图标.png");		
+		frame.setIconImage(icon55.getImage());
 		
 		ButtonGroup mygourpButtonGroup = new ButtonGroup();
 		
@@ -219,14 +222,16 @@ public class ExtraWorkWindows {
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(5)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(submitextrawork, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-						.addComponent(panelhandle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-						.addComponent(paneltime, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-						.addComponent(panelreason, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+						.addComponent(panelhandle, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addComponent(paneltime, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addComponent(panelreason, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(submitextrawork, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
+							.addGap(32)))
 					.addGap(5))
 		);
 		groupLayout.setVerticalGroup(
@@ -240,7 +245,7 @@ public class ExtraWorkWindows {
 					.addComponent(panelhandle, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 					.addGap(15)
 					.addComponent(submitextrawork, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(15))
+					.addGap(18))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 		
@@ -291,7 +296,7 @@ public class ExtraWorkWindows {
 	public void setdata(String Actualtimenoclear,String Explainreason) {
 		 
 		 String nameString = getlabel().getCal().getUser().getCheckname();	 		 		 
-		 Dayinformation information = new Dayinformation();
+		 Approvel_N_Dayinformation information = new Approvel_N_Dayinformation();
 		 String catogoryString = getlabel().getNewSubimitWindows().getVacationorExtrawork();
 		 String vacationreasonString = (String)extraworktype.getSelectedItem();
 		 String timeString = String.valueOf(getlabel().getNewSubimitWindows().getyear())+"-"+
@@ -307,11 +312,16 @@ public class ExtraWorkWindows {
 		 information.setreasons_explanation(Explainreason);
 		 information.sethandleovertimework(howtodealwithovertimework);
 		 
+		 int vnpassed = 0;
+		 information.setVACATION_NORMAL_PASSED(vnpassed);
+		 String level_shape = getlabel().getCal().getUser().getLevel_shape();
+		 information.setLEVEL_SHAPE(level_shape);
+		 information.setDEPARTMENT(getlabel().getCal().getUser().getDepartmentString());
 		 CheckTheManExist(nameString);
 		 
 		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {
 			if (nameString.equals(getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
-				getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getDayinformation().add(information);				
+				getlabel().getNewSubimitWindows().getSubmitdatagroup().get(i).getN_dayinformation().add(information);				
 			}
 
 		}
@@ -344,7 +354,7 @@ public class ExtraWorkWindows {
 	
 	private void CreateOneManData(String name) {
 		
-		OneManData OnePersondata = new OneManData(new ArrayList<Dayinformation>());
+		OneManData OnePersondata = new OneManData(new ArrayList<Approvel_N_Dayinformation>());
 		OnePersondata.setName(name);
 		DataBaseOperation getidBaseOperation = new DataBaseOperation();
 		int id = -1;

@@ -1,0 +1,284 @@
+package user;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JTextPane;
+import java.awt.GridBagConstraints;
+import java.awt.TextField;
+import java.awt.FlowLayout;
+import java.awt.Component;
+import javax.swing.Box;
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import ojdbc.DataBaseOperation;
+
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import java.awt.Insets;
+import javax.swing.JPasswordField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
+
+public class RegisterWindows {
+
+	private JFrame frame;
+	private JTextField checknamefield;
+	private JPasswordField passwordtextfiled;
+	private JPasswordField CetificatePasswordField;
+	private JTextField usenametextfiled;
+
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	public RegisterWindows() {
+		initialize();
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.setTitle("\u6CE8\u518C\u7A97\u53E3");
+		frame.setBounds(100, 100, 450, 514);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		ImageIcon icon55 = new ImageIcon("src/image/汇景图标.png");		
+		frame.setIconImage(icon55.getImage());
+		
+		JButton register = new JButton("\u6CE8\u518C");
+		register.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		JLabel CetificatePasswordlable = new JLabel("\u786E\u8BA4\u5BC6\u7801\uFF1A");
+		CetificatePasswordlable.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		CetificatePasswordField = new JPasswordField();
+		CetificatePasswordField.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		JLabel label_1 = new JLabel("\u5458\u5DE5\u59D3\u540D\uFF1A");
+		label_1.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		checknamefield = new JTextField();
+		checknamefield.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		checknamefield.setColumns(10);
+		
+		JLabel passwordlable = new JLabel("\u6CE8\u518C\u5BC6\u7801\uFF1A");
+		passwordlable.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		passwordtextfiled = new JPasswordField();
+		passwordtextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		JLabel title = new JLabel("欢迎员工注册");
+		title.setFont(new Font("微软雅黑", Font.PLAIN, 27));
+		
+		JLabel tiptitle = new JLabel("××请认真阅读注册说明××");
+		tiptitle.setForeground(Color.MAGENTA);
+		tiptitle.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label = new JLabel("××请填写员工的真实姓名，非本公司员工不允许注册\r\n");
+		label.setForeground(Color.MAGENTA);
+		label.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel usernamelabel = new JLabel("注册帐号：");
+		usernamelabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		usenametextfiled = new JTextField();
+		usenametextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		usenametextfiled.setColumns(10);
+		
+		JLabel label_3 = new JLabel("××不能小于6位");
+		label_3.setForeground(Color.MAGENTA);
+		label_3.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label_2 = new JLabel("××不能小于6位");
+		label_2.setForeground(Color.MAGENTA);
+		label_2.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label_4 = new JLabel("××一个员工只能注册一个帐号！");
+		label_4.setForeground(Color.MAGENTA);
+		label_4.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label_5 = new JLabel("如有问题，请联系管理员！");
+		label_5.setForeground(Color.MAGENTA);
+		label_5.setFont(new Font("宋体", Font.PLAIN, 12));
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(185)
+							.addComponent(register))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(70)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(CetificatePasswordlable)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(CetificatePasswordField, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE))
+								.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(68)
+									.addComponent(tiptitle))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(usernamelabel, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+									.addGap(4)
+									.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(passwordlable)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, 229, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+									.addComponent(title, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(label_1)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(checknamefield, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))))))
+					.addContainerGap(380, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(139, Short.MAX_VALUE)
+					.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(15)
+					.addComponent(title)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(tiptitle)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_1)
+						.addComponent(checknamefield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label)
+					.addGap(2)
+					.addComponent(label_4)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(3)
+							.addComponent(usernamelabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+						.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(label_3)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(passwordlable)
+						.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addComponent(label_2)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(CetificatePasswordlable)
+						.addComponent(CetificatePasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(31)
+					.addComponent(label_5)
+					.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+					.addComponent(register)
+					.addGap(18))
+		);
+		frame.getContentPane().setLayout(groupLayout);
+		
+		register.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				
+			}
+		});
+		
+		
+		register.addMouseListener(new MouseAdapter() {
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				
+				String usernameString = usenametextfiled.getText();
+				String checknameString = checknamefield.getText();
+				String passwordString = passwordtextfiled.getText();
+				String cetificationString = CetificatePasswordField.getText();
+
+				String departmentString = (String)departmentfield.getSelectedItem();
+				
+				int usernamelength = usernameString.length();
+				int passwordlength = passwordString.length();
+				
+				if (checknameString.equals("")) {
+					ShowDialog("员工姓名不能为空");
+					return;
+				}
+				
+				if (usernamelength<6) {
+					
+					ShowDialog("帐号长度不能小于6位");
+					return;
+				}
+				
+				if (passwordlength<6) {
+					ShowDialog("密码长度不能小于6位");
+					return;
+					
+				}
+				
+				if (!passwordString.equals(cetificationString)) {
+					ShowDialog("两次输入的密码不一致");
+					return;
+					
+				}
+				
+				
+				try {
+					boolean result = User.RegisterUser(checknameString, usernameString, passwordString, departmentString);
+					if (result == true) {
+						ShowDialog("注册成功");
+						getFrame().dispose();
+					}
+				} catch (ClassNotFoundException e1) {
+					ShowDialog("数据库连接错误");
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO �Զ����ɵ� catch ��
+					ShowDialog("查询到你不是本公司的员工，或者你已经注册过了帐号，请联系管理员");
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
+		
+	}
+	
+	
+	
+	
+	
+    private void ShowDialog(String word) {
+
+         JOptionPane.showMessageDialog(null,word, "提示ʾ", JOptionPane.ERROR_MESSAGE); 
+		
+    }
+}

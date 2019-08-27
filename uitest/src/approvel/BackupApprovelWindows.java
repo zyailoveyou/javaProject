@@ -53,33 +53,32 @@ public class BackupApprovelWindows {
 		scrollPane.setViewportView(panelscroll);
 		
 		JLabel titlelabel = new JLabel("\u5F02\u5E38\u51FA\u52E4\u8BF4\u660E");
-		titlelabel.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 20));
+		titlelabel.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½", Font.BOLD, 20));
 		titlelabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel name = new JLabel("\u59D3\u540D\uFF1A\u5F20\u5343\u5531");
-		name.setFont(new Font("ËÎÌå", Font.PLAIN, 14));
+		name.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 14));
 		
 		JLabel vacationtype = new JLabel("\u5047\u522B\uFF1A\u6362\u4F11");
-		vacationtype.setFont(new Font("ËÎÌå", Font.PLAIN, 14));
+		vacationtype.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 14));
 		
 		JLabel vacationtime = new JLabel("\u8BF7\u5047\u65F6\u95F4\uFF1A");
-		vacationtime.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		vacationtime.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½", Font.BOLD, 16));
 		
 		JCheckBox approval = new JCheckBox("\u5141\u8BB8");
-		approval.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		approval.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½", Font.BOLD, 16));
 		approval.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		JCheckBox deny = new JCheckBox("\u62D2\u7EDD");
-		deny.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 16));
+		deny.setFont(new Font("Î¢ï¿½ï¿½ï¿½Åºï¿½", Font.BOLD, 16));
 		deny.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		ButtonGroup mygourpButtonGroup = new ButtonGroup();
-		panelscroll.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		mygourpButtonGroup.add(approval);
 		mygourpButtonGroup.add(deny);
 		
 		JLabel department = new JLabel("\u90E8\u95E8\uFF1A\u529E\u516C\u5BA4");
-		department.setFont(new Font("ËÎÌå", Font.PLAIN, 14));
+		department.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.PLAIN, 14));
 		
 		GroupLayout gl_p1 = new GroupLayout(p1);
 		gl_p1.setHorizontalGroup(
@@ -125,7 +124,22 @@ public class BackupApprovelWindows {
 					.addGap(24))
 		);
 		p1.setLayout(gl_p1);
-		panelscroll.add(p1);
+		GroupLayout gl_panelscroll = new GroupLayout(panelscroll);
+		gl_panelscroll.setHorizontalGroup(
+			gl_panelscroll.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelscroll.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(p1, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panelscroll.setVerticalGroup(
+			gl_panelscroll.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelscroll.createSequentialGroup()
+					.addGap(5)
+					.addComponent(p1, GroupLayout.PREFERRED_SIZE, 249, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(139, Short.MAX_VALUE))
+		);
+		panelscroll.setLayout(gl_panelscroll);
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
 	}
 }

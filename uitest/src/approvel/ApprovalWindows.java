@@ -18,6 +18,7 @@ import mylayout.MyVFlowLayout;
 import ojdbc.DataBaseOperation;
 import tcp.ListInformation;
 import user.User;
+import java.awt.Color;
 public class ApprovalWindows extends Windows {
 
 	ListInformation informationgroup;
@@ -37,9 +38,10 @@ public class ApprovalWindows extends Windows {
 	 */
 	private void initialize() throws ClassNotFoundException, SQLException {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 527);
+		frame.setBounds(100, 100, 525, 527);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
 		frame.setTitle("请假审批");
 		
 		
@@ -56,7 +58,7 @@ public class ApprovalWindows extends Windows {
 		if (informationgroup!= null) {
 			
 			for (ArrayList<String> list : informationgroup.getLineinformationgroup()) {
-				VacationPanel vacationPanel = new VacationPanel(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4));
+				VacationPanel vacationPanel = new VacationPanel(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5));
 				panelcontainer.add(vacationPanel);
 				vacationPanels.add(vacationPanel);
 			}
@@ -72,12 +74,15 @@ public class ApprovalWindows extends Windows {
 		frame.getContentPane().add(panel, BorderLayout.SOUTH);
 		
 		JButton quicklyapproval = new JButton("\u4E00\u952E\u540C\u610F");
-		quicklyapproval.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		quicklyapproval.setForeground(Color.DARK_GRAY);
+		quicklyapproval.setFont(new Font("幼圆", Font.BOLD, 16));
 		panel.add(quicklyapproval);
 		
 		JButton submitapproval = new JButton("\u63D0\u4EA4\u5BA1\u6279");
-		submitapproval.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		submitapproval.setForeground(Color.DARK_GRAY);
+		submitapproval.setFont(new Font("幼圆", Font.BOLD, 16));
 		panel.add(submitapproval);
+		
 		
 		
 		if (user!=null) {
@@ -95,6 +100,8 @@ public class ApprovalWindows extends Windows {
 				for (VacationPanel v:vacationPanels) {
 					
 					v.Setcheckedstate();
+					System.out.println(v.getWidth());
+					System.out.println(v.getHeight());
 				}
 				
 			}

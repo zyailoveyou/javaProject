@@ -13,7 +13,9 @@ import java.util.Iterator;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import manager_operation.Manager_download_windows;
 import ojdbc.DataBaseOperation;
+import vacation_extrawork.Approvel_N_Dayinformation;
 import vacation_extrawork.Dayinformation;
 import vacation_extrawork.ExtraWorkWindows;
 import vacation_extrawork.OneManData;
@@ -58,8 +60,8 @@ public class Mylabel extends JLabel implements MouseListener {
 			
 			if (oneManData.getName().equals(name)) {
 				
-				ArrayList<Dayinformation> dayinformations = oneManData.getDayinformation();			
-				Iterator<Dayinformation> l2 = dayinformations.iterator();				
+				ArrayList<Approvel_N_Dayinformation> dayinformations = oneManData.getN_dayinformation();			
+				Iterator<Approvel_N_Dayinformation> l2 = dayinformations.iterator();				
 				while (l2.hasNext()) {
 					
 					Dayinformation dayinformation = (Dayinformation)l2.next();
@@ -117,6 +119,11 @@ public class Mylabel extends JLabel implements MouseListener {
 		
 		return (DownloadWindows)cal;	
 	}
+	
+	public Manager_download_windows getManager_download_windows() {
+		
+		return(Manager_download_windows)cal;
+	}
 
 
 	public Mylabel(Windows cal) {
@@ -147,9 +154,16 @@ public class Mylabel extends JLabel implements MouseListener {
 			ExecuteDownloadMode();
 		}
 		
+		else if ((getCal().getWindowsMode()).equals("管理员下载模式")) {
+			
+			ExecuteManager_download_windowsDownloadMode();
+		}
+		
 	}
 	
 	
+
+
 
 	private void ShowDialog(String word) {
 		
@@ -162,7 +176,7 @@ public class Mylabel extends JLabel implements MouseListener {
 	public void setdata(String Actualtimenoclear,String Explainreason) {
 		 
 		 String nameString = getCal().getUser().getCheckname();	 
-		 Dayinformation information = new Dayinformation();
+		 Approvel_N_Dayinformation information = new Approvel_N_Dayinformation();
 		 String catogoryString = (getNewSubimitWindows().getVacationorExtrawork());
 		 
 		 String timeString = String.valueOf(getNewSubimitWindows().getyear())+"-"+
@@ -178,11 +192,18 @@ public class Mylabel extends JLabel implements MouseListener {
 		 information.sethandleovertimework(null);
 		 
 		 
+		 int vnpassed = 0;
+		 information.setVACATION_NORMAL_PASSED(vnpassed);
+		 String level_shape = getCal().getUser().getLevel_shape();
+		 information.setLEVEL_SHAPE(level_shape);
+		 information.setDEPARTMENT(getCal().getUser().getDepartmentString());
+		 
+		 
 		 CheckTheManExist(nameString);
 		 
 		 for (int i=0;i<(getNewSubimitWindows().getSubmitdatagroup().size());i++) {
 			if (nameString.equals(getNewSubimitWindows().getSubmitdatagroup().get(i).getName())) {				
-				(getNewSubimitWindows().getSubmitdatagroup().get(i).getDayinformation()).add(information);				
+				(getNewSubimitWindows().getSubmitdatagroup().get(i).getN_dayinformation()).add(information);				
 			}
 
 		}
@@ -213,7 +234,7 @@ public class Mylabel extends JLabel implements MouseListener {
 	
 	private void CreateOneManData(String name) {
 		
-		OneManData OnePersondata = new OneManData(new ArrayList<Dayinformation>());
+		OneManData OnePersondata = new OneManData(new ArrayList<Approvel_N_Dayinformation>());
 		OnePersondata.setName(name);
 
 		int id = -1;	
@@ -412,6 +433,64 @@ public class Mylabel extends JLabel implements MouseListener {
 				
 			}
 	
+	}
+	
+	private void ExecuteManager_download_windowsDownloadMode() {
+		
+		if (!ischoose) {
+			
+			String nowchoosedateString = String.valueOf(getManager_download_windows().getyear())+"-"+String.valueOf(getManager_download_windows().getmonth())+"-"+getText();			
+			Date nowDate = Date.valueOf(nowchoosedateString);
+			
+			  if ((getManager_download_windows().getPeriod())[0] == null ) {
+				
+				(getManager_download_windows().getPeriod())[0] = nowDate;
+				SetChooseStatefornormalrestdayColor();
+
+				
+			  }
+			
+			  else {
+				
+				if ((getManager_download_windows().getPeriod())[1] == null) {
+										
+					(getManager_download_windows().getPeriod())[1] = nowDate;
+					SetChooseStatefornormalrestdayColor();
+					
+				}
+				
+				else {
+					
+					ShowDialog("日期设置满了必须先删除一个，再次点击设置好的日期可以删除");
+										
+				 }
+											
+			   }
+						   			
+			 }
+			
+			
+			else {
+				
+				String nowchoosedateString = String.valueOf(getManager_download_windows().getyear())+"-"+String.valueOf(getManager_download_windows().getmonth())+"-"+getText();			
+				Date nowDate = Date.valueOf(nowchoosedateString);
+				for (int i = 0; i < 2;i++) {					
+										
+					if ((getManager_download_windows().getPeriod())[i] != null) {
+												
+						if ((getManager_download_windows().getPeriod())[i].equals(nowDate)) {
+							(getManager_download_windows().getPeriod())[i] = null;
+							SetNoChooseState();
+							break;													
+						}
+												
+					}
+					
+					
+				}
+				
+			}
+		
 	}
 		
 

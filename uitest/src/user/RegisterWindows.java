@@ -19,9 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import implement.RoundBorder;
 import ojdbc.DataBaseOperation;
 
 import java.awt.event.ActionListener;
@@ -33,14 +35,16 @@ import java.awt.Insets;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class RegisterWindows {
 
 	private JFrame frame;
-	private JTextField usenametextfiled;
 	private JTextField checknamefield;
 	private JPasswordField passwordtextfiled;
 	private JPasswordField CetificatePasswordField;
+	private JTextField usenametextfiled;
+	private JTextField emailtextfield;
 
 	
 	public JFrame getFrame() {
@@ -55,126 +59,179 @@ public class RegisterWindows {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setTitle("\u6CE8\u518C\u7A97\u53E3");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 381, 545);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		frame.setLocationRelativeTo(null);
-		JPanel northfillin = new JPanel();
-		FlowLayout fl_northfillin = (FlowLayout) northfillin.getLayout();
-		fl_northfillin.setVgap(20);
-		fl_northfillin.setHgap(10);
-		frame.getContentPane().add(northfillin, BorderLayout.NORTH);
-		
-		JPanel centerfillin = new JPanel();
-		frame.getContentPane().add(centerfillin, BorderLayout.CENTER);
-		
-		Box ChecknameBox = Box.createHorizontalBox();
-		
-		JLabel label_1 = new JLabel("\u5458\u5DE5\u59D3\u540D\uFF1A");
-		label_1.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		ChecknameBox.add(label_1);
-		
-		checknamefield = new JTextField();
-		checknamefield.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		checknamefield.setColumns(10);
-		ChecknameBox.add(checknamefield);
-		
-		Box UsenameBox = Box.createHorizontalBox();
-		
-		JLabel usernamelabel = new JLabel("\u6CE8\u518C\u5E10\u53F7\uFF1A");
-		usernamelabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		UsenameBox.add(usernamelabel);
-		
-		usenametextfiled = new JTextField();
-		usenametextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		UsenameBox.add(usenametextfiled);
-		usenametextfiled.setColumns(10);
-		
-		Box PasswordBox = Box.createHorizontalBox();
-		
-		JLabel passwordlable = new JLabel("\u6CE8\u518C\u5BC6\u7801\uFF1A");
-		passwordlable.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		PasswordBox.add(passwordlable);
-		
-		passwordtextfiled = new JPasswordField();
-		passwordtextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		PasswordBox.add(passwordtextfiled);
-		
-		Box CetificatePasswordBox = Box.createHorizontalBox();
-		
-		JLabel CetificatePasswordlable = new JLabel("\u786E\u8BA4\u5BC6\u7801\uFF1A");
-		CetificatePasswordlable.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		CetificatePasswordBox.add(CetificatePasswordlable);
-		
-		CetificatePasswordField = new JPasswordField();
-		CetificatePasswordField.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		CetificatePasswordBox.add(CetificatePasswordField);
-		
-		GroupLayout gl_centerfillin = new GroupLayout(centerfillin);
-		gl_centerfillin.setHorizontalGroup(
-			gl_centerfillin.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_centerfillin.createSequentialGroup()
-					.addGroup(gl_centerfillin.createParallelGroup(Alignment.LEADING)
-						.addComponent(ChecknameBox, GroupLayout.PREFERRED_SIZE, 364, GroupLayout.PREFERRED_SIZE)
-						.addComponent(UsenameBox, GroupLayout.PREFERRED_SIZE, 364, GroupLayout.PREFERRED_SIZE)
-						.addComponent(PasswordBox, GroupLayout.PREFERRED_SIZE, 364, GroupLayout.PREFERRED_SIZE)
-						.addComponent(CetificatePasswordBox, GroupLayout.PREFERRED_SIZE, 364, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_centerfillin.setVerticalGroup(
-			gl_centerfillin.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_centerfillin.createSequentialGroup()
-					.addGap(10)
-					.addComponent(ChecknameBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(UsenameBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addComponent(PasswordBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addComponent(CetificatePasswordBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setHgap(15);
-		ChecknameBox.add(panel);
-		
-		JLabel label = new JLabel("\u6240\u5C5E\u90E8\u95E8\uFF1A");
-		ChecknameBox.add(label);
-		label.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		
-		JComboBox departmentfield = new JComboBox();
-		departmentfield.setModel(new DefaultComboBoxModel(new String[] {"\u5DE5\u7A0B\u90E8", "\u529E\u516C\u5BA4", "\u8D22\u52A1\u90E8", "\u9500\u552E\u90E8"}));
-		departmentfield.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		ChecknameBox.add(departmentfield);
-		
-		JPanel panel_1 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_1.getLayout();
-		flowLayout_3.setHgap(1);
-		ChecknameBox.add(panel_1);
-		centerfillin.setLayout(gl_centerfillin);
-		
-		JPanel southfillin = new JPanel();
-		frame.getContentPane().add(southfillin, BorderLayout.SOUTH);
+		ImageIcon icon55 = new ImageIcon("src/image/汇景图标.png");		
+		frame.setIconImage(icon55.getImage());
 		
 		JButton register = new JButton("\u6CE8\u518C");
 		register.setFont(new Font("微软雅黑", Font.BOLD, 16));
-		GroupLayout gl_southfillin = new GroupLayout(southfillin);
-		gl_southfillin.setHorizontalGroup(
-			gl_southfillin.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_southfillin.createSequentialGroup()
-					.addGap(188)
-					.addComponent(register)
-					.addContainerGap(191, Short.MAX_VALUE))
+		
+		JLabel CetificatePasswordlable = new JLabel("\u786E\u8BA4\u5BC6\u7801\uFF1A");
+		CetificatePasswordlable.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		
+		CetificatePasswordField = new JPasswordField();
+		CetificatePasswordField.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		CetificatePasswordField.setBorder(new RoundBorder());
+		
+		JLabel label_1 = new JLabel("\u5458\u5DE5\u59D3\u540D\uFF1A");
+		label_1.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		checknamefield = new JTextField();
+		checknamefield.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		checknamefield.setBorder(new RoundBorder());
+
+		
+		JLabel passwordlable = new JLabel("\u6CE8\u518C\u5BC6\u7801\uFF1A");
+		passwordlable.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		passwordtextfiled = new JPasswordField();
+		passwordtextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		passwordtextfiled.setBorder(new RoundBorder());
+		
+		JLabel title = new JLabel("欢迎员工注册");
+		title.setFont(new Font("微软雅黑", Font.BOLD, 27));
+		
+		JLabel tiptitle = new JLabel("××请认真阅读注册说明××");
+		tiptitle.setForeground(Color.MAGENTA);
+		tiptitle.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label = new JLabel("××请填写员工的真实姓名，非本公司员工不允许注册\r\n");
+		label.setForeground(Color.MAGENTA);
+		label.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel usernamelabel = new JLabel("注册帐号：");
+		usernamelabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		usenametextfiled = new JTextField();
+		usenametextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		usenametextfiled.setBorder(new RoundBorder());
+		
+		
+		JLabel label_3 = new JLabel("××不能小于6位");
+		label_3.setForeground(Color.MAGENTA);
+		label_3.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label_2 = new JLabel("××不能小于6位");
+		label_2.setForeground(Color.MAGENTA);
+		label_2.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label_4 = new JLabel("××一个员工只能注册一个帐号！");
+		label_4.setForeground(Color.MAGENTA);
+		label_4.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel label_5 = new JLabel("如有问题，请联系管理员！");
+		label_5.setForeground(Color.MAGENTA);
+		label_5.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		JLabel emailwordlabel = new JLabel("备用邮箱：");
+		emailwordlabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		
+		JLabel label_7 = new JLabel("××用于找回密码，必须填写");
+		label_7.setForeground(Color.MAGENTA);
+		label_7.setFont(new Font("宋体", Font.PLAIN, 12));
+		
+		emailtextfield = new JTextField();
+		emailtextfield.setFont(new Font("微软雅黑", Font.BOLD, 16));
+		emailtextfield.setBorder(new RoundBorder());
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(41, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(label, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+									.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(passwordlable)
+										.addGap(1)
+										.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE))
+									.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(usernamelabel, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+										.addGap(1)
+										.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE))
+									.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(emailwordlabel, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+										.addGap(1)
+										.addComponent(emailtextfield, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE))
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(CetificatePasswordlable)
+										.addGap(1)
+										.addComponent(CetificatePasswordField, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE))
+									.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(label_1)
+										.addGap(1)
+										.addComponent(checknamefield, GroupLayout.PREFERRED_SIZE, 209, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(register, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+									.addGap(104)))
+							.addContainerGap(29, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(5)
+									.addComponent(tiptitle))
+								.addComponent(title, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE))
+							.addGap(96))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addGap(100))))
 		);
-		gl_southfillin.setVerticalGroup(
-			gl_southfillin.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_southfillin.createSequentialGroup()
-					.addComponent(register)
-					.addContainerGap(30, Short.MAX_VALUE))
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(11)
+					.addComponent(title)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(tiptitle)
+					.addGap(34)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label_1)
+						.addComponent(checknamefield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(1)
+					.addComponent(label)
+					.addGap(1)
+					.addComponent(label_4)
+					.addGap(12)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(usernamelabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+						.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(2)
+					.addComponent(label_3)
+					.addGap(12)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(passwordlable)
+						.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(2)
+					.addComponent(label_2)
+					.addGap(12)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(CetificatePasswordlable)
+						.addComponent(CetificatePasswordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(29)
+							.addComponent(emailwordlabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(29)
+							.addComponent(emailtextfield, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label_7)
+					.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+					.addComponent(register, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label_5)
+					.addGap(30))
 		);
-		southfillin.setLayout(gl_southfillin);
+		frame.getContentPane().setLayout(groupLayout);
 		
 		register.addMouseListener(new MouseAdapter() {
 			
@@ -184,16 +241,6 @@ public class RegisterWindows {
 				
 			}
 		});
-		
-		JPanel westfillin = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) westfillin.getLayout();
-		flowLayout_1.setHgap(20);
-		frame.getContentPane().add(westfillin, BorderLayout.WEST);
-		
-		JPanel eastfillin = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) eastfillin.getLayout();
-		flowLayout_2.setHgap(20);
-		frame.getContentPane().add(eastfillin, BorderLayout.EAST);
 		
 		
 		register.addMouseListener(new MouseAdapter() {
@@ -207,8 +254,7 @@ public class RegisterWindows {
 				String checknameString = checknamefield.getText();
 				String passwordString = passwordtextfiled.getText();
 				String cetificationString = CetificatePasswordField.getText();
-
-				String departmentString = (String)departmentfield.getSelectedItem();
+				String emailmentString = (String)emailtextfield.getText();
 				
 				int usernamelength = usernameString.length();
 				int passwordlength = passwordString.length();
@@ -238,7 +284,7 @@ public class RegisterWindows {
 				
 				
 				try {
-					boolean result = User.RegisterUser(checknameString, usernameString, passwordString, departmentString);
+					boolean result = User.RegisterUser(checknameString, usernameString, passwordString, emailmentString);
 					if (result == true) {
 						ShowDialog("注册成功");
 						getFrame().dispose();
@@ -247,7 +293,7 @@ public class RegisterWindows {
 					ShowDialog("数据库连接错误");
 					e1.printStackTrace();
 				} catch (SQLException e1) {
-					// TODO �Զ����ɵ� catch ��
+
 					ShowDialog("查询到你不是本公司的员工，或者你已经注册过了帐号，请联系管理员");
 					e1.printStackTrace();
 				}
@@ -267,7 +313,4 @@ public class RegisterWindows {
          JOptionPane.showMessageDialog(null,word, "提示ʾ", JOptionPane.ERROR_MESSAGE); 
 		
     }
-	
-	
-
 }

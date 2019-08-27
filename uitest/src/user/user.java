@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import javax.swing.JOptionPane;
 
 import ojdbc.DataBaseOperation;
+import ojdbc.LocaltestDataBaseOperation;
 
 public class User {
 	
@@ -73,6 +74,8 @@ public class User {
 	}
 
 
+
+
 	public String getVACATION_APPROVAL_NORMAL() {
 		return VACATION_APPROVAL_NORMAL;
 	}
@@ -109,7 +112,7 @@ public class User {
 		this.level_shape = level_shape;
 		this.VACATION_APPROVAL_NORMAL = VACATION_APPROVAL_NORMAL;
 		this.VACATION_APPROVAL_HIGHER = VACATION_APPROVAL_HIGHER;
-		this.ASSESS_APPROVAL_NORMAL = ASSESS_APPROVAL_NORMAL;
+		this.ASSESS_APPROVAL_NORMAL= ASSESS_APPROVAL_NORMAL;
 		this.ASSESS_APPROVAL_HIGHER = ASSESS_APPROVAL_HIGHER;
 		
 	}
@@ -122,12 +125,11 @@ public class User {
 	}
 	
 		
-	public static boolean RegisterUser(String checkname,String usernameString,String passwordString,String departmentString) throws ClassNotFoundException, SQLException
+	public static boolean RegisterUser(String checkname,String usernameString,String passwordString,String emailstring) throws ClassNotFoundException, SQLException
 	{
 		
-		DataBaseOperation testBaseOperation = new DataBaseOperation();		
-		int id = testBaseOperation.GetID_from_Nanme(checkname);		
-		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname, id,departmentString);
+		DataBaseOperation testBaseOperation = new DataBaseOperation();			
+		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname,emailstring);
 				
 	}
 	
@@ -143,6 +145,10 @@ public class User {
 			resultmap.put(returnUser, "帐号密码为空");
 			return resultmap;
 		}
+		
+		
+//		LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+//		Map<ArrayList<String>, String> resultString = localtestDataBaseOperation.SelectOneLine_DATA_ACCOUNT(usernameString, passwordString);
 		
 		DataBaseOperation testBaseOperation = new DataBaseOperation();		
 		Map<ArrayList<String>, String> resultString = testBaseOperation.SelectOneLine_DATA_ACCOUNT(usernameString, passwordString);

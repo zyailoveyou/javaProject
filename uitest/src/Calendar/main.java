@@ -1,6 +1,7 @@
 package Calendar;
 
 import javax.swing.ImageIcon;
+import javax.swing.UIManager;
 
 import approvel.ApprovalWindows;
 import approvel.BackupApprovelWindows;
@@ -12,17 +13,27 @@ import user.LoginInWindows;
 	
 	public static void main(String[] args) {
 			
-		ImageIcon icon = new ImageIcon("uitest/image/upload.png");
+	    try {
+            //here you can put the selected theme class name in JTattoo
+            UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+ 
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginInWindows.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginInWindows.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginInWindows.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginInWindows.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+		
+			
+	    
+	    
+	    
 			LoginInWindows window = new LoginInWindows();
 			window.getFrame().setVisible(true);
 			window.getFrame().requestFocus();
-		
-//		ApprovalWindows testwindows = new ApprovalWindows();
-//		testwindows.getFrame().setVisible(true);
-//		
-//		BackupApprovelWindows tesBackupDownWindows = new BackupApprovelWindows();
-//		tesBackupDownWindows.getFrame().setVisible(true);
-
-										
+											
       }
  }
