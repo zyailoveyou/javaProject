@@ -629,7 +629,7 @@ public class LocaltestDataBaseOperation {
 				String ASSESS_APPROVAL_NORMAL_UPPER = myresultSet.getString("ASSESS_APPROVAL_NORMAL_UPPER");
 				String ASSESS_APPROVAL_HIGHER_UPPER = myresultSet.getString("ASSESS_APPROVAL_HIGHER_UPPER");
 				String email = myresultSet.getString("email");
-				String VACATION_APPROVAL_NORMAL_RIGHT = myresultSet.getString("VACATION_APPROVAL_NORMAL_RIGHT");
+				String VACATION_APPROVAL_NORMAL_RIGHT = myresultSet.getString("VACATION_APPROVAL_NORMAL__RIGHT");
 				String VACATION_APPROVAL_HIGHER_RIGHT = myresultSet.getString("VACATION_APPROVAL_HIGHER_RIGHT");
 				String ASSESS_APPROVAL_NORMAL_RIGHT = myresultSet.getString("ASSESS_APPROVAL_NORMAL_RIGHT");
 				String ASSESS_APPROVAL_HIGHER_RIGHT = myresultSet.getString("ASSESS_APPROVAL_HIGHER_RIGHT");
@@ -653,11 +653,6 @@ public class LocaltestDataBaseOperation {
 						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_UPPER);
 						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_UPPER);
 						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_UPPER);
-						userinformationArrayList.add(email);
-						userinformationArrayList.add(VACATION_APPROVAL_NORMAL_RIGHT);
-						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_RIGHT);
-						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_RIGHT);
-						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_RIGHT);
 						resutMap.put(userinformationArrayList, "成功登录");						
 						DisposeLocalDataBaseLink();
 						return resutMap;

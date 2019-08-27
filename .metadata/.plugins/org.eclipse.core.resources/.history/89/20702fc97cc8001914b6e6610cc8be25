@@ -653,11 +653,6 @@ public class LocaltestDataBaseOperation {
 						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_UPPER);
 						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_UPPER);
 						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_UPPER);
-						userinformationArrayList.add(email);
-						userinformationArrayList.add(VACATION_APPROVAL_NORMAL_RIGHT);
-						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_RIGHT);
-						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_RIGHT);
-						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_RIGHT);
 						resutMap.put(userinformationArrayList, "成功登录");						
 						DisposeLocalDataBaseLink();
 						return resutMap;

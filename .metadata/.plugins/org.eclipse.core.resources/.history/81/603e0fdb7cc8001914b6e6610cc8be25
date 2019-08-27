@@ -199,7 +199,7 @@ public class MainWindows {
 			approvel.setEnabled(false);
 		}
 		
-		if (Integer.valueOf(getUser().getASSESS_APPROVAL_HIGHER_RIGHT())!=1&&Integer.valueOf(getUser().getASSESS_APPROVAL_HIGHER_RIGHT())!=1) {
+		if (Integer.valueOf(getUser().getVACATION_APPROVAL_NORMAL())!=1&&Integer.valueOf(getUser().getVACATION_APPROVAL_HIGHER())!=1) {
 			
 			vacationapproval.setEnabled(false);
 		}
