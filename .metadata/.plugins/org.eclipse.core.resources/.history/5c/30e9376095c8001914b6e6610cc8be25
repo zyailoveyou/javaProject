@@ -253,7 +253,7 @@ public class DataBaseOperation {
 			System.out.println(count);
 			
 			if (count ==2) {
-								
+				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
 				
@@ -265,7 +265,6 @@ public class DataBaseOperation {
 				}
 				
 				ListInformation informationgroup = new ListInformation();
-				
 				while (myresultSet.next()) {
 					
 				String NAME = myresultSet.getString("NAME");
@@ -297,7 +296,9 @@ public class DataBaseOperation {
 				
 			}
 			
-						
+			
+			
+			
 			if (count == 3) {
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));

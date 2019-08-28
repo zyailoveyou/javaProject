@@ -624,15 +624,15 @@ public class LocaltestDataBaseOperation {
 				String power_level = myresultSet.getString("POWER_LEVEL");
 				String whether_manager = myresultSet.getString("WHETHERMANAGER");
 				String level_shape = myresultSet.getString("LEVEL_SHAPE");
-				String VACATION_APPROVAL_NORMAL_UPPER = myresultSet.getString("VACATION_APPROVAL_NORMAL_UPPER");
-				String VACATION_APPROVAL_HIGHER_UPPER = myresultSet.getString("VACATION_APPROVAL_HIGHER_UPPER");
-				String ASSESS_APPROVAL_NORMAL_UPPER = myresultSet.getString("ASSESS_APPROVAL_NORMAL_UPPER");
-				String ASSESS_APPROVAL_HIGHER_UPPER = myresultSet.getString("ASSESS_APPROVAL_HIGHER_UPPER");
+				String VACATION_APPROVAL_NORMAL_UPPER = myresultSet.getString("VA_AP_N_UPPER");
+				String VACATION_APPROVAL_HIGHER_UPPER = myresultSet.getString("VA_AP_H_UPPER");
+				String ASSESS_APPROVAL_NORMAL_UPPER = myresultSet.getString("AS_AP_N_UPPER");
+				String ASSESS_APPROVAL_HIGHER_UPPER = myresultSet.getString("AS_AP_H_UPPER");
 				String email = myresultSet.getString("email");
-				String VACATION_APPROVAL_NORMAL_RIGHT = myresultSet.getString("VACATION_APPROVAL_NORMAL_RIGHT");
-				String VACATION_APPROVAL_HIGHER_RIGHT = myresultSet.getString("VACATION_APPROVAL_HIGHER_RIGHT");
-				String ASSESS_APPROVAL_NORMAL_RIGHT = myresultSet.getString("ASSESS_APPROVAL_NORMAL_RIGHT");
-				String ASSESS_APPROVAL_HIGHER_RIGHT = myresultSet.getString("ASSESS_APPROVAL_HIGHER_RIGHT");
+				String VACATION_APPROVAL_NORMAL_RIGHT = myresultSet.getString("VA_AP_N_RIGHT");
+				String VACATION_APPROVAL_HIGHER_RIGHT = myresultSet.getString("VA_AP_H_RIGHT");
+				String ASSESS_APPROVAL_NORMAL_RIGHT = myresultSet.getString("AS_AP_N_RIGHT");
+				String ASSESS_APPROVAL_HIGHER_RIGHT = myresultSet.getString("AS_AP_H_RIGHT");
 												
 				if (usenameString.equals(username)) {
 					

@@ -1,6 +1,5 @@
 package ojdbc;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -16,15 +15,13 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import excel.wrtieExcel;
-import jxl.write.WriteException;
 import tcp.ListInformation;
 import user.User;
 import vacation_extrawork.Approvel_N_Dayinformation;
-import vacation_extrawork.Dayinformation;
 import vacation_extrawork.OneManData;
 
-public class DataBaseOperation {
+public class LocaltestDataBaseOperation {
+	
 	
 	Connection connect = null;
     Statement statement = null;
@@ -38,6 +35,7 @@ public class DataBaseOperation {
         return connect;
                						
 	}
+	
 	
 	public void DisposeDataBaseLink() throws SQLException {
 		
@@ -68,7 +66,7 @@ public class DataBaseOperation {
 			                                                  String ACTUALTIMENOCLEAR,String REASONS,
 			                                                  String REASONS_DETAILS,String REASONS_EXPLANATION,String HANDLEOVERTIMEWORK) throws SQLException, ClassNotFoundException {
 		
-		LinkToDataBase();
+		LinkToLocalDataBase();
 		
 		if (connect!=null) {
 			
@@ -86,13 +84,13 @@ public class DataBaseOperation {
 			pre.setString(8,HANDLEOVERTIMEWORK);
 			
 			pre.execute();			
-			DisposeDataBaseLink();									
+			DisposeLocalDataBaseLink();									
 			return true;
 						
 		}
 		else {
 			System.out.println("链接没有建立成功");
-			DisposeDataBaseLink();
+			DisposeLocalDataBaseLink();
 			return false;
 		}
 			
@@ -101,7 +99,7 @@ public class DataBaseOperation {
 	public boolean DeleteOneLine_DATA_VACATIONANDOVERWORK(String name,int id,Date time,
             String ACTUALTIMENOCLEAR) throws SQLException, ClassNotFoundException {
 		
-		LinkToDataBase();
+		LinkToLocalDataBase();
 		if (connect!=null) {
 			
 		String sql = "DELETE FROM DATA_VACATIONANDOVERWORK WHERE name = ?and ID =? and TIME = ? and ACTUALTIMENOCLEAR = ?";		
@@ -115,17 +113,17 @@ public class DataBaseOperation {
 		System.out.println(indexcount);
 		
 		 if (indexcount>0) {
-			 DisposeDataBaseLink();	
+			 DisposeLocalDataBaseLink();	
 			return true;
 				
 		 }
 		 else {
-			 DisposeDataBaseLink();	
+			 DisposeLocalDataBaseLink();	
 			return false;
 		 }
 		}
 		else {
-			DisposeDataBaseLink();	
+			DisposeLocalDataBaseLink();	
 			return false;
 		}
 			
@@ -133,7 +131,7 @@ public class DataBaseOperation {
 	
 	public boolean InsertIntoOneLine_DATA_WOKERNAMELIST(int id,String name) throws SQLException, ClassNotFoundException {
 		
-		LinkToDataBase();
+		LinkToLocalDataBase();
 		if (connect!=null) {
 			
 			String sql = "INSERT INTO WOKERNAMELIST (ID,NAME) VALUES (?,?)";		
@@ -141,13 +139,13 @@ public class DataBaseOperation {
 			pre.setInt(1, id);
 			pre.setString(2,name);				
 			pre.execute();		
-			DisposeDataBaseLink();	
+			DisposeLocalDataBaseLink();	
 			return true;
 									
 		}
 		else {
 			System.out.println("链接没有建立成功");
-			DisposeDataBaseLink();	
+			DisposeLocalDataBaseLink();	
 			return false;
 		}
 		
@@ -155,7 +153,7 @@ public class DataBaseOperation {
 	
 	public int GetID_from_Nanme(String name) throws ClassNotFoundException, SQLException {
 		
-		LinkToDataBase();
+		LinkToLocalDataBase();
 		int id = -1;
 		if (connect!=null) {
 			
@@ -172,7 +170,7 @@ public class DataBaseOperation {
 			}
 						
 		}
-		DisposeDataBaseLink();
+		DisposeLocalDataBaseLink();
 		return id;
 		
 	}
@@ -180,7 +178,7 @@ public class DataBaseOperation {
 	
 	public void InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(ArrayList<OneManData> data) throws ClassNotFoundException, SQLException {
 		
-		LinkToDataBase();
+		LinkToLocalDataBase();
 		
 		if (connect!=null) {
 			
@@ -217,7 +215,7 @@ public class DataBaseOperation {
 											
 		}
 		
-		DisposeDataBaseLink();
+		DisposeLocalDataBaseLink();
 		
 				
 	}
@@ -225,7 +223,7 @@ public class DataBaseOperation {
 	
 	public ListInformation Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName(String name,String reason,String reasondetail,Date[] period) throws ClassNotFoundException, SQLException {
 		
-        LinkToDataBase();
+        LinkToLocalDataBase();
         
 		if (connect!=null) {
 			
@@ -253,7 +251,7 @@ public class DataBaseOperation {
 			System.out.println(count);
 			
 			if (count ==2) {
-								
+				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
 				
@@ -265,7 +263,6 @@ public class DataBaseOperation {
 				}
 				
 				ListInformation informationgroup = new ListInformation();
-				
 				while (myresultSet.next()) {
 					
 				String NAME = myresultSet.getString("NAME");
@@ -292,12 +289,14 @@ public class DataBaseOperation {
 				informationgroup.getLineinformationgroup().add(datagroup);
 				
 				}
-				DisposeDataBaseLink();
+				DisposeLocalDataBaseLink();
 				return informationgroup;
 				
 			}
 			
-						
+			
+			
+			
 			if (count == 3) {
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
@@ -338,7 +337,7 @@ public class DataBaseOperation {
 				informationgroup.getLineinformationgroup().add(datagroup);
 				
 				}
-				DisposeDataBaseLink();
+				DisposeLocalDataBaseLink();
 				return informationgroup;
 			}
 			
@@ -383,7 +382,7 @@ public class DataBaseOperation {
 				informationgroup.getLineinformationgroup().add(datagroup);
 				
 				}
-				DisposeDataBaseLink();
+				DisposeLocalDataBaseLink();
 				return informationgroup;
 				
 			}
@@ -430,21 +429,21 @@ public class DataBaseOperation {
 				informationgroup.getLineinformationgroup().add(datagroup);
 				
 				}
-				DisposeDataBaseLink();
+				DisposeLocalDataBaseLink();
 				return informationgroup;
 				
 			}
 			ShowDialog("程序出错联系管理员");
 			return null;
 		}
-		DisposeDataBaseLink();
+		DisposeLocalDataBaseLink();
 		return null;
 				
 	}
 	
 	public boolean InsertIntoOneLine_DATA_ACCOUNT(String username,String password,String workname,String email) throws ClassNotFoundException, SQLException {
 		
-	       LinkToDataBase();
+	       LinkToLocalDataBase();
 	       
 			int id = -1;
 			String duty = null;
@@ -591,13 +590,13 @@ public class DataBaseOperation {
 							
 			}
 			
-			DisposeDataBaseLink();			
+			DisposeLocalDataBaseLink();			
 			return false;		
 	}
 	
 	public Map<ArrayList<String>, String> SelectOneLine_DATA_ACCOUNT(String username,String password) throws ClassNotFoundException, SQLException
 	{
-		LinkToDataBase();
+		LinkToLocalDataBase();
 		
 		if (connect!=null) {
 			
@@ -609,7 +608,7 @@ public class DataBaseOperation {
 				
 				Map<ArrayList<String>, String> resutMap = new HashMap<ArrayList<String>, String>();
 				resutMap.put(new ArrayList<String>(), "数据库中没有读取到任何帐号数据，请联系管理员");	
-				DisposeDataBaseLink();
+				DisposeLocalDataBaseLink();
 				return resutMap;
 				
 			}
@@ -625,10 +624,15 @@ public class DataBaseOperation {
 				String power_level = myresultSet.getString("POWER_LEVEL");
 				String whether_manager = myresultSet.getString("WHETHERMANAGER");
 				String level_shape = myresultSet.getString("LEVEL_SHAPE");
-				String VACATION_APPROVAL_NORMAL = myresultSet.getString("VACATION_APPROVAL_NORMAL");
-				String VACATION_APPROVAL_HIGHER = myresultSet.getString("VACATION_APPROVAL_HIGHER");
-				String ASSESS_APPROVAL_NORMAL = myresultSet.getString("ASSESS_APPROVAL_NORMAL");
-				String ASSESS_APPROVAL_HIGHER = myresultSet.getString("ASSESS_APPROVAL_HIGHER");
+				String VACATION_APPROVAL_NORMAL_UPPER = myresultSet.getString("VACATION_APPROVAL_NORMAL_UPPER");
+				String VACATION_APPROVAL_HIGHER_UPPER = myresultSet.getString("VACATION_APPROVAL_HIGHER_UPPER");
+				String ASSESS_APPROVAL_NORMAL_UPPER = myresultSet.getString("ASSESS_APPROVAL_NORMAL_UPPER");
+				String ASSESS_APPROVAL_HIGHER_UPPER = myresultSet.getString("ASSESS_APPROVAL_HIGHER_UPPER");
+				String email = myresultSet.getString("email");
+				String VACATION_APPROVAL_NORMAL_RIGHT = myresultSet.getString("VACATION_APPROVAL_NORMAL_RIGHT");
+				String VACATION_APPROVAL_HIGHER_RIGHT = myresultSet.getString("VACATION_APPROVAL_HIGHER_RIGHT");
+				String ASSESS_APPROVAL_NORMAL_RIGHT = myresultSet.getString("ASSESS_APPROVAL_NORMAL_RIGHT");
+				String ASSESS_APPROVAL_HIGHER_RIGHT = myresultSet.getString("ASSESS_APPROVAL_HIGHER_RIGHT");
 												
 				if (usenameString.equals(username)) {
 					
@@ -645,12 +649,17 @@ public class DataBaseOperation {
 						userinformationArrayList.add(power_level);
 						userinformationArrayList.add(whether_manager);
 						userinformationArrayList.add(level_shape);
-						userinformationArrayList.add(VACATION_APPROVAL_NORMAL);
-						userinformationArrayList.add(VACATION_APPROVAL_HIGHER);
-						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL);
-						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER);
+						userinformationArrayList.add(VACATION_APPROVAL_NORMAL_UPPER);
+						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_UPPER);
+						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_UPPER);
+						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_UPPER);
+						userinformationArrayList.add(email);
+						userinformationArrayList.add(VACATION_APPROVAL_NORMAL_RIGHT);
+						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_RIGHT);
+						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_RIGHT);
+						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_RIGHT);
 						resutMap.put(userinformationArrayList, "成功登录");						
-						DisposeDataBaseLink();
+						DisposeLocalDataBaseLink();
 						return resutMap;
 					}
 				}
@@ -659,21 +668,21 @@ public class DataBaseOperation {
 			
 			Map<ArrayList<String>, String> resutMap = new HashMap<ArrayList<String>, String>();
 			resutMap.put(new ArrayList<String>(), "帐号或者密码错误");
-			DisposeDataBaseLink();
+			DisposeLocalDataBaseLink();
 			return resutMap;
 									
 		}
 		
 		Map<ArrayList<String>, String> resutMap = new HashMap<ArrayList<String>, String>();
 		resutMap.put(new ArrayList<String>(), "数据库连接错误");		
-		DisposeDataBaseLink();
+		DisposeLocalDataBaseLink();
 		return resutMap;
 		
 	}
 	
 	public ListInformation Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(User user) throws ClassNotFoundException, SQLException {
 		
-       LinkToDataBase();
+       LinkToLocalDataBase();
 		
 		if (connect!=null) {
 						
@@ -704,7 +713,6 @@ public class DataBaseOperation {
                 	String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
                 	String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
                 	String DEPARTMENT= myresultSet.getString("DEPARTMENT");
-                	String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
                 	
                 	ArrayList<String> arrayList = new ArrayList<String>();
                 	arrayList.add(NAME);
@@ -712,12 +720,11 @@ public class DataBaseOperation {
                 	arrayList.add(ACTUALTIMENOCLEAR);
                 	arrayList.add(REASONS_DETAILS);
                 	arrayList.add(DEPARTMENT);
-                	arrayList.add(REASONS_EXPLANATION);
                 	           	
                 	informationgroup.getLineinformationgroup().add(arrayList);
                 						
 				}
-				DisposeDataBaseLink();
+				DisposeLocalDataBaseLink();
 				return informationgroup;
 				
 			}
@@ -727,7 +734,7 @@ public class DataBaseOperation {
 			
 		}
 		
-		DisposeDataBaseLink();
+		DisposeLocalDataBaseLink();
 		return null;
 		
 	}
@@ -735,7 +742,7 @@ public class DataBaseOperation {
 	
 	public void Update_VACATION_WORK_NORMOL_APPROVAL_state(ListInformation datagroup) throws SQLException, ClassNotFoundException {
 		
-		  LinkToDataBase();
+		  LinkToLocalDataBase();
 			
 		  
 			if (connect!=null) {
@@ -772,7 +779,7 @@ public class DataBaseOperation {
 				ShowDialog("审批提交成功");
 			}
 		
-		DisposeDataBaseLink();
+		DisposeLocalDataBaseLink();
 		
 	}
 	

@@ -253,11 +253,15 @@ public class DataBaseOperation {
 			System.out.println(count);
 			
 			if (count ==2) {
-								
-				pre.setDate(1, GetTheSmallerTimeInperiod(period));
-				pre.setDate(2, GetTheBiggerTimeInperiod(period));
 				
-				ResultSet myresultSet = pre.executeQuery();
+				
+				String sqlStringT = "select * from DATA_VACATIONANDOVERWORK where name = '陈诚'";
+				PreparedStatement preT = connect.prepareStatement(sqlStringT);
+				
+//				pre.setDate(1, GetTheSmallerTimeInperiod(period));
+//				pre.setDate(2, GetTheBiggerTimeInperiod(period));
+				
+				ResultSet myresultSet = preT.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
 					
 					ShowDialog("选定的范围内没有数据");
@@ -265,7 +269,6 @@ public class DataBaseOperation {
 				}
 				
 				ListInformation informationgroup = new ListInformation();
-				
 				while (myresultSet.next()) {
 					
 				String NAME = myresultSet.getString("NAME");
