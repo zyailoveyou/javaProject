@@ -348,6 +348,7 @@ public class VacationWindows {
 		 String level_shape = getlabel().getCal().getUser().getLevel_shape();
 		 information.setLEVEL_SHAPE(level_shape);
 		 information.setDEPARTMENT(getlabel().getCal().getUser().getDepartmentString());
+		 information.setVACATION_APPROVAL_NORMAL_UPPER(getlabel().getCal().getUser().getASSESS_APPROVAL_NORMAL_UPPER());
 
 		 
 		 CheckTheManExist(nameString);

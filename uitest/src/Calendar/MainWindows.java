@@ -24,6 +24,7 @@ import approvel.ApprovalWindows;
 import backup.BackupDownWindows;
 import manager_operation.Manager_download_windows;
 import ojdbc.DataBaseOperation;
+import ojdbc.LocaltestDataBaseOperation;
 import tcp.ListInformation;
 import user.LoginInWindows;
 import user.User;
@@ -194,12 +195,12 @@ public class MainWindows {
 		
 		
 		
-		if (Integer.valueOf(getUser().getWhether_manager())!=1) {
-			
-			approvel.setEnabled(false);
-		}
+//		if (Integer.valueOf(getUser().getWhether_manager())!=1) {
+//			
+//			approvel.setEnabled(false);
+//		}
 		
-		if (Integer.valueOf(getUser().getASSESS_APPROVAL_HIGHER_RIGHT())!=1&&Integer.valueOf(getUser().getASSESS_APPROVAL_HIGHER_RIGHT())!=1) {
+		if (Integer.valueOf(getUser().getVACATION_APPROVAL_NORMAL_RIGHT())!=1&&Integer.valueOf(getUser().getVACATION_APPROVAL_HIGHER_RIGHT())!=1) {
 			
 			vacationapproval.setEnabled(false);
 		}
@@ -256,10 +257,12 @@ public class MainWindows {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				DataBaseOperation dataBaseOperation = new DataBaseOperation();
+//				DataBaseOperation dataBaseOperation = new DataBaseOperation();
+				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
 				ListInformation informationgroup = null;
 				try {
-					informationgroup = dataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
+//					informationgroup = dataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
+					informationgroup = localtestDataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
 				} catch (ClassNotFoundException e2) {
 					e2.printStackTrace();
 				} catch (SQLException e2) {

@@ -677,14 +677,13 @@ public class DataBaseOperation {
 		
 		if (connect!=null) {
 						
-			int VACATION_APPROVAL_NORMAL = Integer.valueOf(user.getVACATION_APPROVAL_NORMAL());
-			int VACATION_APPROVAL_HIGHER = Integer.valueOf(user.getVACATION_APPROVAL_HIGHER());
+			int VACATION_APPROVAL_NORMAL = Integer.valueOf(user.getVACATION_APPROVAL_NORMAL_RIGHT());
+			int VACATION_APPROVAL_HIGHER = Integer.valueOf(user.getVACATION_APPROVAL_HIGHER_RIGHT());
 			String level_shape = user.getLevel_shape();
 						
 			if (VACATION_APPROVAL_NORMAL ==1) {
 				
-				String SelectSQL = "SELECT * FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED = 0 and level_shape LIKE";
-				SelectSQL += "'"+user.getLevel_shape()+"."+"%"+"'";			
+				String SelectSQL = "SELECT * FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED = 0 and VA_AP_N_UPPER = '汪军'";		
 				PreparedStatement pre = connect.prepareStatement(SelectSQL);
 				System.out.println(SelectSQL);
 				ResultSet myresultSet = pre.executeQuery();
