@@ -183,7 +183,7 @@ public class LocaltestDataBaseOperation {
 		if (connect!=null) {
 			
 			connect.setAutoCommit(false);
-			String onelineSQL = "INSERT INTO VACATION_NAPPROVAL (name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK,VACATION_NORMAL_PASSED,LEVEL_SHAPE,DEPARTMENT)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			String onelineSQL = "INSERT INTO VACATION_NAPPROVAL (name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK,VACATION_NORMAL_PASSED,LEVEL_SHAPE,DEPARTMENT,VA_AP_N_UPPER)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pre = connect.prepareStatement(onelineSQL);					
 			Iterator<OneManData> onemaniIterator = data.iterator();
 			
@@ -206,6 +206,7 @@ public class LocaltestDataBaseOperation {
 					pre.setInt(9, datafordayinformaiton.getVACATION_NORMAL_PASSED());
 					pre.setString(10, datafordayinformaiton.getLEVEL_SHAPE());
 					pre.setString(11, datafordayinformaiton.getDEPARTMENT());
+					pre.setString(12, datafordayinformaiton.getVACATION_APPROVAL_NORMAL_UPPER());
 					pre.addBatch();
 										
 				}
@@ -451,10 +452,16 @@ public class LocaltestDataBaseOperation {
 			String level_shape = null;
 			int power_level = -1;
 			int whethermanager =-1;
-			int vacation_approval_normal = -1;
-			int vacation_approval_higher = -1;
-			int assess_approval_normal = -1;
-			int assess_approval_higher = -1;
+			
+			int VA_AP_N_RIGHT= -1;
+			int VA_AP_H_RIGHT = -1;
+			int AS_AP_N_RIGHT = -1;
+			int AS_AP_H_RIGHT = -1;
+			
+			String VA_AP_N_UPPER= null;
+			String VA_AP_H_UPPER= null;
+			String AS_AP_N_UPPER= null;
+			String AS_AP_H_UPPER= null;
 			
 			if (connect!=null) {
 				
@@ -530,10 +537,14 @@ public class LocaltestDataBaseOperation {
 					
 					while (resultgetvacationasses2.next()) {
 						
-						vacation_approval_normal = resultgetvacationasses2.getInt("vacation_approval_normal");
-						vacation_approval_higher = resultgetvacationasses2.getInt("vacation_approval_higher");
-						assess_approval_normal = resultgetvacationasses2.getInt("assess_approval_normal");
-						assess_approval_higher = resultgetvacationasses2.getInt("assess_approval_higher");
+						VA_AP_N_UPPER = resultgetvacationasses2.getString("VA_AP_N_UPPER");
+						VA_AP_H_UPPER = resultgetvacationasses2.getString("VA_AP_H_UPPER");
+						AS_AP_N_UPPER = resultgetvacationasses2.getString("AS_AP_N_UPPER");
+						AS_AP_H_UPPER = resultgetvacationasses2.getString("AS_AP_H_UPPER");
+						VA_AP_N_RIGHT = resultgetvacationasses2.getInt("VA_AP_N_RIGHT");
+						VA_AP_H_RIGHT = resultgetvacationasses2.getInt("VA_AP_H_RIGHT");
+						AS_AP_N_RIGHT = resultgetvacationasses2.getInt("AS_AP_N_RIGHT");
+						AS_AP_H_RIGHT = resultgetvacationasses2.getInt("AS_AP_H_RIGHT");
 											
 					}
 					
@@ -542,10 +553,14 @@ public class LocaltestDataBaseOperation {
 				
 				while (resultgetvacationasses.next()) {
 					
-					vacation_approval_normal = resultgetvacationasses.getInt("vacation_approval_normal");
-					vacation_approval_higher = resultgetvacationasses.getInt("vacation_approval_higher");
-					assess_approval_normal = resultgetvacationasses.getInt("assess_approval_normal");
-					assess_approval_higher = resultgetvacationasses.getInt("assess_approval_higher");
+					VA_AP_N_UPPER = resultgetvacationasses.getString("VA_AP_N_UPPER");
+					VA_AP_H_UPPER = resultgetvacationasses.getString("VA_AP_H_UPPER");
+					AS_AP_N_UPPER = resultgetvacationasses.getString("AS_AP_N_UPPER");
+					AS_AP_H_UPPER = resultgetvacationasses.getString("AS_AP_H_UPPER");
+					VA_AP_N_RIGHT = resultgetvacationasses.getInt("VA_AP_N_RIGHT");
+					VA_AP_H_RIGHT = resultgetvacationasses.getInt("VA_AP_H_RIGHT");
+					AS_AP_N_RIGHT = resultgetvacationasses.getInt("AS_AP_N_RIGHT");
+					AS_AP_H_RIGHT = resultgetvacationasses.getInt("AS_AP_H_RIGHT");
 										
 				}
 				
@@ -554,7 +569,7 @@ public class LocaltestDataBaseOperation {
 				
 				
 										
-				String insertaccountsql = "INSERT INTO ACCOUNT (username,password,WOKERNAME,id,DEPARTMENT,duty,power_level,whethermanager,level_shape,vacation_approval_normal,vacation_approval_higher,assess_approval_normal,assess_approval_higher,email)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String insertaccountsql = "INSERT INTO ACCOUNT (username,password,WOKERNAME,id,DEPARTMENT,duty,power_level,whethermanager,level_shape,VA_AP_N_UPPER,VA_AP_H_UPPER,AS_AP_N_UPPER,AS_AP_H_UPPER,email,VA_AP_N_RIGHT,VA_AP_H_RIGHT,AS_AP_N_RIGHT,AS_AP_H_RIGHT)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement preinsertaccount = connect.prepareStatement(insertaccountsql);
 				
 				preinsertaccount.setString(1, username);
@@ -566,12 +581,15 @@ public class LocaltestDataBaseOperation {
 				preinsertaccount.setInt(7, power_level);
 				preinsertaccount.setInt(8, whethermanager);
 				preinsertaccount.setString(9, level_shape);
-				preinsertaccount.setInt(10, vacation_approval_normal);
-				preinsertaccount.setInt(11, vacation_approval_higher);
-				preinsertaccount.setInt(12, assess_approval_normal);
-				preinsertaccount.setInt(13, assess_approval_higher);
+				preinsertaccount.setString(10, VA_AP_N_UPPER);
+				preinsertaccount.setString(11, VA_AP_H_UPPER);
+				preinsertaccount.setString(12, AS_AP_N_UPPER );
+				preinsertaccount.setString(13, AS_AP_H_UPPER);
 				preinsertaccount.setString(14, email);
-				
+				preinsertaccount.setInt(15, VA_AP_N_RIGHT);
+				preinsertaccount.setInt(16, VA_AP_H_RIGHT);
+				preinsertaccount.setInt(17, AS_AP_N_RIGHT);
+				preinsertaccount.setInt(18, AS_AP_H_RIGHT);
 								
 				int result = preinsertaccount.executeUpdate();
 				
@@ -692,10 +710,12 @@ public class LocaltestDataBaseOperation {
 						
 			if (VACATION_APPROVAL_NORMAL ==1) {
 				
-				String SelectSQL = "SELECT * FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED = 0 and VA_AP_N_UPPER = '汪军'";
-//				SelectSQL += "'"+user.getLevel_shape()+"."+"%"+"'";			
+				String SelectSQL = "SELECT * FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED = 0 and VA_AP_N_UPPER = ?";
+						
 				PreparedStatement pre = connect.prepareStatement(SelectSQL);
+				pre.setString(1, user.getCheckname());
 				System.out.println(SelectSQL);
+				
 				ResultSet myresultSet = pre.executeQuery();
 				
                 if (!myresultSet.isBeforeFirst()) {
@@ -785,11 +805,33 @@ public class LocaltestDataBaseOperation {
 		
 	}
 	
+	public void Delete_VACATION_WORK_NORMOL_APPROVAL(ListInformation datagroup) throws SQLException, ClassNotFoundException {
 	
 	
+		LinkToLocalDataBase();
+		if (connect!=null) {
+			
+			String SQLdelete = "DELETE FROM VACATION_NAPPROVAL WHERE name = ? and ACTUALTIMENOCLEAR = ? and to_char(time,'yyyy-mm-dd')=?";		
+			PreparedStatement pre = connect.prepareStatement(SQLdelete);
+			
+			
+			for (ArrayList<String> data : datagroup.getLineinformationgroup()) {
+				
+				pre.setString(1, data.get(0));
+				pre.setString(2, data.get(1));
+				pre.setString(3, data.get(2));					
+				pre.addBatch();
+				
+			}
+			
+			int[] myresultSet = pre.executeBatch();
+			
+			
+		}
+		DisposeLocalDataBaseLink();
+		
 	
-	
-	
+	}
 	
 	
 		

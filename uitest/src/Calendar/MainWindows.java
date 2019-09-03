@@ -193,22 +193,36 @@ public class MainWindows {
 
 		
 		
+		administration.setEnabled(false);
 		
-		
-//		if (Integer.valueOf(getUser().getWhether_manager())!=1) {
-//			
-//			approvel.setEnabled(false);
-//		}
-		
-		if (Integer.valueOf(getUser().getVACATION_APPROVAL_NORMAL_RIGHT())!=1&&Integer.valueOf(getUser().getVACATION_APPROVAL_HIGHER_RIGHT())!=1) {
+		//设置审批功能是否开启		
+		if (Integer.valueOf(getUser().getWhether_manager())!=1) {
 			
+			approvel.setEnabled(false);
+		}
+		
+		
+
+		
+        //设置请假审批功能是否开启		
+		if (Integer.valueOf(getUser().getVACATION_APPROVAL_NORMAL_RIGHT())!=1&&Integer.valueOf(getUser().getVACATION_APPROVAL_HIGHER_RIGHT())!=1) {
 			vacationapproval.setEnabled(false);
 		}
+
+		
+//设置考勤身躯功能是否开启
 		
 //		if (Integer.valueOf(getUser().getASSESS_APPROVAL_NORMAL())!=1&&Integer.valueOf(getUser().getASSESS_APPROVAL_HIGHER())!=1) {
 			
 			assessapproval.setEnabled(false);
 //		}
+			
+//设置高级功能是否开启
+			
+		if (Integer.valueOf(getUser().getPower_level()) == 99) {
+			
+			administration.setEnabled(true);
+		}
 		
 		
 		
@@ -216,10 +230,7 @@ public class MainWindows {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				SubimitWindows newSubimitWindows = new SubimitWindows(getUser());
-//				MyThread myThread = new MyThread(newSubimitWindows);				
-//				Thread starThread = new Thread(myThread);
-//				starThread.start();
+
 				SnewSubimitWindows.getFrame().setVisible(true);
 			}
 		});
@@ -228,10 +239,7 @@ public class MainWindows {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				DownloadWindows newSubimitWindows = new DownloadWindows(getUser());
-//				MyThread myThread = new MyThread(newSubimitWindows);				
-//				Thread starThread = new Thread(myThread);
-//				starThread.start();
+
 				DnewSubimitWindows.getFrame().setVisible(true);
 				
 			}
@@ -269,8 +277,7 @@ public class MainWindows {
 					e2.printStackTrace();
 				}
 				
-				
-				
+								
 				if (informationgroup!=null) {
 					
 					ApprovalWindows testwindows;
@@ -286,11 +293,7 @@ public class MainWindows {
 					}
 					
 				}
-				
-
-				
-
-				
+								
 			}
 		});
 		

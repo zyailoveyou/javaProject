@@ -10,12 +10,14 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import Calendar.Windows;
 import mylayout.MyVFlowLayout;
 import ojdbc.DataBaseOperation;
+import ojdbc.LocaltestDataBaseOperation;
 import tcp.ListInformation;
 import user.User;
 import java.awt.Color;
@@ -99,7 +101,7 @@ public class ApprovalWindows extends Windows {
 				
 				for (VacationPanel v:vacationPanels) {
 					
-					v.Setcheckedstate();
+					v.Setquickapprovelcheckedstate();;
 					System.out.println(v.getWidth());
 					System.out.println(v.getHeight());
 				}
@@ -113,28 +115,50 @@ public class ApprovalWindows extends Windows {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ListInformation datagroup = new ListInformation();
+				ListInformation datagroupadd = new ListInformation();
+				ListInformation datagroupdelete = new ListInformation();
 				for (VacationPanel v:vacationPanels) {
 					
-					if (v.getcheckedstate() == true) {
+					if (v.getapprovelcheckedstate() == true) {
 												
-						ArrayList<String> data = new ArrayList<String>();
-						data.add(v.getWokername());
-						data.add(v.getWokervacationtime());
-						data.add(v.getWokervacationdate());
-						datagroup.getLineinformationgroup().add(data);																							
+						ArrayList<String> dataadd = new ArrayList<String>();
+						dataadd.add(v.getWokername());
+						dataadd.add(v.getWokervacationtime());
+						dataadd.add(v.getWokervacationdate());
+						datagroupadd.getLineinformationgroup().add(dataadd);																							
+					}
+					
+					
+					if (v.getdenycheckedstate() == true) {
+						
+						ArrayList<String> datadelete = new ArrayList<String>();
+						datadelete.add(v.getWokername());
+						datadelete.add(v.getWokervacationtime());
+						datadelete.add(v.getWokervacationdate());
+						datagroupdelete.getLineinformationgroup().add(datadelete);																							
 					}
 				}
 				
-				DataBaseOperation baseOperation = new DataBaseOperation();
+//				DataBaseOperation baseOperation = new DataBaseOperation();
+				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+				
 				try {
-					baseOperation.Update_VACATION_WORK_NORMOL_APPROVAL_state(datagroup);
-					frame.dispose();
+					
+					if (!datagroupadd.getLineinformationgroup().isEmpty()) {
+						localtestDataBaseOperation.Update_VACATION_WORK_NORMOL_APPROVAL_state(datagroupadd);
+						frame.dispose();
+					}
+					
+					if (!datagroupdelete.getLineinformationgroup().isEmpty()) {
+						localtestDataBaseOperation.Delete_VACATION_WORK_NORMOL_APPROVAL(datagroupdelete);
+						frame.dispose();
+					}
+					
 				} catch (ClassNotFoundException e1) {
-
+					ShowDialog("无法连接数据库");
 					e1.printStackTrace();
-				} catch (SQLException e1) {
-
+				} catch (SQLException e1) {					
+					ShowDialog("无法更新数据，有可能你的数据中含有重复提交的项目");
 					e1.printStackTrace();
 				}
 
@@ -143,6 +167,12 @@ public class ApprovalWindows extends Windows {
 		
 		
 		
+	}
+	
+	private void ShowDialog(String word) {
+		
+		JOptionPane.showMessageDialog(null,word, "提示ʾ", JOptionPane.ERROR_MESSAGE); 
+				
 	}
 
 }

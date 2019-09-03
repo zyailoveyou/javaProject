@@ -292,21 +292,38 @@ public class VacationWindows {
 					if (morningnocheck_1.isSelected()&&!afternoonnocheck.isSelected()) 
 					{					
 					 
-						   setdata("上午未打",reasonsexplanation.getText());
+						if (!(reasonsexplanation.getText()).equals("请输入未打卡说明")) {
+							setdata("上午未打",reasonsexplanation.getText());
+						}
+						else {
+							setdata("上午未打",null);
+						}						   
 						   noinformationsubmit = false;
 						 						 						 
 					}
 						
 					else if (!morningnocheck_1.isSelected()&&afternoonnocheck.isSelected()) 
 					{					
+						
+						if (!(reasonsexplanation.getText()).equals("请输入未打卡说明")) {
 							setdata("下午未打",reasonsexplanation.getText());
+						}
+						else {
+							setdata("下午未打",null);
+						}		
 							noinformationsubmit = false;
 
 					}
 						
 					else if(wholedaynoclear.isSelected())
-					{					
-						    setdata("全天未打",reasonsexplanation.getText());
+					{		
+						
+						if (!(reasonsexplanation.getText()).equals("请输入未打卡说明")) {
+							setdata("全天未打",reasonsexplanation.getText());
+						}
+						else {
+							setdata("全天未打",null);
+						}
 						    noinformationsubmit = false;
 
 					}

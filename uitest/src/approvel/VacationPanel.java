@@ -92,8 +92,15 @@ public class VacationPanel extends BackgroundPanel {
 		vacationtype.setText("类型："+vacationtypeforwoker);
 		department.setText("部门："+wokerdepartment);
 		vacationtime.setText("时间："+vacationdateforwoker+" "+vacationtimeforwoker);
+		JLabel reasons = new JLabel();
+		if (reasonsString!=null) {
+			 reasons.setText("未打卡原因："+reasonsString);
+		}
 		
-		JLabel reasons = new JLabel("未打卡原因："+reasonsString);
+		else {
+			reasons.setText("未打卡原因：无");
+		}
+		
 		reasons.setForeground(Color.DARK_GRAY);
 		reasons.setFont(new Font("幼圆", Font.BOLD, 16));
 		
@@ -164,14 +171,22 @@ public class VacationPanel extends BackgroundPanel {
 		
 	}
 	
-	public boolean getcheckedstate() {
+	public boolean getapprovelcheckedstate() {
 		
 		return approval.isSelected();
 		
 	}
 	
-	public void Setcheckedstate() {
+	public boolean getdenycheckedstate() {
+		
+		return deny.isSelected();
+		
+	}
+	
+	public void Setquickapprovelcheckedstate() {
 		
 		approval.setSelected(true);
 	}
+	
+	
 }
