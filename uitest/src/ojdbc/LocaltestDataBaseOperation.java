@@ -222,26 +222,55 @@ public class LocaltestDataBaseOperation {
 	}
 	
 	
-	public ListInformation Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName(String name,String reason,String reasondetail,Date[] period) throws ClassNotFoundException, SQLException {
+	public ListInformation Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName(String selectname,String []namelist,String reason,String reasondetail,Date[] period) throws ClassNotFoundException, SQLException {
 		
-        LinkToLocalDataBase();
+		//已经设置好了分部门下载
+        LinkToDataBase();
         
 		if (connect!=null) {
 			
 			String sqlString ="select * from DATA_VACATIONANDOVERWORK where Time>= ? and Time<= ?";
-								
-			if (!name.equals("全部")) {
-				sqlString += "and name = ?";
-			}
+			boolean allmodeactive = false;
+			boolean reasonsset = false;
+			boolean reasonsdetailset = false;
+			
+			
+            if (selectname.equals("全部")) {
+				
+				String namelistsql = "";
+				allmodeactive = true;
+				sqlString+="and";
+				for (int i = 0; i < namelist.length; i++) {
 					
+					if (i==0) {
+						
+						namelistsql +="name ="+"'"+namelist[i]+"'";
+					}
+					
+					else {
+						namelistsql +="or name ="+"'"+namelist[i]+"'";
+					}				
+										
+				}
+				
+				sqlString = sqlString+"("+namelistsql+")";		
+														
+			}
+			
+			else {
+				sqlString+="and name = ?";
+			 }
+						
 			if (!reason.equals("全部")) {
 				
 				sqlString += "and reasons = ?";
+				reasonsset = true;
 			}
 			
 			if (!reasondetail.equals("全部")) {
 				
 				sqlString += "and REASONS_DETAILS = ?";
+				reasonsdetailset = true;
 			}
 			
 			
@@ -251,8 +280,10 @@ public class LocaltestDataBaseOperation {
 			int count = parameterMetaData.getParameterCount();
 			System.out.println(count);
 			
+			//可能性只有一种 就是全部选出来
 			if (count ==2) {
 				
+				System.out.println(sqlString);
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
 				
@@ -297,12 +328,31 @@ public class LocaltestDataBaseOperation {
 			
 			
 			
-			
+			//有两种可能性，如果是非全部选出来只有一种肯可能性，就是单个选人，否则就是全部选出来
+			  
 			if (count == 3) {
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, name);
+				
+				if (allmodeactive == false) {
+					pre.setString(3, selectname);
+				}
+				
+				else {
+					
+					if (reasonsset == true) {
+						
+						pre.setString(3, reason);
+					}
+					
+					if (reasonsdetailset == true) {
+						
+						pre.setString(3, reasondetail);
+					}
+					
+				}
+				
 				
 				ResultSet myresultSet = pre.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
@@ -341,14 +391,34 @@ public class LocaltestDataBaseOperation {
 				DisposeLocalDataBaseLink();
 				return informationgroup;
 			}
+			
 			
 			if (count == 4) {
 				
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, name);
-				pre.setString(4, reason);
+				
+				if (allmodeactive == false) {
+					
+					if (reasonsset == true) {
+						
+						pre.setString(3, selectname);
+						pre.setString(4, reason);
+					}
+					
+					if (reasonsdetailset == true) {
+						pre.setString(3, selectname);
+						pre.setString(4, reasondetail);
+					}
+					
+					
+				}
+				else {					
+					pre.setString(3, reason);
+					pre.setString(4, reasondetail);					
+				}
+								
 				
 				ResultSet myresultSet = pre.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
@@ -393,7 +463,7 @@ public class LocaltestDataBaseOperation {
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, name);
+				pre.setString(3, selectname);
 				pre.setString(4, reason);
 				pre.setString(5, reasondetail);
 				
@@ -437,7 +507,8 @@ public class LocaltestDataBaseOperation {
 			ShowDialog("程序出错联系管理员");
 			return null;
 		}
-		DisposeLocalDataBaseLink();
+		DisposeDataBaseLink();
+		
 		return null;
 				
 	}
@@ -831,6 +902,72 @@ public class LocaltestDataBaseOperation {
 		DisposeLocalDataBaseLink();
 		
 	
+	}
+	
+	public ArrayList<String> SelectDownLoadlist_From_DataBase(User user) throws ClassNotFoundException, SQLException {
+		
+
+		LinkToLocalDataBase();
+		if (connect!=null) {
+			
+			//查找是否有审批的人员
+			String SQLsearchwoker = "SELECT * FROM PRIVI_DOWNLOAD WHERE WOKER_NAME = ?";		
+			PreparedStatement pre = connect.prepareStatement(SQLsearchwoker);
+			pre.setString(1, user.getCheckname());
+			
+			ResultSet myresultSetwoker = pre.executeQuery();
+			
+            if (!myresultSetwoker.isBeforeFirst()) {
+            	
+				ShowDialog("没有读取到需要审批的数据"); 
+				return null;
+			}
+            
+            ArrayList<String> returnNameList = new ArrayList<String>();
+            returnNameList.add("全部");
+            while (myresultSetwoker.next()) {
+            	
+            	if (myresultSetwoker.getString("DOWNLOAD_TYPE").equals("Manager")) {
+					
+            		returnNameList.add(myresultSetwoker.getString("DOWNLOAD_NAME"));
+				}
+            	
+            	else {
+            		
+            		//查询部门人员
+            		
+        			String SQLsearchdepartment = "SELECT * FROM WOKERNAMELIST WHERE DEPARTMENT = ?";		
+        			PreparedStatement pre2 = connect.prepareStatement(SQLsearchdepartment);
+        			pre2.setString(1, myresultSetwoker.getString("DOWNLOAD_NAME"));
+        			
+        			ResultSet myresultSetpartment= pre2.executeQuery();
+        			
+                    if (!myresultSetpartment.isBeforeFirst()) {
+                    	
+        				ShowDialog("没有读取到需要审批的部门人员数据"); 
+        				
+        			}
+                    
+                    while (myresultSetpartment.next()) {
+                    	
+                    	returnNameList.add(myresultSetpartment.getString("NAME"));
+                    	
+                    }
+                    
+					
+				}
+            	            		
+            }
+            
+            DisposeLocalDataBaseLink();
+
+            
+            return returnNameList;
+        		
+		}
+		DisposeLocalDataBaseLink();
+		return null;
+		
 	}
 	
 	

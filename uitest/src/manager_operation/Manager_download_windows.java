@@ -40,6 +40,7 @@ import Calendar.Windows;
 import excel.wrtieExcel;
 import jxl.write.WriteException;
 import ojdbc.DataBaseOperation;
+import ojdbc.LocaltestDataBaseOperation;
 import tcp.ListInformation;
 import user.User;
 import vacation_extrawork.OneManData;
@@ -57,6 +58,7 @@ public class Manager_download_windows extends Windows {
 	private JComboBox<String> vacationorextrawork;
 	private JComboBox<String> detailstype;
 	private JComboBox<String> namelist;
+	private String[] namelistarray;
 	
 	
 	public JComboBox<String> getNamelist() {
@@ -67,9 +69,11 @@ public class Manager_download_windows extends Windows {
 		return workername;
 	}
 		
-	public Manager_download_windows(User user) {
+	public Manager_download_windows(User user,String[] namelistarray) throws ClassNotFoundException, SQLException {
 		
 		setWindowsMode("管理员下载模式");
+		setUser(user);
+		this.namelistarray = namelistarray;
 		yearlistdata = new String[] {"2019年", "2020年", "2021年", "2022年", "2023年", "2024年", "2025年", "2026年", "2027年", "2028年", "2029年", "2030年", "2031年", "2032年", "2033年", "2034年", "2035年", "2036年", "2037年", "2038年", "2039年", "2040年", "2041年", "2042年", "2043年", "2044年", "2045年", "2046年", "2047年", "2048年", "2049年", "2050年"};
 		monthlistdata = new String[] {"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};	
 		initialize();
@@ -104,7 +108,7 @@ public class Manager_download_windows extends Windows {
 		
 	}
 	
-	private void initialize() {
+	private void initialize() throws ClassNotFoundException, SQLException {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setTitle("下载窗口");
@@ -141,7 +145,7 @@ public class Manager_download_windows extends Windows {
 		
 		namelist = new JComboBox<String>();
 		namelist.setModel(new DefaultComboBoxModel(new String[] {"全部", "俞珺", "陈毓林", "李建平", "潘俊伦", "刘智颖", "何希彪", "蒲菲", "郑乾岗", "韩文雯", "沈平", "杨瑞", "张千唱", "汪军", "陈诚", "张雪", "钟静鸿", "汪怡雯", "吴友兰", "王丹", "彭小波", "谢金豆", "杨易", "廖龙", "杨道琴", "陈道颖", "卢燕", "刘萍", "段从勇", "董成竹", "邓轲", "王炜", "代佳", "夏曦", "何家锋", "王镝", "李友文", "孙红丽"}));
-		namelist.setToolTipText("选择年份");
+		namelist.setModel(new DefaultComboBoxModel(namelistarray));
 		namelist.setForeground(Color.DARK_GRAY);
 		namelist.setFont(new Font("幼圆", Font.BOLD, 16));
 		
@@ -330,9 +334,10 @@ public class Manager_download_windows extends Windows {
 
 			public void mouseClicked(MouseEvent e) {
 				ListInformation listInformation= null;
-				DataBaseOperation dataBaseOperation = new DataBaseOperation();
+//				DataBaseOperation dataBaseOperation = new DataBaseOperation();
+				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
 				try {
-				  listInformation = dataBaseOperation.Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName((String)(getNamelist().getSelectedItem()), getVacationorExtrawork(), getdetailstype(), period);
+				  listInformation = localtestDataBaseOperation.Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName((String)(getNamelist().getSelectedItem()), namelistarray,getVacationorExtrawork(), getdetailstype(), period);
 				} catch (ClassNotFoundException e1) {
 
 					e1.printStackTrace();

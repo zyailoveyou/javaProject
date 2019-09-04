@@ -12,10 +12,12 @@ import user.LoginInWindows;
    public class main {
 	
 	public static void main(String[] args) {
-			
+//		com.jtattoo.plaf.aluminium.AluminiumLookAndFeel.class
+//		com.jtattoo.plaf.mcwin.McWinLookAndFeel
+//		com.jtattoo.plaf.texture.TextureLookAndFeel.class
 	    try {
             //here you can put the selected theme class name in JTattoo
-            UIManager.setLookAndFeel("com.jtattoo.plaf.mcwin.McWinLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
  
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(LoginInWindows.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);

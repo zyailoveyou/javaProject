@@ -29,6 +29,8 @@ import MyThread.MyThread;
 import backup.BackupSubmitWindows;
 import backup.CalendarWindows;
 import implement.RoundBorder;
+import implement.RoundJPasswordField;
+import implement.RoundJTextField;
 import ojdbc.DataBaseOperation;
 
 import java.awt.event.ActionListener;
@@ -75,11 +77,11 @@ public class LoginInWindows {
 		
 		Box AccounthorizontalBox = Box.createHorizontalBox();		
 		Box PasswordhorizontalBox = Box.createHorizontalBox();		
-		JLabel usernamelabel = new JLabel("帐号");
+		JLabel usernamelabel = new JLabel("帐号:");
 		usernamelabel.setForeground(Color.DARK_GRAY);
 		usernamelabel.setFont(new Font("幼圆", Font.BOLD, 16));
 		
-		usenametextfiled = new JTextField();
+		usenametextfiled = new RoundJTextField(20);
 		usenametextfiled.setForeground(Color.DARK_GRAY);
 		usenametextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
 		usenametextfiled.setColumns(10);
@@ -101,11 +103,11 @@ public class LoginInWindows {
 		});
 		register_1.setFont(new Font("幼圆", Font.BOLD, 16));
 		
-		JLabel passwordlable = new JLabel("密码");
+		JLabel passwordlable = new JLabel("密码:");
 		passwordlable.setForeground(Color.DARK_GRAY);
 		passwordlable.setFont(new Font("幼圆", Font.BOLD, 16));
 		
-		passwordtextfiled = new JPasswordField();
+		passwordtextfiled = new RoundJPasswordField(20);
 		passwordtextfiled.setForeground(Color.DARK_GRAY);
 		passwordtextfiled.setFont(new Font("微软雅黑", Font.BOLD, 16));
 		passwordtextfiled.setBorder(new RoundBorder());
@@ -129,8 +131,8 @@ public class LoginInWindows {
 								.addComponent(passwordlable))
 							.addGap(3)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(passwordtextfiled)
-								.addComponent(usenametextfiled, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
+								.addComponent(usenametextfiled, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(passwordtextfiled, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(19)
 							.addComponent(imagetitle, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
