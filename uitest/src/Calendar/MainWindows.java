@@ -84,7 +84,6 @@ public class MainWindows {
 		
 		ImageIcon icon11 = new ImageIcon("src/image/考勤功能.png");
 		JMenu assessmode = new JMenu("\u8003\u52E4\u529F\u80FD");
-		assessmode.setForeground(Color.DARK_GRAY);
 		assessmode.setBorder(new EmptyBorder(2, 2, 2, 2));
 		assessmode.setIconTextGap(6);
 		assessmode.setFont(new Font("幼圆", Font.BOLD, 14));
@@ -95,7 +94,6 @@ public class MainWindows {
 		ImageIcon icon1 = new ImageIcon("src/image/提交考勤.png");
 		
 		JMenuItem submitmode = new JMenuItem("\u63D0\u4EA4\u8003\u52E4");
-		submitmode.setForeground(Color.DARK_GRAY);
 		submitmode.setIconTextGap(10);
 		submitmode.setIcon(icon1);
 		submitmode.setHorizontalAlignment(SwingConstants.CENTER);
@@ -152,7 +150,6 @@ public class MainWindows {
 			}
 		});
 		JMenuItem downloadmode = new JMenuItem("\u4E0B\u8F7D\u8003\u52E4");
-		downloadmode.setForeground(Color.DARK_GRAY);
 		downloadmode.setIconTextGap(10);
 		downloadmode.setIcon(icon2);
 		downloadmode.setHorizontalAlignment(SwingConstants.CENTER);
@@ -162,7 +159,6 @@ public class MainWindows {
 		
 		ImageIcon icon22 = new ImageIcon("src/image/审批功能.png");
 		JMenu checkmode = new JMenu("考核功能");
-		checkmode.setForeground(Color.DARK_GRAY);
 		checkmode.setBorder(new EmptyBorder(2, 2, 2, 2));
 		checkmode.setIconTextGap(6);
 		checkmode.setFont(new Font("幼圆", Font.BOLD, 14));
@@ -184,7 +180,7 @@ public class MainWindows {
 		ImageIcon icon27 = new ImageIcon("src/image/管理功能.png");
 		JMenu administration = new JMenu("公司管理");
 		administration.setIconTextGap(6);
-		administration.setForeground(Color.DARK_GRAY);
+
 		administration.setFont(new Font("幼圆", Font.BOLD, 14));
 		administration.setBorder(new EmptyBorder(2, 2, 2, 2));
 		administration.setIcon(icon27);
@@ -221,7 +217,6 @@ public class MainWindows {
 		
 		ImageIcon icon25 = new ImageIcon("src/image/关于.png");
 		JMenu aboutinformation = new JMenu("\u5173\u4E8E");
-		aboutinformation.setForeground(Color.DARK_GRAY);
 		aboutinformation.setBorder(new EmptyBorder(2, 2, 2, 2));
 		aboutinformation.setIconTextGap(6);
 		aboutinformation.setFont(new Font("幼圆", Font.BOLD, 14));
@@ -259,7 +254,6 @@ public class MainWindows {
 			
 			JMenu checkgrade = new JMenu("考核打分");
 			checkgrade.setIconTextGap(6);
-			checkgrade.setForeground(Color.DARK_GRAY);
 			checkgrade.setFont(new Font("宋体", Font.PLAIN, 12));
 			checkgrade.setBorder(new EmptyBorder(2, 2, 2, 2));
 			checkmode.add(checkgrade);

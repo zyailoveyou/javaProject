@@ -28,8 +28,7 @@ import user.LoginInWindows;
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginInWindows.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-		
-			 
+					 
 			LoginInWindows window = new LoginInWindows();
 			window.getFrame().setVisible(true);
 			window.getFrame().requestFocus();

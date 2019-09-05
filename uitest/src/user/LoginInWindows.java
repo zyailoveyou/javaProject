@@ -69,7 +69,7 @@ public class LoginInWindows {
 		frmHjassesssystemAlpha.setFont(new Font("Dialog", Font.PLAIN, 12));
 		frmHjassesssystemAlpha.setResizable(false);
 		frmHjassesssystemAlpha.setTitle("HJ_Assess_System alpha1.0");
-		frmHjassesssystemAlpha.setBounds(100, 100, 417, 300);
+		frmHjassesssystemAlpha.setBounds(100, 100, 431, 341);
 		frmHjassesssystemAlpha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHjassesssystemAlpha.setLocationRelativeTo(null);		
 		ImageIcon icon = new ImageIcon("src/image/汇景图标.png");		
@@ -118,61 +118,58 @@ public class LoginInWindows {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(145)
-							.addComponent(login)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(register_1))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(82)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(usernamelabel)
-								.addComponent(passwordlable))
-							.addGap(3)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(usenametextfiled, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(passwordtextfiled, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(19)
-							.addComponent(imagetitle, GroupLayout.PREFERRED_SIZE, 377, GroupLayout.PREFERRED_SIZE)
-							.addGap(25)
-							.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(5)
-							.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(86))
+					.addGap(131)
+					.addComponent(login, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+					.addGap(1)
+					.addComponent(register_1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(73)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(usernamelabel)
+						.addComponent(passwordlable))
+					.addGap(3)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(usenametextfiled, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(passwordtextfiled, GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)))
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addComponent(imagetitle, GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGap(418)
+						.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGap(5)
+						.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(1)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(imagetitle, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
+		
+					.addComponent(imagetitle, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+					.addGap(4)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(AccounthorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(PasswordhorizontalBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(15)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(usenametextfiled, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(usernamelabel))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addComponent(passwordtextfiled, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 						.addComponent(passwordlable))
 					.addGap(10)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(login, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(register_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(register_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(login, GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE))
+					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		frmHjassesssystemAlpha.getContentPane().setLayout(groupLayout);
 		
 				
 		
-		ImageIcon icon2 = new ImageIcon("src/image/汇景logo.jpg");
+		ImageIcon icon2 = new ImageIcon("src/image/汇景logo.png");
 		icon2.setImage(
 				icon2.getImage().
-      		  getScaledInstance(377,95, Image.SCALE_DEFAULT)); 
+      		  getScaledInstance(425,157, Image.SCALE_DEFAULT)); 
 		imagetitle.setIcon(icon2);
 		
 				register_1.addMouseListener(new MouseAdapter() {

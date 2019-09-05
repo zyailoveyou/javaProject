@@ -919,7 +919,7 @@ public class LocaltestDataBaseOperation {
 			
             if (!myresultSetwoker.isBeforeFirst()) {
             	
-				ShowDialog("没有读取到需要审批的数据"); 
+				ShowDialog("没有读取到需要下载的数据，你可能没有下载权限，联系管理员帮你设置"); 
 				return null;
 			}
             
