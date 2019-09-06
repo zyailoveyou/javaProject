@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="groupdownload" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="正常休假"/>
-			<item value="submit"/>
-			<item value="vacationapproval"/>
-			<item value="activeTextfield"/>
-			<item value="reasonsexplanation"/>
+			<item value="groupdownload"/>
 			<item value="imagetitle"/>
-			<item value="scrollPane"/>
-			<item value="panelcontainer"/>
-			<item value="gl_p1"/>
-			<item value="panelscroll"/>
-			<item value="p1"/>
-			<item value="mvfl_panelcontainer"/>
-			<item value="vacationPanels"/>
-			<item value="assessapproval"/>
-			<item value="mylabel"/>
+			<item value="151"/>
+			<item value="passwordtextfiled"/>
+			<item value="usenametextfiled"/>
+			<item value="usenametextfiled "/>
+			<item value="reasondetail"/>
+			<item value="download"/>
+			<item value="administration"/>
+			<item value="administration "/>
+			<item value="管理员下载模式"/>
+			<item value="icon29"/>
+			<item value="vacationapproval"/>
+			<item value="getApprovalState"/>
+			<item value="正常休假"/>
 		</list>
 		<list key="replacehistory">
 			<item value="download"/>

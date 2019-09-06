@@ -1,0 +1,105 @@
+package vacation_extrawork;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+public  class OneManData {
+	
+
+	private ArrayList<Approvel_N_Dayinformation> N_dayinformation = new ArrayList<Approvel_N_Dayinformation>();
+	private String name = null;
+	private int id;
+	private ArrayList<Integer> sequcetialdayindex = new ArrayList<Integer>();	
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public OneManData(ArrayList<Approvel_N_Dayinformation> info) {		
+		this.N_dayinformation = info;				
+	}
+		
+	public ArrayList<Approvel_N_Dayinformation> getN_dayinformation() {
+		return N_dayinformation;
+	}
+
+	public void setN_dayinformation(ArrayList<Approvel_N_Dayinformation> dayinformation) {
+		this.N_dayinformation = dayinformation;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	public ArrayList<Approvel_N_Dayinformation> SeparateSequential_ThreeDay_Dayinformation() {
+		
+		ArrayList<Approvel_N_Dayinformation> SpecialSequencialVacationday = new ArrayList<Approvel_N_Dayinformation>();
+		
+		for (int i = 0; i < N_dayinformation.size(); i++) {
+			
+			    sequcetialdayindex.add(i);
+				FindOneLocationIdentical(i);
+				if (sequcetialdayindex.size()>=3) {
+					
+					for (int j = 0;i<sequcetialdayindex.size();j++) {
+						
+						SpecialSequencialVacationday.add(N_dayinformation.get(j));
+						N_dayinformation.remove(sequcetialdayindex.get(j)-j);
+						sequcetialdayindex.clear();
+												
+					}
+					
+				}
+			}
+					
+		return SpecialSequencialVacationday;		
+	}
+	
+	
+	public void FindOneLocationIdentical(int location) {
+		
+			
+		for (int i = 0; i < N_dayinformation.size(); i++) {
+			
+			   Date nowtime =N_dayinformation.get(location).getTime();		   
+			   java.util.Date nowdateforuse = nowtime;
+			   
+			   Date nowtime2 =N_dayinformation.get(i).getTime();
+			   java.util.Date nowdateforuse2 = nowtime2;
+					   				
+			   Calendar calendar1 = Calendar.getInstance();
+			   calendar1.setTime(nowdateforuse);
+			   calendar1.set(Calendar.DAY_OF_MONTH, calendar1.get(Calendar.DAY_OF_MONTH)+1);
+							   				  				   
+			   Calendar calendar2 = Calendar.getInstance();
+			   calendar2.setTime(nowdateforuse2);
+				   
+				   if (calendar1.getTime().equals(calendar2.getTime())) {
+					   
+					   sequcetialdayindex.add(i);
+					   FindOneLocationIdentical(i);			  
+				   }
+				   
+				   else {
+					   return;				  					   
+				   }
+				   
+			   }		   				
+				
+		
+	}
+	
+	
+
+}

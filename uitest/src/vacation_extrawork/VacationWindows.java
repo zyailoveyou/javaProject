@@ -358,14 +358,14 @@ public class VacationWindows {
 		 information.setActualtimenoclear(Actualtimenoclear);
 		 information.setreasons_explanation(Explainreason);
 		 information.sethandleovertimework(null);
-		 
-		 
-		 int vnpassed = 0;
-		 information.setVACATION_NORMAL_PASSED(vnpassed);
+		 		 		 
+		 information.setVACATION_NORMAL_PASSED(0);
+		 information.setVACATION_SPECIAL_PASSED(0);
 		 String level_shape = getlabel().getCal().getUser().getLevel_shape();
 		 information.setLEVEL_SHAPE(level_shape);
 		 information.setDEPARTMENT(getlabel().getCal().getUser().getDepartmentString());
-		 information.setVACATION_APPROVAL_NORMAL_UPPER(getlabel().getCal().getUser().getASSESS_APPROVAL_NORMAL_UPPER());
+		 information.setVACATION_APPROVAL_NORMAL_UPPER(getlabel().getCal().getUser().getVACATION_APPROVAL_NORMAL_UPPER());
+		 information.setVACATION_APPROVAL_HIGHER_UPPER(getlabel().getCal().getUser().getVACATION_APPROVAL_HIGHER_UPPER());
 
 		 
 		 CheckTheManExist(nameString);

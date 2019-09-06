@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-<fullyQualifiedTypeName name="user.RegisterWindows"/>
-<fullyQualifiedTypeName name="java.util.AbstractMap"/>
-<fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="java.util.Iterator"/>
-<fullyQualifiedTypeName name="java.lang.Boolean"/>
-<fullyQualifiedTypeName name="java.util.Map.Entry"/>
-<fullyQualifiedTypeName name="Calendar.CalendarWindows"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="user.user"/>
 <fullyQualifiedTypeName name="oracle.jdbc.AdditionalDatabaseMetaData"/>
 <fullyQualifiedTypeName name="Calendar.DownloadWindows"/>
@@ -33,10 +23,8 @@
 <fullyQualifiedTypeName name="backup.BackupDownWindows"/>
 <fullyQualifiedTypeName name="approvel.BackupApprovelWindows"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
-<fullyQualifiedTypeName name="user.User"/>
 <fullyQualifiedTypeName name="approvel.VacationPanel"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseAdapter"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="ojdbc.DataBaseOperation"/>
 <fullyQualifiedTypeName name="tcp.ListInformation"/>
 <fullyQualifiedTypeName name="javax.swing.Icon"/>
@@ -48,9 +36,7 @@
 <fullyQualifiedTypeName name="javax.swing.JSeparator"/>
 <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="vacation_extrawork.Dayinformation"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="vacation_extrawork.Approvel_N_Dayinformation"/>
 <fullyQualifiedTypeName name="implement.RoundBorder"/>
@@ -60,4 +46,18 @@
 <fullyQualifiedTypeName name="javax.swing.event.MenuListener"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="version_information.VersionWindows"/>
+<fullyQualifiedTypeName name="jxl.Workbook"/>
+<fullyQualifiedTypeName name="jxl.write.WritableWorkbook"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="java.awt.Shape"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
+<fullyQualifiedTypeName name="java.awt.geom.RoundRectangle2D"/>
+<fullyQualifiedTypeName name="implement.RoundJTextField"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="javax.swing.JPasswordField"/>
+<fullyQualifiedTypeName name="implement.RoundJPasswordField"/>
+<fullyQualifiedTypeName name="user.User"/>
+<fullyQualifiedTypeName name="ojdbc.LocaltestDataBaseOperation"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

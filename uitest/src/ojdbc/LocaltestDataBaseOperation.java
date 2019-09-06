@@ -182,8 +182,7 @@ public class LocaltestDataBaseOperation {
 		
 		if (connect!=null) {
 			
-			connect.setAutoCommit(false);
-			String onelineSQL = "INSERT INTO VACATION_NAPPROVAL (name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK,VACATION_NORMAL_PASSED,LEVEL_SHAPE,DEPARTMENT,VA_AP_N_UPPER)VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+			String onelineSQL = "INSERT INTO VACATION_APPROVAL (name,id,DEPARTMENT,LEVEL_SHAPE,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK,WHETHERNEEDHIGHPASS,VACATION_NORMAL_PASSED,VACATION_SPECIAL_PASSED,VA_AP_N_UPPER,VA_AP_H_UPPER)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pre = connect.prepareStatement(onelineSQL);					
 			Iterator<OneManData> onemaniIterator = data.iterator();
 			
@@ -197,16 +196,20 @@ public class LocaltestDataBaseOperation {
 
 					pre.setString(1,dataforoneman.getName());
 					pre.setString(2,String.valueOf(dataforoneman.getId()));
-					pre.setDate(3, datafordayinformaiton.getTime());
-					pre.setString(4,datafordayinformaiton.getActualtimenoclear());
-					pre.setString(5,datafordayinformaiton.getreasons());
-					pre.setString(6,datafordayinformaiton.getreasons_details());
-					pre.setString(7,datafordayinformaiton.getreasons_explanation());
-					pre.setString(8,datafordayinformaiton.gethandleovertimework());	
-					pre.setInt(9, datafordayinformaiton.getVACATION_NORMAL_PASSED());
-					pre.setString(10, datafordayinformaiton.getLEVEL_SHAPE());
-					pre.setString(11, datafordayinformaiton.getDEPARTMENT());
-					pre.setString(12, datafordayinformaiton.getVACATION_APPROVAL_NORMAL_UPPER());
+					pre.setString(3, datafordayinformaiton.getDEPARTMENT());
+					pre.setString(4, datafordayinformaiton.getLEVEL_SHAPE());
+					pre.setDate(5, datafordayinformaiton.getTime());
+					pre.setString(6,datafordayinformaiton.getActualtimenoclear());
+					pre.setString(7,datafordayinformaiton.getreasons());
+					pre.setString(8,datafordayinformaiton.getreasons_details());
+					pre.setString(9,datafordayinformaiton.getreasons_explanation());
+					pre.setString(10,datafordayinformaiton.gethandleovertimework());
+					pre.setInt(11,datafordayinformaiton.getWHETHERNEEDHIGHPASS());				
+					pre.setInt(12, datafordayinformaiton.getVACATION_NORMAL_PASSED());
+					pre.setInt(13, datafordayinformaiton.getVACATION_SPECIAL_PASSED());										
+					pre.setString(14, datafordayinformaiton.getVACATION_APPROVAL_NORMAL_UPPER());
+					pre.setString(15, datafordayinformaiton.getVACATION_APPROVAL_HIGHER_UPPER());
+					
 					pre.addBatch();
 										
 				}
