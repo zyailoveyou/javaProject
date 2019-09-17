@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="user.user"/>
-<fullyQualifiedTypeName name="oracle.jdbc.AdditionalDatabaseMetaData"/>
 <fullyQualifiedTypeName name="Calendar.DownloadWindows"/>
 <fullyQualifiedTypeName name="java.awt.event.MouseListener"/>
 <fullyQualifiedTypeName name="java.awt.event.ItemListener"/>
@@ -38,7 +36,6 @@
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="vacation_extrawork.Dayinformation"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="vacation_extrawork.Approvel_N_Dayinformation"/>
 <fullyQualifiedTypeName name="implement.RoundBorder"/>
 <fullyQualifiedTypeName name="implement.BackgroundPanel"/>
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
@@ -60,4 +57,7 @@
 <fullyQualifiedTypeName name="ojdbc.LocaltestDataBaseOperation"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="vacation_extrawork.Approvel_N_Dayinformation"/>
+<fullyQualifiedTypeName name="java.util.NoSuchElementException"/>
 </qualifiedTypeNameHistroy>

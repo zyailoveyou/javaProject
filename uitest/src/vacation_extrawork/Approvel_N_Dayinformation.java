@@ -1,6 +1,6 @@
 package vacation_extrawork;
 
-public class Approvel_N_Dayinformation extends Dayinformation {
+public class Approvel_N_Dayinformation extends Dayinformation implements Cloneable {
 	
 	
 	private int WHETHERNEEDHIGHPASS = 0;
@@ -12,6 +12,11 @@ public class Approvel_N_Dayinformation extends Dayinformation {
 	private String VACATION_APPROVAL_HIGHER_UPPER;
 	
 	
+	@Override
+	protected Approvel_N_Dayinformation clone() throws CloneNotSupportedException {
+		// TODO 自动生成的方法存根
+		return (Approvel_N_Dayinformation)super.clone();
+	}
 	
 	public String getVACATION_APPROVAL_HIGHER_UPPER() {
 		return VACATION_APPROVAL_HIGHER_UPPER;

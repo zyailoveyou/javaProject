@@ -1,0 +1,115 @@
+package vacation_extrawork;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
+
+public  class OneManData {
+	
+
+	private ArrayList<Approvel_N_Dayinformation> N_dayinformation = new ArrayList<Approvel_N_Dayinformation>();
+	private String name = null;
+	private int id;	
+	private ArrayList<Approvel_N_Dayinformation> SpecialSequencialVacationday = new ArrayList<Approvel_N_Dayinformation>();
+		
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public OneManData(ArrayList<Approvel_N_Dayinformation> info) {		
+		this.N_dayinformation = info;				
+	}
+		
+	public ArrayList<Approvel_N_Dayinformation> getN_dayinformation() {
+		return N_dayinformation;
+	}
+
+	public void setN_dayinformation(ArrayList<Approvel_N_Dayinformation> dayinformation) {
+		this.N_dayinformation = dayinformation;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	public void SeparateSequential_ThreeDay_Dayinformation() {
+				
+		for (int i = 0; i < N_dayinformation.size(); i++) {
+			
+			    SpecialSequencialVacationday.add(N_dayinformation.get(i));
+				FindOneLocationIdentical(i);
+				if (SpecialSequencialVacationday.size()>=3) {
+										
+					Iterator<Approvel_N_Dayinformation> speciaiIterator = SpecialSequencialVacationday.iterator();
+					
+					while (speciaiIterator.hasNext()) {
+						
+						Approvel_N_Dayinformation itS = (Approvel_N_Dayinformation)speciaiIterator.next();
+						
+						Iterator<Approvel_N_Dayinformation> N_dayinformationIterator = N_dayinformation.iterator();
+						
+						while (N_dayinformationIterator.hasNext()) {
+							
+							Approvel_N_Dayinformation itN = (Approvel_N_Dayinformation)N_dayinformationIterator.next();
+			   				
+							Calendar calendar1 = Calendar.getInstance();
+							calendar1.setTime(itS.getTime());
+							
+							Calendar calendar2 = Calendar.getInstance();
+							calendar2.setTime(itN.getTime());
+							
+							if (calendar1.getTime().equals(calendar2.getTime())) {
+								
+								N_dayinformationIterator.remove();
+								break;														
+							}
+						}						
+					}										
+				}
+				else {
+					SpecialSequencialVacationday.clear();
+				}
+			}
+						
+	}
+	
+	
+	public void FindOneLocationIdentical(int location) {
+		
+			
+		for (int i = 0; i < N_dayinformation.size(); i++) {
+			
+			   Date nowtime =N_dayinformation.get(location).getTime();		   
+			   java.util.Date nowdateforuse = nowtime;
+			   
+			   Date nowtime2 =N_dayinformation.get(i).getTime();
+			   java.util.Date nowdateforuse2 = nowtime2;
+					   				
+			   Calendar calendar1 = Calendar.getInstance();
+			   calendar1.setTime(nowdateforuse);
+			   calendar1.set(Calendar.DAY_OF_MONTH, calendar1.get(Calendar.DAY_OF_MONTH)+1);
+							   				  				   
+			   Calendar calendar2 = Calendar.getInstance();
+			   calendar2.setTime(nowdateforuse2);
+				   
+				   if (calendar1.getTime().equals(calendar2.getTime())) {
+					   
+					   SpecialSequencialVacationday.add(N_dayinformation.get(i));
+					   FindOneLocationIdentical(i);			  
+				   }
+				   				   
+			   }		   				
+						
+	}
+	
+}

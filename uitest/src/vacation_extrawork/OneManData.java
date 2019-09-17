@@ -4,15 +4,22 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public  class OneManData {
 	
 
-	private ArrayList<Approvel_N_Dayinformation> N_dayinformation = new ArrayList<Approvel_N_Dayinformation>();
+
 	private String name = null;
 	private int id;	
 	private ArrayList<Approvel_N_Dayinformation> SpecialSequencialVacationday = new ArrayList<Approvel_N_Dayinformation>();
+	private ArrayList<Approvel_N_Dayinformation> N_dayinformation = new ArrayList<Approvel_N_Dayinformation>();
+	private ArrayList<Approvel_N_Dayinformation> SpecialSequencialVacationdayTemp = new ArrayList<Approvel_N_Dayinformation>();
 		
+	public ArrayList<Approvel_N_Dayinformation> getSpecialSequencialVacationday() {
+		return SpecialSequencialVacationday;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -42,74 +49,125 @@ public  class OneManData {
 	}
 	
 	
-	public void SeparateSequential_ThreeDay_Dayinformation() {
-				
-		for (int i = 0; i < N_dayinformation.size(); i++) {
+	public void SeparateSequential_ThreeDay_Dayinformation() throws CloneNotSupportedException {
+		
+		
+		try {
 			
-			    SpecialSequencialVacationday.add(N_dayinformation.get(i));
-				FindOneLocationIdentical(i);
-				if (SpecialSequencialVacationday.size()>=3) {
-										
-					Iterator<Approvel_N_Dayinformation> speciaiIterator = SpecialSequencialVacationday.iterator();
-					
-					while (speciaiIterator.hasNext()) {
-						
-						Approvel_N_Dayinformation itS = (Approvel_N_Dayinformation)speciaiIterator.next();
-						
-						Iterator<Approvel_N_Dayinformation> N_dayinformationIterator = N_dayinformation.iterator();
-						
-						while (N_dayinformationIterator.hasNext()) {
+			Iterator<Approvel_N_Dayinformation> iteratorN_dayinformation = N_dayinformation.iterator();
+			
+			while (iteratorN_dayinformation.hasNext()) {
+				
+				Approvel_N_Dayinformation itn = (Approvel_N_Dayinformation)iteratorN_dayinformation.next();
+				
+				FindOneLocationIdentical(itn);
 							
-							Approvel_N_Dayinformation itN = (Approvel_N_Dayinformation)N_dayinformationIterator.next();
-			   				
-							Calendar calendar1 = Calendar.getInstance();
-							calendar1.setTime(itS.getTime());
+					if (SpecialSequencialVacationdayTemp.size()>=3) {
+											
+						Iterator<Approvel_N_Dayinformation> speciaiIterator = SpecialSequencialVacationdayTemp.iterator();
+						
+						while (speciaiIterator.hasNext()) {
 							
-							Calendar calendar2 = Calendar.getInstance();
-							calendar2.setTime(itN.getTime());
+							Approvel_N_Dayinformation itS = (Approvel_N_Dayinformation)speciaiIterator.next();
 							
-							if (calendar1.getTime().equals(calendar2.getTime())) {
+							Iterator<Approvel_N_Dayinformation> N_dayinformationIterator = N_dayinformation.iterator();
+							
+							while (N_dayinformationIterator.hasNext()) {
 								
-								N_dayinformationIterator.remove();
-								break;														
+								Approvel_N_Dayinformation itN = (Approvel_N_Dayinformation)N_dayinformationIterator.next();
+				   				
+								Calendar calendar1 = Calendar.getInstance();
+								calendar1.setTime(itS.getTime());
+								
+								Calendar calendar2 = Calendar.getInstance();
+								calendar2.setTime(itN.getTime());
+								
+								if (calendar1.getTime().equals(calendar2.getTime())) {
+									
+									N_dayinformationIterator.remove();		
+									break;														
+								}
 							}
+							
+							SpecialSequencialVacationday.add(itS);
 						}						
-					}										
-				}
-				else {
-					SpecialSequencialVacationday.clear();
-				}
-			}
-						
+						SpecialSequencialVacationdayTemp.clear();									
+					}
+					else {
+						SpecialSequencialVacationdayTemp.clear();
+					}
+				
+			 }
+			
+		} 
+		
+		catch (java.util.ConcurrentModificationException e) {
+			
+			SeparateSequential_ThreeDay_Dayinformation();
+		}
+								
 	}
 	
 	
-	public void FindOneLocationIdentical(int location) {
+	public void FindOneLocationIdentical(Approvel_N_Dayinformation location) throws CloneNotSupportedException {
 		
+		if (SpecialSequencialVacationdayTemp.isEmpty()) {
+			Approvel_N_Dayinformation newtype = location.clone();
+			newtype.setWHETHERNEEDHIGHPASS(1);
+			SpecialSequencialVacationdayTemp.add(newtype);
+		}
+		else {			
 			
-		for (int i = 0; i < N_dayinformation.size(); i++) {
+				for (int j = 0; j < SpecialSequencialVacationdayTemp.size();j++) {
+					
+					if ( SpecialSequencialVacationdayTemp.get(j).getLabelday()!= location.getLabelday()) {	
+						if (j==SpecialSequencialVacationdayTemp.size()-1) {
+							
+							Approvel_N_Dayinformation newtype = location.clone();
+							newtype.setWHETHERNEEDHIGHPASS(1);
+							SpecialSequencialVacationdayTemp.add(newtype);
+						}
+						continue;					
+					}
+					
+					else if (SpecialSequencialVacationdayTemp.get(j).getLabelday() == location.getLabelday()) {						
+						break;
+					}
+					
+										
+				}										
+		}
+		
+        Iterator<Approvel_N_Dayinformation> iteratorN_dayinformation = N_dayinformation.iterator();
+		
+		while (iteratorN_dayinformation.hasNext()) {
+						
+			Approvel_N_Dayinformation itn = (Approvel_N_Dayinformation)iteratorN_dayinformation.next();
 			
-			   Date nowtime =N_dayinformation.get(location).getTime();		   
-			   java.util.Date nowdateforuse = nowtime;
+			Date nowtime =location.getTime();		   
+			java.util.Date nowdateforuse = nowtime;
 			   
-			   Date nowtime2 =N_dayinformation.get(i).getTime();
-			   java.util.Date nowdateforuse2 = nowtime2;
+			Date nowtime2 =itn.getTime();
+			java.util.Date nowdateforuse2 = nowtime2;
 					   				
-			   Calendar calendar1 = Calendar.getInstance();
-			   calendar1.setTime(nowdateforuse);
-			   calendar1.set(Calendar.DAY_OF_MONTH, calendar1.get(Calendar.DAY_OF_MONTH)+1);
+			Calendar calendar1 = Calendar.getInstance();
+		    calendar1.setTime(nowdateforuse);
+			calendar1.set(Calendar.DAY_OF_MONTH, calendar1.get(Calendar.DAY_OF_MONTH)+1);
 							   				  				   
-			   Calendar calendar2 = Calendar.getInstance();
-			   calendar2.setTime(nowdateforuse2);
+			Calendar calendar2 = Calendar.getInstance();
+			calendar2.setTime(nowdateforuse2);
 				   
 				   if (calendar1.getTime().equals(calendar2.getTime())) {
 					   
-					   SpecialSequencialVacationday.add(N_dayinformation.get(i));
-					   FindOneLocationIdentical(i);			  
+					   Approvel_N_Dayinformation newtype = itn.clone();
+					   newtype.setWHETHERNEEDHIGHPASS(1);
+					   SpecialSequencialVacationdayTemp.add(newtype);
+					   FindOneLocationIdentical(newtype);
+					   break;
 				   }
 				   				   
 			   }		   				
 						
-	}
+	      }
 	
 }

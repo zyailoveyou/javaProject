@@ -120,7 +120,7 @@ public class MainWindows {
 				
 //				DataBaseOperation dataBaseOperation = new DataBaseOperation();
 				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
-				ListInformation informationgroup = null;
+				ArrayList<ListInformation> informationgroup = null;
 				try {
 //					informationgroup = dataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
 					informationgroup = localtestDataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);

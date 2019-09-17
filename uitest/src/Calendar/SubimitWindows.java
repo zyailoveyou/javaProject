@@ -212,19 +212,21 @@ public class SubimitWindows extends Windows {
 				try {
 //					test.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
 					for (OneManData i : submitdatagroup) {
-						
-						i.SeparateSequential_ThreeDay_Dayinformation();
+//执行3天以上的拆分
+							i.SeparateSequential_ThreeDay_Dayinformation();						 
 						
 					}
-					
-					
-					
+										
 					localtestDataBaseOperation.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
 				} catch (ClassNotFoundException e1) {
 
 					e1.printStackTrace();
 				} catch (SQLException e1) {
 
+					e1.printStackTrace();
+				}
+				catch (CloneNotSupportedException e1) {
+					// TODO 自动生成的 catch 块
 					e1.printStackTrace();
 				}
 				

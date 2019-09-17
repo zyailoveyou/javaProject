@@ -28,35 +28,19 @@ public class VacationPanel extends BackgroundPanel {
 	ButtonGroup mygourpButtonGroup = new ButtonGroup();	
 	JLabel department = new JLabel("\u90E8\u95E8\uFF1A\u529E\u516C\u5BA4");
 	
-	String wokername = null;
-	String wokervacationtype = null;
-	String wokervacationdate = null;
-	String wokervacationtime = null;
-	String wokerdepartment = null;
-	String reasonsString = null;
+	private String wokername = null;
+	private String wokervacationtype = null;
+	private String wokervacationdate = null;
+	private String wokervacationtime = null;
+	private String wokerdepartment = null;
+	private String reasonsString = null;
+	private int VACATION_NORMAL_PASSED;
+	private int VACATION_SPECIAL_PASSED;
+	private String mode = null;
 	
 	
-	                                         
-	public String getWokername() {
-		return wokername;
-	}
-
-	public String getWokervacationtype() {
-		return wokervacationtype;
-	}
-
-	public String getWokervacationdate() {
-		return wokervacationdate;
-	}
-
-	public String getWokervacationtime() {
-		return wokervacationtime;
-	}
-
-	public String getWokerdepartment() {
-		return wokerdepartment;
-	}
-
+	
+			                                     
 	public VacationPanel(String nameforwoker,String vacationdateforwoker,String vacationtimeforwoker,String vacationtypeforwoker,String departmentforwoker,String reasonsString) {
 		
 			
@@ -158,6 +142,26 @@ public class VacationPanel extends BackgroundPanel {
 		
 	}
 	
+	
+	
+	
+	
+	public String getMode() {
+		return mode;
+	}
+
+
+
+
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
+
+
+
+
 	public boolean getApprovalState() {
 		
 		if (approval.isSelected()) {
@@ -188,5 +192,40 @@ public class VacationPanel extends BackgroundPanel {
 		approval.setSelected(true);
 	}
 	
+	public int getVACATION_NORMAL_PASSED() {
+		return VACATION_NORMAL_PASSED;
+	}
+
+	public void setVACATION_NORMAL_PASSED(int vACATION_NORMAL_PASSED) {
+		VACATION_NORMAL_PASSED = vACATION_NORMAL_PASSED;
+	}
+
+	public int getVACATION_SPECIAL_PASSED() {
+		return VACATION_SPECIAL_PASSED;
+	}
+
+	public void setVACATION_SPECIAL_PASSED(int vACATION_SPECIAL_PASSED) {
+		VACATION_SPECIAL_PASSED = vACATION_SPECIAL_PASSED;
+	}
+
+	public String getWokername() {
+		return wokername;
+	}
+
+	public String getWokervacationtype() {
+		return wokervacationtype;
+	}
+
+	public String getWokervacationdate() {
+		return wokervacationdate;
+	}
+
+	public String getWokervacationtime() {
+		return wokervacationtime;
+	}
+
+	public String getWokerdepartment() {
+		return wokerdepartment;
+	}
 	
 }

@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,10 +24,10 @@ import user.User;
 import java.awt.Color;
 public class ApprovalWindows extends Windows {
 
-	ListInformation informationgroup;
+	ArrayList<ListInformation> informationgroup;
 
 	ArrayList<VacationPanel> vacationPanels =  new ArrayList<VacationPanel>();
-	public ApprovalWindows(User user,ListInformation information) throws ClassNotFoundException, SQLException {
+	public ApprovalWindows(User user,ArrayList<ListInformation> information) throws ClassNotFoundException, SQLException {
 		this.setUser(user);
 		this.informationgroup=information;
 		initialize();
@@ -40,12 +41,14 @@ public class ApprovalWindows extends Windows {
 	 */
 	private void initialize() throws ClassNotFoundException, SQLException {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 525, 527);
+		frame.setBounds(100, 100, 530, 527);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("请假审批");
 		
+		ImageIcon icon55 = new ImageIcon("src/image/汇景图标.png");		
+		frame.setIconImage(icon55.getImage());
 		
 		JScrollPane scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -59,8 +62,23 @@ public class ApprovalWindows extends Windows {
 		
 		if (informationgroup!= null) {
 			
-			for (ArrayList<String> list : informationgroup.getLineinformationgroup()) {
+			for (ArrayList<String> list : informationgroup.get(0).getLineinformationgroup()) {
 				VacationPanel vacationPanel = new VacationPanel(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5));
+				vacationPanel.setMode("单普通审批");
+				panelcontainer.add(vacationPanel);
+				vacationPanels.add(vacationPanel);
+			}
+			
+			for (ArrayList<String> list : informationgroup.get(1).getLineinformationgroup()) {
+				VacationPanel vacationPanel = new VacationPanel(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5));
+				vacationPanel.setMode("单高级审批");
+				panelcontainer.add(vacationPanel);
+				vacationPanels.add(vacationPanel);
+			}
+			
+			for (ArrayList<String> list : informationgroup.get(2).getLineinformationgroup()) {
+				VacationPanel vacationPanel = new VacationPanel(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5));
+				vacationPanel.setMode("双权限审批");
 				panelcontainer.add(vacationPanel);
 				vacationPanels.add(vacationPanel);
 			}
@@ -90,8 +108,7 @@ public class ApprovalWindows extends Windows {
 		if (user!=null) {
 			
 			String userlevel_shape = user.getLevel_shape();
-			
-			
+						
 		}
 		
 		quicklyapproval.addMouseListener(new MouseAdapter() {
@@ -115,28 +132,61 @@ public class ApprovalWindows extends Windows {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				ListInformation datagroupadd = new ListInformation();
-				ListInformation datagroupdelete = new ListInformation();
+				ListInformation datagroup_singlenormal = new ListInformation();
+				ListInformation datagroup_singlespecial = new ListInformation();
+				ListInformation datagroup_doubleright = new ListInformation();
+				ListInformation datagroup_delete = new ListInformation();
 				for (VacationPanel v:vacationPanels) {
 					
 					if (v.getapprovelcheckedstate() == true) {
+						
+						
+						if (v.getMode() == "单普通审批") {
+													
+							ArrayList<String> dataadd = new ArrayList<String>();
+							dataadd.add(v.getWokername());
+							dataadd.add(v.getWokervacationtime());
+							dataadd.add(v.getWokervacationdate());
+							datagroup_singlenormal.getLineinformationgroup().add(dataadd);
+							
+							
+						}
+						
+						if (v.getMode() == "单高级审批") {
+							
+							ArrayList<String> dataadd = new ArrayList<String>();
+							dataadd.add(v.getWokername());
+							dataadd.add(v.getWokervacationtime());
+							dataadd.add(v.getWokervacationdate());
+							datagroup_singlespecial.getLineinformationgroup().add(dataadd);
+													
+						}
+					
+					    if (v.getMode() == "双权限审批") {
+					    	
+					    	
+							ArrayList<String> dataadd = new ArrayList<String>();
+							dataadd.add(v.getWokername());
+							dataadd.add(v.getWokervacationtime());
+							dataadd.add(v.getWokervacationdate());
+							datagroup_doubleright.getLineinformationgroup().add(dataadd);					    	
+					   		
+					    }
 												
-						ArrayList<String> dataadd = new ArrayList<String>();
-						dataadd.add(v.getWokername());
-						dataadd.add(v.getWokervacationtime());
-						dataadd.add(v.getWokervacationdate());
-						datagroupadd.getLineinformationgroup().add(dataadd);																							
 					}
 					
 					
 					if (v.getdenycheckedstate() == true) {
 						
-						ArrayList<String> datadelete = new ArrayList<String>();
-						datadelete.add(v.getWokername());
-						datadelete.add(v.getWokervacationtime());
-						datadelete.add(v.getWokervacationdate());
-						datagroupdelete.getLineinformationgroup().add(datadelete);																							
+			
+						ArrayList<String> dataadd = new ArrayList<String>();
+						dataadd.add(v.getWokername());
+						dataadd.add(v.getWokervacationtime());
+						dataadd.add(v.getWokervacationdate());
+						datagroup_delete.getLineinformationgroup().add(dataadd);	
+								
 					}
+					
 				}
 				
 //				DataBaseOperation baseOperation = new DataBaseOperation();
@@ -144,20 +194,25 @@ public class ApprovalWindows extends Windows {
 				
 				try {
 					
-					if (!datagroupadd.getLineinformationgroup().isEmpty()) {
-						localtestDataBaseOperation.Update_VACATION_WORK_NORMOL_APPROVAL_state(datagroupadd);
+					if ((!datagroup_singlenormal.getLineinformationgroup().isEmpty())||
+							(!datagroup_singlespecial.getLineinformationgroup().isEmpty())||
+							   (!datagroup_doubleright.getLineinformationgroup().isEmpty()
+						)) {
+						localtestDataBaseOperation.Update_VACATION_WORK_NORMOL_APPROVAL_state(datagroup_singlenormal,datagroup_singlespecial,datagroup_doubleright);
 						frame.dispose();
 					}
 					
-					if (!datagroupdelete.getLineinformationgroup().isEmpty()) {
-						localtestDataBaseOperation.Delete_VACATION_WORK_NORMOL_APPROVAL(datagroupdelete);
+					if (!datagroup_delete.getLineinformationgroup().isEmpty()) {
+						localtestDataBaseOperation.Delete_VACATION_WORK_NORMOL_APPROVAL(datagroup_delete);
+						ShowDialog("操作成功");
 						frame.dispose();
 					}
 					
 				} catch (ClassNotFoundException e1) {
 					ShowDialog("无法连接数据库");
 					e1.printStackTrace();
-				} catch (SQLException e1) {					
+				} catch (SQLException e1) {	
+					
 					ShowDialog("无法更新数据，有可能你的数据中含有重复提交的项目");
 					e1.printStackTrace();
 				}
