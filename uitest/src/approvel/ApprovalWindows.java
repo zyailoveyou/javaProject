@@ -189,8 +189,8 @@ public class ApprovalWindows extends Windows {
 					
 				}
 				
-//				DataBaseOperation baseOperation = new DataBaseOperation();
-				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+				DataBaseOperation baseOperation = new DataBaseOperation();
+//				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
 				
 				try {
 					
@@ -198,12 +198,14 @@ public class ApprovalWindows extends Windows {
 							(!datagroup_singlespecial.getLineinformationgroup().isEmpty())||
 							   (!datagroup_doubleright.getLineinformationgroup().isEmpty()
 						)) {
-						localtestDataBaseOperation.Update_VACATION_WORK_NORMOL_APPROVAL_state(datagroup_singlenormal,datagroup_singlespecial,datagroup_doubleright);
+//						localtestDataBaseOperation.Update_VACATION_WORK_NORMOL_APPROVAL_state(datagroup_singlenormal,datagroup_singlespecial,datagroup_doubleright);
+						baseOperation.Update_VACATION_WORK_NORMOL_APPROVAL_state(datagroup_singlenormal,datagroup_singlespecial,datagroup_doubleright);
 						frame.dispose();
 					}
 					
 					if (!datagroup_delete.getLineinformationgroup().isEmpty()) {
-						localtestDataBaseOperation.Delete_VACATION_WORK_NORMOL_APPROVAL(datagroup_delete);
+//						localtestDataBaseOperation.Delete_VACATION_WORK_NORMOL_APPROVAL(datagroup_delete);
+						baseOperation.Delete_VACATION_WORK_NORMOL_APPROVAL(datagroup_delete);
 						ShowDialog("操作成功");
 						frame.dispose();
 					}

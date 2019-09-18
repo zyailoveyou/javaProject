@@ -118,12 +118,12 @@ public class MainWindows {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-//				DataBaseOperation dataBaseOperation = new DataBaseOperation();
-				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+				DataBaseOperation dataBaseOperation = new DataBaseOperation();
+//				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
 				ArrayList<ListInformation> informationgroup = null;
 				try {
-//					informationgroup = dataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
-					informationgroup = localtestDataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
+					informationgroup = dataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
+//					informationgroup = localtestDataBaseOperation.Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(user);
 				} catch (ClassNotFoundException e2) {
 					e2.printStackTrace();
 				} catch (SQLException e2) {
@@ -234,19 +234,19 @@ public class MainWindows {
 		SubimitWindows SnewSubimitWindows = new SubimitWindows(getUser());
 		DownloadWindows DnewSubimitWindows = new DownloadWindows(getUser());
 
+        //设置高级功能是否开启
 		
-		
-//		administration.setEnabled(false);
-		
-		//设置审批功能是否开启		
-		if (Integer.valueOf(getUser().getWhether_manager())!=1) {
+		if (Integer.valueOf(getUser().getPower_level()) == 99) {
 			
-			checkmode.setEnabled(false);
+			administration.setEnabled(true);
 		}
 		
 		
-
-		
+		//设置审批功能是否开启		
+					
+			checkmode.setEnabled(false);
+	
+				
         //设置请假审批功能是否开启		
 		if (Integer.valueOf(getUser().getVACATION_APPROVAL_NORMAL_RIGHT())!=1&&Integer.valueOf(getUser().getVACATION_APPROVAL_HIGHER_RIGHT())!=1) {
 			vacationapproval.setEnabled(false);
@@ -273,12 +273,7 @@ public class MainWindows {
 			checkgrade.add(arroundcheck);
 //		}
 			
-//设置高级功能是否开启
-			
-		if (Integer.valueOf(getUser().getPower_level()) == 99) {
-			
-			administration.setEnabled(true);
-		}
+
 		
 		
 		groupdownload.addActionListener(new ActionListener() {
@@ -287,11 +282,11 @@ public class MainWindows {
 			public void actionPerformed(ActionEvent e) {
 
 				//筛选下载范围
-				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+				DataBaseOperation DataBaseOperation = new DataBaseOperation();
 				Manager_download_windows manager_download_windows;
 				ArrayList<String> namelist = null;
 				try {
-					namelist = localtestDataBaseOperation.SelectDownLoadlist_From_DataBase(getUser());
+					namelist = DataBaseOperation.SelectDownLoadlist_From_DataBase(getUser());
 					if(namelist!=null) {
 						String[] stringArray = new String[namelist.size()];
 						namelist.toArray(stringArray);

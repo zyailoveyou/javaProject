@@ -18,35 +18,64 @@ import ojdbc.DataBaseOperation;
 import vacation_extrawork.Approvel_N_Dayinformation;
 import vacation_extrawork.Dayinformation;
 import vacation_extrawork.ExtraWorkWindows;
+import vacation_extrawork.MissCheckWindows;
 import vacation_extrawork.OneManData;
 import vacation_extrawork.VacationWindows;
 
 public class Mylabel extends JLabel implements MouseListener {
 	
-	private Color choosecolor;
-	private Color choosecolorfornormalrestdayColor;
+	private Color choosecolorforvacation;
+	private Color choosecolorforextrawork;
+	private Color choosecolorfornormalrestday;
+	private Color choosecolorformisscheck;
+	private Color choosecolorfordownloaddrange;
 	private Color nochoosecolor;
-	private Color betweenColor;
+
 	private boolean ischoose = false;
 	private String dayclearinformationString;
 	private Windows cal;
 	private Dayinformation information = new Dayinformation();
 	
-	public void SetChooseState() {
-		setBackground(choosecolor);
+	public void SetChooseForVacation() {
+		setBackground(choosecolorforvacation);
+		this.setForeground(Color.white);
 		ischoose = true;	
+	}
+	
+	public void SetChooseForExtrawork() {
+		setBackground(choosecolorforextrawork);
+		this.setForeground(Color.white);
+		ischoose = true;	
+	}
+	
+	
+	public void SetChooseStateForNormalRestDay()
+	{
+		setBackground(choosecolorfornormalrestday);
+		this.setForeground(Color.white);
+		ischoose =true;
+	}
+	
+	public void SetChooseStateForMisscheck()
+	{
+		setBackground(choosecolorformisscheck);
+		this.setForeground(Color.white);
+		ischoose =true;
+	}
+	
+	public void SetChooseStateForDownLoaddRange()
+	{
+		setBackground(choosecolorfordownloaddrange);
+		ischoose =true;
 	}
 	
 	public void SetNoChooseState() {
 		setBackground(nochoosecolor);
+		this.setForeground(Color.black);
 		ischoose = false;	
 	}
 	
-	public void SetChooseStatefornormalrestdayColor()
-	{
-		setBackground(choosecolorfornormalrestdayColor);
-		ischoose =true;
-	}
+
 
 	
 	public void Removedata(String name) {
@@ -87,9 +116,7 @@ public class Mylabel extends JLabel implements MouseListener {
 		
 	}
 	
-	public Color getChoosecolor() {
-		return choosecolor;
-	}
+
 
 	public Color getNochoosecolor() {
 		return nochoosecolor;
@@ -129,10 +156,13 @@ public class Mylabel extends JLabel implements MouseListener {
 	public Mylabel(Windows cal) {
 		
 		super();
-		choosecolor = new Color(255,206, 82);
+		
+		choosecolorforvacation = new Color(217,65,63);
+		choosecolorforextrawork = new Color(151,40,41);
+		choosecolorfornormalrestday = new Color(140,140,140);
+		choosecolorformisscheck = new Color(64,64,64);
+		choosecolorfordownloaddrange = new Color(59,204,105);
 		nochoosecolor = new Color(255,255,255);
-		choosecolorfornormalrestdayColor = new Color(0,204,255);
-		betweenColor = new Color(255,192,0);
 		this.setBackground(nochoosecolor);
 		this.cal = cal;
 								
@@ -188,15 +218,17 @@ public class Mylabel extends JLabel implements MouseListener {
 		 information.setTime(datetime);
 		 information.setLabelday(getText());		 
 		 information.setActualtimenoclear(Actualtimenoclear);
-		 information.setreasons_explanation(Explainreason);
+		 information.setreasons_explanation(null);
 		 information.sethandleovertimework(null);
 		 
 		 
-		 int vnpassed = 0;
-		 information.setVACATION_NORMAL_PASSED(vnpassed);
+		 information.setVACATION_NORMAL_PASSED(0);
+		 information.setVACATION_SPECIAL_PASSED(0);
 		 String level_shape = getCal().getUser().getLevel_shape();
 		 information.setLEVEL_SHAPE(level_shape);
 		 information.setDEPARTMENT(getCal().getUser().getDepartmentString());
+		 information.setVACATION_APPROVAL_NORMAL_UPPER(getCal().getUser().getVACATION_APPROVAL_NORMAL_UPPER());
+		 information.setVACATION_APPROVAL_HIGHER_UPPER(getCal().getUser().getVACATION_APPROVAL_HIGHER_UPPER());
 		 
 		 
 		 CheckTheManExist(nameString);
@@ -286,7 +318,7 @@ public class Mylabel extends JLabel implements MouseListener {
 				
 				if (optionchoose.equals("请假")) {
 					
-					setBackground(choosecolor);
+					SetChooseForVacation();
 								
 					VacationWindows Vwindow = new VacationWindows(this);
 					Vwindow.getFrame().setVisible(true);		
@@ -323,7 +355,7 @@ public class Mylabel extends JLabel implements MouseListener {
 				
 				else if (optionchoose.equals("加班")) {
 					
-					setBackground(choosecolor);				
+					SetChooseForExtrawork();			
 				    ExtraWorkWindows ewindoWindow = new ExtraWorkWindows(this);
 				    ewindoWindow.getFrame().setVisible(true);
 				    ewindoWindow.getFrame().addWindowListener(new WindowAdapter() {
@@ -352,9 +384,41 @@ public class Mylabel extends JLabel implements MouseListener {
 							
 			      }
 				
-				else if (optionchoose.equals("正常休假")) {
 					
-					SetChooseStatefornormalrestdayColor();							
+			    else if (optionchoose.equals("未打卡")) {
+					
+			    	SetChooseStateForMisscheck();			
+				    MissCheckWindows missCheckWindows = new MissCheckWindows(this);
+				    missCheckWindows.getFrame().setVisible(true);
+				    missCheckWindows.getFrame().addWindowListener(new WindowAdapter() {
+				    	
+				    	@Override
+				    	public void windowClosed(WindowEvent e) {
+				    				
+							if (missCheckWindows.getnoinformationsubmit()) {
+								
+								SetNoChooseState();
+								ShowDialog("没有提交或者设置任何信息");
+								return;
+								
+							}
+							
+							else {
+								
+								System.out.println("成功提交信息");
+								
+							}
+				    		    		
+
+				    	}
+				    	
+					});
+			    	
+				}
+				
+			   else if (optionchoose.equals("正常休假")) {
+					
+					SetChooseStateForNormalRestDay();					
 					setdata("全天未打", "正常休假");
 													
 				}
@@ -387,7 +451,7 @@ public class Mylabel extends JLabel implements MouseListener {
 			  if ((getDownloadWindows().getPeriod())[0] == null ) {
 				
 				(getDownloadWindows().getPeriod())[0] = nowDate;
-				SetChooseStatefornormalrestdayColor();
+				SetChooseStateForDownLoaddRange();
 
 				
 			  }
@@ -397,7 +461,7 @@ public class Mylabel extends JLabel implements MouseListener {
 				if ((getDownloadWindows().getPeriod())[1] == null) {
 										
 					(getDownloadWindows().getPeriod())[1] = nowDate;
-					SetChooseStatefornormalrestdayColor();
+					SetChooseStateForDownLoaddRange();
 					
 				}
 				
@@ -445,7 +509,7 @@ public class Mylabel extends JLabel implements MouseListener {
 			  if ((getManager_download_windows().getPeriod())[0] == null ) {
 				
 				(getManager_download_windows().getPeriod())[0] = nowDate;
-				SetChooseStatefornormalrestdayColor();
+				SetChooseStateForDownLoaddRange();
 
 				
 			  }
@@ -455,7 +519,7 @@ public class Mylabel extends JLabel implements MouseListener {
 				if ((getManager_download_windows().getPeriod())[1] == null) {
 										
 					(getManager_download_windows().getPeriod())[1] = nowDate;
-					SetChooseStatefornormalrestdayColor();
+					SetChooseStateForDownLoaddRange();
 					
 				}
 				

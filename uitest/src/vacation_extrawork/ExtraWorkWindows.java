@@ -90,6 +90,7 @@ public class ExtraWorkWindows {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setTitle("\u52A0\u73ED\u8BBE\u7F6E");
 		frame.setBounds(100, 100, 207, 435);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -103,9 +104,10 @@ public class ExtraWorkWindows {
 		panelreason.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		labelreason = new JLabel("\u539F\u56E0\u9009\u62E9\uFF1A");
+		labelreason.setFont(new Font("微软雅黑", Font.BOLD, 12));
 		extraworktype = new JComboBox();
 		extraworktype.setPreferredSize(new Dimension(38, 40));
-		extraworktype.setFont(new Font("黑体", Font.BOLD, 16));
+		extraworktype.setFont(new Font("幼圆", Font.PLAIN, 16));
 		extraworktype.setModel(new DefaultComboBoxModel(new String[] {"\u4F11\u606F\u65E5\u52A0\u73ED", "\u6CD5\u5B9A\u8282\u5047\u65E5\u52A0\u73ED", "\u8D85\u65F6\u52A0\u73ED", "\u7EDF\u4E00\u52A0\u73ED"}));
 		GroupLayout gl_panelreason = new GroupLayout(panelreason);
 		gl_panelreason.setHorizontalGroup(
@@ -135,21 +137,22 @@ public class ExtraWorkWindows {
 		paneltime.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		labeltime = new JLabel("\u65F6\u95F4\u9009\u62E9\uFF1A");
+		labeltime.setFont(new Font("微软雅黑", Font.BOLD, 12));
 		
 		morningextrawork = new JCheckBox("\u4E0A\u5348\u52A0\u73ED");
-		morningextrawork.setFont(new Font("黑体", Font.PLAIN, 16));
+		morningextrawork.setFont(new Font("幼圆", Font.PLAIN, 16));
 		morningextrawork.setHorizontalAlignment(SwingConstants.LEFT);
 		morningextrawork.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mygourpButtonGroup.add(morningextrawork);
 		
 		afternoonextrawork = new JCheckBox("\u4E0B\u5348\u52A0\u73ED");
-		afternoonextrawork.setFont(new Font("黑体", Font.PLAIN, 16));
+		afternoonextrawork.setFont(new Font("幼圆", Font.PLAIN, 16));
 		afternoonextrawork.setHorizontalAlignment(SwingConstants.LEFT);
 		afternoonextrawork.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mygourpButtonGroup.add(afternoonextrawork);
 		
 		wholedayextrawork = new JCheckBox("\u5168\u5929\u52A0\u73ED");
-		wholedayextrawork.setFont(new Font("黑体", Font.PLAIN, 16));
+		wholedayextrawork.setFont(new Font("幼圆", Font.PLAIN, 16));
 		wholedayextrawork.setHorizontalAlignment(SwingConstants.LEFT);
 		wholedayextrawork.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mygourpButtonGroup.add(wholedayextrawork);
@@ -191,9 +194,10 @@ public class ExtraWorkWindows {
 		panelhandle.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		labelhandlework = new JLabel("\u5904\u7406\u65B9\u5F0F\uFF1A");
+		labelhandlework.setFont(new Font("微软雅黑", Font.BOLD, 12));
 		
 		howtodealwithoverwork = new JComboBox();
-		howtodealwithoverwork.setFont(new Font("黑体", Font.BOLD, 16));
+		howtodealwithoverwork.setFont(new Font("幼圆", Font.PLAIN, 16));
 		howtodealwithoverwork.setModel(new DefaultComboBoxModel(new String[] {"\u8BA1\u5DE5\u8D44", "\u8BA1\u6362\u4F11"}));
 		GroupLayout gl_panelhandle = new GroupLayout(panelhandle);
 		gl_panelhandle.setHorizontalGroup(
@@ -217,7 +221,7 @@ public class ExtraWorkWindows {
 		panelhandle.setLayout(gl_panelhandle);
 		
 		JButton submitextrawork = new JButton("\u8BBE\u7F6E\u4FE1\u606F");
-		submitextrawork.setFont(new Font("黑体", Font.BOLD, 16));
+		submitextrawork.setFont(new Font("微软雅黑", Font.BOLD, 16));
 		submitextrawork.setPreferredSize(new Dimension(93, 40));
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -312,11 +316,14 @@ public class ExtraWorkWindows {
 		 information.setreasons_explanation(Explainreason);
 		 information.sethandleovertimework(howtodealwithovertimework);
 		 
-		 int vnpassed = 0;
-		 information.setVACATION_NORMAL_PASSED(vnpassed);
+		 information.setVACATION_NORMAL_PASSED(0);
+		 information.setVACATION_SPECIAL_PASSED(0);
 		 String level_shape = getlabel().getCal().getUser().getLevel_shape();
 		 information.setLEVEL_SHAPE(level_shape);
 		 information.setDEPARTMENT(getlabel().getCal().getUser().getDepartmentString());
+		 information.setVACATION_APPROVAL_NORMAL_UPPER(getlabel().getCal().getUser().getVACATION_APPROVAL_NORMAL_UPPER());
+		 information.setVACATION_APPROVAL_HIGHER_UPPER(getlabel().getCal().getUser().getVACATION_APPROVAL_HIGHER_UPPER());
+		 
 		 CheckTheManExist(nameString);
 		 
 		 for (int i=0;i<getlabel().getNewSubimitWindows().getSubmitdatagroup().size();i++) {

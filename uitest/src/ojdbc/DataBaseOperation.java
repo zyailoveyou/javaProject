@@ -39,6 +39,7 @@ public class DataBaseOperation {
                						
 	}
 	
+	
 	public void DisposeDataBaseLink() throws SQLException {
 		
 		if (statement!=null) {statement.close();}
@@ -184,8 +185,7 @@ public class DataBaseOperation {
 		
 		if (connect!=null) {
 			
-			connect.setAutoCommit(false);
-			String onelineSQL = "INSERT INTO VACATION_NAPPROVAL (name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK,VACATION_NORMAL_PASSED,LEVEL_SHAPE,DEPARTMENT)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			String onelineSQL = "INSERT INTO VACATION_APPROVAL (name,id,DEPARTMENT,LEVEL_SHAPE,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK,WHETHERNEEDHIGHPASS,VACATION_NORMAL_PASSED,VACATION_SPECIAL_PASSED,VA_AP_N_UPPER,VA_AP_H_UPPER)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pre = connect.prepareStatement(onelineSQL);					
 			Iterator<OneManData> onemaniIterator = data.iterator();
 			
@@ -195,19 +195,51 @@ public class DataBaseOperation {
 				Iterator<Approvel_N_Dayinformation> dayinformationIterator = dataforoneman.getN_dayinformation().iterator();
 				
 				while (dayinformationIterator.hasNext()) {
+					
 					Approvel_N_Dayinformation datafordayinformaiton = (Approvel_N_Dayinformation)dayinformationIterator.next();
 
 					pre.setString(1,dataforoneman.getName());
 					pre.setString(2,String.valueOf(dataforoneman.getId()));
-					pre.setDate(3, datafordayinformaiton.getTime());
-					pre.setString(4,datafordayinformaiton.getActualtimenoclear());
-					pre.setString(5,datafordayinformaiton.getreasons());
-					pre.setString(6,datafordayinformaiton.getreasons_details());
-					pre.setString(7,datafordayinformaiton.getreasons_explanation());
-					pre.setString(8,datafordayinformaiton.gethandleovertimework());	
-					pre.setInt(9, datafordayinformaiton.getVACATION_NORMAL_PASSED());
-					pre.setString(10, datafordayinformaiton.getLEVEL_SHAPE());
-					pre.setString(11, datafordayinformaiton.getDEPARTMENT());
+					pre.setString(3, datafordayinformaiton.getDEPARTMENT());
+					pre.setString(4, datafordayinformaiton.getLEVEL_SHAPE());
+					pre.setDate(5, datafordayinformaiton.getTime());
+					pre.setString(6,datafordayinformaiton.getActualtimenoclear());
+					pre.setString(7,datafordayinformaiton.getreasons());
+					pre.setString(8,datafordayinformaiton.getreasons_details());
+					pre.setString(9,datafordayinformaiton.getreasons_explanation());
+					pre.setString(10,datafordayinformaiton.gethandleovertimework());
+					pre.setInt(11,datafordayinformaiton.getWHETHERNEEDHIGHPASS());				
+					pre.setInt(12, datafordayinformaiton.getVACATION_NORMAL_PASSED());
+					pre.setInt(13, datafordayinformaiton.getVACATION_SPECIAL_PASSED());										
+					pre.setString(14, datafordayinformaiton.getVACATION_APPROVAL_NORMAL_UPPER());
+					pre.setString(15, datafordayinformaiton.getVACATION_APPROVAL_HIGHER_UPPER());
+					
+					pre.addBatch();
+										
+				}
+				
+	            Iterator<Approvel_N_Dayinformation> specialdayinformationIterator = dataforoneman.getSpecialSequencialVacationday().iterator();
+				
+				while (specialdayinformationIterator.hasNext()) {
+					
+					Approvel_N_Dayinformation datafordayinformaiton = (Approvel_N_Dayinformation)specialdayinformationIterator.next();
+
+					pre.setString(1,dataforoneman.getName());
+					pre.setString(2,String.valueOf(dataforoneman.getId()));
+					pre.setString(3, datafordayinformaiton.getDEPARTMENT());
+					pre.setString(4, datafordayinformaiton.getLEVEL_SHAPE());
+					pre.setDate(5, datafordayinformaiton.getTime());
+					pre.setString(6,datafordayinformaiton.getActualtimenoclear());
+					pre.setString(7,datafordayinformaiton.getreasons());
+					pre.setString(8,datafordayinformaiton.getreasons_details());
+					pre.setString(9,datafordayinformaiton.getreasons_explanation());
+					pre.setString(10,datafordayinformaiton.gethandleovertimework());
+					pre.setInt(11,datafordayinformaiton.getWHETHERNEEDHIGHPASS());				
+					pre.setInt(12, datafordayinformaiton.getVACATION_NORMAL_PASSED());
+					pre.setInt(13, datafordayinformaiton.getVACATION_SPECIAL_PASSED());										
+					pre.setString(14, datafordayinformaiton.getVACATION_APPROVAL_NORMAL_UPPER());
+					pre.setString(15, datafordayinformaiton.getVACATION_APPROVAL_HIGHER_UPPER());
+					
 					pre.addBatch();
 										
 				}
@@ -223,26 +255,55 @@ public class DataBaseOperation {
 	}
 	
 	
-	public ListInformation Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName(String name,String reason,String reasondetail,Date[] period) throws ClassNotFoundException, SQLException {
+	public ListInformation Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName(String selectname,String []namelist,String reason,String reasondetail,Date[] period) throws ClassNotFoundException, SQLException {
 		
+		//已经设置好了分部门下载
         LinkToDataBase();
         
 		if (connect!=null) {
 			
 			String sqlString ="select * from DATA_VACATIONANDOVERWORK where Time>= ? and Time<= ?";
-								
-			if (!name.equals("全部")) {
-				sqlString += "and name = ?";
-			}
+			boolean allmodeactive = false;
+			boolean reasonsset = false;
+			boolean reasonsdetailset = false;
+			
+			
+            if (selectname.equals("全部")) {
+				
+				String namelistsql = "";
+				allmodeactive = true;
+				sqlString+="and";
+				for (int i = 0; i < namelist.length; i++) {
 					
+					if (i==0) {
+						
+						namelistsql +="name ="+"'"+namelist[i]+"'";
+					}
+					
+					else {
+						namelistsql +="or name ="+"'"+namelist[i]+"'";
+					}				
+										
+				}
+				
+				sqlString = sqlString+"("+namelistsql+")";		
+														
+			}
+			
+			else {
+				sqlString+="and name = ?";
+			 }
+						
 			if (!reason.equals("全部")) {
 				
 				sqlString += "and reasons = ?";
+				reasonsset = true;
 			}
 			
 			if (!reasondetail.equals("全部")) {
 				
 				sqlString += "and REASONS_DETAILS = ?";
+				reasonsdetailset = true;
 			}
 			
 			
@@ -252,8 +313,10 @@ public class DataBaseOperation {
 			int count = parameterMetaData.getParameterCount();
 			System.out.println(count);
 			
+			//可能性只有一种 就是全部选出来
 			if (count ==2) {
-								
+				
+				System.out.println(sqlString);
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
 				
@@ -265,7 +328,6 @@ public class DataBaseOperation {
 				}
 				
 				ListInformation informationgroup = new ListInformation();
-				
 				while (myresultSet.next()) {
 					
 				String NAME = myresultSet.getString("NAME");
@@ -297,12 +359,33 @@ public class DataBaseOperation {
 				
 			}
 			
-						
+			
+			
+			//有两种可能性，如果是非全部选出来只有一种肯可能性，就是单个选人，否则就是全部选出来
+			  
 			if (count == 3) {
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, name);
+				
+				if (allmodeactive == false) {
+					pre.setString(3, selectname);
+				}
+				
+				else {
+					
+					if (reasonsset == true) {
+						
+						pre.setString(3, reason);
+					}
+					
+					if (reasonsdetailset == true) {
+						
+						pre.setString(3, reasondetail);
+					}
+					
+				}
+				
 				
 				ResultSet myresultSet = pre.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
@@ -341,14 +424,34 @@ public class DataBaseOperation {
 				DisposeDataBaseLink();
 				return informationgroup;
 			}
+			
 			
 			if (count == 4) {
 				
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, name);
-				pre.setString(4, reason);
+				
+				if (allmodeactive == false) {
+					
+					if (reasonsset == true) {
+						
+						pre.setString(3, selectname);
+						pre.setString(4, reason);
+					}
+					
+					if (reasonsdetailset == true) {
+						pre.setString(3, selectname);
+						pre.setString(4, reasondetail);
+					}
+					
+					
+				}
+				else {					
+					pre.setString(3, reason);
+					pre.setString(4, reasondetail);					
+				}
+								
 				
 				ResultSet myresultSet = pre.executeQuery();
 				if (!myresultSet.isBeforeFirst()) {
@@ -393,7 +496,7 @@ public class DataBaseOperation {
 				
 				pre.setDate(1, GetTheSmallerTimeInperiod(period));
 				pre.setDate(2, GetTheBiggerTimeInperiod(period));
-				pre.setString(3, name);
+				pre.setString(3, selectname);
 				pre.setString(4, reason);
 				pre.setString(5, reasondetail);
 				
@@ -438,13 +541,14 @@ public class DataBaseOperation {
 			return null;
 		}
 		DisposeDataBaseLink();
+		
 		return null;
 				
 	}
 	
 	public boolean InsertIntoOneLine_DATA_ACCOUNT(String username,String password,String workname,String email) throws ClassNotFoundException, SQLException {
 		
-	       LinkToDataBase();
+		LinkToDataBase();
 	       
 			int id = -1;
 			String duty = null;
@@ -452,10 +556,16 @@ public class DataBaseOperation {
 			String level_shape = null;
 			int power_level = -1;
 			int whethermanager =-1;
-			int vacation_approval_normal = -1;
-			int vacation_approval_higher = -1;
-			int assess_approval_normal = -1;
-			int assess_approval_higher = -1;
+			
+			int VA_AP_N_RIGHT= -1;
+			int VA_AP_H_RIGHT = -1;
+			int AS_AP_N_RIGHT = -1;
+			int AS_AP_H_RIGHT = -1;
+			
+			String VA_AP_N_UPPER= null;
+			String VA_AP_H_UPPER= null;
+			String AS_AP_N_UPPER= null;
+			String AS_AP_H_UPPER= null;
 			
 			if (connect!=null) {
 				
@@ -484,9 +594,8 @@ public class DataBaseOperation {
 				}
 				
 				//取出power-level和whethermanager
-				
-				
-				String sqlgetpower = "SELECT * FROM POWER WHERE duty =? ";
+							
+				String sqlgetpower = "SELECT * FROM DUTYLIST WHERE duty =? ";
 				PreparedStatement pregetpower = connect.prepareStatement(sqlgetpower);			
 				pregetpower.setString(1, duty);		
 				ResultSet resultgetpower =pregetpower.executeQuery();
@@ -494,7 +603,7 @@ public class DataBaseOperation {
 				
 				if (!resultgetpower .isBeforeFirst()) {
 					
-					ShowDialog("在power表中不能查找到该duty，联系管理员");
+					ShowDialog("在dutylist表中不能查找到该duty，联系管理员");
 					return false;
 				}
 				
@@ -509,53 +618,34 @@ public class DataBaseOperation {
 				
 				
 
-				String sqlgetvacationassess = "SELECT * FROM MANAGER_RELATIONSHIP WHERE MANAGER_NAME = ?";
+				String sqlgetvacationassess = "SELECT * FROM ADMI_MANAGER WHERE WOKER_NAME = ?";
 				PreparedStatement pregetvacationassess = connect.prepareStatement(sqlgetvacationassess);			
 				pregetvacationassess.setString(1, workname);		
 				ResultSet resultgetvacationasses =pregetvacationassess.executeQuery();
 				
 				
 				if (!resultgetvacationasses.isBeforeFirst()) {
-					
-					String sqlgetvacationassess2 = "SELECT * FROM MANAGER_RELATIONSHIP WHERE MANAGER_NAME = ?";
-					PreparedStatement pregetvacationassess2 = connect.prepareStatement(sqlgetvacationassess2);			
-					pregetvacationassess2.setString(1, department);		
-					ResultSet resultgetvacationasses2 =pregetvacationassess2.executeQuery();
-					
-					if (!resultgetvacationasses2.isBeforeFirst())
-					{
-						ShowDialog("在MANAGER_RELATIONSHIP表中不能查找到vacation和assess权限，联系管理员");
-						return false;
-						
-					}
-					
-					while (resultgetvacationasses2.next()) {
-						
-						vacation_approval_normal = resultgetvacationasses2.getInt("vacation_approval_normal");
-						vacation_approval_higher = resultgetvacationasses2.getInt("vacation_approval_higher");
-						assess_approval_normal = resultgetvacationasses2.getInt("assess_approval_normal");
-						assess_approval_higher = resultgetvacationasses2.getInt("assess_approval_higher");
-											
-					}
-					
+					//如果找不到					
 					
 				}
 				
 				while (resultgetvacationasses.next()) {
 					
-					vacation_approval_normal = resultgetvacationasses.getInt("vacation_approval_normal");
-					vacation_approval_higher = resultgetvacationasses.getInt("vacation_approval_higher");
-					assess_approval_normal = resultgetvacationasses.getInt("assess_approval_normal");
-					assess_approval_higher = resultgetvacationasses.getInt("assess_approval_higher");
+					VA_AP_N_UPPER = resultgetvacationasses.getString("VA_AP_N_UPPER");
+					VA_AP_H_UPPER = resultgetvacationasses.getString("VA_AP_H_UPPER");
+					AS_AP_N_UPPER = resultgetvacationasses.getString("AS_AP_N_UPPER");
+					AS_AP_H_UPPER = resultgetvacationasses.getString("AS_AP_H_UPPER");
+					VA_AP_N_RIGHT = resultgetvacationasses.getInt("VA_AP_N_RIGHT");
+					VA_AP_H_RIGHT = resultgetvacationasses.getInt("VA_AP_H_RIGHT");
+					AS_AP_N_RIGHT = resultgetvacationasses.getInt("AS_AP_N_RIGHT");
+					AS_AP_H_RIGHT = resultgetvacationasses.getInt("AS_AP_H_RIGHT");
 										
 				}
 				
 								
 				//尝试插入帐号
-				
-				
-										
-				String insertaccountsql = "INSERT INTO ACCOUNT (username,password,WOKERNAME,id,DEPARTMENT,duty,power_level,whethermanager,level_shape,vacation_approval_normal,vacation_approval_higher,assess_approval_normal,assess_approval_higher,email)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+														
+				String insertaccountsql = "INSERT INTO ACCOUNT (username,password,WOKERNAME,id,DEPARTMENT,duty,power_level,whethermanager,level_shape,VA_AP_N_UPPER,VA_AP_H_UPPER,AS_AP_N_UPPER,AS_AP_H_UPPER,email,VA_AP_N_RIGHT,VA_AP_H_RIGHT,AS_AP_N_RIGHT,AS_AP_H_RIGHT)  VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				PreparedStatement preinsertaccount = connect.prepareStatement(insertaccountsql);
 				
 				preinsertaccount.setString(1, username);
@@ -567,12 +657,15 @@ public class DataBaseOperation {
 				preinsertaccount.setInt(7, power_level);
 				preinsertaccount.setInt(8, whethermanager);
 				preinsertaccount.setString(9, level_shape);
-				preinsertaccount.setInt(10, vacation_approval_normal);
-				preinsertaccount.setInt(11, vacation_approval_higher);
-				preinsertaccount.setInt(12, assess_approval_normal);
-				preinsertaccount.setInt(13, assess_approval_higher);
+				preinsertaccount.setString(10, VA_AP_N_UPPER);
+				preinsertaccount.setString(11, VA_AP_H_UPPER);
+				preinsertaccount.setString(12, AS_AP_N_UPPER );
+				preinsertaccount.setString(13, AS_AP_H_UPPER);
 				preinsertaccount.setString(14, email);
-				
+				preinsertaccount.setInt(15, VA_AP_N_RIGHT);
+				preinsertaccount.setInt(16, VA_AP_H_RIGHT);
+				preinsertaccount.setInt(17, AS_AP_N_RIGHT);
+				preinsertaccount.setInt(18, AS_AP_H_RIGHT);
 								
 				int result = preinsertaccount.executeUpdate();
 				
@@ -625,10 +718,15 @@ public class DataBaseOperation {
 				String power_level = myresultSet.getString("POWER_LEVEL");
 				String whether_manager = myresultSet.getString("WHETHERMANAGER");
 				String level_shape = myresultSet.getString("LEVEL_SHAPE");
-				String VACATION_APPROVAL_NORMAL = myresultSet.getString("VACATION_APPROVAL_NORMAL");
-				String VACATION_APPROVAL_HIGHER = myresultSet.getString("VACATION_APPROVAL_HIGHER");
-				String ASSESS_APPROVAL_NORMAL = myresultSet.getString("ASSESS_APPROVAL_NORMAL");
-				String ASSESS_APPROVAL_HIGHER = myresultSet.getString("ASSESS_APPROVAL_HIGHER");
+				String VACATION_APPROVAL_NORMAL_UPPER = myresultSet.getString("VA_AP_N_UPPER");
+				String VACATION_APPROVAL_HIGHER_UPPER = myresultSet.getString("VA_AP_H_UPPER");
+				String ASSESS_APPROVAL_NORMAL_UPPER = myresultSet.getString("AS_AP_N_UPPER");
+				String ASSESS_APPROVAL_HIGHER_UPPER = myresultSet.getString("AS_AP_H_UPPER");
+				String email = myresultSet.getString("email");
+				String VACATION_APPROVAL_NORMAL_RIGHT = myresultSet.getString("VA_AP_N_RIGHT");
+				String VACATION_APPROVAL_HIGHER_RIGHT = myresultSet.getString("VA_AP_H_RIGHT");
+				String ASSESS_APPROVAL_NORMAL_RIGHT = myresultSet.getString("AS_AP_N_RIGHT");
+				String ASSESS_APPROVAL_HIGHER_RIGHT = myresultSet.getString("AS_AP_H_RIGHT");
 												
 				if (usenameString.equals(username)) {
 					
@@ -645,10 +743,15 @@ public class DataBaseOperation {
 						userinformationArrayList.add(power_level);
 						userinformationArrayList.add(whether_manager);
 						userinformationArrayList.add(level_shape);
-						userinformationArrayList.add(VACATION_APPROVAL_NORMAL);
-						userinformationArrayList.add(VACATION_APPROVAL_HIGHER);
-						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL);
-						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER);
+						userinformationArrayList.add(VACATION_APPROVAL_NORMAL_UPPER);
+						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_UPPER);
+						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_UPPER);
+						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_UPPER);
+						userinformationArrayList.add(email);
+						userinformationArrayList.add(VACATION_APPROVAL_NORMAL_RIGHT);
+						userinformationArrayList.add(VACATION_APPROVAL_HIGHER_RIGHT);
+						userinformationArrayList.add(ASSESS_APPROVAL_NORMAL_RIGHT);
+						userinformationArrayList.add(ASSESS_APPROVAL_HIGHER_RIGHT);
 						resutMap.put(userinformationArrayList, "成功登录");						
 						DisposeDataBaseLink();
 						return resutMap;
@@ -671,41 +774,46 @@ public class DataBaseOperation {
 		
 	}
 	
-	public ListInformation Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(User user) throws ClassNotFoundException, SQLException {
+	public ArrayList<ListInformation> Selectfrom_DATA_VACATION_WORK_APPROVAL_ForUser(User user) throws ClassNotFoundException, SQLException {
 		
-       LinkToDataBase();
+		LinkToDataBase();
 		
 		if (connect!=null) {
 						
 			int VACATION_APPROVAL_NORMAL = Integer.valueOf(user.getVACATION_APPROVAL_NORMAL_RIGHT());
 			int VACATION_APPROVAL_HIGHER = Integer.valueOf(user.getVACATION_APPROVAL_HIGHER_RIGHT());
 			String level_shape = user.getLevel_shape();
+			ListInformation informationgroup_doublerightsameperson = new ListInformation();
+			ListInformation informationgroup_onlynormalright = new ListInformation();
+			ListInformation informationgroup_onlyhighright = new ListInformation();
+			ArrayList<ListInformation> vacationapprovalinfomationArrayList = new ArrayList<ListInformation>();
+
+			//同时具有两个权限的情况下			
+			if (VACATION_APPROVAL_NORMAL ==1 && VACATION_APPROVAL_HIGHER==1 ) {
+				
+			    //选出两个审批人都是同一个的情况，插入一个标记数据
+				String SelectSQL_doublerightsameperson = "SELECT * FROM VACATION_APPROVAL WHERE VA_AP_N_UPPER = ? and VA_AP_H_UPPER = ? and VACATION_NORMAL_PASSED = 0 and VACATION_SPECIAL_PASSED =0";
 						
-			if (VACATION_APPROVAL_NORMAL ==1) {
+				PreparedStatement pre_doublerightsameperson = connect.prepareStatement(SelectSQL_doublerightsameperson);
+				pre_doublerightsameperson.setString(1, user.getCheckname());
+				pre_doublerightsameperson.setString(2, user.getCheckname());
+				System.out.println(SelectSQL_doublerightsameperson);
 				
-				String SelectSQL = "SELECT * FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED = 0 and VA_AP_N_UPPER = '汪军'";		
-				PreparedStatement pre = connect.prepareStatement(SelectSQL);
-				System.out.println(SelectSQL);
-				ResultSet myresultSet = pre.executeQuery();
-				
-                if (!myresultSet.isBeforeFirst()) {
-                	
-    				ShowDialog("暂时没有读取到需要审批的数据"); 
-					return null;
-				}
+				ResultSet myresultSet_doublerightsameperson = pre_doublerightsameperson.executeQuery();				               
                 
-                ListInformation informationgroup = new ListInformation();
-                while (myresultSet.next()) {
+				
+                while (myresultSet_doublerightsameperson.next()) {
 					
-                	String NAME = myresultSet.getString("NAME");
-                	Date time = myresultSet.getDate("time");
+                	String NAME = myresultSet_doublerightsameperson.getString("NAME");
+                	Date time = myresultSet_doublerightsameperson.getDate("time");
                 	String timeString = time.toString();
-                	String ACTUALTIMENOCLEAR = myresultSet.getString("ACTUALTIMENOCLEAR");
-                	String REASONS_DETAILS = myresultSet.getString("REASONS_DETAILS");
-                	String DEPARTMENT= myresultSet.getString("DEPARTMENT");
-                	String REASONS_EXPLANATION = myresultSet.getString("REASONS_EXPLANATION");
+                	String ACTUALTIMENOCLEAR = myresultSet_doublerightsameperson.getString("ACTUALTIMENOCLEAR");
+                	String REASONS_DETAILS = myresultSet_doublerightsameperson.getString("REASONS_DETAILS");
+                	String DEPARTMENT= myresultSet_doublerightsameperson.getString("DEPARTMENT");
+                	String REASONS_EXPLANATION = myresultSet_doublerightsameperson.getString("REASONS_EXPLANATION");
                 	
                 	ArrayList<String> arrayList = new ArrayList<String>();
+                	
                 	arrayList.add(NAME);
                 	arrayList.add(timeString);
                 	arrayList.add(ACTUALTIMENOCLEAR);
@@ -713,15 +821,172 @@ public class DataBaseOperation {
                 	arrayList.add(DEPARTMENT);
                 	arrayList.add(REASONS_EXPLANATION);
                 	           	
-                	informationgroup.getLineinformationgroup().add(arrayList);
+                	informationgroup_doublerightsameperson.getLineinformationgroup().add(arrayList);
                 						
 				}
-				DisposeDataBaseLink();
-				return informationgroup;
+                
+                
+                //选出单独一个审批人是普通请假的情况，插入一个标记的数据。
+            	String SelectSQL_onlynormalright = "SELECT * FROM VACATION_APPROVAL WHERE VA_AP_N_UPPER = ? and VA_AP_H_UPPER != ? and VACATION_NORMAL_PASSED = 0";
+				
+				PreparedStatement pre_onlynormalright = connect.prepareStatement(SelectSQL_onlynormalright);
+				pre_onlynormalright.setString(1, user.getCheckname());
+				pre_onlynormalright.setString(2, user.getCheckname());
+				System.out.println(SelectSQL_onlynormalright);
+				
+				ResultSet myresultSet_onlynormalright = pre_onlynormalright.executeQuery();				               
+                
+                while (myresultSet_onlynormalright.next()) {
+					
+                	String NAME = myresultSet_onlynormalright.getString("NAME");
+                	Date time = myresultSet_onlynormalright.getDate("time");
+                	String timeString = time.toString();
+                	String ACTUALTIMENOCLEAR = myresultSet_onlynormalright.getString("ACTUALTIMENOCLEAR");
+                	String REASONS_DETAILS = myresultSet_onlynormalright.getString("REASONS_DETAILS");
+                	String DEPARTMENT= myresultSet_onlynormalright.getString("DEPARTMENT");
+                	String REASONS_EXPLANATION = myresultSet_onlynormalright.getString("REASONS_EXPLANATION");
+                	
+                	ArrayList<String> arrayList = new ArrayList<String>();
+                	
+                	arrayList.add(NAME);
+                	arrayList.add(timeString);
+                	arrayList.add(ACTUALTIMENOCLEAR);
+                	arrayList.add(REASONS_DETAILS);
+                	arrayList.add(DEPARTMENT);
+                	arrayList.add(REASONS_EXPLANATION);
+                	           	
+                	informationgroup_onlynormalright.getLineinformationgroup().add(arrayList);
+                						
+				}
+                
+                
+                //选出单独一个审批人是高级请假的情况，插入一个标记数据
+                String SelectSQL_onlyhighright = "SELECT * FROM VACATION_APPROVAL WHERE VA_AP_N_UPPER != ? and VA_AP_H_UPPER = ? and VACATION_NORMAL_PASSED = 1 and VACATION_SPECIAL_PASSED =0 and WHETHERNEEDHIGHPASS = 1";
+				
+				PreparedStatement pre__onlyhighright = connect.prepareStatement(SelectSQL_onlyhighright);
+				pre__onlyhighright.setString(1, user.getCheckname());
+				pre__onlyhighright.setString(2, user.getCheckname());
+				System.out.println(SelectSQL_onlyhighright);
+				
+				ResultSet myresultSet_onlyhighright = pre__onlyhighright.executeQuery();				               
+                
+                while (myresultSet_onlyhighright.next()) {
+					
+                	String NAME = myresultSet_onlyhighright.getString("NAME");
+                	Date time = myresultSet_onlyhighright.getDate("time");
+                	String timeString = time.toString();
+                	String ACTUALTIMENOCLEAR = myresultSet_onlyhighright.getString("ACTUALTIMENOCLEAR");
+                	String REASONS_DETAILS = myresultSet_onlyhighright.getString("REASONS_DETAILS");
+                	String DEPARTMENT= myresultSet_onlyhighright.getString("DEPARTMENT");
+                	String REASONS_EXPLANATION = myresultSet_onlyhighright.getString("REASONS_EXPLANATION");
+                	
+                	ArrayList<String> arrayList = new ArrayList<String>();
+                	
+                	arrayList.add(NAME);
+                	arrayList.add(timeString);
+                	arrayList.add(ACTUALTIMENOCLEAR);
+                	arrayList.add(REASONS_DETAILS);
+                	arrayList.add(DEPARTMENT);
+                	arrayList.add(REASONS_EXPLANATION);
+                	           	
+                	informationgroup_onlyhighright.getLineinformationgroup().add(arrayList);
+                						
+				}
+                
+
 				
 			}
 			
+			//审批人只具有单普通审批权限			
+			if (VACATION_APPROVAL_NORMAL ==1 && VACATION_APPROVAL_HIGHER  == 0) {
+							
+				//选出单独一个审批人是普通请假的情况，插入一个标记的数据。
+            	String SelectSQL_onlynormalright = "SELECT * FROM VACATION_APPROVAL WHERE VA_AP_N_UPPER = ? and VA_AP_H_UPPER != ? and VACATION_NORMAL_PASSED = 0";
+				
+				PreparedStatement pre_onlynormalright = connect.prepareStatement(SelectSQL_onlynormalright);
+				pre_onlynormalright.setString(1, user.getCheckname());
+				pre_onlynormalright.setString(2, user.getCheckname());
+				System.out.println(SelectSQL_onlynormalright);
+				
+				ResultSet myresultSet_onlynormalright = pre_onlynormalright.executeQuery();				               
+                
+                while (myresultSet_onlynormalright.next()) {
+					
+                	String NAME = myresultSet_onlynormalright.getString("NAME");
+                	Date time = myresultSet_onlynormalright.getDate("time");
+                	String timeString = time.toString();
+                	String ACTUALTIMENOCLEAR = myresultSet_onlynormalright.getString("ACTUALTIMENOCLEAR");
+                	String REASONS_DETAILS = myresultSet_onlynormalright.getString("REASONS_DETAILS");
+                	String DEPARTMENT= myresultSet_onlynormalright.getString("DEPARTMENT");
+                	String REASONS_EXPLANATION = myresultSet_onlynormalright.getString("REASONS_EXPLANATION");
+                	
+                	ArrayList<String> arrayList = new ArrayList<String>();
+                	
+                	arrayList.add(NAME);
+                	arrayList.add(timeString);
+                	arrayList.add(ACTUALTIMENOCLEAR);
+                	arrayList.add(REASONS_DETAILS);
+                	arrayList.add(DEPARTMENT);
+                	arrayList.add(REASONS_EXPLANATION);
+                	           	
+                	informationgroup_onlynormalright.getLineinformationgroup().add(arrayList);
+                						
+				}
+								
+			}
 			
+			if (VACATION_APPROVAL_NORMAL ==0 && VACATION_APPROVAL_HIGHER  == 1) 
+			{
+				
+				 //选出单独一个审批人是高级请假的情况，插入一个标记数据
+                String SelectSQL_onlyhighright = "SELECT * FROM VACATION_APPROVAL WHERE VA_AP_N_UPPER != ? and VA_AP_H_UPPER = ? and VACATION_NORMAL_PASSED = 1 and VACATION_SPECIAL_PASSED =0 and WHETHERNEEDHIGHPASS = 1";
+				
+				PreparedStatement pre__onlyhighright = connect.prepareStatement(SelectSQL_onlyhighright);
+				pre__onlyhighright.setString(1, user.getCheckname());
+				pre__onlyhighright.setString(2, user.getCheckname());
+				System.out.println(SelectSQL_onlyhighright);
+				
+				ResultSet myresultSet_onlyhighright = pre__onlyhighright.executeQuery();				               
+                
+                while (myresultSet_onlyhighright.next()) {
+					
+                	String NAME = myresultSet_onlyhighright.getString("NAME");
+                	Date time = myresultSet_onlyhighright.getDate("time");
+                	String timeString = time.toString();
+                	String ACTUALTIMENOCLEAR = myresultSet_onlyhighright.getString("ACTUALTIMENOCLEAR");
+                	String REASONS_DETAILS = myresultSet_onlyhighright.getString("REASONS_DETAILS");
+                	String DEPARTMENT= myresultSet_onlyhighright.getString("DEPARTMENT");
+                	String REASONS_EXPLANATION = myresultSet_onlyhighright.getString("REASONS_EXPLANATION");
+                	
+                	ArrayList<String> arrayList = new ArrayList<String>();
+                	
+                	arrayList.add(NAME);
+                	arrayList.add(timeString);
+                	arrayList.add(ACTUALTIMENOCLEAR);
+                	arrayList.add(REASONS_DETAILS);
+                	arrayList.add(DEPARTMENT);
+                	arrayList.add(REASONS_EXPLANATION);
+                	           	
+                	informationgroup_onlyhighright.getLineinformationgroup().add(arrayList);
+                						
+				}
+				
+			}
+			
+			DisposeDataBaseLink();
+			
+			vacationapprovalinfomationArrayList.add(informationgroup_onlynormalright);
+			vacationapprovalinfomationArrayList.add(informationgroup_onlyhighright);
+			vacationapprovalinfomationArrayList.add(informationgroup_doublerightsameperson);
+			
+			if (informationgroup_doublerightsameperson.getLineinformationgroup().isEmpty()&&informationgroup_onlyhighright.getLineinformationgroup().isEmpty()&&informationgroup_onlynormalright.getLineinformationgroup().isEmpty()) {
+				
+				ShowDialog("暂时没有读取到需要审批的数据");
+				return null;
+				
+			}
+						
+			return vacationapprovalinfomationArrayList;
 					
 			
 		}
@@ -732,54 +997,202 @@ public class DataBaseOperation {
 	}
 	
 	
-	public void Update_VACATION_WORK_NORMOL_APPROVAL_state(ListInformation datagroup) throws SQLException, ClassNotFoundException {
+	public void Update_VACATION_WORK_NORMOL_APPROVAL_state(ListInformation datagroup_singlenormal,ListInformation datagroup_singlespecial,ListInformation datagroup_doubleright) throws SQLException, ClassNotFoundException {
 		
-		  LinkToDataBase();
+		LinkToDataBase();
 			
-		  
 			if (connect!=null) {
 				
-				//更新表单请假状态记号
-				String SQL1 = "UPDATE VACATION_NAPPROVAL SET VACATION_NORMAL_PASSED = 1 WHERE name = ? and ACTUALTIMENOCLEAR = ? and to_char(time,'yyyy-mm-dd')=? ";		
-				PreparedStatement pre = connect.prepareStatement(SQL1);
-				
-				
-				for (ArrayList<String> data : datagroup.getLineinformationgroup()) {
+				connect.setAutoCommit(false);
+				//更新表单请假状态记号,singnormal审批
+				if (!datagroup_singlenormal.getLineinformationgroup().isEmpty()) {
 					
-					pre.setString(1, data.get(0));
-					pre.setString(2, data.get(1));
-					pre.setString(3, data.get(2));					
-					pre.addBatch();
+					String SQL_singlenormal = "UPDATE VACATION_APPROVAL SET VACATION_NORMAL_PASSED = 1 WHERE name = ? and ACTUALTIMENOCLEAR = ? and to_char(time,'yyyy-mm-dd')=? ";		
+					PreparedStatement pre_singlenormal = connect.prepareStatement(SQL_singlenormal);
+					
+					
+					for (ArrayList<String> data : datagroup_singlenormal.getLineinformationgroup()) {
+						
+						pre_singlenormal.setString(1, data.get(0));
+						pre_singlenormal.setString(2, data.get(1));
+						pre_singlenormal.setString(3, data.get(2));					
+						pre_singlenormal.addBatch();
+						
+					}
+					
+					int[] myresultSet_singlenormal = pre_singlenormal.executeBatch();
+				}
+
+							
+				//更新表单请假状态记号,singlespecial审批
+				
+				if (!datagroup_singlespecial.getLineinformationgroup().isEmpty()) {
+								
+				String SQL_singlespecial = "UPDATE VACATION_APPROVAL SET VACATION_SPECIAL_PASSED = 1 WHERE name = ? and ACTUALTIMENOCLEAR = ? and to_char(time,'yyyy-mm-dd')=? ";		
+				PreparedStatement pre_singlespecial = connect.prepareStatement(SQL_singlespecial);
+				
+				
+				for (ArrayList<String> data : datagroup_singlespecial.getLineinformationgroup()) {
+					
+					pre_singlespecial.setString(1, data.get(0));
+					pre_singlespecial.setString(2, data.get(1));
+					pre_singlespecial.setString(3, data.get(2));					
+					pre_singlespecial.addBatch();
 					
 				}
 				
-				int[] myresultSet = pre.executeBatch();
+				int[] myresultSet_singlespecial = pre_singlespecial.executeBatch();
 				
-				//转移数据
+				}
 				
-				String SQL2 = "insert into DATA_VACATIONANDOVERWORK(name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK) select name, id ,time ,ACTUALTIMENOCLEAR, REASONS, REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK from VACATION_NAPPROVAL where VACATION_NORMAL_PASSED = 1";	
+				//更新表单请假状态记号,doubleright审批
+				if (!datagroup_doubleright.getLineinformationgroup().isEmpty()) {
+					
+				String SQL_doubleright = "UPDATE VACATION_APPROVAL SET VACATION_SPECIAL_PASSED = 1,VACATION_NORMAL_PASSED = 1 WHERE name = ? and ACTUALTIMENOCLEAR = ? and to_char(time,'yyyy-mm-dd')=? ";		
+				PreparedStatement pre_doubleright = connect.prepareStatement(SQL_doubleright);
+				
+				
+				for (ArrayList<String> data : datagroup_doubleright.getLineinformationgroup()) {
+					
+					pre_doubleright.setString(1, data.get(0));
+					pre_doubleright.setString(2, data.get(1));
+					pre_doubleright.setString(3, data.get(2));					
+					pre_doubleright.addBatch();
+					
+				}
+				
+				int[] myresultSet_doubleright = pre_doubleright.executeBatch();
+				
+				}		
+				
+				//转移数据1 不需要高级审批的数据
+				
+				String SQL1 = "insert into DATA_VACATIONANDOVERWORK(name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK) select name, id ,time ,ACTUALTIMENOCLEAR, REASONS, REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK from VACATION_APPROVAL where VACATION_NORMAL_PASSED = 1 and WHETHERNEEDHIGHPASS = 0";	
+				PreparedStatement pre1 = connect.prepareStatement(SQL1);
+				pre1.executeUpdate();
+				
+				
+				
+				//转移数据2 需要高级审批的数据
+				
+				String SQL2 = "insert into DATA_VACATIONANDOVERWORK(name,id,time,ACTUALTIMENOCLEAR,REASONS,REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK) select name, id ,time ,ACTUALTIMENOCLEAR, REASONS, REASONS_DETAILS,REASONS_EXPLANATION,HANDLEOVERTIMEWORK from VACATION_APPROVAL where VACATION_NORMAL_PASSED = 1 and VACATION_SPECIAL_PASSED = 1 and WHETHERNEEDHIGHPASS = 1";	
 				PreparedStatement pre2 = connect.prepareStatement(SQL2);
 				pre2.executeUpdate();
 				 
-				//
-				
-				//删除原数据
-				String SQL3 = "DELETE FROM VACATION_NAPPROVAL WHERE VACATION_NORMAL_PASSED  = 1";	
+				//删除原数据1
+				String SQL3 = "DELETE FROM VACATION_APPROVAL WHERE VACATION_NORMAL_PASSED  = 1 and WHETHERNEEDHIGHPASS = 0";	
 				PreparedStatement pre3 = connect.prepareStatement(SQL3);
 				pre3.executeUpdate();
 				
+				//删除原数据2
+				String SQL4 = "DELETE FROM VACATION_APPROVAL WHERE VACATION_NORMAL_PASSED  = 1 and VACATION_SPECIAL_PASSED = 1 and WHETHERNEEDHIGHPASS = 1";	
+				PreparedStatement pre4 = connect.prepareStatement(SQL4);
+				pre4.executeUpdate();
+				
+				connect.commit();
+				
 				ShowDialog("审批提交成功");
+				
+				
 			}
 		
-		DisposeDataBaseLink();
+			DisposeDataBaseLink();
 		
 	}
 	
+	public void Delete_VACATION_WORK_NORMOL_APPROVAL(ListInformation datagroup) throws SQLException, ClassNotFoundException {
 	
 	
+		LinkToDataBase();
+		if (connect!=null) {
+			
+			String SQLdelete = "DELETE FROM VACATION_APPROVAL WHERE name = ? and ACTUALTIMENOCLEAR = ? and to_char(time,'yyyy-mm-dd')=?";		
+			PreparedStatement pre = connect.prepareStatement(SQLdelete);
+			
+			
+			for (ArrayList<String> data : datagroup.getLineinformationgroup()) {
+				
+				pre.setString(1, data.get(0));
+				pre.setString(2, data.get(1));
+				pre.setString(3, data.get(2));					
+				pre.addBatch();
+				
+			}
+			
+			int[] myresultSet = pre.executeBatch();
+			
+			
+		}
+		DisposeDataBaseLink();
+		
 	
+	}
 	
-	
+	public ArrayList<String> SelectDownLoadlist_From_DataBase(User user) throws ClassNotFoundException, SQLException {
+		
+
+		LinkToDataBase();
+		if (connect!=null) {
+			
+			//查找是否有审批的人员
+			String SQLsearchwoker = "SELECT * FROM PRIVI_DOWNLOAD WHERE WOKER_NAME = ?";		
+			PreparedStatement pre = connect.prepareStatement(SQLsearchwoker);
+			pre.setString(1, user.getCheckname());
+			
+			ResultSet myresultSetwoker = pre.executeQuery();
+			
+            if (!myresultSetwoker.isBeforeFirst()) {
+            	
+				ShowDialog("没有读取到需要下载的数据，你可能没有下载权限，联系管理员帮你设置"); 
+				return null;
+			}
+            
+            ArrayList<String> returnNameList = new ArrayList<String>();
+            returnNameList.add("全部");
+            while (myresultSetwoker.next()) {
+            	
+            	if (myresultSetwoker.getString("DOWNLOAD_TYPE").equals("Manager")) {
+					
+            		returnNameList.add(myresultSetwoker.getString("DOWNLOAD_NAME"));
+				}
+            	
+            	else {
+            		
+            		//查询部门人员
+            		
+        			String SQLsearchdepartment = "SELECT * FROM WOKERNAMELIST WHERE DEPARTMENT = ?";		
+        			PreparedStatement pre2 = connect.prepareStatement(SQLsearchdepartment);
+        			pre2.setString(1, myresultSetwoker.getString("DOWNLOAD_NAME"));
+        			
+        			ResultSet myresultSetpartment= pre2.executeQuery();
+        			
+                    if (!myresultSetpartment.isBeforeFirst()) {
+                    	
+        				ShowDialog("没有读取到需要审批的部门人员数据"); 
+        				
+        			}
+                    
+                    while (myresultSetpartment.next()) {
+                    	
+                    	returnNameList.add(myresultSetpartment.getString("NAME"));
+                    	
+                    }
+                    
+					
+				}
+            	            		
+            }
+            
+            DisposeDataBaseLink();
+
+            
+            return returnNameList;
+        		
+		}
+		DisposeDataBaseLink();
+		return null;
+		
+	}
 	
 	
 		

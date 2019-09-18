@@ -103,7 +103,7 @@ public class VacationWindows {
 				
 		ButtonGroup mygourpButtonGroup = new ButtonGroup();		
 		JButton submitvacation = new JButton("\u8BBE\u7F6E\u4FE1\u606F");
-		submitvacation.setFont(new Font("黑体", Font.BOLD, 16));
+		submitvacation.setFont(new Font("微软雅黑", Font.BOLD, 16));
 		submitvacation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -117,22 +117,23 @@ public class VacationWindows {
 		paneltime.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
 		JLabel notificationtime = new JLabel("\u65F6\u95F4\u9009\u62E9\uFF1A");
+		notificationtime.setFont(new Font("微软雅黑", Font.BOLD, 12));
 		
 		JCheckBox morningnocheck_1 = new JCheckBox("上午未打");
 		
-		morningnocheck_1.setFont(new Font("黑体", Font.PLAIN, 16));
+		morningnocheck_1.setFont(new Font("幼圆", Font.PLAIN, 16));
 		morningnocheck_1.setHorizontalAlignment(SwingConstants.CENTER);
 		mygourpButtonGroup.add(morningnocheck_1);
 		
 		JCheckBox afternoonnocheck = new JCheckBox("下午未打");
 		
-		afternoonnocheck.setFont(new Font("黑体", Font.PLAIN, 16));
+		afternoonnocheck.setFont(new Font("幼圆", Font.PLAIN, 16));
 		afternoonnocheck.setHorizontalAlignment(SwingConstants.CENTER);
 		mygourpButtonGroup.add(afternoonnocheck);
 		
 		JCheckBox wholedaynoclear = new JCheckBox("全天未打");
 		wholedaynoclear.setHorizontalAlignment(SwingConstants.CENTER);
-		wholedaynoclear.setFont(new Font("黑体", Font.PLAIN, 16));
+		wholedaynoclear.setFont(new Font("幼圆", Font.PLAIN, 16));
 		
 		mygourpButtonGroup.add(wholedaynoclear);
 		GroupLayout gl_paneltime = new GroupLayout(paneltime);
@@ -169,13 +170,14 @@ public class VacationWindows {
 		JPanel panelweidaka = new JPanel();
 		panelweidaka.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
 		
-		JLabel notificationweidaka = new JLabel("\u672A\u6253\u5361\u8BF4\u660E\uFF1A");
+		JLabel notificationweidaka = new JLabel("请假说明（选填）：");
+		notificationweidaka.setFont(new Font("宋体", Font.BOLD, 12));
 		
 		reasonsexplanation = new JTextField();
-		reasonsexplanation.setText("\u8BF7\u8F93\u5165\u672A\u6253\u5361\u8BF4\u660E");
-		reasonsexplanation.setEnabled(false);
+		reasonsexplanation.setFont(new Font("幼圆", Font.PLAIN, 12));
+		reasonsexplanation.setText("请输入请假说明");
 		reasonsexplanation.setColumns(10);
-		reasonsexplanation.addFocusListener(new JTextFieldHintListener("请输入未打卡说明", reasonsexplanation));
+		reasonsexplanation.addFocusListener(new JTextFieldHintListener("请输入请假说明", reasonsexplanation));
 		GroupLayout gl_panelweidaka = new GroupLayout(panelweidaka);
 		gl_panelweidaka.setHorizontalGroup(
 			gl_panelweidaka.createParallelGroup(Alignment.LEADING)
@@ -229,10 +231,11 @@ public class VacationWindows {
 		);
 		vacationreasons = new JComboBox<String>();
 		vacationreasons.setPreferredSize(new Dimension(32, 40));
-		vacationreasons.setFont(new Font("黑体", Font.BOLD, 18));
-		vacationreasons.setModel(new DefaultComboBoxModel(new String[] {"换休", "年休", "事假", "丧假", "产假", "病假", "陪护假", "未打卡"}));
+		vacationreasons.setFont(new Font("幼圆", Font.PLAIN, 18));
+		vacationreasons.setModel(new DefaultComboBoxModel(new String[] {"换休", "年休", "事假", "丧假", "产假", "病假", "陪护假"}));
 		
 		JLabel notificationreason = new JLabel("\u539F\u56E0\u9009\u62E9\uFF1A");
+		notificationreason.setFont(new Font("微软雅黑", Font.BOLD, 12));
 		GroupLayout gl_panelreason = new GroupLayout(panelreason);
 		gl_panelreason.setHorizontalGroup(
 			gl_panelreason.createParallelGroup(Alignment.LEADING)
@@ -261,28 +264,15 @@ public class VacationWindows {
 		
 		String reasonsString = (String)vacationreasons.getSelectedItem();
 		
-		if (reasonsString.equals("未打卡")) {
-			
-                    activeTextfield();
-			
-			
-		}
-		else {
-			
-			nagativeTextfield();
-
-			
-		}				
+				
 			}
 		});
 		frame.getContentPane().setLayout(groupLayout);
 				
-		nagativeTextfield();
 			
 		
 		
-		
-		
+				
 		
 		submitvacation.addMouseListener(new MouseAdapter() {
 			
@@ -292,7 +282,7 @@ public class VacationWindows {
 					if (morningnocheck_1.isSelected()&&!afternoonnocheck.isSelected()) 
 					{					
 					 
-						if (!(reasonsexplanation.getText()).equals("请输入未打卡说明")) {
+						if (!(reasonsexplanation.getText()).equals("请输入请假说明")) {
 							setdata("上午未打",reasonsexplanation.getText());
 						}
 						else {
@@ -305,7 +295,7 @@ public class VacationWindows {
 					else if (!morningnocheck_1.isSelected()&&afternoonnocheck.isSelected()) 
 					{					
 						
-						if (!(reasonsexplanation.getText()).equals("请输入未打卡说明")) {
+						if (!(reasonsexplanation.getText()).equals("请输入请假说明")) {
 							setdata("下午未打",reasonsexplanation.getText());
 						}
 						else {
@@ -318,7 +308,7 @@ public class VacationWindows {
 					else if(wholedaynoclear.isSelected())
 					{		
 						
-						if (!(reasonsexplanation.getText()).equals("请输入未打卡说明")) {
+						if (!(reasonsexplanation.getText()).equals("请输入请假说明")) {
 							setdata("全天未打",reasonsexplanation.getText());
 						}
 						else {

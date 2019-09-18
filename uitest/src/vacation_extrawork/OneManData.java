@@ -113,8 +113,13 @@ public  class OneManData {
 		
 		if (SpecialSequencialVacationdayTemp.isEmpty()) {
 			Approvel_N_Dayinformation newtype = location.clone();
-			newtype.setWHETHERNEEDHIGHPASS(1);
-			SpecialSequencialVacationdayTemp.add(newtype);
+			
+			
+			if (newtype.getreasons().equals("请假")&&!newtype.getreasons_details().equals("换休")) {
+				newtype.setWHETHERNEEDHIGHPASS(1);
+				SpecialSequencialVacationdayTemp.add(newtype);
+			}
+			
 		}
 		else {			
 			
@@ -124,8 +129,10 @@ public  class OneManData {
 						if (j==SpecialSequencialVacationdayTemp.size()-1) {
 							
 							Approvel_N_Dayinformation newtype = location.clone();
-							newtype.setWHETHERNEEDHIGHPASS(1);
-							SpecialSequencialVacationdayTemp.add(newtype);
+							if (newtype.getreasons().equals("请假")&&!newtype.getreasons_details().equals("换休")) {
+								newtype.setWHETHERNEEDHIGHPASS(1);
+								SpecialSequencialVacationdayTemp.add(newtype);
+							}
 						}
 						continue;					
 					}
@@ -160,8 +167,10 @@ public  class OneManData {
 				   if (calendar1.getTime().equals(calendar2.getTime())) {
 					   
 					   Approvel_N_Dayinformation newtype = itn.clone();
-					   newtype.setWHETHERNEEDHIGHPASS(1);
-					   SpecialSequencialVacationdayTemp.add(newtype);
+						if (newtype.getreasons().equals("请假")&&!newtype.getreasons_details().equals("换休")) {
+							newtype.setWHETHERNEEDHIGHPASS(1);
+							SpecialSequencialVacationdayTemp.add(newtype);
+						}
 					   FindOneLocationIdentical(newtype);
 					   break;
 				   }

@@ -166,11 +166,11 @@ public class User {
 	public static boolean RegisterUser(String checkname,String usernameString,String passwordString,String emailstring) throws ClassNotFoundException, SQLException
 	{
 		
-		LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
-		return localtestDataBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname,emailstring);
+//		LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+//		return localtestDataBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname,emailstring);
 		
-//		DataBaseOperation testBaseOperation = new DataBaseOperation();			
-//		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname,emailstring);
+		DataBaseOperation testBaseOperation = new DataBaseOperation();			
+		return testBaseOperation.InsertIntoOneLine_DATA_ACCOUNT(usernameString, passwordString, checkname,emailstring);
 				
 	}
 	
@@ -188,11 +188,11 @@ public class User {
 		}
 		
 		
-		LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
-		Map<ArrayList<String>, String> resultString = localtestDataBaseOperation.SelectOneLine_DATA_ACCOUNT(usernameString, passwordString);
+//		LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+//		Map<ArrayList<String>, String> resultString = localtestDataBaseOperation.SelectOneLine_DATA_ACCOUNT(usernameString, passwordString);
 		
-//		DataBaseOperation testBaseOperation = new DataBaseOperation();		
-//		Map<ArrayList<String>, String> resultString = testBaseOperation.SelectOneLine_DATA_ACCOUNT(usernameString, passwordString);
+		DataBaseOperation testBaseOperation = new DataBaseOperation();		
+		Map<ArrayList<String>, String> resultString = testBaseOperation.SelectOneLine_DATA_ACCOUNT(usernameString, passwordString);
 				
 		Set<Map.Entry<ArrayList<String>, String>> set = resultString.entrySet();					
 		Iterator<Map.Entry<ArrayList<String>, String>> iterator = set.iterator();

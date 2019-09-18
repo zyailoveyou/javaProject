@@ -93,7 +93,7 @@ public class SubimitWindows extends Windows {
 		month.setForeground(Color.DARK_GRAY);
 		vacationorextrawork = new JComboBox<String>();
 		vacationorextrawork.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
-		vacationorextrawork.setModel(new DefaultComboBoxModel(new String[] {"\u8BF7\u5047", "\u52A0\u73ED", "\u6B63\u5E38\u4F11\u5047"}));
+		vacationorextrawork.setModel(new DefaultComboBoxModel<String>(new String[] {"请假","加班","正常休假","未打卡"}));
 		vacationorextrawork.setFont(new Font("幼圆", Font.BOLD, 16));
 		vacationorextrawork.setForeground(Color.DARK_GRAY);
 		worknameinformation = new JLabel("New label");
@@ -203,8 +203,8 @@ public class SubimitWindows extends Windows {
 			public void mouseClicked(MouseEvent e) {
 					
 				
-				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
-//				DataBaseOperation test = new DataBaseOperation();
+//				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+				DataBaseOperation test = new DataBaseOperation();
 				if (submitdatagroup.isEmpty()) {
 					ShowDialog("没有设置任何数据");
 					return;
@@ -212,12 +212,13 @@ public class SubimitWindows extends Windows {
 				try {
 //					test.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
 					for (OneManData i : submitdatagroup) {
-//执行3天以上的拆分
+                      //执行3天以上假期的拆分
 							i.SeparateSequential_ThreeDay_Dayinformation();						 
 						
 					}
 										
-					localtestDataBaseOperation.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
+//					localtestDataBaseOperation.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
+					test.InsertInto_DATA_VACATIONANDOVERWORK_ONEMANDATAGROUP(submitdatagroup);
 				} catch (ClassNotFoundException e1) {
 
 					e1.printStackTrace();
@@ -369,12 +370,19 @@ public class SubimitWindows extends Windows {
 			    		    	if (in.getLabelday().equals(daylabeList.get(i).getText())) {
 			    		    				    
 			    		    		
-			    		    		if (in.getreasons_details().equals("正常休假")) {
+			    		    		if (in.getreasons().equals("正常休假")) {
 			    		    			
-			    		    			daylabeList.get(i).SetChooseStatefornormalrestdayColor();
+			    		    			daylabeList.get(i).SetChooseStateForNormalRestDay();
+									}
+			    		    		
+			    		    		else if (in.getreasons().equals("加班")) {
+			    		    			daylabeList.get(i).SetChooseForExtrawork();
+									}
+			    		    		else if (in.getreasons().equals("请假")) {
+			    		    			daylabeList.get(i).SetChooseForVacation();
 									}
 			    		    		else {
-			    		    			daylabeList.get(i).SetChooseState();
+			    		    			daylabeList.get(i).SetChooseStateForMisscheck();
 									}
 			    
 									break;

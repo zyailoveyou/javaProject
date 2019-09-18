@@ -133,12 +133,12 @@ public class Manager_download_windows extends Windows {
 		month.setForeground(Color.DARK_GRAY);
 		vacationorextrawork = new JComboBox<String>();
 		vacationorextrawork.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
-		vacationorextrawork.setModel(new DefaultComboBoxModel(new String[] {"全部","\u8BF7\u5047", "\u52A0\u73ED", "\u6B63\u5E38\u4F11\u5047"}));
+		vacationorextrawork.setModel(new DefaultComboBoxModel(new String[] {"全部","\u8BF7\u5047", "\u52A0\u73ED", "\u6B63\u5E38\u4F11\u5047","未打卡"}));
 		vacationorextrawork.setFont(new Font("幼圆", Font.BOLD, 16));
 		vacationorextrawork.setForeground(Color.DARK_GRAY);
 		
 		detailstype = new JComboBox<String>();
-		detailstype.setModel(new DefaultComboBoxModel(new String[] {"全部", "换休", "年休", "事假", "丧假", "产假", "陪护假", "未打卡说明"}));
+		detailstype.setModel(new DefaultComboBoxModel(new String[] {"全部", "换休", "年休", "事假", "丧假", "产假", "陪护假"}));
 		detailstype.setToolTipText("\u9009\u62E9\u672A\u6253\u5361\u539F\u56E0");
 		detailstype.setFont(new Font("幼圆", Font.BOLD, 16));
 		detailstype.setForeground(Color.DARK_GRAY);
@@ -298,7 +298,7 @@ public class Manager_download_windows extends Windows {
 						
 						if (((String)vacationorextrawork.getSelectedItem()).equals("请假")) {
 							
-							detailstype.setModel(new DefaultComboBoxModel(new String[] {"全部", "换休", "年休", "事假","丧假", "产假", "陪护假", "未打卡说明"}));
+							detailstype.setModel(new DefaultComboBoxModel(new String[] {"全部", "换休", "年休", "事假","丧假", "产假", "陪护假"}));
 							
 						}
 						
@@ -322,6 +322,12 @@ public class Manager_download_windows extends Windows {
 							
 						}
 						
+						if (((String)vacationorextrawork.getSelectedItem()).equals("未打卡")) {
+							
+							detailstype.setModel(new DefaultComboBoxModel(new String[] {"全部"}));
+							
+						}
+						
 						
 					}
 					
@@ -334,10 +340,11 @@ public class Manager_download_windows extends Windows {
 
 			public void mouseClicked(MouseEvent e) {
 				ListInformation listInformation= null;
-//				DataBaseOperation dataBaseOperation = new DataBaseOperation();
-				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
+				DataBaseOperation dataBaseOperation = new DataBaseOperation();
+//				LocaltestDataBaseOperation localtestDataBaseOperation = new LocaltestDataBaseOperation();
 				try {
-				  listInformation = localtestDataBaseOperation.Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName((String)(getNamelist().getSelectedItem()), namelistarray,getVacationorExtrawork(), getdetailstype(), period);
+//				  listInformation = localtestDataBaseOperation.Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName((String)(getNamelist().getSelectedItem()), namelistarray,getVacationorExtrawork(), getdetailstype(), period);
+				  listInformation = dataBaseOperation.Selectfrom_DATA_VACATIONANDOVERWORK_Downloadchoose_ForOneName((String)(getNamelist().getSelectedItem()), namelistarray,getVacationorExtrawork(), getdetailstype(), period);
 				} catch (ClassNotFoundException e1) {
 
 					e1.printStackTrace();
@@ -478,7 +485,7 @@ public class Manager_download_windows extends Windows {
 						 
 						 if (saveday ==myCalendar.get(Calendar.DAY_OF_MONTH)) {
 								
-							 daylabeList.get(k).SetChooseStatefornormalrestdayColor();
+							 daylabeList.get(k).SetChooseStateForDownLoaddRange();
 							 
 						  } 
 						 
