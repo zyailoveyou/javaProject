@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="flash" key="selection"/>
+		<item value="VA_AP_N_RIGHT" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="VA_AP_N_RIGHT"/>
+			<item value="namelist"/>
+			<item value="Local"/>
+			<item value="LocalDataBase"/>
+			<item value="DisposeLocalDataBaseLink"/>
+			<item value="LinkToLocalDataBase"/>
+			<item value="vacationapproval.setEnabled"/>
+			<item value="vacationapproval"/>
+			<item value="checkmode"/>
+			<item value="groupdownload"/>
+			<item value="setdata"/>
+			<item value="请输入"/>
 			<item value="flash"/>
 			<item value="activeTextfield"/>
 			<item value="reasonsexplanation"/>
-			<item value="nagativeTextfield"/>
-			<item value="nagativeTextfield();"/>
-			<item value="activeTextfield()"/>
-			<item value="vacationorextrawork"/>
-			<item value="SnewSubimitWindows"/>
-			<item value="submitmode"/>
-			<item value="DnewSubimitWindows"/>
-			<item value="downloadmode"/>
-			<item value="groupdownload"/>
-			<item value="setN_dayinformation"/>
-			<item value="imagetitle"/>
-			<item value="151"/>
 		</list>
 		<list key="replacehistory">
 			<item value="download"/>
@@ -48,7 +48,7 @@
 		<item value="278" key="DIALOG_WIDTH"/>
 		<item value="1|微软雅黑|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|微软雅黑" key="DIALOG_FONT_NAME"/>
 		<item value="327" key="DIALOG_HEIGHT"/>
-		<item value="1144" key="DIALOG_X_ORIGIN"/>
-		<item value="350" key="DIALOG_Y_ORIGIN"/>
+		<item value="812" key="DIALOG_X_ORIGIN"/>
+		<item value="343" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -70,13 +70,13 @@ public class WindowsUI {
 	        InputExcelDirectory.setColumns(30);
 	        TextField OutPutExcelDirectory = new TextField();	        
 	        OutPutExcelDirectory.setColumns(30);
-	        Button InputExcelDirectoryButton = new Button("Open OrignalFile");
+	        Button InputExcelDirectoryButton = new Button("open orignal");
 	        InputExcelDirectoryButton.setSize(50, 50);
-	        Button OutPutExcelDirectoryButton = new Button("Open OutputFile");
+	        Button OutPutExcelDirectoryButton = new Button("open output");
 	        OutPutExcelDirectoryButton.setSize(50, 50);	        
 	        TextField sheetmonthname = new TextField();	        
 	        sheetmonthname.setColumns(40);	      	        
-	        Button beginButton = new Button("Execute Caculate");
+	        Button beginButton = new Button("execute accuralate");
 	        beginButton.setSize(50, 50);
 	        
 	        windowsFrame.add(InputExcelDirectory);

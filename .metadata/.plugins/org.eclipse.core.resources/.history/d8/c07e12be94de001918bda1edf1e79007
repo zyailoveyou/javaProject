@@ -601,7 +601,7 @@ public class DataBaseOperation {
 				ResultSet resultgetpower =pregetpower.executeQuery();
 				
 				
-				if (!resultgetpower.isBeforeFirst()) {
+				if (!resultgetpower .isBeforeFirst()) {
 					
 					ShowDialog("在dutylist表中不能查找到该duty，联系管理员");
 					return false;
@@ -615,7 +615,9 @@ public class DataBaseOperation {
 				}
 				
 				//从MANAGER_RELATIONSHIP取出vacation和assess权限
-								
+				
+				
+
 				String sqlgetvacationassess = "SELECT * FROM ADMI_MANAGER WHERE WOKER_NAME = ?";
 				PreparedStatement pregetvacationassess = connect.prepareStatement(sqlgetvacationassess);			
 				pregetvacationassess.setString(1, workname);		
@@ -624,26 +626,7 @@ public class DataBaseOperation {
 				
 				if (!resultgetvacationasses.isBeforeFirst()) {
 					//如果找不到
-									
-					String sqlgetva_as = "SELECT * FROM ADMI_DEPARTMENT WHERE DEPARTMENTNAME = ?";
-					
-					PreparedStatement pregetva_as= connect.prepareStatement(sqlgetva_as);			
-					pregetva_as.setString(1, department);		
-					ResultSet resultgetva_as =pregetva_as.executeQuery();
-					
-					while (resultgetva_as.next()) {
-						
-						VA_AP_N_UPPER = resultgetva_as.getString("VA_AP_N_UPPER");
-						VA_AP_H_UPPER = resultgetva_as.getString("VA_AP_H_UPPER");
-						AS_AP_N_UPPER = resultgetva_as.getString("AS_AP_N_UPPER");
-						AS_AP_H_UPPER = resultgetva_as.getString("AS_AP_H_UPPER");
-						VA_AP_N_RIGHT = resultgetva_as.getInt("VA_AP_N_RIGHT");
-						VA_AP_H_RIGHT = resultgetva_as.getInt("VA_AP_H_RIGHT");
-						AS_AP_N_RIGHT = resultgetva_as.getInt("AS_AP_N_RIGHT");
-						AS_AP_H_RIGHT = resultgetva_as.getInt("AS_AP_H_RIGHT");
-	
-					}
-					
+					System.out.println("find none assess right");
 					
 				}
 				
