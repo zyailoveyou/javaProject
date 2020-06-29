@@ -1,0 +1,40 @@
+package test;
+
+import java.util.ArrayList;
+
+import javax.tools.DocumentationTool.Location;
+
+public class main {
+	
+	
+	public static void main(String[] args){
+		
+		char[] b = {'h','e','l','l','o'};
+		
+		reverseString(b);
+		
+		
+}
+
+
+	   public static void reverseString(char[] s) {        
+	        helper(0,s);
+	        System.out.println(s);
+	    }
+	    
+	    
+	    public static void helper(int location,char[] s){
+	        
+	        if(location <0 || location>s.length-1){
+	            return;
+	        }       
+	        int reverselocation = s.length - location -1;
+	        char tempchar = s[location];
+	        s[location] = s[reverselocation];
+	        System.out.print(s[location]);
+	        s[reverselocation] = tempchar;        
+	        helper(location +1,s);	        
+	    }
+
+
+}

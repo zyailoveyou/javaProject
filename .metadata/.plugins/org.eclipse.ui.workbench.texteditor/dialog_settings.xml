@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="VA_AP_N_RIGHT" key="selection"/>
+		<item value="morningextrawork" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="VA_AP_N_RIGHT"/>
-			<item value="namelist"/>
-			<item value="Local"/>
-			<item value="LocalDataBase"/>
-			<item value="DisposeLocalDataBaseLink"/>
-			<item value="LinkToLocalDataBase"/>
-			<item value="vacationapproval.setEnabled"/>
+			<item value="morningextrawork"/>
+			<item value="dayzoompJPanel"/>
+			<item value="submitdatagroup"/>
+			<item value="submit"/>
+			<item value="submitmode"/>
+			<item value="VacationPanel"/>
+			<item value="vacationtimeforwoker"/>
 			<item value="vacationapproval"/>
+			<item value="vacation"/>
+			<item value="checkgrade"/>
 			<item value="checkmode"/>
 			<item value="groupdownload"/>
-			<item value="setdata"/>
-			<item value="请输入"/>
-			<item value="flash"/>
-			<item value="activeTextfield"/>
-			<item value="reasonsexplanation"/>
+			<item value="department"/>
+			<item value="VA_AP_N_RIGHT"/>
+			<item value="namelist"/>
 		</list>
 		<list key="replacehistory">
 			<item value="download"/>
